@@ -67,8 +67,44 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\ColorPage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CreditPage4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ModelPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ResultPage5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TotalCostPage3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Car.cs" />
+    <Compile Include="Pages\ColorPage2.xaml.cs">
+      <DependentUpon>ColorPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CreditPage4.xaml.cs">
+      <DependentUpon>CreditPage4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ModelPage1.xaml.cs">
+      <DependentUpon>ModelPage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ResultPage5.xaml.cs">
+      <DependentUpon>ResultPage5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TotalCostPage3.xaml.cs">
+      <DependentUpon>TotalCostPage3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
