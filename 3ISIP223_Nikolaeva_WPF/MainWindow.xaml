@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ProgressBar Grid.Row="0" x:Name="Progress" Margin="10, 10, 10, 10" Height="50" Minimum="1" Maximum="5"></ProgressBar>
+        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="BtnBack" Content="Назад" Click="BtnBack_Click"/>
+            <Button x:Name="BtnForward" Content="Далее" Click="BtnForward_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
