@@ -33,5 +33,27 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             //models.Add("Skoda Octavia");
             //models.Add("BMW 3 Series");
         }
+
+        private void RBMod_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            string model = rb.Content.ToString();
+            Car.Model = model;
+            if (model == "Renault Logan") Car.ModelPrice = 5000000;
+            else if (model == "Hyundai Solaris") Car.ModelPrice = 10000000;
+            else Car.ModelPrice = 100000000;
+            CarItog.Text = $"{Car.Model} {Car.ModelPrice}";
+        }
+
+        private void RBEngine_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            string engine = rb.Content.ToString();
+            Car.EngineType = engine;
+            if (engine == "Бензиновый") Car.EnginPrice = 50000;
+            else if (engine == "Дизельный") Car.EnginPrice = 100000;
+            else Car.EnginPrice = 70000;
+            CarItog.Text += $" {Car.EngineType} {Car.EnginPrice}";
+        }
     }
 }

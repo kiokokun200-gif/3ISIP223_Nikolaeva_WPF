@@ -17,6 +17,7 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button x:Name="BtnBack" Content="Назад" Click="BtnBack_Click"/>
             <Button x:Name="BtnForward" Content="Далее" Click="BtnForward_Click"/>
+            <TextBlock x:Name="CarItog"/>
         </StackPanel>
     </Grid>
 </Window>

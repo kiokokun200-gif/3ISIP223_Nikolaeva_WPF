@@ -29,7 +29,7 @@ namespace _3ISIP223_Nikolaeva_WPF
 
             Progress.Value = 1;
 
-            BtnBack.IsEnabled = false;
+          
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -54,7 +54,7 @@ namespace _3ISIP223_Nikolaeva_WPF
                 MainFrame.Navigate(new CreditPage4());
                 Progress.Value = 4;
             }
-
+            BtnBack.IsEnabled = !(MainFrame.Content is ModelPage1);
         }
 
         private void BtnForward_Click(object sender, RoutedEventArgs e)
@@ -79,7 +79,7 @@ namespace _3ISIP223_Nikolaeva_WPF
                 MainFrame.Navigate(new ResultPage5());
                 Progress.Value = 5;
             }
-
+            BtnForward.IsEnabled = !(MainFrame.Content is ResultPage5);
         }
     }
 }
