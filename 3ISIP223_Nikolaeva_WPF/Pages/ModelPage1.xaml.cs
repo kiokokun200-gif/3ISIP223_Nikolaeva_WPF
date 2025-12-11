@@ -1,6 +1,8 @@
-﻿using System;
+﻿using _3ISIP223_Nikolaeva_WPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public ModelPage1()
         {
             InitializeComponent();
+
+            //List<string> models = new List<string>();
+            //models.Add("Toyota Camry");
+            //models.Add("Kia Rio");
+            //models.Add("Hyundai Solaris");
+            //models.Add("Skoda Octavia");
+            //models.Add("BMW 3 Series");
         }
     }
 }

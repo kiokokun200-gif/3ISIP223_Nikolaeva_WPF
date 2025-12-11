@@ -7,8 +7,20 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ModelPage1">
+    
 
-    <Grid>
+    <Grid Background="White">
         
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Модель:"/>
+            <RadioButton GroupName="Model" Content="Toyota Camry" Checked="RBMod_Checked"/>
+            <RadioButton GroupName="Model" Content="Kia Rio" Checked="RBMod_Checked"/>
+            <RadioButton GroupName="Model" Content="Hyundai Solaris" Checked="RBMod_Checked"/>
+            <RadioButton GroupName="Model" Content="BMW 3 Series" Checked="RBMod_Checked"/>
+            <TextBlock Text="Тип двигателя:"/>
+            <RadioButton GroupName="Engine" Content="Бензиновый"/>
+            <RadioButton GroupName="Engine" Content="Дизельный"/>
+            <RadioButton GroupName="Engine" Content="Газовый"/>
+        </StackPanel>
     </Grid>
 </Page>

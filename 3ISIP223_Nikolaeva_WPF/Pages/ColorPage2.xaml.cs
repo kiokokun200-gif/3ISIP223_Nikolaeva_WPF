@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _3ISIP223_Nikolaeva_WPF.Models;
 
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
