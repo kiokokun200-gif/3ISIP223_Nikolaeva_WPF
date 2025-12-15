@@ -42,7 +42,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             if (model == "Renault Logan") Car.ModelPrice = 5000000;
             else if (model == "Hyundai Solaris") Car.ModelPrice = 10000000;
             else Car.ModelPrice = 100000000;
-            CarItog.Text = $"{Car.Model} {Car.ModelPrice}";
+            //CarItog.Text = $"{Car.Model} {Car.ModelPrice}";
         }
 
         private void RBEngine_Checked(object sender, RoutedEventArgs e)
@@ -50,10 +50,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             RadioButton rb = (RadioButton)sender;
             string engine = rb.Content.ToString();
             Car.EngineType = engine;
-            if (engine == "Бензиновый") Car.EnginPrice = 50000;
-            else if (engine == "Дизельный") Car.EnginPrice = 100000;
-            else Car.EnginPrice = 70000;
-            CarItog.Text += $" {Car.EngineType} {Car.EnginPrice}";
+            if (engine == "Бензиновый") Car.EnginePrice = 50000;
+            else if (engine == "Дизельный") Car.EnginePrice = 100000;
+            else Car.EnginePrice = 70000;
+            //CarItog.Text += $" {Car.EngineType} {Car.EnginPrice}";
         }
     }
 }

@@ -11,12 +11,26 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public static string Model { get; set; }
         public static double ModelPrice { get; set; }
         public static string EngineType { get; set; }
-        public static double EnginPrice { get; set; }
+        public static double EnginePrice { get; set; }
+
         public static string Color { get; set; }
-        public static List<string> AdditionalOptions { get; set; }
-        public static List<double> AdditionalOptionsPrice { get; set; }
+        public static double ColorPrice { get; set; }
 
 
+        public static bool Option1 { get; set; } 
+        public static bool Option2 { get; set; } 
+        public static bool Option3 { get; set; } 
+        public static bool Option4 { get; set; } 
+        public static double OptionsPrice { get; set; } 
+        public static double CarTotalPrice { get; set; } 
 
+        
+
+        public static double DownPaymentPercent { get; set; } = 20;
+        public static int LoanTerm { get; set; } = 36;
+
+        public static string CustomerName { get; set; }
+        public static string Phone { get; set; }
+        public static string Email { get; set; }
     }
 }

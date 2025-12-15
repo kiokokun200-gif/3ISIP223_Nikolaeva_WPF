@@ -7,10 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ModelPage1">
-    
-
     <Grid Background="White">
-        
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Модель:"/>
             <RadioButton GroupName="Model" Content="Renault Logan" Checked="RBMod_Checked"/>
@@ -20,7 +17,7 @@
             <RadioButton GroupName="Engine" Content="Бензиновый" Checked="RBEngine_Checked"/>
             <RadioButton GroupName="Engine" Content="Дизельный" Checked="RBEngine_Checked"/>
             <RadioButton GroupName="Engine" Content="Газовый" Checked="RBEngine_Checked"/>
-            <TextBlock x:Name="CarItog"/>
+            <!--<TextBlock x:Name="CarItog"/>-->
         </StackPanel>
     </Grid>
 </Page>

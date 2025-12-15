@@ -12,12 +12,14 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ProgressBar Grid.Row="0" x:Name="Progress" Margin="10, 10, 10, 10" Height="30" Minimum="1" Maximum="5"></ProgressBar>
-        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button x:Name="BtnBack" Content="Назад" Click="BtnBack_Click"/>
-            <Button x:Name="BtnForward" Content="Далее" Click="BtnForward_Click"/>
-            <TextBlock x:Name="CarItog"/>
+        
+        <ProgressBar Grid.Row="0" x:Name="Progress" Margin="10" Height="30" Minimum="1" Maximum="5" Value="1"/>
+
+        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button x:Name="BtnBack" Content="Назад" Width="80" Margin="5" Click="BtnBack_Click"/>
+            <Button x:Name="BtnForward" Content="Далее" Width="80" Margin="5" Click="BtnForward_Click"/>
         </StackPanel>
     </Grid>
 </Window>

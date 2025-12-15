@@ -14,16 +14,38 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using _3ISIP223_Nikolaeva_WPF.Models;
 
+
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для ResultPage5.xaml
-    /// </summary>
     public partial class ResultPage5 : Page
     {
         public ResultPage5()
         {
             InitializeComponent();
+            ShowSummary();
+        }
+
+        private void ShowSummary()
+        {
+            double totalPrice = Car.CarTotalPrice;
+
+            double downPayment = totalPrice * (Car.DownPaymentPercent / 100);
+            double loanAmount = totalPrice - downPayment;
+
+            TextBlockSummary.Text = $"Модель: {Car.Model}\n" +
+                                   $"Двигатель: {Car.EngineType}\n" +
+                                   $"Цвет: {Car.Color}\n" +
+                                   $"Итоговая цена: {totalPrice:C}\n" +
+                                   $"Первоначальный взнос: {Car.DownPaymentPercent}%\n" +
+                                   $"Сумма кредита: {loanAmount:C}\n" +
+                                   $"Срок кредита: {Car.LoanTerm} месяцев";
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Car.CustomerName = TextBoxName.Text;
+            Car.Phone = TextBoxPhone.Text;
+            Car.Email = TextBoxEmail.Text;
         }
     }
 }
