@@ -25,6 +25,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public ModelPage1()
         {
             InitializeComponent();
+            
         }
 
         private void RBMod_Checked(object sender, RoutedEventArgs e)

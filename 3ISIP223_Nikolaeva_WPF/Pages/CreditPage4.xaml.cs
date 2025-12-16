@@ -21,6 +21,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public CreditPage4()
         {
             InitializeComponent();
+            SliderPercent.Value = Car.DownPaymentPercent;
+            SliderMonths.Value = Car.LoanTerm;
+
+            TextBlockPercent.Text = $"{Car.DownPaymentPercent}%";
+            TextBlockMonths.Text = $"{Car.LoanTerm} месяцев";
 
 
             UpdateCredit();

@@ -24,18 +24,19 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public ColorPage2()
         {
             InitializeComponent();
+
+            if (!string.IsNullOrEmpty(Car.Color))
+            {
+                if (Car.Color == "Черный") RbBlack.IsChecked = true;
+                else if (Car.Color == "Белый") RbBWhite.IsChecked = true;
+                else if (Car.Color == "Розови") RbPink.IsChecked = true;
+            }
+            CheckBox1.IsChecked = Car.Option1;
+            CheckBox2.IsChecked = Car.Option2;
+            CheckBox3.IsChecked = Car.Option3;
+            CheckBox4.IsChecked = Car.Option4;
         }
 
-        private void RBColor_Cheked(object sender, RoutedEventArgs e)
-        {
-            RadioButton rb = (RadioButton)sender;
-            string color = rb.Content.ToString();
-            Car.Color = color;
-            if (color == "Черный") Car.ColorPrice = 5000;
-            else if (color == "Белый") Car.ColorPrice = 1000;
-            else Car.ColorPrice = 50000;
-        }
-        
 
         private void CheckBox1_Click(object sender, RoutedEventArgs e)
         {
@@ -59,6 +60,27 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             CheckBox cb = (CheckBox)sender;
             Car.Option4 = cb.IsChecked == true;
+        }
+
+        private void RbBlack_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            Car.Color = rb.Content.ToString();
+            Car.ColorPrice = 5000;
+        }
+
+        private void RbBWhite_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            Car.Color = rb.Content.ToString();
+            Car.ColorPrice = 1000;
+        }
+
+        private void RbPink_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            Car.Color = rb.Content.ToString();
+            Car.ColorPrice = 50000;
         }
     }
 }

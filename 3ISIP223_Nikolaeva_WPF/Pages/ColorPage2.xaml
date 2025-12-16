@@ -8,12 +8,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ColorPage2">
 
-    <Grid Background="White">
+    <Grid x:Name="MainGrid" Background="White">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Цвет:"/>
-            <RadioButton GroupName="ColorGroup" Content="Черный" Checked="RBColor_Cheked" IsChecked="True"/>
-            <RadioButton GroupName="ColorGroup" Content="Белый" Checked="RBColor_Cheked"/>
-            <RadioButton GroupName="ColorGroup" Content="Розови" Checked="RBColor_Cheked"/>
+            <RadioButton x:Name="RbBlack" GroupName="ColorGroup" Content="Черный" Checked="RbBlack_Checked"/>
+            <RadioButton x:Name="RbBWhite" GroupName="ColorGroup" Content="Белый" Checked="RbBWhite_Checked"/>
+            <RadioButton x:Name="RbPink" GroupName="ColorGroup" Content="Розови" Checked="RbPink_Checked"/>
             <TextBlock Text="Дополнительные опции:"/>
             <CheckBox x:Name="CheckBox1" Content="Кожаный салон (+50 000 ₽)" Click="CheckBox1_Click"/>
             <CheckBox x:Name="CheckBox2" Content="Панорамная крыша (+70 000 ₽)" Click="CheckBox2_Click"/>
