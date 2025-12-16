@@ -11,14 +11,14 @@
     <Grid Background="White">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Цвет:"/>
-            <RadioButton GroupName="ColorGroup" Content="Черный" Checked="RBColor_Cheked"/>
+            <RadioButton GroupName="ColorGroup" Content="Черный" Checked="RBColor_Cheked" IsChecked="True"/>
             <RadioButton GroupName="ColorGroup" Content="Белый" Checked="RBColor_Cheked"/>
             <RadioButton GroupName="ColorGroup" Content="Розови" Checked="RBColor_Cheked"/>
             <TextBlock Text="Дополнительные опции:"/>
-            <CheckBox x:Name="CheckBox1" Content="Кожаный салон (+50 000 ₽)" Click="CheckBox_Click"/>
-            <CheckBox x:Name="CheckBox2" Content="Панорамная крыша (+70 000 ₽)" Click="CheckBox_Click"/>
-            <CheckBox x:Name="CheckBox3" Content="Навигация (+30 000 ₽)" Click="CheckBox_Click"/>
-            <CheckBox x:Name="CheckBox4" Content="Подогрев сидений (+20 000 ₽)" Click="CheckBox_Click"/>
+            <CheckBox x:Name="CheckBox1" Content="Кожаный салон (+50 000 ₽)" Click="CheckBox1_Click"/>
+            <CheckBox x:Name="CheckBox2" Content="Панорамная крыша (+70 000 ₽)" Click="CheckBox2_Click"/>
+            <CheckBox x:Name="CheckBox3" Content="Навигация (+30 000 ₽)" Click="CheckBox3_Click"/>
+            <CheckBox x:Name="CheckBox4" Content="Подогрев сидений (+20 000 ₽)" Click="CheckBox4_Click"/>
         </StackPanel>
     </Grid>
 </Page>

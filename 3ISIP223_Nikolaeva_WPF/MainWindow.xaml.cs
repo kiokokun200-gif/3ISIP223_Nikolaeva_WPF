@@ -30,7 +30,6 @@ namespace _3ISIP223_Nikolaeva_WPF
         
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            // Проверка только для 5-й страницы
             if (MainFrame.Content is ResultPage5 resultPage)
             {
                 if (resultPage.ShouldShowWarning())
@@ -43,10 +42,8 @@ namespace _3ISIP223_Nikolaeva_WPF
                     
                     if (result == MessageBoxResult.Yes)
                     {
-                        // ПОЛЬЗОВАТЕЛЬ СОГЛАСИЛСЯ ПОТЕРЯТЬ ДАННЫЕ
-                        resultPage.ResetData(); // Сбрасываем данные
+                        resultPage.ResetData(); 
                         
-                        // Переходим назад
                         if (MainFrame.CanGoBack)
                         {
                             MainFrame.GoBack();
@@ -54,13 +51,11 @@ namespace _3ISIP223_Nikolaeva_WPF
                     }
                     else
                     {
-                        // ПОЛЬЗОВАТЕЛЬ ОТМЕНИЛ - остаемся на странице
                         return;
                     }
                 }
                 else
                 {
-                    // Данных нет или они все корректны - просто уходим
                     if (MainFrame.CanGoBack)
                     {
                         MainFrame.GoBack();
@@ -69,7 +64,6 @@ namespace _3ISIP223_Nikolaeva_WPF
             }
             else
             {
-                // Для других страниц - обычный переход
                 if (MainFrame.CanGoBack)
                 {
                     MainFrame.GoBack();
@@ -99,11 +93,10 @@ namespace _3ISIP223_Nikolaeva_WPF
                 MainFrame.Navigate(new ResultPage5());
                 Progress.Value = 5;
                 BtnForward.Content = "Готово";
-                BtnForward.IsEnabled = false; // Начинаем с неактивной кнопки
+                BtnForward.IsEnabled = false; 
             }
             else if (MainFrame.Content is ResultPage5 resultPage)
             {
-                // Проверяем валидность перед отправкой
                 if (resultPage.IsFormValid())
                 {
                     MessageBox.Show("Заявка оформлена! \n" + $" Модель: { Car.Model}\n" +
@@ -117,8 +110,8 @@ namespace _3ISIP223_Nikolaeva_WPF
         $"Имя: {Car.CustomerName}\n" +
         $"Телефон: {Car.Phone}\n" +
         $"Почта: {Car.Email}", "Успех");
-                    // Можно добавить сброс всей конфигурации, если нужно
-                    // Car.Reset();
+                    Application.Current.Shutdown();
+
                 }
                 else
                 {
@@ -129,7 +122,6 @@ namespace _3ISIP223_Nikolaeva_WPF
         
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            // Обновляем ProgressBar
             if (MainFrame.Content is ModelPage1)
                 Progress.Value = 1;
             else if (MainFrame.Content is ColorPage2)
@@ -141,20 +133,16 @@ namespace _3ISIP223_Nikolaeva_WPF
             else if (MainFrame.Content is ResultPage5)
                 Progress.Value = 5;
             
-            // Кнопка Назад
             BtnBack.IsEnabled = MainFrame.CanGoBack;
             
-            // Кнопка Вперед
             if (MainFrame.Content is ResultPage5)
             {
                 BtnForward.Content = "Готово";
-                // Кнопка будет активна только если форма валидна
-                // (проверяется в ResultPage5.CheckAllFields())
             }
             else
             {
                 BtnForward.Content = "Далее";
-                BtnForward.IsEnabled = true; // На других страницах всегда активна
+                BtnForward.IsEnabled = true; 
             }
         }
     }

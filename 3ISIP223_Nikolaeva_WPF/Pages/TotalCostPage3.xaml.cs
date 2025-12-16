@@ -36,13 +36,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             double totalPrice = Car.ModelPrice + Car.EnginePrice + Car.ColorPrice + optionsPrice;
 
-            TextBlockInfo.Text = $"Модель: {Car.Model} - {Car.ModelPrice:C}\n" +
-                               $"Двигатель: {Car.EngineType} - {Car.EnginePrice:C}\n" +
-                               $"Цвет: {Car.Color} - {Car.ColorPrice:C}\n" +
-                               $"Опции: {GetOptionsText()} - {optionsPrice:C}";
+            TextBlockInfo.Text = $"Модель: {Car.Model} - {Car.ModelPrice}\n" +
+                               $"Двигатель: {Car.EngineType} - {Car.EnginePrice}\n" +
+                               $"Цвет: {Car.Color} - {Car.ColorPrice}\n" +
+                               $"Опции: {GetOptionsText()} - {optionsPrice}";
 
 
-            TextBlockTotal.Text = $"Итоговая цена: {totalPrice:C}";
+            TextBlockTotal.Text = $"Итоговая цена: {totalPrice}";
             Car.CarTotalPrice = totalPrice;
         }
 

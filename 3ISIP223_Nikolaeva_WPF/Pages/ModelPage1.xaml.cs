@@ -25,13 +25,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public ModelPage1()
         {
             InitializeComponent();
-
-            //List<string> models = new List<string>();
-            //models.Add("Toyota Camry");
-            //models.Add("Kia Rio");
-            //models.Add("Hyundai Solaris");
-            //models.Add("Skoda Octavia");
-            //models.Add("BMW 3 Series");
         }
 
         private void RBMod_Checked(object sender, RoutedEventArgs e)

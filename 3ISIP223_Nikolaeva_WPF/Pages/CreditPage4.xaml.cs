@@ -23,15 +23,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             InitializeComponent();
 
 
-            //SliderPercent.Value = 20;
-            //SliderMonths.Value = 36;
-
-            //Car.DownPaymentPercent = 20;
-            //Car.LoanTerm = 36;
-
-            //TextBlockPercent.Text = "20%";
-            //TextBlockMonths.Text = "36 месяцев";
-
             UpdateCredit();
         }
 

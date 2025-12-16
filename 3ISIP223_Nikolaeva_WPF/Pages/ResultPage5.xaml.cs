@@ -64,7 +64,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         $"Итоговая цена: {Car.CarTotalPrice}\n" +
         $"Первоначальный взнос: {Car.DownPaymentPercent}%\n" +
         $"Сумма кредита: {loanAmount:C}\n" +
-        $"Срок кредита: {Car.LoanTerm} месяцев +\n" +
+        $"Срок кредита: {Car.LoanTerm} месяцев\n" +
         $"Ежемесячный платеж: {Car.MountlyPayment}";
             }
         }

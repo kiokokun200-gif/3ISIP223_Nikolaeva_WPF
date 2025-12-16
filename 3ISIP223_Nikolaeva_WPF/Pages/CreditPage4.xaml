@@ -20,7 +20,7 @@
 
             <TextBlock Text="Срок кредита (месяцев):"/>
             <Slider x:Name="SliderMonths" Minimum="12" Maximum="96" Value ="24" IsSnapToTickEnabled="True" ValueChanged="SliderMonths_ValueChanged"/>
-            <TextBlock x:Name="TextBlockMonths" Text="36 месяцев"/>
+            <TextBlock x:Name="TextBlockMonths" Text="24 месяца"/>
             <TextBlock Text="Результат:"/>
             <TextBlock x:Name="TextBlockDownPayment"/>
             <TextBlock x:Name="TextBlockLoanAmount"/>
