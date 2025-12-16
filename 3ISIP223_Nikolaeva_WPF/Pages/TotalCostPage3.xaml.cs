@@ -55,7 +55,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             if (Car.Option4) text += "Подогрев сидений, ";
 
             if (text == "") return "нет";
-            return text.TrimEnd(',', ' ');
+            text.TrimEnd(',', ' ');
+            Car.Options = text;
+            return text;
         }
     }
 }

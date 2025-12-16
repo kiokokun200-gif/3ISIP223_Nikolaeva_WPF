@@ -21,13 +21,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public static bool Option2 { get; set; } 
         public static bool Option3 { get; set; } 
         public static bool Option4 { get; set; } 
+        public static string Options { get; set; } 
+
         public static double OptionsPrice { get; set; } 
         public static double CarTotalPrice { get; set; } 
 
-        
-
-        public static double DownPaymentPercent { get; set; } = 20;
-        public static int LoanTerm { get; set; } = 36;
+        public static double DownPaymentPercent { get; set; } 
+        public static double LoanTerm { get; set; }
+        public static double MountlyPayment { get; set; }
 
         public static string CustomerName { get; set; }
         public static string Phone { get; set; }

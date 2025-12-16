@@ -30,6 +30,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             RadioButton rb = (RadioButton)sender;
             string color = rb.Content.ToString();
+            Car.Color = color;
             if (color == "Черный") Car.ColorPrice = 5000;
             else if (color == "Белый") Car.ColorPrice = 1000;
             else Car.ColorPrice = 50000;

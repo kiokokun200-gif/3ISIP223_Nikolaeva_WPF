@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using _3ISIP223_Nikolaeva_WPF.Models;
 
-
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
     public partial class CreditPage4 : Page
@@ -22,40 +21,56 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public CreditPage4()
         {
             InitializeComponent();
+
+
+            //SliderPercent.Value = 20;
+            //SliderMonths.Value = 36;
+
+            //Car.DownPaymentPercent = 20;
+            //Car.LoanTerm = 36;
+
+            //TextBlockPercent.Text = "20%";
+            //TextBlockMonths.Text = "36 месяцев";
+
             UpdateCredit();
         }
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void SliderPercent_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Car.DownPaymentPercent = SliderPercent.Value;
-            Car.LoanTerm = (int)SliderMonths.Value;
-
+            Car.DownPaymentPercent = e.NewValue;
+            if (TextBlockPercent != null)
             TextBlockPercent.Text = $"{Car.DownPaymentPercent}%";
-            TextBlockMonths.Text = $"{Car.LoanTerm} месяцев";
+            UpdateCredit();
+        }
 
+        private void SliderMonths_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Car.LoanTerm = e.NewValue;
+            if (TextBlockMonths != null)
+            TextBlockMonths.Text = $"{Car.LoanTerm} месяцев";
             UpdateCredit();
         }
 
         private void UpdateCredit()
         {
-            double carPrice = Car.CarTotalPrice;
+            double C = Car.CarTotalPrice;
+            TextBlockCarPrice.Text = $"Цена на авто: {C} Р";
+            double P = C * (Car.DownPaymentPercent / 100);
 
-            TextBlockCarPrice.Text = $"{carPrice:C}";
-
-            double downPayment = carPrice * (Car.DownPaymentPercent / 100);
-            double loanAmount = carPrice - downPayment;
+            double S = C - P;
 
             double r = 7.5;
-            double i = r / 100 / 12;
-            int n = Car.LoanTerm;
 
-            double numerator = i * Math.Pow(1 + i, n);
-            double denominator = Math.Pow(1 + i, n) - 1;
-            double monthlyPayment = loanAmount * (numerator / denominator);
+            double i = r / 100/ 12;
 
-            TextBlockDownPayment.Text = $"Первоначальный взнос: {downPayment:C}";
-            TextBlockLoanAmount.Text = $"Сумма кредита: {loanAmount:C}";
-            TextBlockMonthlyPayment.Text = $"Ежемесячный платёж: {monthlyPayment:C}";
+            double n = Car.LoanTerm;
+
+            double A = S * (i * Math.Pow(1 + i, n)) / (Math.Pow(1 + i, n) - 1);
+            Car.MountlyPayment = A;
+
+            if (TextBlockDownPayment != null) TextBlockDownPayment.Text = $"Первоначальный взнос: {P:C}";
+            if (TextBlockLoanAmount != null) TextBlockLoanAmount.Text = $"Сумма кредита: {S:C}";
+            if(TextBlockMonthlyPayment != null) TextBlockMonthlyPayment.Text = $"Ежемесячный платёж: {A:C}";
         }
     }
 }

@@ -15,11 +15,11 @@
             <TextBlock x:Name="TextBlockSummary" />
             <TextBlock Text="Контактные данные:"/>
             <TextBlock Text="Имя:"/>
-            <TextBox x:Name="TextBoxName"/>
+            <TextBox x:Name="TextBoxName" TextChanged="TextBoxName_TextChanged"/>
             <TextBlock Text="Телефон:"/>
-            <TextBox x:Name="TextBoxPhone"/>
-            <TextBlock Text="Email:"/>
-            <TextBox x:Name="TextBoxEmail"/>
+            <TextBox x:Name="TextBoxPhone" PreviewTextInput ="TextBoxPhone_PreviewTextInput" TextChanged="TextBoxPhone_TextChanged"/>
+            <TextBlock Text="Email:" />
+            <TextBox x:Name="TextBoxEmail" TextChanged="TextBoxEmail_TextChanged"/>
         </StackPanel>
     </Grid>
 </Page>
