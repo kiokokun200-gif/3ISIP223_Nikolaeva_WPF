@@ -9,6 +9,10 @@
       Title="_1PageProducts">
 
     <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <ListBox x:Name="ProductsListBox">
             <ListBox.ItemTemplate>
                 <DataTemplate>
