@@ -9,6 +9,24 @@
       Title="_3PageOrder" Background="White">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="ФИО: "/>
+            <TextBox  Width="300"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="E-mail: "/>
+            <TextBox  Width="300"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="Адрес доставки: "/>
+            <TextBox  Width="300"/>
+        </StackPanel>
     </Grid>
 </Page>
