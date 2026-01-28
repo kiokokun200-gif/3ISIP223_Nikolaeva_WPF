@@ -27,7 +27,6 @@ namespace _3ISIP223_Nikolaeva_WPF
             InitializeComponent();
             
         }
-
        
     }
 }

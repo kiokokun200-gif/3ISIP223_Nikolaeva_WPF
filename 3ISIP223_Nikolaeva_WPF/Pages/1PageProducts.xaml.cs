@@ -28,7 +28,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             List<Products>products = Core.Context.Products.ToList();
             ProductsListBox.ItemsSource = products;
 
-            List<Cart>cart = 
+            BtnCart.IsEnabled = Cartlst.Cartlist.Any();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -37,19 +38,25 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             Button button = (Button)sender;
             Products selectedProd = (Products)button.DataContext;
 
-            if (ProductsListBox.SelectedItem != null)
-            {
-                Products products = ProductsListBox.SelectedItem as Products;
+           
+            Cart exist_products = Cartlst.Cartlist.FirstOrDefault(c => c.ID_Product == selectedProd.ID_Product);
 
-                if (Cart.CartProducts.FirstOrDefault(c => c.ID_Product == selectedProd.ID_Product) == null)
-                    Cart.CartProducts.Add(ProductsListBox.SelectedItem as Products);
-                else Cart.CartProducts
+            if (exist_products == null)
+            {
+                Cart Add_cart = new Cart(selectedProd.ID_Product, selectedProd.Name, selectedProd.Price, selectedProd.Image, 1);
+                Cartlst.Cartlist.Add(Add_cart);
             }
+            else exist_products.Quantity += 1;
+
+            BtnCart.IsEnabled = Cartlst.Cartlist.Any();
+
         }
 
         private void BtnCart_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new _2PageCart());
         }
+
+       
     }
 }

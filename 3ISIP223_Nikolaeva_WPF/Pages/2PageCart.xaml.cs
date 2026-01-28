@@ -23,6 +23,24 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public _2PageCart()
         {
             InitializeComponent();
+            CartListBox.ItemsSource = Cartlst.Cartlist;
+
+            decimal total = Cartlst.Cartlist.Sum(p => p.ProductPrice * p.Quantity);
+            TxtBlkTotal.Text = $"Итого: {total} Р";
+
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new _3PageOrder());
         }
     }
 }
