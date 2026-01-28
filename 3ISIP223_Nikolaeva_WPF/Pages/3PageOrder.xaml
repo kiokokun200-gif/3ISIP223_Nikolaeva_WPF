@@ -19,15 +19,15 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="ФИО: "/>
-            <TextBox Width="300"/>
+            <TextBox x:Name="TxtFIO" Width="300" TextChanged="TxtFIO_TextChanged"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="E-mail: "/>
-            <TextBox  Width="300"/>
+            <TextBox x:Name="TxtEmail" Width="300" TextChanged="TxtEmail_TextChanged"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock Text="Адрес доставки: "/>
-            <TextBox  Width="300"/>
+            <TextBox x:Name="TxtAdress" Width="300" TextChanged="TxtAdress_TextChanged"/>
         </StackPanel>
         <ListBox x:Name="TotalListBox" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
@@ -41,7 +41,7 @@
         </ListBox>
         <StackPanel Grid.Row="4" Orientation="Vertical">
             <TextBlock x:Name="TxtBlkTotal"/>
-            <Button Content="Заказать" Width="100" HorizontalAlignment="Left" Click="Button_Click"/>
+            <Button x:Name="BtnOrder" Content="Заказать" Width="100" HorizontalAlignment="Left" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Page>
