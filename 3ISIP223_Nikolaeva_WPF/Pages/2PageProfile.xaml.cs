@@ -12,22 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using _3ISIP223_Nikolaeva_WPF.Pages;
 
-namespace _3ISIP223_Nikolaeva_WPF
+namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для _2PageProfile.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class _2PageProfile : Page
     {
-        
-        public MainWindow()
+        public _2PageProfile()
         {
             InitializeComponent();
-            
         }
 
-       
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

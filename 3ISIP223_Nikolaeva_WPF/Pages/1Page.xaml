@@ -9,15 +9,26 @@
       Title="_1Page">
 
     <Grid Background="White">
-        <ListBox x:Name="FilmListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="⌕" FontSize="20"></TextBlock>
+            <TextBox x:Name="TxtBoxSearch" Width="300" TextChanged="TxtBoxSearch_TextChanged"/>
+            <Button x:Name="BtnSortName" Click="Button_Click"/>
+            <Button x:Name="BtnSortRating" Click="BtnSortRating_Click"/>
+        </StackPanel>
+        <Button Grid.Row="0" x:Name="ProfileBtn" HorizontalAlignment="Right" Content="Личная страница" Click="ProfileBtn_Click"/>
+        <ListBox Grid.Row="1" x:Name="FilmListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
                         <Image Source="{Binding Cover}" Width="150" Height="200"/>
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text= "{Binding Name}" FontSize="30"/>
-                            <TextBlock FontSize="20" Text="{Binding Name}"/>
-                            <Button Content="Добавить в корзину" Click="Button_Click"/>
+                            <TextBlock Text="{Binding Rating, StringFormat=Рейтинг: {0}}"/>
+                            <TextBlock Text="{Binding ShowDate, StringFormat=Дата начала показа: {0}}"/>
                         </StackPanel>
                     </WrapPanel>
                 </DataTemplate>
