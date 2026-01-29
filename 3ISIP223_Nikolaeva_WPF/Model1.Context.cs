@@ -13,10 +13,10 @@ namespace _3ISIP223_Nikolaeva_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OnlineShopEntities : DbContext
+    public partial class OnlineShopEntities1 : DbContext
     {
-        public OnlineShopEntities()
-            : base("name=OnlineShopEntities")
+        public OnlineShopEntities1()
+            : base("name=OnlineShopEntities1")
         {
         }
     

@@ -8,6 +8,6 @@ namespace _3ISIP223_Nikolaeva_WPF
 {
     internal class Core
     {
-        public static OnlineShopEntities Context = new OnlineShopEntities();
+        public static OnlineShopEntities1 Context = new OnlineShopEntities1();
     }
 }
