@@ -13,10 +13,10 @@ namespace _3ISIP223_Nikolaeva_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PR14_CinemaEntities : DbContext
+    public partial class PR14_CinemaEntities1 : DbContext
     {
-        public PR14_CinemaEntities()
-            : base("name=PR14_CinemaEntities")
+        public PR14_CinemaEntities1()
+            : base("name=PR14_CinemaEntities1")
         {
         }
     

@@ -19,7 +19,7 @@
             <Button x:Name="BtnSortName" Click="Button_Click"/>
             <Button x:Name="BtnSortRating" Click="BtnSortRating_Click"/>
         </StackPanel>
-        <Button Grid.Row="0" x:Name="ProfileBtn" HorizontalAlignment="Right" Content="Личная страница" Click="ProfileBtn_Click"/>
+        <Button Grid.Row="0" x:Name="ProfileBtn" HorizontalAlignment="Right" Content="Личная страница" Background="#FFFF37B5" Foreground="White" Click="ProfileBtn_Click"/>
         <ListBox Grid.Row="1" x:Name="FilmListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

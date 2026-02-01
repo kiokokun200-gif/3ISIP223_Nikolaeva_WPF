@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace _3ISIP223_Nikolaeva_WPF
 {
-    internal class Core
+    public static class UserData
     {
-        public static PR14_CinemaEntities1 Context = new PR14_CinemaEntities1();
+        public static Users CurrentUser { get; set; }
+        public static bool IsLoggedIn => CurrentUser != null;
+
+
     }
 }

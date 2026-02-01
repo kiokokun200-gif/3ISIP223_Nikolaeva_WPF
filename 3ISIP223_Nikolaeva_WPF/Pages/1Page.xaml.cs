@@ -90,7 +90,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ProfileBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new _2PageProfile());
+            if(UserData.IsLoggedIn)
+            {
+                NavigationService.Navigate(new _2PageProfile());
+            }
+            else NavigationService.Navigate(new _3PageLogin());
         }
     }
 }

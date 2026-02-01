@@ -9,6 +9,12 @@
       Title="_2PageProfile">
 
     <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <Button x:Name="BtnBack" Content="Назад" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BtnBack_Click"/>
+        
     </Grid>
 </Page>
