@@ -13,13 +13,20 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Image Grid.Column="0" Source="{Binding Cover}" Height="400" Width="300"/>
-        <StackPanel Grid.Column="1">
+        <Image Grid.Column="0" Grid.RowSpan="2" Source="{Binding Cover}" Height="400" Width="300"/>
+        <StackPanel Grid.Column="1" Grid.Row="0">
             <TextBlock Text="{Binding Name}" FontSize="40"/>
             <TextBlock Text="{Binding Genre, StringFormat=Жанр: {0}}"/> <!--спросить-->
             <TextBlock Text="{Binding Rating, StringFormat=Рейтинг: {0}}"/>
             <TextBlock Text="{Binding Description, StringFormat=Описание: {0}}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Сеансы:"/>
         </StackPanel>
     </Grid>
 </Page>

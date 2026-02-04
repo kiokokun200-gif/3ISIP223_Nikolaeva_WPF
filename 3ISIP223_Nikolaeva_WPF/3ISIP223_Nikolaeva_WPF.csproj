@@ -119,6 +119,7 @@
     <Compile Include="Seat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Seats.cs" />
     <Compile Include="Ticket.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
