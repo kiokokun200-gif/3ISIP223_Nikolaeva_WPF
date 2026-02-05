@@ -18,19 +18,17 @@ namespace _3ISIP223_Nikolaeva_WPF
         public Kinozal()
         {
             this.Seans = new HashSet<Seans>();
-            this.Seat = new HashSet<Seat>();
-            this.Seat1 = new HashSet<Seat>();
         }
     
         public int ID { get; set; }
         public int Rating_ID { get; set; }
+        public int KinozalNumber { get; set; }
+        public string Name { get; set; }
+        public int RowNumber { get; set; }
+        public int SeatNumber { get; set; }
     
         public virtual Kinozal_Rating Kinozal_Rating { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Seans> Seans { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Seat> Seat { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Seat> Seat1 { get; set; }
     }
 }

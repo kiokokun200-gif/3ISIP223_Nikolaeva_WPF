@@ -8,6 +8,6 @@ namespace _3ISIP223_Nikolaeva_WPF
 {
     internal class Core
     {
-        public static PR14_CinemaEntities1 Context = new PR14_CinemaEntities1();
+        public static PR14_CinemaEntities Context = new PR14_CinemaEntities();
     }
 }

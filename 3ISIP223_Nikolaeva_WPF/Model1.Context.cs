@@ -13,10 +13,10 @@ namespace _3ISIP223_Nikolaeva_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PR14_CinemaEntities1 : DbContext
+    public partial class PR14_CinemaEntities : DbContext
     {
-        public PR14_CinemaEntities1()
-            : base("name=PR14_CinemaEntities1")
+        public PR14_CinemaEntities()
+            : base("name=PR14_CinemaEntities")
         {
         }
     
@@ -32,8 +32,6 @@ namespace _3ISIP223_Nikolaeva_WPF
         public virtual DbSet<Kinozal> Kinozal { get; set; }
         public virtual DbSet<Kinozal_Rating> Kinozal_Rating { get; set; }
         public virtual DbSet<Seans> Seans { get; set; }
-        public virtual DbSet<Seans_Seat> Seans_Seat { get; set; }
-        public virtual DbSet<Seat> Seat { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }

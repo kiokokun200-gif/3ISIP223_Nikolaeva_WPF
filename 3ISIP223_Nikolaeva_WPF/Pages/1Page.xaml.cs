@@ -96,5 +96,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
             else NavigationService.Navigate(new _3PageLogin());
         }
+
+        private void FilmListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selectFilm = FilmListBox.SelectedItem as Film;
+            NavigationService.Navigate(new _5PageFilm(selectFilm));
+        }
     }
 }

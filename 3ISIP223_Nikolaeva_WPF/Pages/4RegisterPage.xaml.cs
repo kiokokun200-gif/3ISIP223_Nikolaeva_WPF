@@ -61,6 +61,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnRegisterBD_Click(object sender, RoutedEventArgs e)
         {
+            //добавить проверку почты
             if (CheckText())
             {
                 var registeruser = new Users

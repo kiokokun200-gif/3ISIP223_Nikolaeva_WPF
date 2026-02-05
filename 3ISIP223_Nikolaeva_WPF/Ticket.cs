@@ -18,9 +18,10 @@ namespace _3ISIP223_Nikolaeva_WPF
         public int Seat_ID { get; set; }
         public int User_ID { get; set; }
         public int Seans_ID { get; set; }
+        public int RowNumber { get; set; }
+        public int SeatNumber { get; set; }
     
         public virtual Seans Seans { get; set; }
-        public virtual Seat Seat { get; set; }
         public virtual Users Users { get; set; }
     }
 }

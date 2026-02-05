@@ -17,19 +17,16 @@ namespace _3ISIP223_Nikolaeva_WPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Seans()
         {
-            this.Seans_Seat = new HashSet<Seans_Seat>();
             this.Ticket = new HashSet<Ticket>();
         }
     
         public int ID { get; set; }
         public int Kinozal_ID { get; set; }
         public int Film_ID { get; set; }
-        public System.DateTime DateTime { get; set; }
+        public System.DateTime SeansDate { get; set; }
     
         public virtual Film Film { get; set; }
         public virtual Kinozal Kinozal { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Seans_Seat> Seans_Seat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Ticket { get; set; }
     }

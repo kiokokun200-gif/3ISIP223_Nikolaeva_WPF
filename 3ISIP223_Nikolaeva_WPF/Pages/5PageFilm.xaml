@@ -25,8 +25,26 @@
             <TextBlock Text="{Binding Rating, StringFormat=Рейтинг: {0}}"/>
             <TextBlock Text="{Binding Description, StringFormat=Описание: {0}}"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
+        <StackPanel x:Name="First" Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Сеансы:"/>
+            <ListBox Grid.Row="1" x:Name="SeansListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel Orientation="Vertical">
+                            <StackPanel Orientation="Vertical">
+                                <Button Content= "{Binding Seans.SeansDate}" FontSize="10"/>
+                                <TextBlock Text="{Binding Seans.Kinozal.Kinozal_Rating.Name}"/>
+                                <TextBlock Text="{Binding Seans.Kinozal.Kinozal_Rating.Ticket_Price}"/>
+                            </StackPanel>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
         </StackPanel>
     </Grid>
 </Page>

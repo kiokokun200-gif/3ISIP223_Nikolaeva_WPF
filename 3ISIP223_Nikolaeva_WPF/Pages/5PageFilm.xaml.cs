@@ -18,11 +18,15 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// <summary>
     /// Логика взаимодействия для _5PageFilm.xaml
     /// </summary>
+    
     public partial class _5PageFilm : Page
     {
-        public _5PageFilm()
+        private Film _film;
+        public _5PageFilm(Film film)
         {
             InitializeComponent();
+            _film = film;
+            DataContext = film;
         }
     }
 }
