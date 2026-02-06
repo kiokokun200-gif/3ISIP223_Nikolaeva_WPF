@@ -61,23 +61,26 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnRegisterBD_Click(object sender, RoutedEventArgs e)
         {
-            //добавить проверку почты
             if (CheckText())
             {
-                var registeruser = new Users
+                if (Core.Context.Users.FirstOrDefault(u => u.Email == TxtBoxEmail.Text) == null)
                 {
-                    Name = TxtBoxName.Text,
-                    Password = TxtBoxPassword.Text,
-                    Email = TxtBoxEmail.Text
-                };
-                Core.Context.Users.Add(registeruser);
-                Core.Context.SaveChanges();
-                MessageBox.Show("Регистрация успешна");
-                UserData.CurrentUser = registeruser;
-                if (NavigationService.CanGoBack)
-                {
-                    NavigationService.GoBack();
+                    var registeruser = new Users
+                    {
+                        Name = TxtBoxName.Text,
+                        Password = TxtBoxPassword.Text,
+                        Email = TxtBoxEmail.Text
+                    };
+                    Core.Context.Users.Add(registeruser);
+                    Core.Context.SaveChanges();
+                    MessageBox.Show("Регистрация успешна");
+                    UserData.CurrentUser = registeruser;
+                    if (NavigationService.CanGoBack)
+                    {
+                        NavigationService.GoBack();
+                    }
                 }
+                else MessageBox.Show("Пользователь с такой почтой уже существует!");
             }
             else MessageBox.Show("Ошибка");
         }

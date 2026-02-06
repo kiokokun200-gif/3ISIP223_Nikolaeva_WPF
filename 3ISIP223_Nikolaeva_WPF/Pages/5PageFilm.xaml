@@ -21,18 +21,10 @@
         <Image Grid.Column="0" Grid.RowSpan="2" Source="{Binding Cover}" Height="400" Width="300"/>
         <StackPanel Grid.Column="1" Grid.Row="0">
             <TextBlock Text="{Binding Name}" FontSize="40"/>
-            <TextBlock x:Name="TxtBoxGenres" Text="{Binding Genre, StringFormat=Жанр: {0}}"/> <!--спросить-->
+            <TextBlock x:Name="TxtBoxGenres"/> <!--спросить-->
             <TextBlock Text="{Binding Rating, StringFormat=Рейтинг: {0}}"/>
             <TextBlock Text="{Binding Description, StringFormat=Описание: {0}}"/>
-            <ListView x:Name="GenresListBox" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Genre.Name}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            
         </StackPanel>
         <StackPanel x:Name="First" Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Сеансы:"/>
@@ -41,7 +33,7 @@
                     <DataTemplate>
                         <WrapPanel Orientation="Vertical">
                             <StackPanel Orientation="Vertical">
-                                <Button Content= "{Binding SeansDate}" FontSize="10"/>
+                                <Button x:Name="BtnSeans" Content= "{Binding SeansDate}" FontSize="10" Click="BtnSeans_Click"/>
                                 <TextBlock Text="{Binding Kinozal.Kinozal_Rating.Name}"/>
                                 <TextBlock Text="{Binding Kinozal.Kinozal_Rating.Ticket_Price}"/>
                             </StackPanel>
@@ -55,5 +47,6 @@
                 </ListBox.ItemsPanel>
             </ListBox>
         </StackPanel>
+        <Button Grid.Row="1" x:Name="BtnBack" Content="Назад" Height="20" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="BtnBack_Click"/>
     </Grid>
 </Page>

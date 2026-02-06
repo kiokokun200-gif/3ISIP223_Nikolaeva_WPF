@@ -33,10 +33,36 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             var seans = Core.Context.Seans.Where(s => s.Film_ID == _film.ID).ToList();
             SeansListBox.ItemsSource = seans;
-            var genres = Core.Context.Film_Genre.Where(s => s.Film_ID == _film.ID).ToList();
-            GenresListBox.ItemsSource = genres;
-            //попробовать через цикл, просто взять пустую строку и туда вписывать жанры
+            var genres = Core.Context.Film_Genre.Where(s => s.Film_ID == _film.ID).Select(g => g.Genre.Name).ToList();
+            string genresList = "";
+            for(int i = 0; i < genres.Count; i++)
+            {
+                if(i == genres.Count - 1) { genresList+= genres[i]; }
+                else genresList = genresList + genres[i] + ", ";
 
+            }
+            TxtBoxGenres.Text = $"Жанры: {genresList}";
+
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if(NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
+        private void BtnSeans_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserData.IsLoggedIn)
+            {
+                Button btn = (Button)sender;
+
+                var selectseans = (Seans)btn.DataContext;
+                NavigationService.Navigate(new _6PageSeans(selectseans));
+            }
+            else MessageBox.Show("Войдите в аккаунт!!!");
         }
     }
 }
