@@ -27,6 +27,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             InitializeComponent();
             _film = film;
             DataContext = film;
+            LoadPage();
+        }
+        private void LoadPage()
+        {
+            var seans = Core.Context.Seans.Where(s => s.Film_ID == _film.ID).ToList();
+            SeansListBox.ItemsSource = seans;
+            var genres = Core.Context.Film_Genre.Where(s => s.Film_ID == _film.ID).ToList();
+            GenresListBox.ItemsSource = genres;
+            //попробовать через цикл, просто взять пустую строку и туда вписывать жанры
+
         }
     }
 }
