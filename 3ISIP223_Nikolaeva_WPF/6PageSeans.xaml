@@ -9,6 +9,34 @@
       Title="_6PageSeans">
 
     <Grid Background="White">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock Text="{Binding Film.Name}" FontSize="30" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding SeansDate, StringFormat=Дата: {0:dd.MM}}" Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding SeansDate, StringFormat=Время: {0:hh\\:mm}}" Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding Kinozal.Name}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Background="#FFC8C8C8" Text="Экран" Width="450" TextAlignment="Center" Height="20" VerticalAlignment="Top"/>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="SeatsPanel" 
+                        HorizontalAlignment="Center"
+                        Margin="20"/>
+            </ScrollViewer>
+
+            <!-- Панель кнопок -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <CheckBox x:Name="HideBookedCheckBox" Content="Скрыть занятые места" Margin="0,0,20,0" Checked="HideBookedCheckBox_Checked" Unchecked="HideBookedCheckBox_Unchecked"/>
+            <Button Content="Оформить билет" Click="BuyTicketButton_Click" Padding="20,10"/>
+        </StackPanel>
     </Grid>
 </Page>

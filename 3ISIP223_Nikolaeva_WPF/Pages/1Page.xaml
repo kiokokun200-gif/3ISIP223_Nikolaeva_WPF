@@ -29,7 +29,7 @@
                             <TextBlock Text= "{Binding Name}" FontSize="30"/>
                             <TextBlock Text="{Binding Rating, StringFormat=Рейтинг: {0}}"/>
                             <TextBlock Text="{Binding Age_Rating.Name, StringFormat=Возрастное ограничение: {0}}"/>
-                            <TextBlock Text="{Binding ShowDate, StringFormat=Дата начала показа: {0}}"/>
+                            <TextBlock Text="{Binding ShowDate, StringFormat=Дата показа: {0:dd.MM.yyyy}}"/>
                         </StackPanel>
                     </WrapPanel>
                 </DataTemplate>
