@@ -13,7 +13,6 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="10">
@@ -27,16 +26,13 @@
 
         <TextBlock Grid.Row="1" Background="#FFC8C8C8" Text="Экран" Width="450" TextAlignment="Center" Height="20" VerticalAlignment="Top"/>
 
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="SeatsPanel" 
-                        HorizontalAlignment="Center"
-                        Margin="20"/>
-            </ScrollViewer>
+        <StackPanel Grid.Row="1" x:Name="SeatsPanel" HorizontalAlignment="Center" Margin="20"/>
+   
 
-            <!-- Панель кнопок -->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <CheckBox x:Name="HideBookedCheckBox" Content="Скрыть занятые места" Margin="0,0,20,0" Checked="HideBookedCheckBox_Checked" Unchecked="HideBookedCheckBox_Unchecked"/>
             <Button Content="Оформить билет" Click="BuyTicketButton_Click" Padding="20,10"/>
         </StackPanel>
+        <Button Grid.Row="2" Content="Назад" Width="70" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Button_Click"/>
     </Grid>
 </Page>

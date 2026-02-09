@@ -74,7 +74,8 @@ namespace _3ISIP223_Nikolaeva_WPF
                 StackPanel rowPanel = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
-                    Margin = new Thickness(0, 5, 0, 5)
+                    Margin = new Thickness(0, 5, 0, 5),
+                    
                 };
 
                 TextBlock rowLabel = new TextBlock
@@ -164,7 +165,6 @@ namespace _3ISIP223_Nikolaeva_WPF
 
         private void HideBookedCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            // Показываем только свободные места
             foreach (var button in _seatButtons)
             {
                 if (button.Tag is Seats seat && seat.IsBooked)
@@ -176,7 +176,6 @@ namespace _3ISIP223_Nikolaeva_WPF
 
         private void HideBookedCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            // Показываем все места
             foreach (var button in _seatButtons)
             {
                 button.Visibility = Visibility.Visible;
@@ -191,7 +190,12 @@ namespace _3ISIP223_Nikolaeva_WPF
                 return;
             }
 
-            
+            NavigationService.Navigate(new _7PageTicket(_selectedSeats, _seans));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 
