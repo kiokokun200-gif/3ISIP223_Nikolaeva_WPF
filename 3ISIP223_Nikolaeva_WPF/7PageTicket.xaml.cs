@@ -21,12 +21,18 @@ namespace _3ISIP223_Nikolaeva_WPF
     public partial class _7PageTicket : Page
     {
         private List<Seats> _selectedseats;
+        private Seans _seans;
         public _7PageTicket(List<Seats> selectedseats, Seans seans)
         {
             InitializeComponent();
             _selectedseats = selectedseats;
+            _seans = seans;
 
+            StackSeans.DataContext = seans;
+            TicketListBox.ItemsSource = _selectedseats.ToList();
 
+         
         }
+        
     }
 }

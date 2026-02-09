@@ -9,6 +9,32 @@
       Title="_7PageTicket">
 
     <Grid Background="White">
-        <
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="StackSeans" Grid.Row="0" Margin="10">
+            <TextBlock Text="{Binding Film.Name}" FontSize="30" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding SeansDate, StringFormat=Дата: {0:dd.MM}}" Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding SeansDate, StringFormat=Время: {0:hh\\:mm}}" Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding Kinozal.Name}"/>
+          </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Билеты:"/>
+            <ListBox x:Name="TicketListBox" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="{Binding RowNumber, StringFormat=Ряд: {0}}"/>
+                            <TextBlock Text="{Binding SeatNumber, StringFormat=Место: {0}}"/>
+                            <TextBlock x:Name="Pricl" DataContext="_seans" Text="{Binding Kinozal.Kinozal_Rating.Ticket_Price}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock x:Name="TxtBlkTotal" FontSize="30"/>
+        </StackPanel>
     </Grid>
 </Page>
