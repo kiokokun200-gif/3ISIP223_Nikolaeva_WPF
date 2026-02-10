@@ -41,24 +41,26 @@ namespace _3ISIP223_Nikolaeva_WPF
 
         private void CreateSeats()
         {
-            int rows = _seans.Kinozal.RowNumber; 
-            int seatsPerRow = _seans.Kinozal.SeatNumber; 
+            int rows = _seans.Kinozal.RowNumber;
+            int seatsPerRow = _seans.Kinozal.SeatNumber;
 
             _allSeats.Clear();
+
+            var bookedSeats = Core.Context.Ticket.Where(t => t.Seans_ID == _seans.ID).Select(t => new { t.RowNumber, t.SeatNumber }).ToList();
 
             for (int row = 1; row <= rows; row++)
             {
                 for (int seatNum = 1; seatNum <= seatsPerRow; seatNum++)
                 {
-                    //bool isBooked = new Random().Next(0, 100) < 30; // 30% мест заняты
+                    bool isBooked = bookedSeats.Any(seat => seat.RowNumber == row && seat.SeatNumber == seatNum);
 
                     _allSeats.Add(new Seats
                     {
                         RowNumber = row,
                         SeatNumber = seatNum,
-                        IsBooked = false,
+                        IsBooked = isBooked,
                         Price = _seans.Kinozal.Kinozal_Rating.Ticket_Price
-                    }) ;
+                    });
                 }
             }
         }

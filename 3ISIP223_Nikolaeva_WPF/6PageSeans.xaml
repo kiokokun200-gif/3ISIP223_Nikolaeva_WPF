@@ -31,7 +31,7 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Width="20" Height="20" VerticalAlignment="Top" Background="LightGreen" />
             <TextBlock Text=" Свободно" Margin="0 0 10 0"/>
-            <Button Width="20" Height="20" VerticalAlignment="Top" Background="Red"/>
+            <Button Width="20" Height="20" VerticalAlignment="Top" Background="Red" Foreground="White" Content="X" IsEnabled="False"/>
             <TextBlock Text=" Занято" Margin="0 0 10 0"/>
             <Button Width="20" Height="20" VerticalAlignment="Top" Background="Orange"/>
             <TextBlock Text=" Выбранное вами" Margin="0 0 10 0"/>
