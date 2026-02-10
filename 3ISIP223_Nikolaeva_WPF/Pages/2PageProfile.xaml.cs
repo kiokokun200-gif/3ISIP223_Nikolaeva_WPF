@@ -20,9 +20,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _2PageProfile : Page
     {
+        private Users _user = UserData.CurrentUser;
+        private List<Ticket> _tickets;
         public _2PageProfile()
         {
             InitializeComponent();
+            _tickets = Core.Context.Ticket.Where(t => t.User_ID == _user.ID).ToList();
+            StackProfile.DataContext = _user;
+            TicketKListBox.ItemsSource = _tickets;
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)

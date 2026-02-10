@@ -11,6 +11,8 @@ namespace _3ISIP223_Nikolaeva_WPF
         public int RowNumber { get; set; }
         public int SeatNumber { get; set; }   
         public bool IsBooked { get; set; }
+        public decimal Price { get; set; }
+
 
     }
 }

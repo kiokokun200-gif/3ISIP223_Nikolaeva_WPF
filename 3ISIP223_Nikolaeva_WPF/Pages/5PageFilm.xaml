@@ -47,6 +47,7 @@
                 </ListBox.ItemsPanel>
             </ListBox>
         </StackPanel>
-        <Button Grid.Row="1" x:Name="BtnBack" Content="Назад" Height="20" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="BtnBack_Click"/>
+        <Button Grid.Row="1" x:Name="BtnBack" Content="Назад" Height="30" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="BtnBack_Click" 
+                Background="#FFFF37B5" Foreground="White"/>
     </Grid>
 </Page>

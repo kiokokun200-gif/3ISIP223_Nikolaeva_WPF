@@ -15,11 +15,11 @@ namespace _3ISIP223_Nikolaeva_WPF
     public partial class Ticket
     {
         public int ID { get; set; }
-        public int Seat_ID { get; set; }
         public int User_ID { get; set; }
         public int Seans_ID { get; set; }
         public int RowNumber { get; set; }
         public int SeatNumber { get; set; }
+        public decimal Price { get; set; }
     
         public virtual Seans Seans { get; set; }
         public virtual Users Users { get; set; }

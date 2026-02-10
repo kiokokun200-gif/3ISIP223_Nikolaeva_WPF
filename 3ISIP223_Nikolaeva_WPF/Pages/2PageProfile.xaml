@@ -11,10 +11,32 @@
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="BtnBack" Content="Назад" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BtnBack_Click"/>
-        
+        <Button x:Name="BtnBack" Content="Назад" Width="50" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Background="#FFFF37B5" Foreground="White" Click="BtnBack_Click"/>
+        <StackPanel x:Name="StackProfile" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding Name}" FontSize="30" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Email}" FontSize="20"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Мои билеты:" FontSize="25"/>
+            <ListBox x:Name="TicketKListBox">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Seans.Film.Name}" FontSize="20"/>
+                            <TextBlock Text="{Binding Seans.SeansDate}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding RowNumber, StringFormat=Ряд: {0}}" Margin="0 0 10 0"/>
+                                <TextBlock Text="{Binding SeatNumber, StringFormat=Место: {0}}" Margin="0 0 10 0" />
+                                <TextBlock Text="{Binding Price, StringFormat=Цена: {0}}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </Grid>
 </Page>

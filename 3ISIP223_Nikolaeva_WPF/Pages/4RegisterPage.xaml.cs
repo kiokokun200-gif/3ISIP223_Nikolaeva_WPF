@@ -84,5 +84,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
             else MessageBox.Show("Ошибка");
         }
+
+        private void TxtBoxConfirmPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

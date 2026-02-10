@@ -13,6 +13,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="10">
@@ -27,12 +28,23 @@
         <TextBlock Grid.Row="1" Background="#FFC8C8C8" Text="Экран" Width="450" TextAlignment="Center" Height="20" VerticalAlignment="Top"/>
 
         <StackPanel Grid.Row="1" x:Name="SeatsPanel" HorizontalAlignment="Center" Margin="20"/>
-   
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="20" Height="20" VerticalAlignment="Top" Background="LightGreen" />
+            <TextBlock Text=" Свободно" Margin="0 0 10 0"/>
+            <Button Width="20" Height="20" VerticalAlignment="Top" Background="Red"/>
+            <TextBlock Text=" Занято" Margin="0 0 10 0"/>
+            <Button Width="20" Height="20" VerticalAlignment="Top" Background="Orange"/>
+            <TextBlock Text=" Выбранное вами" Margin="0 0 10 0"/>
+            <TextBlock Text="{Binding Kinozal.Kinozal_Rating.Ticket_Price, StringFormat=Цена: {0}}"/>
+        </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <CheckBox x:Name="HideBookedCheckBox" Content="Скрыть занятые места" Margin="0,0,20,0" Checked="HideBookedCheckBox_Checked" Unchecked="HideBookedCheckBox_Unchecked"/>
             <Button Content="Оформить билет" Click="BuyTicketButton_Click" Padding="20,10"/>
         </StackPanel>
-        <Button Grid.Row="2" Content="Назад" Width="70" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Button_Click"/>
+        <Button Grid.Row="3" Content="Назад" Width="70" Height="30" HorizontalAlignment="Left" 
+                Background="#FFFF37B5" Foreground="White" VerticalAlignment="Bottom" Click="Button_Click"/>
     </Grid>
 </Page>

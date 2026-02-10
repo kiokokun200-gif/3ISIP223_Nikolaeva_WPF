@@ -30,8 +30,8 @@
                 <TextBlock Text="Пароль"/>
                 <TextBox x:Name="TxtBoxPassword" Width="300" Height="30" TextChanged="Register_TextChanged"/>
                 <TextBlock Text="Подтвердите пароль"/>
-                <TextBox x:Name="TxtBoxConfirmPassword" Width="300" Height="30" TextChanged="Register_TextChanged"/>
-                <Button x:Name="BtnRegisterBD" Content="Зарегистрироваться" Width="150" Height="30" Margin="20" Background="#FFFF37B5" Foreground="White" IsEnabled="False" FontSize="20" Click="BtnRegisterBD_Click"/>
+                <TextBox x:Name="TxtBoxConfirmPassword" Width="300" Height="30" TextChanged="Register_TextChanged" LostFocus="TxtBoxConfirmPassword_LostFocus"/>
+                <Button x:Name="BtnRegisterBD" Content="Зарегистрироваться" Width="200" Height="30" Margin="20" Background="#FFFF37B5" Foreground="White" IsEnabled="False" FontSize="20" Click="BtnRegisterBD_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

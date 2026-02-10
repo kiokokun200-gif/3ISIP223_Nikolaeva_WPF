@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel x:Name="StackSeans" Grid.Row="0" Margin="10">
             <TextBlock Text="{Binding Film.Name}" FontSize="30" FontWeight="Bold"/>
@@ -26,15 +27,17 @@
             <ListBox x:Name="TicketListBox" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <TextBlock Text="{Binding RowNumber, StringFormat=Ряд: {0}}"/>
-                            <TextBlock Text="{Binding SeatNumber, StringFormat=Место: {0}}"/>
-                            <TextBlock x:Name="Pricl" DataContext="_seans" Text="{Binding Kinozal.Kinozal_Rating.Ticket_Price}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0 0 10 0" Text="{Binding RowNumber, StringFormat=Ряд: {0}}"/>
+                            <TextBlock Margin="0 0 10 0" Text="{Binding SeatNumber, StringFormat=Место: {0}}"/>
+                            <TextBlock x:Name="Pricl" Text="{Binding Price, StringFormat=Цена: {0}}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <TextBlock x:Name="TxtBlkTotal" FontSize="30"/>
+            <Button x:Name="BtnRegTicket" Content="Оформить билет" Width="200" Height="30" Background="#FFFF37B5" Foreground="White" Click="BtnRegTicket_Click"/>
         </StackPanel>
+        <Button Grid.Row="2" x:Name="BtnBack" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Назад" Width="50" Height="30" Background="#FFFF37B5" Foreground="White" Click="BtnBack_Click"/>
     </Grid>
 </Page>

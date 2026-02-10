@@ -22,7 +22,7 @@ namespace _3ISIP223_Nikolaeva_WPF
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Ticket_Price { get; set; }
+        public decimal Ticket_Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kinozal> Kinozal { get; set; }

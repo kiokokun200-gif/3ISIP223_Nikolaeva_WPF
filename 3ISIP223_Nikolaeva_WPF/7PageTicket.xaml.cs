@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _3ISIP223_Nikolaeva_WPF.Pages;
 
 namespace _3ISIP223_Nikolaeva_WPF
 {
@@ -30,9 +31,40 @@ namespace _3ISIP223_Nikolaeva_WPF
 
             StackSeans.DataContext = seans;
             TicketListBox.ItemsSource = _selectedseats.ToList();
-
-         
+            string total = _selectedseats.Sum(s => s.Price).ToString();
+            TxtBlkTotal.Text = $"Итого: {total} P";
         }
-        
+
+
+        private void BtnRegTicket_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var seat in _selectedseats)
+            {
+                try
+                {
+                    var ticket = new Ticket
+                    {
+                        User_ID = UserData.CurrentUser.ID,
+                        Seans_ID = _seans.ID,
+                        RowNumber = seat.RowNumber,
+                        SeatNumber = seat.SeatNumber,
+                        Price = seat.Price
+                    };
+
+                    Core.Context.Ticket.Add(ticket);
+                }
+                catch (Exception ex) { 
+                MessageBox.Show(ex.Message);
+                }
+            }
+            Core.Context.SaveChanges();
+            MessageBox.Show("Билет успешно оформлен");
+            NavigationService.Navigate(new _1Page());
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

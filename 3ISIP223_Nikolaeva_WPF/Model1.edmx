@@ -56,7 +56,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="70" Nullable="false" />
-          <Property Name="Ticket_Price" Type="int" Nullable="false" />
+          <Property Name="Ticket_Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Seans">
           <Key>
@@ -72,11 +72,11 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Seat_ID" Type="int" Nullable="false" />
           <Property Name="User_ID" Type="int" Nullable="false" />
           <Property Name="Seans_ID" Type="int" Nullable="false" />
           <Property Name="RowNumber" Type="int" Nullable="false" />
           <Property Name="SeatNumber" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -291,7 +291,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Ticket_Price" Type="Int32" Nullable="false" />
+          <Property Name="Ticket_Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <NavigationProperty Name="Kinozal" Relationship="Self.FK_Kinozal_Kinozal_Rating" FromRole="Kinozal_Rating" ToRole="Kinozal" />
         </EntityType>
         <EntityType Name="Seans">
@@ -311,11 +311,11 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Seat_ID" Type="Int32" Nullable="false" />
           <Property Name="User_ID" Type="Int32" Nullable="false" />
           <Property Name="Seans_ID" Type="Int32" Nullable="false" />
           <Property Name="RowNumber" Type="Int32" Nullable="false" />
           <Property Name="SeatNumber" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <NavigationProperty Name="Seans" Relationship="Self.FK_Ticket_Seans" FromRole="Ticket" ToRole="Seans" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Ticket_Users" FromRole="Ticket" ToRole="Users" />
         </EntityType>
@@ -547,11 +547,11 @@
             <EntityTypeMapping TypeName="PR14_CinemaModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Seat_ID" ColumnName="Seat_ID" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="Seans_ID" ColumnName="Seans_ID" />
                 <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
                 <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

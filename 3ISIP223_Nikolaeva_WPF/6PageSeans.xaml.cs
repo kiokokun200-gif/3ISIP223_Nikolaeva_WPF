@@ -56,8 +56,9 @@ namespace _3ISIP223_Nikolaeva_WPF
                     {
                         RowNumber = row,
                         SeatNumber = seatNum,
-                        IsBooked = false
-                    });
+                        IsBooked = false,
+                        Price = _seans.Kinozal.Kinozal_Rating.Ticket_Price
+                    }) ;
                 }
             }
         }
