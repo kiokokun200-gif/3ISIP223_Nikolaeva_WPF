@@ -27,7 +27,8 @@
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="{Binding Seans.Film.Name}" FontSize="20"/>
-                            <TextBlock Text="{Binding Seans.SeansDate}"/>
+                            <TextBlock Text="{Binding Seans.SeansDate, StringFormat=Дата: {0:dd.MM}}" Margin="0,0,10,0"/>
+                            <TextBlock Text="{Binding Seans.SeansDate, StringFormat=Время: {0:hh\\:mm}}" Margin="0,0,10,0"/>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding RowNumber, StringFormat=Ряд: {0}}" Margin="0 0 10 0"/>
                                 <TextBlock Text="{Binding SeatNumber, StringFormat=Место: {0}}" Margin="0 0 10 0" />

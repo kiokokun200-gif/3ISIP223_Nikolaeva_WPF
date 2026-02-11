@@ -26,7 +26,7 @@
             <TextBox x:Name="TxtBoxEmail" Width="300" Height="30" TextChanged="TxtBoxEmail_TextChanged"/>
             <TextBlock Text="Пароль"/>
             <TextBox x:Name="TxtBoxPassword" Width="300" Height="30" TextChanged="TxtBoxPassword_TextChanged"/>
-            <Button x:Name="BtnLoginBD" Content="Войти" Width="150" Height="30" Margin="20" Background="#FFFF37B5" Foreground="White" FontSize="20" IsEnabled="False" Click="BtnLoginBD_Click"/>
+            <Button x:Name="BtnLoginBD" Content="Войти" Width="150" Height="30" Margin="20" Background="#FFFF37B5" Foreground="White" FontSize="20" IsEnabled="False" Click="BtnLoginBD_Click" IsDefault="True"/>
         </StackPanel>
     </Grid>
 </Page>

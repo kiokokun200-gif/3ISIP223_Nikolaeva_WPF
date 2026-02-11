@@ -75,10 +75,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     Core.Context.SaveChanges();
                     MessageBox.Show("Регистрация успешна");
                     UserData.CurrentUser = registeruser;
-                    if (NavigationService.CanGoBack)
-                    {
-                        NavigationService.GoBack();
-                    }
+                    
+                        NavigationService.Navigate(new _1Page());
                 }
                 else MessageBox.Show("Пользователь с такой почтой уже существует!");
             }
@@ -87,7 +85,53 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void TxtBoxConfirmPassword_LostFocus(object sender, RoutedEventArgs e)
         {
+            if (TxtBoxPassword.Text != TxtBoxConfirmPassword.Text)
+            {
+                TxtBlckErrPass.Text = "Пароли не совпадают";
+            }
+            else TxtBlckErrPass.Text = "";
+        }
 
+        private void TxtBoxPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TxtBoxPassword.Text))
+            {
+                TxtBlckErrPass1.Text = "Заполните поле";
+            }
+            else if (!TxtBoxPassword.Text.Any(char.IsDigit) || (TxtBoxPassword.Text.Length <= 6))
+            {
+
+                TxtBlckErrPass1.Text = "Пароль должен содержать цифры и больше 6 символов";
+
+            }
+            else TxtBlckErrPass1.Text = "";
+        }
+
+        private void TxtBoxName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TxtBoxName.Text)) {
+                TxtBlckErrName.Text = "Заполните поле";
+            }
+            else if (TxtBoxName.Text.Length <= 1) {
+                TxtBlckErrName.Text = "Имя должно быть длиннее 1 символа";
+            }
+            else TxtBlckErrName.Text = "";
+            
+        }
+
+        private void TxtBoxEmail_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TxtBoxEmail.Text))
+            {
+                TxtBlckErrEmail.Text = "Заполните поле";
+            }
+            else if (!TxtBoxEmail.Text.Contains("@") || (!TxtBoxEmail.Text.Contains(".")))
+            {
+
+                TxtBlckErrEmail.Text = "Почта должна содержать @ и .";
+
+            }
+            else TxtBlckErrEmail.Text = "";
         }
     }
 }

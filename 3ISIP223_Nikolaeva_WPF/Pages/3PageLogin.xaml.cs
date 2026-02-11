@@ -74,10 +74,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 MessageBox.Show("Вход успешный");
                 //добавить перезод на страницу
-                if (NavigationService.CanGoBack)
-                {
-                    NavigationService.GoBack();
-                }
+                NavigationService.Navigate(new _1Page());
+
                 UserData.CurrentUser = user;
             }
             else MessageBox.Show("Ошибка входа");

@@ -62,7 +62,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 var selectseans = (Seans)btn.DataContext;
                 NavigationService.Navigate(new _6PageSeans(selectseans));
             }
-            else MessageBox.Show("Войдите в аккаунт!!!");
+            else
+            {
+                MessageBox.Show("Войдите в аккаунт!!!");
+                NavigationService.Navigate(new _3PageLogin());
+            }
         }
     }
 }

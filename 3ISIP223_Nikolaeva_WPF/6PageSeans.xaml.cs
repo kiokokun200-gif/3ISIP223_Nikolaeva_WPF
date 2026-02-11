@@ -30,13 +30,15 @@ namespace _3ISIP223_Nikolaeva_WPF
             InitializeComponent();
             _seans = seans;
             DataContext = _seans;
-            Loaded += _6PageSeans_Loaded;
+            //Loaded += _6PageSeans_Loaded;
+            CreateSeats();
+            DisplaySeats();
         }
 
         private void _6PageSeans_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateSeats();
-            DisplaySeats();
+            //CreateSeats();
+            //DisplaySeats();
         }
 
         private void CreateSeats()
@@ -150,21 +152,11 @@ namespace _3ISIP223_Nikolaeva_WPF
                     button.BorderThickness = new Thickness(2);
                 }
 
-                UpdateBuyButton();
+         
             }
         }
 
-        private void UpdateBuyButton()
-        {
-            var buyButton = FindName("BuyTicketButton") as Button;
-            if (buyButton != null)
-            {
-                buyButton.IsEnabled = _selectedSeats.Count > 0;
-                buyButton.Content = _selectedSeats.Count > 0
-                    ? $"Оформить билет ({_selectedSeats.Count})"
-                    : "Оформить билет";
-            }
-        }
+        
 
         private void HideBookedCheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -172,7 +164,7 @@ namespace _3ISIP223_Nikolaeva_WPF
             {
                 if (button.Tag is Seats seat && seat.IsBooked)
                 {
-                    button.Visibility = Visibility.Collapsed;
+                    button.Visibility = Visibility.Hidden;
                 }
             }
         }

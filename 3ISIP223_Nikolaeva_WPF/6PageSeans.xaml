@@ -26,9 +26,13 @@
         </StackPanel>
 
         <TextBlock Grid.Row="1" Background="#FFC8C8C8" Text="Экран" Width="450" TextAlignment="Center" Height="20" VerticalAlignment="Top"/>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="SeatsPanel" 
+                        HorizontalAlignment="Center"
+                        Margin="20"/>
+        </ScrollViewer>
 
-        <StackPanel Grid.Row="1" x:Name="SeatsPanel" HorizontalAlignment="Center" Margin="20"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Width="20" Height="20" VerticalAlignment="Top" Background="LightGreen" />
             <TextBlock Text=" Свободно" Margin="0 0 10 0"/>
             <Button Width="20" Height="20" VerticalAlignment="Top" Background="Red" Foreground="White" Content="X" IsEnabled="False"/>
