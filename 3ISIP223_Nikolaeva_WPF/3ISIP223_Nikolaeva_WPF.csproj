@@ -225,6 +225,14 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\case.png" />
+    <Resource Include="Images\cpu.png" />
+    <Resource Include="Images\gpu.jpg" />
+    <Resource Include="Images\motherboard.png" />
+    <Resource Include="Images\powersupply.jpg" />
+    <Resource Include="Images\processorcooler.png" />
+    <Resource Include="Images\ram.png" />
+    <Resource Include="Images\StorageDevice.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -236,5 +244,6 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

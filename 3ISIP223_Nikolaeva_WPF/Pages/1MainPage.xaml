@@ -6,9 +6,35 @@
       xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="_1MainPage">
+      Title="_1MainPage" Loaded="Page_Loaded">
 
     <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         
+        <TextBlock Grid.Column="0" Text="Конфигуратор ПК" FontSize="30" HorizontalAlignment="Center"/>
+        <ListBox x:Name="PartTypesListBox" Grid.RowSpan="2" Grid.Column="0" Width="400">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" >
+                        <Image x:Name="ImageBox" Source="{Binding picture}" Width="20" Height="20" Margin="10" Loaded="ImageBox_Loaded"/>
+                        <TextBlock Text="{Binding name}" FontSize="20" Margin="10"/>
+                        <Button x:Name="BtnChoose" Content="Выбрать" Margin="10" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </DataTemplate>
+             
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </Page>

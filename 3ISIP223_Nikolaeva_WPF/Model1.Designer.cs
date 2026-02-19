@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\234794\source\repos\kiokokun200-gif\3ISIP223_Nikolaeva_WPF\3ISIP223_Nikolaeva_WPF\Model1.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\Admin\Source\Repos\kiokokun200-gif\3ISIP223_Nikolaeva_WPF\3ISIP223_Nikolaeva_WPF\Model1.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

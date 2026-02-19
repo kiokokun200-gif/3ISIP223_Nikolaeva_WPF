@@ -20,9 +20,38 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _1MainPage : Page
     {
+        private List<parttype> parttypes;
+        private List<string> picture;
         public _1MainPage()
         {
+
             InitializeComponent();
+            parttypes = Core.Context.parttype.ToList();
+            PartTypesListBox.ItemsSource = parttypes;
+            picture = new List<string>()
+            {
+                "Images\\cpu.png",
+                "Images\\gpu.jpg",
+                "Images\\ram.png",
+                "Images\\motherboard.png",
+                "Images\\case.png",
+                "Images\\powersupply.jpg",
+                "Images\\processorcooler.png",
+                "Images\\StorageDevice.png"  
+            };
+            
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ImageBox_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+
         }
     }
 }
