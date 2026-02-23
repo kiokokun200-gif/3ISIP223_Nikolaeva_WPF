@@ -43,15 +43,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
-        private void ImageBox_Loaded(object sender, RoutedEventArgs e)
-        {
-           
 
-        }
+     
     }
 }
