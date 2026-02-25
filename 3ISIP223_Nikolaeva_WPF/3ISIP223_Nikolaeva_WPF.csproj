@@ -115,6 +115,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\basepart.cs" />
+    <Compile Include="Models\cpu.cs" />
+    <Compile Include="Models\gpu.cs" />
     <Compile Include="motherboard.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
