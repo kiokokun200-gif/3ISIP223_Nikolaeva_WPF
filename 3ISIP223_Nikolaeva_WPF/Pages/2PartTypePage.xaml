@@ -20,15 +20,27 @@
         
         </StackPanel>
 
-        <ListBox x:Name="PartsListBox" Grid.Row="1" >
+        <ListBox x:Name="PartsListBox" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding getdes}"/>
-                        
-                    </StackPanel>
+                    <WrapPanel Orientation="Horizontal">
+                        <Image Source="{Binding image}" Width="150" Height="150" Margin="10"/>
+                        <WrapPanel>
+                        <TextBlock Text="{Binding name}" Margin="10" FontSize="22" />
+                        <TextBlock Text="{Binding FullDescription, StringFormat=[{0}]}" Margin="10" FontSize="22" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding price}"  FontSize="30"/>
+                        </WrapPanel>
+                    </WrapPanel>
                 </DataTemplate>
+        
             </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
         </ListBox>
+        
     </Grid>
 </Page>
