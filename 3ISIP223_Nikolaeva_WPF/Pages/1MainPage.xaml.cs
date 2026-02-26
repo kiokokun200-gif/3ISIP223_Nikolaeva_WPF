@@ -20,13 +20,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _1MainPage : Page
     {
-        private List<parttype> parttypes;
+        private List<basepart> parttypes;
         private List<string> picture;
         public _1MainPage()
         {
 
             InitializeComponent();
-            parttypes = Core.Context.parttype.ToList();
+            //parttypes = Core.Context.parttype.ToList(); //нет
             PartTypesListBox.ItemsSource = parttypes;
             picture = new List<string>()
             {
@@ -43,8 +43,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         }
 
-
-
-     
+        private void BtnChoose_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            var selectpart = (parttype)btn.DataContext;
+            NavigationService.Navigate(selectpart);
+        }
     }
 }

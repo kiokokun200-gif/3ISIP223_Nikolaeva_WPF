@@ -26,7 +26,7 @@
                     <StackPanel Orientation="Horizontal" Width="400" HorizontalAlignment="Right">
                         <!--<Image x:Name="ImageBox" Source="{Binding picture}" Width="20" Height="20" Margin="10"/>-->
                         <TextBlock Text="{Binding name}" FontSize="20" Margin="10"/>
-                        <Button x:Name="BtnChoose" Content="Выбрать" Margin="10" />
+                        <Button x:Name="BtnChoose" Content="Выбрать" Margin="10" Click="BtnChoose_Click"/>
                     </StackPanel>
                 </DataTemplate>
 

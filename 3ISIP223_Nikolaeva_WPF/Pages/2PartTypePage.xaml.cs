@@ -20,9 +20,21 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _2PartTypePage : Page
     {
-        public _2PartTypePage()
+        static public parttype part {get;set;}
+        public List<basepart> parts { get; set; }
+        public _2PartTypePage(parttype p)
         {
+            DataContext = this;
+            part = p;
             InitializeComponent();
+            Lod();
+        }
+
+        public void Lod()
+        {
+            parts = Core.Context.basepart.Where(d => d.parttype.id == part.id).ToList();
+            PartsListBox.ItemsSource = parts;
+
         }
     }
 }

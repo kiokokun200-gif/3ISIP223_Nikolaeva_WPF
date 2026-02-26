@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _3ISIP223_Nikolaeva_WPF.Pages;
 
 namespace _3ISIP223_Nikolaeva_WPF
 {
     public partial class basepart
     {
+        public string getdes
+        {
+            get
+            {
+                return GetDescription(_2PartTypePage.part.basepart);
+            }
+        }
+
         public string GetDescription(basepart part)
         {
             if (part.parttype.name == "CPU")
@@ -87,5 +96,8 @@ namespace _3ISIP223_Nikolaeva_WPF
                 return res;
             }
         }
+
+
+        
     }
 }

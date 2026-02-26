@@ -9,6 +9,26 @@
       Title="_2PartTypePage">
 
     <Grid Background="White">
-                
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="⌕" FontSize="30"/>
+            <TextBox Width="200" Height="30"/>
+        
+        </StackPanel>
+
+        <ListBox x:Name="PartsListBox" Grid.Row="1" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding getdes}"/>
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>
