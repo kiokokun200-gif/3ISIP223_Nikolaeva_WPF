@@ -1517,7 +1517,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PR_15Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PR_15Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="assembly" EntityType="Self.assembly" />
           <EntitySet Name="basepart" EntityType="Self.basepart" />
           <EntitySet Name="boardformfactorcase" EntityType="Self.boardformfactorcase" />
@@ -1685,7 +1685,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище PR_15ModelContainer" CdmEntityContainer="PR_15Entities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PR_15ModelContainer" CdmEntityContainer="PR_15Entities2">
           <EntitySetMapping Name="assembly">
             <EntityTypeMapping TypeName="PR_15Model.assembly">
               <MappingFragment StoreEntitySet="assembly">

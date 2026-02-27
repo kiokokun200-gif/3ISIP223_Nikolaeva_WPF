@@ -28,6 +28,27 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             DataContext = this;
             parts = Core.Context.basepart.Where(d => d.parttype.id == p.id).ToList();
             PartsListBox.ItemsSource = parts;
-        } 
+        }
+
+        private void BtnAddPart_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            basepart selectedpart = (basepart)btn.DataContext;
+            var userselectpart = UserDataaa.userparts.FirstOrDefault(p => p.parttype.name == selectedpart.parttype.name);
+            if (userselectpart != null)
+            {
+                UserDataaa.userparts.Remove(userselectpart);
+                UserDataaa.userparts.Add(selectedpart);
+            }
+            else UserDataaa.userparts.Add(selectedpart);
+            NavigationService.Navigate(new _1MainPage()); //или NavigationService.GoBack
+
+        }
+
+        private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchtext = TxtBoxSearch.Text.ToLower();
+            PartsListBox.ItemsSource = parts.Where(p => p.name.ToLower().Contains(searchtext)).ToList();
+        }
     }
 }
