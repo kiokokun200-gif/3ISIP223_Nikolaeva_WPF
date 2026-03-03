@@ -22,24 +22,29 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     {
         private List<parttype> parttypes;
         private List<string> picture;
+        private List<basepart> userassembly;
         public _1MainPage()
         {
 
             InitializeComponent();
             parttypes = Core.Context.parttype.ToList(); //нет
             PartTypesListBox.ItemsSource = parttypes;
-            picture = new List<string>()
-            {
-                "Images\\cpu.png",
-                "Images\\gpu.jpg",
-                "Images\\ram.png",
-                "Images\\motherboard.png",
-                "Images\\case.png",
-                "Images\\powersupply.jpg",
-                "Images\\processorcooler.png",
-                "Images\\StorageDevice.png"  
-            };
-            
+            //picture = new List<string>()
+            //{
+            //    "Images\\cpu.png",
+            //    "Images\\gpu.jpg",
+            //    "Images\\ram.png",
+            //    "Images\\motherboard.png",
+            //    "Images\\case.png",
+            //    "Images\\powersupply.jpg",
+            //    "Images\\processorcooler.png",
+            //    "Images\\StorageDevice.png"  
+            //};
+
+            userassembly = UserDataaa.userparts;
+            CurrentAssemblyListBox.ItemsSource=userassembly;
+            TxtBoxTotalAmount.Text = $"{UserDataaa.TotalAmount} $";  
+
 
         }
 

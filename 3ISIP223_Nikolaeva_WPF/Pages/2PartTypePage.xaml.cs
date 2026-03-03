@@ -28,20 +28,49 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             DataContext = this;
             parts = Core.Context.basepart.Where(d => d.parttype.id == p.id).ToList();
             PartsListBox.ItemsSource = parts;
+
         }
 
         private void BtnAddPart_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             basepart selectedpart = (basepart)btn.DataContext;
-            var userselectpart = UserDataaa.userparts.FirstOrDefault(p => p.parttype.name == selectedpart.parttype.name);
-            if (userselectpart != null)
+
+            if (CheckCompatibility.CanAddPart(UserDataaa.userparts, selectedpart, out string errorMessage, out basepart partToReplace))
             {
-                UserDataaa.userparts.Remove(userselectpart);
-                UserDataaa.userparts.Add(selectedpart);
+                if (partToReplace != null)
+                {
+                    //еще можно добавить проверку если добавляют одну и ту же деталь
+                    MessageBoxResult result = MessageBox.Show(
+                        $"В вашей сборке уже есть {partToReplace.parttype.name}: {partToReplace.name}. Заменить на {selectedpart.name}?",
+                        "Замена детали",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        UserDataaa.userparts.Remove(partToReplace);
+                        UserDataaa.userparts.Add(selectedpart);
+                        UserDataaa.Sort();
+                    }
+                }
+                else
+                {
+                    UserDataaa.userparts.Add(selectedpart);
+                    UserDataaa.Sort();
+                }
+                NavigationService.GoBack();
             }
-            else UserDataaa.userparts.Add(selectedpart);
-            NavigationService.Navigate(new _1MainPage()); //или NavigationService.GoBack
+            else
+            {
+                MessageBox.Show(errorMessage, "Ошибка совместимости",
+                               MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+        private void UpdatePrice()
+        {
+            UserDataaa.TotalAmount = UserDataaa.userparts.Sum(p => p.price);
 
         }
 
