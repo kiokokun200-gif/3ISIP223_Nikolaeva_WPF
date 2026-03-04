@@ -27,18 +27,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             InitializeComponent();
             assemblies = Core.Context.assembly.ToList();
-            assemblies[0].partassembly;
+            
             foreach (var assembly in assemblies) {
-                var partIds = Core.Context.partassembly.Where(pa => pa.assemblyid == assembly.id).Select(pa => pa.partid).ToList();
-                var parts = Core.Context.basepart
-            .Where(p => partIds.Contains(p.id))
-            .ToList();
+                var parts = assembly.partassembly.ToList();
+                
+
+
             }
-
+            AssemblyListBox.ItemsSource = assemblies;
         }
 
-        private void Load()
-        {
-        }
+        
     }
 }

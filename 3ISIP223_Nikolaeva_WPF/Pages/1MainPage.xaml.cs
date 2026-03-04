@@ -58,19 +58,29 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             //проверка
-            assembly userassembly = new assembly() { author = TxtBoxAssemblyAuthor.Text, name = TxtBoxAssemblyName.Text };
-            Core.Context.assembly.Add(userassembly);
-            foreach(var part in UserDataaa.userparts)
+            if (!string.IsNullOrEmpty(TxtBoxAssemblyName.Text) && !string.IsNullOrEmpty(TxtBoxAssemblyAuthor.Text))
             {
-                partassembly partassem = new partassembly
+                if (UserDataaa.userparts.Count > 0)
                 {
-                    assemblyid = userassembly.id,
-                    partid = part.id,
-                };
-                Core.Context.partassembly.Add(partassem);
+                    assembly userassembly = new assembly() { author = TxtBoxAssemblyAuthor.Text, name = TxtBoxAssemblyName.Text };
+                    Core.Context.assembly.Add(userassembly);
+                    foreach (var part in UserDataaa.userparts)
+                    {
+                        partassembly partassem = new partassembly
+                        {
+                            assemblyid = userassembly.id,
+                            partid = part.id,
+                        };
+                        Core.Context.partassembly.Add(partassem);
+                    }
+                    Core.Context.SaveChanges();
+                    UserDataaa.username = userassembly.author;
+                    MessageBox.Show("Сборка сохранена!");
+                    NavigationService.Navigate(new _3UserAsseblyPage());
+                }
+                else MessageBox.Show("Добавьте детали в сборку!!!!");
             }
-            Core.Context.SaveChanges();
-            UserDataaa.username = userassembly.author;
+            else MessageBox.Show("Заполните автора и название сборки");
 
         }
 

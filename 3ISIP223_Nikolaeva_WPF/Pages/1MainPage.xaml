@@ -55,11 +55,11 @@
             </ListBox>
             <TextBlock Text="Итоговая цена: " FontSize="20"/>
             <TextBlock x:Name="TxtBoxTotalAmount" FontSize="30"/>
-            <Button x:Name="BtnSave" Content="Сохранить сборку" FontSize="20" Visibility="Hidden" Click="BtnSave_Click"/>
+            <Button x:Name="BtnSave" Content="Сохранить сборку" FontSize="20" Background="#FFFF3394" Foreground="White" BorderThickness="0" Click="BtnSave_Click"/>
             <TextBlock Text="Название сборки: " FontSize="15"/>
-            <TextBox x:Name="TxtBoxAssemblyName" Width="200" Height="40" FontSize="15"/>
-            <TextBlock Text="Автор" FontSize="15"/>
-            <TextBox x:Name="TxtBoxAssemblyAuthor" FontSize="15" Width="200" Height="40"/>
+            <TextBox x:Name="TxtBoxAssemblyName" Width="200" Height="30" FontSize="15"/>
+            <TextBlock Text="Автор:" FontSize="15"/>
+            <TextBox x:Name="TxtBoxAssemblyAuthor" FontSize="15" Width="200" Height="30"/>
         </StackPanel>
     </Grid>
 </Page>

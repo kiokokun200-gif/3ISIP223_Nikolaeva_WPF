@@ -16,16 +16,16 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Ваши сборки" FontSize="25"/>
-        <ListBox x:Name="AssemblyListBox" Grid.Row="1">
+        <ListBox x:Name="AssemblyListBox" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding name}" FontSize="20"/>
-                        <ListBox x:Name="PartsAssemblyListBox">
+                        <ListBox x:Name="PartsAssemblyListBox" ItemsSource="{Binding partassembly}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <TextBlock Text="{Binding name}" FontSize="16"/>
+                                        <TextBlock Text="{Binding basepart.name}" FontSize="16"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -35,5 +35,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button x:Name="BtnBack" Grid.Row="1" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20" Width="100" Height="30" Background="#FFFF3394" BorderThickness="0" Foreground="White"/>
     </Grid>
 </Page>
