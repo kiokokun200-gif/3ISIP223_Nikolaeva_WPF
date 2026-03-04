@@ -27,7 +27,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
 
             InitializeComponent();
-            parttypes = Core.Context.parttype.ToList(); //нет
+            parttypes = Core.Context.parttype.ToList();
             PartTypesListBox.ItemsSource = parttypes;
             //picture = new List<string>()
             //{
@@ -76,7 +76,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnAssembly_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new _3UserAsseblyPage(UserDataaa.username));
+            NavigationService.Navigate(new _3UserAsseblyPage());
         }
     }
 }

@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Конфигуратор ПК" FontSize="25" HorizontalAlignment="Left"/>
-        <Button x:Name="BtnAssembly" Content="Сборки" FontSize="20" Background="#FFFF3394" Foreground="White" BorderThickness="0" HorizontalAlignment="Right" Click="BtnAssembly_Click"/>
+        <Button x:Name="BtnAssembly" Grid.Row="0" Grid.Column="2" Content="Сборки" FontSize="20" Background="#FFFF3394" Foreground="White" BorderThickness="0" HorizontalAlignment="Right" Click="BtnAssembly_Click"/>
         <ListBox x:Name="PartTypesListBox" HorizontalContentAlignment="Stretch" Grid.Row="1" Width="400" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -41,14 +41,14 @@
         </ListBox>
         <StackPanel Grid.Row="1" Grid.Column="2" >
         <TextBlock Text="Текущая сборка:" FontSize="20"/>
-            <ListBox x:Name="CurrentAssemblyListBox" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox x:Name="CurrentAssemblyListBox" d:ItemsSource="{d:SampleData ItemCount=5}" MinHeight="25">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding parttype.name, StringFormat={}{0}:}"/>
-                            <TextBlock Text="{Binding name}"/>
-                            <TextBlock Text="{Binding FullDescription}"/>
-                            <TextBlock Text="{Binding price}"/>
+                            <TextBlock Text="{Binding parttype.name, StringFormat={}{0}:}" FontSize="15"/>
+                            <TextBlock Text="{Binding name}" FontSize="15"/>
+                            <TextBlock Text="{Binding FullDescription}" FontSize="15"/>
+                            <TextBlock Text="{Binding price}" FontSize="15"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

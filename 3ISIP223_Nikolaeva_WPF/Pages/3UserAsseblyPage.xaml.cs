@@ -23,14 +23,22 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     {
         private List<assembly> assemblies;
         
-        public _3UserAsseblyPage(string username)
+        public _3UserAsseblyPage()
         {
             InitializeComponent();
-            assemblies = Core.Context.assembly.Where(a => a.author == username).ToList();
-            foreach (var assembly in assemblies) { 
-                 //partassembly = Core.Context.basepart.Where(p => p.partassembly.)
+            assemblies = Core.Context.assembly.ToList();
+            assemblies[0].partassembly;
+            foreach (var assembly in assemblies) {
+                var partIds = Core.Context.partassembly.Where(pa => pa.assemblyid == assembly.id).Select(pa => pa.partid).ToList();
+                var parts = Core.Context.basepart
+            .Where(p => partIds.Contains(p.id))
+            .ToList();
             }
 
+        }
+
+        private void Load()
+        {
         }
     }
 }

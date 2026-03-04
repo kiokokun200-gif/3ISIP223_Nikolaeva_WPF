@@ -100,5 +100,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 PartsListBox.ItemsSource = parts.Where(pa => pa.manufacturer.name == combotext).ToList();
             }
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -61,5 +62,7 @@
             </ListBox.ItemsPanel>
         </ListBox>
         
+        <Button x:Name="BtnBack" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20" Width="100" Height="30" Content="Назад" Background="#FFFF3394" BorderThickness="0" Foreground="White" Click="BtnBack_Click"/>
+
     </Grid>
 </Page>
