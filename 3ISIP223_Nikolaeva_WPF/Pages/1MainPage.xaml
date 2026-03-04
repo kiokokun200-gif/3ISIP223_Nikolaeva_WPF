@@ -19,7 +19,8 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Конфигуратор ПК" FontSize="30" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Конфигуратор ПК" FontSize="25" HorizontalAlignment="Left"/>
+        <Button x:Name="BtnAssembly" Content="Сборки" FontSize="20" Background="#FFFF3394" Foreground="White" BorderThickness="0" HorizontalAlignment="Right" Click="BtnAssembly_Click"/>
         <ListBox x:Name="PartTypesListBox" HorizontalContentAlignment="Stretch" Grid.Row="1" Width="400" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -39,7 +40,7 @@
             </ListBox.ItemsPanel>-->
         </ListBox>
         <StackPanel Grid.Row="1" Grid.Column="2" >
-        <TextBlock Text="Текущая сборка:"/>
+        <TextBlock Text="Текущая сборка:" FontSize="20"/>
             <ListBox x:Name="CurrentAssemblyListBox" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -54,7 +55,11 @@
             </ListBox>
             <TextBlock Text="Итоговая цена: " FontSize="20"/>
             <TextBlock x:Name="TxtBoxTotalAmount" FontSize="30"/>
-            <Button x:Name="BtnSave" Content="Сохранить сборку" Visibility="Hidden"/>
+            <Button x:Name="BtnSave" Content="Сохранить сборку" FontSize="20" Visibility="Hidden" Click="BtnSave_Click"/>
+            <TextBlock Text="Название сборки: " FontSize="15"/>
+            <TextBox x:Name="TxtBoxAssemblyName" Width="200" Height="40" FontSize="15"/>
+            <TextBlock Text="Автор" FontSize="15"/>
+            <TextBox x:Name="TxtBoxAssemblyAuthor" FontSize="15" Width="200" Height="40"/>
         </StackPanel>
     </Grid>
 </Page>

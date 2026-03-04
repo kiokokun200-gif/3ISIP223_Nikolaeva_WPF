@@ -10,6 +10,7 @@ namespace _3ISIP223_Nikolaeva_WPF
     {
         static public List<basepart> userparts = new List<basepart>();
         static public decimal TotalAmount = 0;
+        static public string username;
 
         static public void Sort()
         {
