@@ -35,6 +35,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button x:Name="BtnBack" Grid.Row="1" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20" Width="100" Height="30" Background="#FFFF3394" BorderThickness="0" Foreground="White"/>
+        <Button x:Name="BtnBack" Grid.Row="1" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20" Width="100" Height="30" Background="#FFFF3394" BorderThickness="0" Foreground="White" Click="BtnBack_Click"/>
     </Grid>
 </Page>

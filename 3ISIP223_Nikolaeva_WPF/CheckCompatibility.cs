@@ -14,21 +14,17 @@ namespace _3ISIP223_Nikolaeva_WPF
             errorMessage = "";
             partToReplace = null;
 
-            // Проверка на дубликаты (кроме RAM и Storage)
             if (newPart.parttype.name != "RAM" && newPart.parttype.name != "StorageDevice")
             {
                 partToReplace = existingParts.FirstOrDefault(p => p.parttypeid == newPart.parttypeid);
 
-                // Если нашли деталь того же типа, это не ошибка, просто нужно будет заменить
                 if (partToReplace != null)
                 {
-                    // Но всё равно проверяем совместимость новой детали с остальными
                     var otherParts = existingParts.Where(p => p.parttypeid != newPart.parttypeid).ToList();
                     return CheckCompatibilityWithOthers(otherParts, newPart, out errorMessage);
                 }
             }
 
-            // Если нет дубликата, просто проверяем совместимость со всеми существующими
             return CheckCompatibilityWithOthers(existingParts, newPart, out errorMessage);
         }
 
@@ -36,7 +32,6 @@ namespace _3ISIP223_Nikolaeva_WPF
         {
             errorMessage = "";
 
-            // Проверка CPU
             if (newPart.parttype.name == "CPU")
             {
                 var motherboard = otherParts.FirstOrDefault(p => p.parttype.name == "Motherboard")?.motherboard;
@@ -59,7 +54,6 @@ namespace _3ISIP223_Nikolaeva_WPF
                 }
             }
 
-            // Проверка Motherboard
             else if (newPart.parttype.name == "Motherboard")
             {
                 var cpu = otherParts.FirstOrDefault(p => p.parttype.name == "CPU")?.cpu;
@@ -89,7 +83,6 @@ namespace _3ISIP223_Nikolaeva_WPF
                 }
             }
 
-            // Проверка RAM
             else if (newPart.parttype.name == "RAM")
             {
                 var motherboard = otherParts.FirstOrDefault(p => p.parttype.name == "Motherboard")?.motherboard;
@@ -110,7 +103,6 @@ namespace _3ISIP223_Nikolaeva_WPF
                 }
             }
 
-            // Проверка GPU
             else if (newPart.parttype.name == "GPU")
             {
                 var ps = otherParts.FirstOrDefault(p => p.parttype.name == "PowerSupply")?.powersupply;
@@ -121,7 +113,6 @@ namespace _3ISIP223_Nikolaeva_WPF
                 }
             }
 
-            // Проверка Cooler
             else if (newPart.parttype.name == "ProcessorCooler")
             {
                 var cpu = otherParts.FirstOrDefault(p => p.parttype.name == "CPU")?.cpu;
@@ -137,7 +128,6 @@ namespace _3ISIP223_Nikolaeva_WPF
                 }
             }
 
-            // Проверка Case
             else if (newPart.parttype.name == "Case")
             {
                 var mb = otherParts.FirstOrDefault(p => p.parttype.name == "Motherboard")?.motherboard;
@@ -153,7 +143,6 @@ namespace _3ISIP223_Nikolaeva_WPF
                 }
             }
 
-            // Проверка PowerSupply
             else if (newPart.parttype.name == "PowerSupply")
             {
                 var gpu = otherParts.FirstOrDefault(p => p.parttype.name == "GPU")?.gpu;

@@ -34,7 +34,7 @@ namespace _3ISIP223_Nikolaeva_WPF
                                 videoconnectors += ", ";
                         }
 
-                        return $"{gpu.gpuinterface.name}, GPU {gpu.chipfrequency} МГц, {gpu.videomemory} ГБ, {gpu.memorybus} бит, {videoconnectors}";
+                        return $"{gpu.gpuinterface.name}, GPU {gpu.chipfrequency} МГц, {gpu.videomemory} ГБ, {gpu.memorybus} бит, {videoconnectors}, {gpu.recommendpower} Вт";
                     }
                     else if (parttype.name == "RAM")
                     {

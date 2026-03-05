@@ -37,6 +37,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             AssemblyListBox.ItemsSource = assemblies;
         }
 
-        
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }
