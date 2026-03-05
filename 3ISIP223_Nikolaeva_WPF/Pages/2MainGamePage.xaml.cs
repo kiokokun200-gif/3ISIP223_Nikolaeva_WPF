@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ResultPage5.xaml
+    /// Логика взаимодействия для _2MainGamePage.xaml
     /// </summary>
-    public partial class ResultPage5 : Page
+    public partial class _2MainGamePage : Page
     {
-        public ResultPage5()
+        public _2MainGamePage()
         {
             InitializeComponent();
         }

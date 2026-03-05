@@ -16,13 +16,24 @@ using System.Windows.Shapes;
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для TotalCostPage3.xaml
+    /// Логика взаимодействия для _1StartPage.xaml
     /// </summary>
-    public partial class TotalCostPage3 : Page
+    public partial class _1StartPage : Page
     {
-        public TotalCostPage3()
+        public _1StartPage()
         {
             InitializeComponent();
+        }
+
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new _2MainGamePage());
+
+        }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
