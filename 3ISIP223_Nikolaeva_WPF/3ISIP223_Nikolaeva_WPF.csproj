@@ -132,7 +132,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Resource Include="Images\ArchimagAttack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Archimag.PNG" />
+    <Resource Include="Images\BossKovalsky.png" />
+    <Resource Include="Images\BossKovalskyAttack.png" />
+    <Resource Include="Images\BossPestov.png" />
+    <Resource Include="Images\BossPestovAttack.png" />
+    <Resource Include="Images\ChatGPT Image 9 мар. 2026 г., 23_20_35.png" />
+    <Resource Include="Images\Goblin.png" />
+    <Resource Include="Images\GoblinAttack.png" />
+    <Resource Include="Images\Mage.png" />
+    <Resource Include="Images\MageAttack.png" />
+    <Resource Include="Images\player_1c_chan.png" />
+    <Resource Include="Images\Skeleton.png" />
+    <Resource Include="Images\SkeletonAttack.png" />
+    <Resource Include="Images\VVGBoss.png" />
+    <Resource Include="Images\VVGBossAttack.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

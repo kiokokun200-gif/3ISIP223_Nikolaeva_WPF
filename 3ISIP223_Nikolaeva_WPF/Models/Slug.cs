@@ -16,7 +16,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         {
             int reducedDamage = damage - 2;
             CurrentHP -= Math.Max(1, reducedDamage);
-            Console.WriteLine($"Слизень поглотил часть урона! Получено: {Math.Max(1, reducedDamage)} урона");
+            //Console.WriteLine($"Слизень поглотил часть урона! Получено: {Math.Max(1, reducedDamage)} урона");
         }
     }
 }

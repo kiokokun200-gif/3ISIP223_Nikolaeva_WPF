@@ -8,9 +8,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
 {
     internal class Mage : Enemy
     {
-        public Mage() : base("Маг", Raaandom.GetRandomInt(10, 15), Raaandom.GetRandomInt(10, 12), Raaandom.GetRandomInt(1, 4), EnemyType.Mage)
+        public Mage() : base("Маг", 25, 15, 2, EnemyType.Mage)
         {
-            FreezeChance = 0.25;
+            FreezeChance = 0.15;
         }
     }
 }
