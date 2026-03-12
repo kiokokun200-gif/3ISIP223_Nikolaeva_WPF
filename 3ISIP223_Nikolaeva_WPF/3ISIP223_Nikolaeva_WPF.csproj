@@ -97,6 +97,7 @@
     <Compile Include="Models\Goblin.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Mage.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Raaandom.cs" />
     <Compile Include="Models\Skeleton.cs" />
     <Compile Include="Models\Slug.cs" />
@@ -163,6 +164,11 @@
   <ItemGroup>
     <Resource Include="Images\Backgrounds\Loca1.jpeg" />
     <Resource Include="Images\Backgrounds\Loca2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\Loca3.jpg" />
+    <Resource Include="Images\Backgrounds\Loca4.jpg" />
+    <Resource Include="Images\Backgrounds\Loca5.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
