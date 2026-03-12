@@ -124,6 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Genshin_Impact.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -169,6 +170,11 @@
     <Resource Include="Images\Backgrounds\Loca3.jpg" />
     <Resource Include="Images\Backgrounds\Loca4.jpg" />
     <Resource Include="Images\Backgrounds\Loca5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\IconATK.png" />
+    <Resource Include="Images\Icons\IconDEF.png" />
+    <Resource Include="Images\Icons\IconHP.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

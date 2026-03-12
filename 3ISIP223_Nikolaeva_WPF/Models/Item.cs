@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _3ISIP223_Nikolaeva_WPF.Models
 {
-    internal class Item
+    public class Item
     {
         public string Name { get; set; }
         public int Attack { get; set; }

@@ -28,6 +28,21 @@
         </Grid.ColumnDefinitions>
 
 
-        <ProgressBar Minimum="0" Maximum="{Binding MaxHP}" Value="{Binding HP}"/>
+        <ProgressBar x:Name="ProgBarHp" Grid.Row="0" Grid.ColumnSpan="3" Height="25" Minimum="0" Maximum="{Binding MaxHP}" 
+                     Value="{Binding HP}" Background="#FF3BCD37" />
+        
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"
+                   Foreground="#FFE8E8E8" FontFamily="TT_Skip-E 85W" FontSize="16" VerticalAlignment="Center"/>
+        
+        <Image Grid.Column="0" Grid.Row="1" Source="/Images/player_1c_chan.png"  />
+        <TextBlock Text="{Binding level, StringFormat=Этаж{0}}" Grid.Column="0" Grid.Row="1" Foreground="#FFE8E8E8" FontFamily="TT_Skip-E 85W" FontSize="28"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="TxtBlcLogg" FontSize="40" Foreground="#FFE8E8E8" FontFamily="TT_Skip-E 85W" Text="Съешь"/>
+            <Image Source="/Images/Icons/IconHP.png" Width="30"/>
+            <Image Source="/Images/Icons/IconDEF.png" Width="30"/>
+            <Image Source="/Images/Icons/IconATK.png" Width="30"/>
+        </StackPanel>
+
     </Grid>
 </Page>
