@@ -151,5 +151,18 @@
     <Resource Include="Images\VVGBoss.png" />
     <Resource Include="Images\VVGBossAttack.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weapons\AquaSimulyacrum.png" />
+    <Resource Include="Images\Weapons\Omut.png" />
+    <Resource Include="Images\Weapons\RassekaushiTuman.png" />
+    <Resource Include="Images\Weapons\VolchyaPogibel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weapons\Chashka.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\Loca1.jpeg" />
+    <Resource Include="Images\Backgrounds\Loca2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
