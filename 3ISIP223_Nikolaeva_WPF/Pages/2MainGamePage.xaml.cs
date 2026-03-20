@@ -43,5 +43,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             int n  = Raaandom.GetRandomInt(0, backgroungimages.Count - 1);
             ImagBr.ImageSource = backgroungimages[n];
         }
+
     }
 }

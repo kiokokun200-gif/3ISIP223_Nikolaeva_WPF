@@ -25,15 +25,17 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             InitializeComponent();
         }
 
-        private void BtnStart_Click(object sender, RoutedEventArgs e)
+       
+
+        private void Page_MouseDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new _2MainGamePage());
-
         }
 
-        private void BtnExit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+
+        //private void BtnExit_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Application.Current.Shutdown();
+        //}
     }
 }

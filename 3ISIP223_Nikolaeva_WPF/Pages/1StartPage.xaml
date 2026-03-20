@@ -6,13 +6,21 @@
       xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="_1StartPage">
+      Title="_1StartPage" MouseDown="Page_MouseDown">
 
-    <Grid Background="White">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Backgrounds/zastavka.jpg"/>
+        </Grid.Background>
+        <!--<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <TextBlock Text="РОГАЛИК" FontSize="60" />
             <Button x:Name="BtnStart" Content="Начать игру" BorderThickness="0" Background="#FF52BBFF" FontSize="30" Width="200" Margin="0 10 0 10" Click="BtnStart_Click"/>
             <Button x:Name="BtnExit" Content="Выйти" BorderThickness="0" Background="#FFF26767" FontSize="30" Width="100" Click="BtnExit_Click" />
-        </StackPanel>
+        </StackPanel>-->
+        <Button Content="НАЧАТЬ ПУТЕШЕСТВИЕ"  FontSize="23" Foreground="White" BorderBrush="Transparent" FontFamily="TT_Skip-E 85W" VerticalAlignment="Bottom" Margin="0 0 0 20">
+            <Button.Background>
+                <SolidColorBrush Color="Black" Opacity="0.55"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>
