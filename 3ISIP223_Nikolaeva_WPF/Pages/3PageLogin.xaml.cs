@@ -69,16 +69,30 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnLoginBD_Click(object sender, RoutedEventArgs e)
         {
-            var user = Core.Context.Users.FirstOrDefault(u => u.Email == TxtBoxEmail.Text && u.Password == TxtBoxPassword.Text);
-            if (user != null)
+
+            bool IsAuth = LogIn(TxtBoxEmail.Text, TxtBoxPassword.Text);
+            if (IsAuth)
             {
                 MessageBox.Show("Вход успешный");
-                //добавить перезод на страницу
-                NavigationService.Navigate(new _1Page());
-
-                UserData.CurrentUser = user;
+                NavigationService.Navigate(new _1Page());                
             }
             else MessageBox.Show("Ошибка входа");
+        }
+
+        public bool LogIn(string login,  string password)
+        {
+            var user = Core.Context.Users.FirstOrDefault(u => u.Email == login && u.Password == password);
+            if (user != null)
+            {
+                UserData.CurrentUser = user;
+                return true;
+            }
+            else 
+            { 
+                return false;
+            }
+
+
         }
     }
 }

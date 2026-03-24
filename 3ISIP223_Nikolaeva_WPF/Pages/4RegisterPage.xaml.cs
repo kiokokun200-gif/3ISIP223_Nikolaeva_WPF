@@ -41,46 +41,69 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             return CorrectName && CorrectEmail && CorrectPass && CorrectConfirmPass && SamePass;
         }
 
-        private void Register_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //bool CorrectName = !string.IsNullOrEmpty(TxtBoxName.Text) && TxtBoxName.Text.Length > 1;
-            //bool CorrectEmail = !string.IsNullOrEmpty(TxtBoxEmail.Text) && TxtBoxEmail.Text.Contains("@") && TxtBoxEmail.Text.Contains(".");
-            //bool CorrectPass = !string.IsNullOrEmpty(TxtBoxPassword.Text) && TxtBoxPassword.Text.Length > 6 && TxtBoxPassword.Text.Any(char.IsDigit);
-            //bool CorrectConfirmPass = !string.IsNullOrEmpty(TxtBoxConfirmPassword.Text) && TxtBoxConfirmPassword.Text.Length > 6 && TxtBoxConfirmPassword.Text.Any(char.IsDigit);
-
-            //bool SamePass = TxtBoxPassword.Text == TxtBoxConfirmPassword.Text;
-            BtnRegisterBD.IsEnabled = CheckText();
+        //private void Register_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+           
+        //    BtnRegisterBD.IsEnabled = CheckText();
 
 
-        }
+        //}
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {      
              NavigationService.Navigate(new _3PageLogin());
         }
 
+     
+
+       
+
+    
+
         private void BtnRegisterBD_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckText())
+            string errorMessage;
+            bool isRegistered = Registration(TxtBoxName.Text, TxtBoxEmail.Text, TxtBoxPassword.Text, out errorMessage);
+
+            if (isRegistered)
             {
-                if (Core.Context.Users.FirstOrDefault(u => u.Email == TxtBoxEmail.Text) == null)
-                {
-                    var registeruser = new Users
-                    {
-                        Name = TxtBoxName.Text,
-                        Password = TxtBoxPassword.Text,
-                        Email = TxtBoxEmail.Text
-                    };
-                    Core.Context.Users.Add(registeruser);
-                    Core.Context.SaveChanges();
-                    MessageBox.Show("Регистрация успешна");
-                    UserData.CurrentUser = registeruser;
-                    
-                        NavigationService.Navigate(new _1Page());
-                }
-                else MessageBox.Show("Пользователь с такой почтой уже существует!");
+                MessageBox.Show("Регистрация успешна");
+                NavigationService.Navigate(new _1Page());
             }
-            else MessageBox.Show("Ошибка");
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
+        }
+
+        public bool Registration(string name, string email, string password, out string errorMessage)
+        {
+            if (!CheckText())
+            {
+                errorMessage = "Заполните все поля корректно";
+                return false;
+            }
+
+            var existingUser = Core.Context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser != null)
+            {
+                errorMessage = "Пользователь с такой почтой уже существует!";
+                return false;
+            }
+
+            var newUser = new Users
+            {
+                Name = name,
+                Password = password,
+                Email = email
+            };
+
+            Core.Context.Users.Add(newUser);
+            Core.Context.SaveChanges();
+            UserData.CurrentUser = newUser;
+
+            errorMessage = null;
+            return true;
         }
 
         private void TxtBoxConfirmPassword_LostFocus(object sender, RoutedEventArgs e)
