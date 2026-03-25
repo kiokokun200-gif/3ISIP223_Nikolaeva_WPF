@@ -20,8 +20,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _3PageLogin : Page
     {
-        private bool _CorrectEmail = false;
-        private bool _CorrectPass = false;
+       
         public _3PageLogin()
         {
             InitializeComponent();
@@ -32,9 +31,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         }
 
-        private void UpdateButton()
+      
+
+        private bool CheckText()
         {
-            BtnLoginBD.IsEnabled = (_CorrectEmail && _CorrectPass);
+            bool CorrectEmail = !string.IsNullOrEmpty(TxtBoxEmail.Text);
+            bool CorrectPass = !string.IsNullOrEmpty(TxtBoxPassword.Text);
+            return (CorrectEmail && CorrectPass);
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -54,29 +57,19 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         }
 
 
-        private void TxtBoxEmail_TextChanged(object sender, TextChangedEventArgs e)
-        { 
-            _CorrectEmail = TxtBoxEmail.Text.Contains("@") && TxtBoxEmail.Text.Contains(".");
-            UpdateButton();
-
-        }
-
-        private void TxtBoxPassword_TextChanged(object sender, TextChangedEventArgs e)
-        {    
-            _CorrectPass = TxtBoxPassword.Text.Length > 6 && TxtBoxPassword.Text.Any(char.IsDigit);
-            UpdateButton();
-        }
-
         private void BtnLoginBD_Click(object sender, RoutedEventArgs e)
         {
-
-            bool IsAuth = LogIn(TxtBoxEmail.Text, TxtBoxPassword.Text);
-            if (IsAuth)
+            if (CheckText())
             {
-                MessageBox.Show("Вход успешный");
-                NavigationService.Navigate(new _1Page());                
+                bool IsAuth = LogIn(TxtBoxEmail.Text, TxtBoxPassword.Text);
+                if (IsAuth)
+                {
+                    MessageBox.Show("Вход успешный");
+                    NavigationService.Navigate(new _1Page());
+                }
+                else MessageBox.Show("Пользователь с этими данными не найден");
             }
-            else MessageBox.Show("Ошибка входа");
+            else MessageBox.Show("Заполните поля");
         }
 
         public bool LogIn(string login,  string password)

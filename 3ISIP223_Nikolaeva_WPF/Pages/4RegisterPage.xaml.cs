@@ -33,8 +33,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             bool CorrectName = !string.IsNullOrEmpty(TxtBoxName.Text) && TxtBoxName.Text.Length > 1;
             bool CorrectEmail = !string.IsNullOrEmpty(TxtBoxEmail.Text) && TxtBoxEmail.Text.Contains("@") && TxtBoxEmail.Text.Contains(".");
-            bool CorrectPass = !string.IsNullOrEmpty(TxtBoxPassword.Text) && TxtBoxPassword.Text.Length > 6 && TxtBoxPassword.Text.Any(char.IsDigit);
-            bool CorrectConfirmPass = !string.IsNullOrEmpty(TxtBoxConfirmPassword.Text) && TxtBoxConfirmPassword.Text.Length > 6 && TxtBoxConfirmPassword.Text.Any(char.IsDigit);
+            bool CorrectPass = !string.IsNullOrEmpty(TxtBoxPassword.Text) && TxtBoxPassword.Text.Length > 5 && TxtBoxPassword.Text.Any(char.IsDigit);
+            bool CorrectConfirmPass = !string.IsNullOrEmpty(TxtBoxConfirmPassword.Text) && TxtBoxConfirmPassword.Text.Length > 5 && TxtBoxConfirmPassword.Text.Any(char.IsDigit);
 
             bool SamePass = TxtBoxPassword.Text == TxtBoxConfirmPassword.Text;
 
