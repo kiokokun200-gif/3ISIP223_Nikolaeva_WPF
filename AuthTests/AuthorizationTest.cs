@@ -14,23 +14,23 @@ namespace AuthTests
 
         [TestMethod]
         public void AuthTestSuccess()
-        { 
-            Assert.IsTrue(PageLogin.LogIn("niconii@icloud.cpm", "qwerty123"));
+        {
+            string err;
+            Assert.IsTrue(PageLogin.LogIn("niconii@icloud.cpm", "qwerty123", out err));
         }
 
         [TestMethod]
-        public void AuthTestFailData() {
-            Assert.IsFalse(PageLogin.LogIn("Adam@gmai.com", "7SP9CV223"));
+        public void AuthTestFail() {
+            string err;
+            Assert.IsFalse(PageLogin.LogIn("Adam@gmai.com", "7SP9CV223", out err));
+            Assert.IsFalse(PageLogin.LogIn("", "qwerty123", out err));
+            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.cpm", "", out err));
+            Assert.IsFalse(PageLogin.LogIn("", "", out err));
+            Assert.IsFalse(PageLogin.LogIn("niconiiicloud.cpm", "qwerty123", out err));
+            Assert.IsFalse(PageLogin.LogIn("niconii@icloudcpm", "qwerty123", out err));      
+            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.cpm", "qwer", out err));
+            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.cpm", "qwertyui", out err));
         }
-        [TestMethod]
-        public void AuthTestFailEmptyLogin()
-        {
-            Assert.IsFalse(PageLogin.LogIn("", "qwerty123"));
-        }
-        [TestMethod]
-        public void AuthTestFailEmptyPassword()
-        {
-            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.cpm", ""));
-        }
+
     }
 }

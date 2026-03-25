@@ -31,15 +31,33 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         }
 
-      
-
-        private bool CheckText()
+        public bool CorrectEmail(string email)
         {
-            bool CorrectEmail = !string.IsNullOrEmpty(TxtBoxEmail.Text);
-            bool CorrectPass = !string.IsNullOrEmpty(TxtBoxPassword.Text);
-            return (CorrectEmail && CorrectPass);
+            return !string.IsNullOrEmpty(email) && email.Contains("@") && email.Contains(".");
+        }
+        public bool CorrectPass(string pass)
+        {
+            return !string.IsNullOrEmpty(pass) && pass.Length > 5;
+        }
+        public bool CorrectAll(string email, string password, out string errorMessage)
+        {
+            if (!CorrectEmail(email))
+            {
+                errorMessage = "Введите корректный email (должен содержать @ и .)";
+                return false;
+            }
+
+            if (!CorrectPass(password))
+            {
+                errorMessage = "Пароль должен быть длиннее 5 символов";
+                return false;
+            }
+
+            errorMessage = null;
+            return true;
         }
 
+        
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (Content is _4RegisterPage)
@@ -57,35 +75,39 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         }
 
 
-        private void BtnLoginBD_Click(object sender, RoutedEventArgs e)
+        public bool LogIn(string login, string password, out string errorMessage)
         {
-            if (CheckText())
+            if (!CorrectAll(login, password, out errorMessage))
             {
-                bool IsAuth = LogIn(TxtBoxEmail.Text, TxtBoxPassword.Text);
-                if (IsAuth)
-                {
-                    MessageBox.Show("Вход успешный");
-                    NavigationService.Navigate(new _1Page());
-                }
-                else MessageBox.Show("Пользователь с этими данными не найден");
+                return false;
             }
-            else MessageBox.Show("Заполните поля");
-        }
 
-        public bool LogIn(string login,  string password)
-        {
             var user = Core.Context.Users.FirstOrDefault(u => u.Email == login && u.Password == password);
             if (user != null)
             {
                 UserData.CurrentUser = user;
+                errorMessage = null;
                 return true;
             }
-            else 
-            { 
-                return false;
+
+            errorMessage = "Пользователь с этими данными не найден";
+            return false;
+        }
+
+        private void BtnLoginBD_Click(object sender, RoutedEventArgs e)
+        {
+            string errorMessage;
+            bool isAuth = LogIn(TxtBoxEmail.Text, TxtBoxPassword.Text, out errorMessage);
+
+            if (isAuth)
+            {
+                MessageBox.Show("Вход успешный");
+                NavigationService.Navigate(new _1Page());
             }
-
-
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
         }
     }
 }

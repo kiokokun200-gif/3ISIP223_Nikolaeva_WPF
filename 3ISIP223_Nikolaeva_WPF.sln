@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3ISIP223_Nikolaeva_WPF", "3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthTests", "AuthTests\AuthTests.csproj", "{DBA6DB4B-320E-442E-8521-3E47F4CBAD64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationTests", "RegistrationTests\RegistrationTests.csproj", "{638E2989-D008-4591-9381-0287099B128C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DBA6DB4B-320E-442E-8521-3E47F4CBAD64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBA6DB4B-320E-442E-8521-3E47F4CBAD64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBA6DB4B-320E-442E-8521-3E47F4CBAD64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{638E2989-D008-4591-9381-0287099B128C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{638E2989-D008-4591-9381-0287099B128C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{638E2989-D008-4591-9381-0287099B128C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{638E2989-D008-4591-9381-0287099B128C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
