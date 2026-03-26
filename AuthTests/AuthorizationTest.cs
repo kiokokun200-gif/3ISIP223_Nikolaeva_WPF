@@ -16,7 +16,8 @@ namespace AuthTests
         public void AuthTestSuccess()
         {
             string err;
-            Assert.IsTrue(PageLogin.LogIn("niconii@icloud.cpm", "qwerty123", out err));
+            Assert.IsTrue(PageLogin.LogIn("niconii@icloud.com", "qwerty123", out err));
+            Assert.IsTrue(PageLogin.LogIn("dima@gmail.com", "qqqqqqq123", out err));
         }
 
         [TestMethod]
@@ -24,12 +25,12 @@ namespace AuthTests
             string err;
             Assert.IsFalse(PageLogin.LogIn("Adam@gmai.com", "7SP9CV223", out err));
             Assert.IsFalse(PageLogin.LogIn("", "qwerty123", out err));
-            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.cpm", "", out err));
+            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.com", "", out err));
             Assert.IsFalse(PageLogin.LogIn("", "", out err));
-            Assert.IsFalse(PageLogin.LogIn("niconiiicloud.cpm", "qwerty123", out err));
-            Assert.IsFalse(PageLogin.LogIn("niconii@icloudcpm", "qwerty123", out err));      
-            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.cpm", "qwer", out err));
-            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.cpm", "qwertyui", out err));
+            Assert.IsFalse(PageLogin.LogIn("niconiiicloud.com", "qwerty123", out err));
+            Assert.IsFalse(PageLogin.LogIn("niconii@icloudcom", "qwerty123", out err));      
+            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.com", "qwer", out err));
+            Assert.IsFalse(PageLogin.LogIn("niconii@icloud.com", "qwertyui", out err));
         }
 
     }
