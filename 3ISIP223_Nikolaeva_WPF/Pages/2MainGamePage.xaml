@@ -24,18 +24,28 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
-            
+
         </Grid.ColumnDefinitions>
 
 
         <ProgressBar x:Name="ProgBarHp" Grid.Row="0" Grid.ColumnSpan="3" Height="25" Minimum="0" Maximum="{Binding MaxHP}" 
                      Value="{Binding HP}" Background="#FF3BCD37" />
+
+        <TextBlock x:Name="TxtBlcCurrentHP" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"
+                    FontSize="16" VerticalAlignment="Center" Text="ХП/ХП"/>
         
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"
-                    FontSize="16" VerticalAlignment="Center"/>
-        
-        <Image Grid.Column="0" Grid.Row="1" Source="/Images/player_1c_chan.png"  />
-        <TextBlock Text="{Binding level, StringFormat=Этаж{0}}" Grid.Column="0" Grid.Row="1" FontSize="28"/>
+        <Viewbox Grid.Column="0" Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Grid.RowSpan="2" Source="/Images/player_1c_chan.png"  />
+                <Image Grid.Row="0" Source="/Images/Armors/almaznaya.png" Height="350" />
+            </Grid>
+        </Viewbox>
+        <!--<TextBlock Text="{Binding level, StringFormat=Этаж{0}}" Grid.Column="0" Grid.Row="1" FontSize="28"/>-->
+        <TextBlock Text="Этаж: " Grid.Column="0" Grid.Row="1" FontSize="28"/>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="TxtBlcLogg" FontSize="40" Text="Съешь">
@@ -44,8 +54,8 @@
                 </TextBlock.Effect>
             </TextBlock>
             <StackPanel Orientation="Horizontal">
-            <Image Source="/Images/Icons/IconHP.png" Width="30"/>
-            <TextBlock Text="{Binding MobHP}"/>
+                <Image Source="/Images/Icons/IconHP.png" Width="30"/>
+                <TextBlock Text="{Binding MobHP}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Icons/IconDEF.png" Width="30"/>
@@ -55,8 +65,25 @@
                 <Image Source="/Images/Icons/IconATK.png" Width="30"/>
                 <TextBlock Text="{Binding MobATK}"/>
             </StackPanel>
-            <Image x:Name="ImageMob" Height="300"/>
-            
+            <Image x:Name="ImageMobOrChest" Height="300"/>
+
+        </StackPanel>
+        
+
+        
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
+            <Border BorderBrush="#FF717171"  BorderThickness="5" Height="100" Width="100" >
+                <Border.Background >
+                    <SolidColorBrush Color="#FF1D1D1D" Opacity="0.55"/>
+                </Border.Background>
+            <Image x:Name="ImgWeapon" />
+            </Border >
+            <Border BorderBrush="#FF717171"  BorderThickness="5" Height="100" Width="100" >
+                <Border.Background >
+                    <SolidColorBrush Color="#FF1D1D1D" Opacity="0.55"/>
+                </Border.Background>
+                <Image x:Name="ImgArmor" />
+            </Border >
         </StackPanel>
         
 

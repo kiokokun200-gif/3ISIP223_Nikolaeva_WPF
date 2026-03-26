@@ -71,17 +71,17 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             private List<Item> armors = new List<Item>
         {
-            new Item("Кожаная броня", 0, 12, ""),
-            new Item("Кольчуга", 0, 15),
-            new Item("Золотая броня", 5, 15),
-            new Item("Алмазная броня", 5, 20)
+            new Item("Кольчуга", 0, 15, "/Images/Armors/kolchuga.png"),
+            new Item("Железная броня", 7, 19, "/Images/Armors/jeleznaya.png"),
+            new Item("Золотая броня", 5, 15, "/Images/Armors/zolotaya.png"),
+            new Item("Алмазная броня", 5, 20, "/Images/Armors/almaznaya.png")
         };
 
             public Game()
             {
                 // Начальная экипировка
-                CurrentWeapon = new Item("Дубина переговоров", 7, 0);
-                CurrentArmor = new Item("Одежда", 0, 1);
+                CurrentWeapon = new Item("Дубина переговоров", 7, 0, "/Images/Weapons/dubina.png");
+                CurrentArmor = new Item("Кожанная броня", 0, 1, "/Images/Armors/kojanaya.png");
             }
 
             public void StartGame()
