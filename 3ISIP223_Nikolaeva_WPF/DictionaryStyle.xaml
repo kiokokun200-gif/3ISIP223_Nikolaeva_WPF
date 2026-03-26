@@ -5,9 +5,7 @@
     <Style TargetType="TextBlock">
         <Setter Property="FontFamily" Value="TT_Skip-E 85W"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Effect">
-            
-        </Setter>
+        
     </Style>
     
 </ResourceDictionary>
