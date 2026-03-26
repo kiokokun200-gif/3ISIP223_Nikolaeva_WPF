@@ -12,7 +12,7 @@ namespace _3ISIP223_Nikolaeva_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Users 
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
