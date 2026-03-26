@@ -183,5 +183,8 @@
   <ItemGroup>
     <Resource Include="Images\Backgrounds\zastavka.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\Armors\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
