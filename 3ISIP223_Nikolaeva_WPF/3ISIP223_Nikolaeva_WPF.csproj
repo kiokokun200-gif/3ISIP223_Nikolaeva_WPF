@@ -96,7 +96,6 @@
     <Compile Include="Models\FactoryGoblin.cs" />
     <Compile Include="Models\FactoryMage.cs" />
     <Compile Include="Models\FactorySkeleton.cs" />
-    <Compile Include="Models\FactorySlug.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Goblin.cs" />
     <Compile Include="Models\Item.cs" />
@@ -104,7 +103,6 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Raaandom.cs" />
     <Compile Include="Models\Skeleton.cs" />
-    <Compile Include="Models\Slug.cs" />
     <Compile Include="Pages\1StartPage.xaml.cs">
       <DependentUpon>1StartPage.xaml</DependentUpon>
     </Compile>
@@ -194,6 +192,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Armors\kojanaya.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Other\chest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Other\zelie.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

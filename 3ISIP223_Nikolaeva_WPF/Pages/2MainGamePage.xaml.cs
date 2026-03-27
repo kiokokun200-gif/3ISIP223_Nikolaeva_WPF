@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
@@ -22,12 +23,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _2MainGamePage : Page
     {
+        public Game _game;
         public _2MainGamePage()
         {
             InitializeComponent();
             LoadPicture();
 
-
+            _game = new Game(this);
+            _game.StartGame();
         }
 
         private void LoadPicture()
@@ -45,8 +48,40 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             ImagBr.ImageSource = backgroungimages[n];
         }
 
+        public void UpdateWeaponImage(Item weapon)
+        {
+            
+            ImgWeapon.Source = new BitmapImage(new Uri(weapon.Image, UriKind.Relative));
+            ImgWeapon.ToolTip = $"{weapon.Name.ToUpper()}\nATK: {weapon.Attack}, DEF: {weapon.Defense}";
+            ImgWeaponOnPlayer.Source = new BitmapImage(new Uri(weapon.Image, UriKind.Relative));
+
+        }
+
+        public void UpdateArmorImage(Item armor)
+        {
+           
+            ImgArmor.Source = new BitmapImage(new Uri(armor.Image, UriKind.Relative));
+            ImgArmor.ToolTip = $"{armor.Name.ToUpper()}\nATK: {armor.Attack}, DEF: {armor.Defense}";
+            ImgArmorOnPlayer.Source = new BitmapImage(new Uri(armor.Image, UriKind.Relative));
+        }
+
+        public void UpdateHealth(int maxhp, int currenrhp)
+        {
+            ProgBarHp.Value = currenrhp;
+            TxtBlcCurrentHP.Text = $"{currenrhp}/{maxhp}";
+        }
+
+        public void UpdateFloor(int floor)
+        {
+            TxtBlcFloor.Text = $"Этаж: {floor}";
+        }
         public class Game
         {
+            private _2MainGamePage _page;
+            private List<Enemy> _currentEnemies = new List<Enemy>();
+
+            
+
             public int PlayerHP { get; set; } = 100;
             public int MaxPlayerHP { get; set; } = 100;
             public Item CurrentWeapon { get; set; }
@@ -77,11 +112,17 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             new Item("Алмазная броня", 5, 20, "/Images/Armors/almaznaya.png")
         };
 
-            public Game()
+            
+
+            public Game(_2MainGamePage page)
             {
-                // Начальная экипировка
+                _page = page;
                 CurrentWeapon = new Item("Дубина переговоров", 7, 0, "/Images/Weapons/dubina.png");
                 CurrentArmor = new Item("Кожанная броня", 0, 1, "/Images/Armors/kojanaya.png");
+                page.UpdateWeaponImage(CurrentWeapon);
+                page.UpdateArmorImage(CurrentArmor);
+                page.UpdateHealth(MaxPlayerHP, PlayerHP);
+
             }
 
             public void StartGame()
@@ -90,102 +131,112 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 while (PlayerHP > 0)
                 {
                     Turn++;
+                    _page.UpdateFloor(Turn);
+                    
 
-                    Console.WriteLine($"=== Ход {Turn} ===");
-                    Console.WriteLine($"Ваше HP: {PlayerHP}/{MaxPlayerHP}");
-                    Console.WriteLine($"Оружие: {CurrentWeapon.Name} (Атака: {CurrentWeapon.Attack})");
-                    Console.WriteLine($"Доспехи: {CurrentArmor.Name} (Защита: {CurrentArmor.Defense})");
-                    Console.WriteLine();
 
                     // Каждые 10 ходов - босс
                     if (Turn % 10 == 0)
                     {
-                        Console.WriteLine("!!! Появляется БОСС !!!");
-                        Enemy boss = GenerateBoss();
-                        Combat(boss);
+                        //Console.WriteLine("!!! Появляется БОСС !!!");
+                        var boss = GenerateBoss();
+
+                        //Combat(boss);
                     }
                     else
                     {
                         // Случайное событие: 50% враг, 50% сундук
                         if (Raaandom.GetRandomInt(0, 1) == 0)
                         {
-                            Enemy enemy = GenerateEnemy();
-                            Combat(enemy);
+                            var enemies = GenerateEnemies();
+                            _page.ListMobs.ItemsSource = enemies;
+                            Combat(enemies);
                         }
                         else
                         {
+                            _page.TxtBlcLogg.Text = "Вы нашли сундук!";
+                            _page.ImgChest.Visibility = Visibility.Visible;
                             OpenChest();
                         }
                     }
 
-                    Console.WriteLine();
-                    Console.WriteLine("Нажмите любую клавишу для продолжения...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    //Console.WriteLine();
+                    //Console.WriteLine("Нажмите любую клавишу для продолжения...");
+                    //Console.ReadKey();
+                    //Console.Clear();
                 }
 
                 GameOver();
             }
 
-            private Enemy GenerateEnemy()
+            private List<Enemy> GenerateEnemies()
             {
-                // Выбираем случайную фабрику из списка обычных мобов
-                int randomIndex = Raaandom.GetRandomInt(0, factoryCreate.mob.Count - 1);
-                Factory selectedFactory = factoryCreate.CreateMob(randomIndex);
+                List<Enemy> enemies = new List<Enemy>();
 
-                // Используем фабрику для создания врага
-                Enemy enemy = selectedFactory.CreateEnemy();
-                Console.WriteLine($"Появился: {enemy.Name} (HP: {enemy.MaxHP}, Атака: {enemy.Attack}, Защита: {enemy.Defense})");
-                return enemy;
+                // Генерируем от 1 до 3 врагов
+                int enemyCount = Raaandom.GetRandomInt(1, 4);
+
+                for (int i = 0; i < enemyCount; i++)
+                {
+                    int randomIndex = Raaandom.GetRandomInt(0, factoryCreate.mob.Count - 1);
+                    Factory selectedFactory = factoryCreate.CreateMob(randomIndex);
+                    Enemy enemy = selectedFactory.CreateEnemy();
+                    enemies.Add(enemy);
+                }
+
+                // Выводим информацию о всех врагах
+                string enemiesInfo = string.Join(", ", enemies.Select(e => $"{e.Name} (HP: {e.MaxHP})"));
+                _page.TxtBlcLogg.Text = $"Появились враги: {enemiesInfo}";
+
+                return enemies;
             }
 
             private Enemy GenerateBoss()
             {
-                // Выбираем случайную фабрику из списка боссов
                 int randomIndex = Raaandom.GetRandomInt(0, factoryCreate.boss.Count - 1);
                 Factory selectedFactory = factoryCreate.CreateBoss(randomIndex);
 
-                // Используем фабрику для создания босса
                 Enemy boss = selectedFactory.CreateEnemy();
-                Console.WriteLine($"!!! БОСС {boss.Name} !!! (HP: {boss.MaxHP}, Атака: {boss.Attack}, Защита: {boss.Defense})");
+                _page.TxtBlcLogg.Text = $"!!! БОСС {boss.Name} !!! (HP: {boss.MaxHP}, Атака: {boss.Attack}, Защита: {boss.Defense})";
                 return boss;
             }
 
-            private void Combat(Enemy enemy)
+            private void Combat(List<Enemy> enemies)
             {
-                Console.WriteLine($"Вы встретили: {enemy.Name}");
-                enemy.DisplayInfo();
-                Console.WriteLine();
+                //_page.TxtBlcLogg.Text = $"Вы встретили: {enemy.Name}";
+                ////Console.WriteLine($"Вы встретили: {enemy.Name}");
+                //enemy.DisplayInfo();
+                //Console.WriteLine();
 
-                bool playerTurn = true;
-                bool defending = false;
+                //bool playerTurn = true;
+                //bool defending = false;
 
-                while (enemy.CurrentHP > 0 && PlayerHP > 0)
-                {
-                    if (playerTurn)
-                    {
-                        if (IsFrozen)
-                        {
-                            Console.WriteLine("Вы заморожены и пропускаете ход!");
-                            IsFrozen = false;
-                            playerTurn = false;
-                            continue;
-                        }
+                //while (enemy.CurrentHP > 0 && PlayerHP > 0)
+                //{
+                //    if (playerTurn)
+                //    {
+                //        if (IsFrozen)
+                //        {
+                //            Console.WriteLine("Вы заморожены и пропускаете ход!");
+                //            IsFrozen = false;
+                //            playerTurn = false;
+                //            continue;
+                //        }
 
-                        PlayerTurn(enemy, ref defending);
-                    }
-                    else
-                    {
-                        EnemyTurn(enemy, ref defending);
-                    }
+                //        PlayerTurn(enemy, ref defending);
+                //    }
+                //    else
+                //    {
+                //        EnemyTurn(enemy, ref defending);
+                //    }
 
-                    playerTurn = !playerTurn;
-                }
+                //    playerTurn = !playerTurn;
+                //}
 
-                if (PlayerHP > 0)
-                {
-                    Console.WriteLine($"Вы победили {enemy.Name}!");
-                }
+                //if (PlayerHP > 0)
+                //{
+                //    Console.WriteLine($"Вы победили {enemy.Name}!");
+                //}
             }
 
             private void PlayerTurn(Enemy enemy, ref bool defending)
@@ -256,12 +307,12 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             private void OpenChest()
             {
-                Console.WriteLine("Вы нашли сундук!");
+                _page.TxtBlcLogg.Text = "Вы нашли сундук!";
                 int chestContent = Raaandom.GetRandomInt(0, 2);
 
                 switch (chestContent)
                 {
-                    case 0: // Зелье здоровья
+                    case 0: 
                         PlayerHP = MaxPlayerHP;
                         Console.WriteLine("Вы нашли зелье здоровья! Ваше HP полностью восстановлено!");
                         break;
@@ -288,34 +339,34 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             private void OfferItem(Item newItem, bool isWeapon)
             {
-                Console.Write("Хотите взять этот предмет? (д/н): ");
-                string choice = Console.ReadLine().ToLower();
+                //Console.Write("Хотите взять этот предмет? (д/н): ");
+                //string choice = Console.ReadLine().ToLower();
 
-                if (choice == "д" || choice == "y")
-                {
-                    if (isWeapon)
-                    {
-                        CurrentWeapon = newItem;
-                        Console.WriteLine($"Вы экипировали {newItem.Name}!");
-                    }
-                    else
-                    {
-                        CurrentArmor = newItem;
-                        Console.WriteLine($"Вы экипировали {newItem.Name}!");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Вы оставили предмет в сундуке.");
-                }
+                //if (choice == "д" || choice == "y")
+                //{
+                //    if (isWeapon)
+                //    {
+                //        CurrentWeapon = newItem;
+                //        Console.WriteLine($"Вы экипировали {newItem.Name}!");
+                //    }
+                //    else
+                //    {
+                //        CurrentArmor = newItem;
+                //        Console.WriteLine($"Вы экипировали {newItem.Name}!");
+                //    }
+                //}
+                //else
+                //{
+                //    Console.WriteLine("Вы оставили предмет в сундуке.");
+                //}
             }
 
             private void GameOver()
             {
-                Console.Clear();
-                Console.WriteLine("=== ИГРА ОКОНЧЕНА ===");
-                Console.WriteLine($"Вы продержались {Turn} ходов!");
-                Console.WriteLine("Спасибо за игру!");
+                //Console.Clear();
+                //Console.WriteLine("=== ИГРА ОКОНЧЕНА ===");
+                //Console.WriteLine($"Вы продержались {Turn} ходов!");
+                //Console.WriteLine("Спасибо за игру!");
             }
         
     }

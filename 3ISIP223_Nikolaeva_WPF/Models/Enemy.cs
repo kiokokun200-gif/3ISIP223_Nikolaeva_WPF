@@ -14,25 +14,29 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public int CurrentHP { get; set; }
         public int Attack { get; set; }
         public int Defense { get; set; }
+        public string DefaultImage {  get; set; }
+        public string AttackImage {  get; set; }
         public EnemyType Type { get; set; }
 
         public double CriticalChance { get; set; } = 0;
         public double FreezeChance { get; set; } = 0;
         public bool IgnoreDefense { get; set; } = false;
 
-        public Enemy(string name, int hp, int attack, int defense, EnemyType type)
+        public Enemy(string name, int hp, int attack, int defense, string defimage, string atimage, EnemyType type)
         {
             Name = name;
             MaxHP = hp;
             CurrentHP = hp;
             Attack = attack;
             Defense = defense;
+            DefaultImage = defimage;
+            AttackImage = atimage;
             Type = type;
         }
 
         public virtual void DisplayInfo()
         {
-            Console.WriteLine($"{Name} - HP: {CurrentHP}/{MaxHP}, Атака: {Attack}, Защита: {Defense}");
+            //Console.WriteLine($"{Name} - HP: {CurrentHP}/{MaxHP}, Атака: {Attack}, Защита: {Defense}");
         }
 
         public virtual int CalculateDamage(int playerDefense)

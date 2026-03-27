@@ -13,7 +13,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public FactoryCreate()
         {
             mob = new List<Factory>();
-            mob.Add(new FactorySlug());
             mob.Add(new FactoryMage());
             mob.Add(new FactorySkeleton());
             mob.Add(new FactoryGoblin());

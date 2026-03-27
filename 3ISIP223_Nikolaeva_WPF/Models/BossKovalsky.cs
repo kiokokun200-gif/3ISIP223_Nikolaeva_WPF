@@ -8,7 +8,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
 {
     internal class BossKovalsky : Enemy
     {
-        public BossKovalsky() : base("Ковальский", 100, 13, 7, EnemyType.BossKovalsky)
+        public BossKovalsky() : base("Ковальский", 100, 13, 7, "/Image/BossKovalsky.png", "/Image/BossKovalskyAttack.png", EnemyType.BossKovalsky)
         {
             IgnoreDefense = true;
         }
