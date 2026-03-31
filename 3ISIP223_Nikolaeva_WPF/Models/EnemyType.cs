@@ -11,7 +11,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         Goblin,
         Skeleton,
         Mage,
-        Slug,
         BossVvg,
         BossKovalsky,
         BossArchmage,

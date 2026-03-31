@@ -53,7 +53,7 @@
                VerticalAlignment="Center" Width="250" Visibility="Hidden"/>
         <!--картинка лута из сундука-->
         <Image x:Name="ImgLutfromChest" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center"
-               VerticalAlignment="Center" Source="/Images/Armors/almaznaya.png" Width="100"/>
+               VerticalAlignment="Center"  Width="100"/>
 
         
         <!--мобы и логи-->
@@ -63,7 +63,8 @@
                     <DropShadowEffect/>
                 </TextBlock.Effect>
             </TextBlock>
-            <ListBox x:Name="ListMobs" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" >
+            <ListBox Background="Transparent" x:Name="ListMobs" SelectionChanged="ListMobs_SelectionChanged"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -87,11 +88,18 @@
                                 <Image Source="/Images/Icons/IconDEF.png" Width="30"/>
                                 <TextBlock Text="{Binding Defense}"/>
                             </StackPanel>
-                            <Image x:Name="ImageCurrentMob" Height="300"/>
+                            <Image x:Name="ImageCurrentMob" Source="{Binding DefaultImage}" Height="200"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            
+
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
             </ListBox>
         </StackPanel>
             
@@ -114,14 +122,24 @@
         
         <!--кнопки атаки и защиты-->
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left">
-            <Button x:Name="BtnAttack" Content="Атака" FontSize="30" Background="#FF828282" Height="60" Width="150" BorderBrush="Black" Margin="0 0 10 0"/>
-            <Button x:Name="BtnDefence" Content="Защита" FontSize="30" Background="#FF828282" Height="60" BorderBrush="Black" Width="150"/>
+            <Button x:Name="BtnAttack" Content="Атака" FontSize="30" Background="#FF828282" 
+                    Height="60" Width="150" BorderBrush="Black" Margin="0 0 10 0" Click="BtnAttack_Click"/>
+            
+            <Button x:Name="BtnDefence" Content="Защита" FontSize="30" Background="#FF828282" Height="60" 
+                    BorderBrush="Black" Width="150" Click="BtnDefence_Click"/>
         </StackPanel>
+        <TextBlock x:Name="TxtBlcHint" Grid.Row="2" Grid.Column="1" 
+           Text="Кликните на врага для атаки" 
+           FontSize="20" Foreground="Gold" 
+           HorizontalAlignment="Center" Margin="0,0,0,10"
+           Visibility="Collapsed"/>
         
         <!--логи-->
         <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
             <TextBlock Text="L;FDS"/>
         </StackPanel>
+        
+        
 
     </Grid>
 </Page>

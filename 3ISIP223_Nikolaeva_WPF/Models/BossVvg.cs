@@ -8,7 +8,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
 {
     internal class BossVvg : Enemy
     {
-        public BossVvg() : base("ВВГ", 60, 18, 4, "/Image/VVGBoss.png", "/Image/VVGBossAttack.png", EnemyType.BossVvg)
+        public BossVvg() : base("ВВГ", 60, 18, 4, "/Images/VVGBoss.png", "/Images/VVGBossAttack.png", EnemyType.BossVvg)
         {
             CriticalChance = 0.3;
         }

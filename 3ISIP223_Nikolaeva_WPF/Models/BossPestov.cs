@@ -8,7 +8,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
 {
     internal class BossPestov : Enemy
     {
-        public BossPestov() : base("Пестов С--", 52, 18, 1, "/Image/BossPestov.png", "/Image/BossPestovAttack.png", EnemyType.BossPestov)
+        public BossPestov() : base("Пестов С--", 52, 18, 1, "/Images/BossPestov.png", "/Images/BossPestovAttack.png", EnemyType.BossPestov)
         {
             IgnoreDefense = true;
             FreezeChance = 0.15;
