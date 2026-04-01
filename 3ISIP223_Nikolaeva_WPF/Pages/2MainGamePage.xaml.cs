@@ -83,12 +83,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public void SetLog(string message)
         {
             TxtBlcLogg.Text = message;
+            TxtLoggingList.Text += $"\n{message}";
+            ScrollViewLog.ScrollToEnd();
         }
-
-        public void SetEnemyImage(string image)
-        {
-
-        }
+      
 
         public void ShowEnemies(List<Enemy> enemies)
         {
@@ -224,7 +222,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     {
                         _currentEnemies = GenerateEnemies();
                         _page.ShowEnemies(_currentEnemies);
-                        _page.SetLog($"Появились враги: {string.Join(", ", _currentEnemies.Select(e => e.Name))}");
                         StartCombat();
                     }
                     else
@@ -238,21 +235,17 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 List<Enemy> enemies = new List<Enemy>();
 
-                // Выбираем тип врага
                 int enemyTypeIndex = Raaandom.GetRandomInt(0, factoryCreate.mob.Count - 1);
                 Factory selectedFactory = factoryCreate.CreateMob(enemyTypeIndex);
 
-                // Количество врагов от 1 до 3
                 int enemyCount = Raaandom.GetRandomInt(1, 3);
 
-                // Создаем врагов одного типа
                 for (int i = 0; i < enemyCount; i++)
                 {
                     Enemy enemy = selectedFactory.CreateEnemy();
                     enemies.Add(enemy);
                 }
 
-                // Выводим сообщение
                 _page.SetLog($"Появились {enemies[0].Name} x{enemyCount}!");
 
                 return enemies;
@@ -271,7 +264,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 _isDefending = false;
                 _page.EnableCombatMode(true);
 
-                // Если игрок заморожен, сразу ход врага
                 if (IsFrozen)
                 {
                     _page.SetLog("Вы заморожены! Враг атакует...");
@@ -297,12 +289,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 if (!_isInCombat) return;
 
-                // Атака
                 int damage = CurrentWeapon.Attack;
                 target.TakeDamage(damage);
                 _page.SetLog($"Вы нанесли {damage} урона {target.Name}!");
 
-                // Проверка смерти
                 if (target.CurrentHP <= 0)
                 {
                     _currentEnemies.Remove(target);
@@ -331,7 +321,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 _isDefending = true;
                 _page.SetLog("Вы встали в защитную стойку!");
 
-                // Ход врага
                 EnemyTurn();
             }
 
@@ -343,19 +332,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 {
                     if (PlayerHP <= 0) break;
 
-                    // Сохраняем старую картинку
                     string oldImage = enemy.DefaultImage;
 
-                    // Меняем на картинку атаки
                     enemy.DefaultImage = enemy.AttackImage;
-                    _page.UpdateEnemyList(); // Обновляем отображение
+                    _page.UpdateEnemyList(); 
 
                     _page.SetLog($"Ход {enemy.Name}:");
 
                     int damage = enemy.CalculateDamage(CurrentArmor.Defense);
                     bool dodged = false;
 
-                    // Уклонение
                     if (_isDefending && Raaandom.GetRandomDouble() < 0.4)
                     {
                         dodged = true;
@@ -418,6 +404,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             private async void OpenChest()
             {
+                _page.EnableCombatMode(false);
                 _page.SetLog("Вы нашли сундук!");
                 _page.ImgChest.Visibility = Visibility.Visible;
 
@@ -460,6 +447,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
                 _page.ImgChest.Visibility = Visibility.Hidden;
                 _page.ImgLutfromChest.Visibility = Visibility.Hidden;
+                _page.EnableCombatMode(true);
+
                 NextTurn();
             }
 

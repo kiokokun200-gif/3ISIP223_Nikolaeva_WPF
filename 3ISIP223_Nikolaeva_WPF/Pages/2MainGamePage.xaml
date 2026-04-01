@@ -73,8 +73,8 @@
                                 <TextBlock FontSize="20">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0}/{1} ХП">
-                                            <Binding Path="MaxHP"/>
                                             <Binding Path="CurrentHP"/>
+                                            <Binding Path="MaxHP"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
@@ -104,7 +104,7 @@
             
         
         <!--оружие-->
-        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" Margin="0 0 0 10">
             <Border BorderBrush="#FF717171"  BorderThickness="5" Height="100" Width="100" >
                 <Border.Background >
                     <SolidColorBrush Color="#FF1D1D1D" Opacity="0.55"/>
@@ -120,7 +120,7 @@
         </StackPanel>
         
         <!--кнопки атаки и защиты-->
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left">
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0 0 0 10">
             <Button x:Name="BtnAttack" Content="Атака" FontSize="30" Background="#FF828282" 
                     Height="60" Width="150" BorderBrush="Black" Margin="0 0 10 0" Click="BtnAttack_Click"/>
             
@@ -134,11 +134,9 @@
            Visibility="Collapsed"/>
         
         <!--логи-->
-        <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
-            <TextBlock Text="L;FDS"/>
-        </StackPanel>
-        
-        
+        <ScrollViewer x:Name="ScrollViewLog" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Height="200">
+            <TextBlock x:Name="TxtLoggingList" FontSize="22"  VerticalAlignment="Bottom" TextWrapping="Wrap" />
+        </ScrollViewer>
 
     </Grid>
 </Page>
