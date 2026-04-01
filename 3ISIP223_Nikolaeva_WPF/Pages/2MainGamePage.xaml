@@ -49,11 +49,11 @@
         <TextBlock x:Name="TxtBlcFloor" Text="Этаж: " Grid.Column="0" Grid.Row="1" FontSize="28"/>
         
         <!--сундук-->
-        <Image x:Name="ImgChest" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" 
-               VerticalAlignment="Center" Width="250" Visibility="Hidden"/>
+        <Image x:Name="ImgChest" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Source="/Images/Other/chest.png" HorizontalAlignment="Center" 
+               VerticalAlignment="Bottom" Width="350" Visibility="Hidden"/>
         <!--картинка лута из сундука-->
         <Image x:Name="ImgLutfromChest" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center"
-               VerticalAlignment="Center"  Width="100"/>
+               VerticalAlignment="Bottom"  Width="200"/>
 
         
         <!--мобы и логи-->
@@ -67,10 +67,10 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/Icons/IconHP.png" Width="30"/>
-                                <TextBlock>
+                                <TextBlock FontSize="20">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0}/{1} ХП">
                                             <Binding Path="MaxHP"/>
@@ -79,16 +79,15 @@
                                     </TextBlock.Text>
                                 </TextBlock>
                             </StackPanel>
-                            
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/Icons/IconATK.png" Width="30"/>
-                                <TextBlock Text="{Binding Attack}"/>
+                                <TextBlock Text="{Binding Attack}" FontSize="20"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/Icons/IconDEF.png" Width="30"/>
-                                <TextBlock Text="{Binding Defense}"/>
+                                <TextBlock Text="{Binding Defense}" FontSize="20"/>
                             </StackPanel>
-                            <Image x:Name="ImageCurrentMob" Source="{Binding DefaultImage}" Height="200"/>
+                            <Image x:Name="ImageCurrentMob" Source="{Binding DefaultImage}" Height="350"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

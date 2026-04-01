@@ -139,7 +139,6 @@
     <Resource Include="Images\ArchimagAttack.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Archimag.PNG" />
     <Resource Include="Images\BossKovalsky.png" />
     <Resource Include="Images\BossKovalskyAttack.png" />
     <Resource Include="Images\BossPestov.png" />
@@ -198,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Other\zelie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Archimag.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

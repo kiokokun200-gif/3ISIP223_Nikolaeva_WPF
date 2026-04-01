@@ -22,6 +22,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     public partial class _2MainGamePage : Page
     {
         public Game _game;
+        public List<BitmapImage> backgroungimages;
         private bool _waitingForTarget = false;
 
         public _2MainGamePage()
@@ -35,7 +36,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void LoadPicture()
         {
-            List<BitmapImage> backgroungimages = new List<BitmapImage>()
+            backgroungimages = new List<BitmapImage>()
             {
                 new BitmapImage(new Uri("pack://application:,,,/Images/Backgrounds/Loca1.jpeg")),
                 new BitmapImage(new Uri("pack://application:,,,/Images/Backgrounds/Loca2.png")),
@@ -43,7 +44,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 new BitmapImage(new Uri("pack://application:,,,/Images/Backgrounds/Loca4.jpg")),
                 new BitmapImage(new Uri("pack://application:,,,/Images/Backgrounds/Loca5.jpg"))
             };
+            UpdateBack();
 
+
+        }
+
+        public void UpdateBack()
+        {
             int n = Raaandom.GetRandomInt(0, backgroungimages.Count - 1);
             ImagBr.ImageSource = backgroungimages[n];
         }
@@ -78,6 +85,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             TxtBlcLogg.Text = message;
         }
 
+        public void SetEnemyImage(string image)
+        {
+
+        }
+
         public void ShowEnemies(List<Enemy> enemies)
         {
             ListMobs.ItemsSource = enemies;
@@ -103,7 +115,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             _waitingForTarget = true;
             TxtBlcHint.Visibility = Visibility.Visible;
-            TxtBlcHint.Text = "👉 КЛИКНИТЕ ПО ВРАГУ ДЛЯ АТАКИ 👈";
+            TxtBlcHint.Text = "КЛИКНИТЕ ПО ВРАГУ ДЛЯ АТАКИ";
         }
 
         public void CancelTargetSelection()
@@ -132,6 +144,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 _game.OnEnemySelected(selected);
                 ListMobs.SelectedItem = null; // Снимаем выделение
             }
+            ListMobs.SelectedIndex = -1;
         }
 
         public class Game
@@ -154,26 +167,26 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             private List<Item> weapons = new List<Item>
             {
-                new Item("Лампа", 10, 0, "/Images/Weapons/Chashka.png"),
-                new Item("Волчья погибель", 15, 0, "/Images/Weapons/VolchyaPogibel.png"),
-                new Item("Аква Симулякрум", 17, 0, "/Images/Weapons/AquaSimulyacrum.png"),
-                new Item("Нефритовый омут", 15, 3, "/Images/Weapons/Omut.png"),
-                new Item("Рассекающий туман", 20, 10, "/Images/Weapons/RassekaushiTuman.png")
+                new Item("Лампа", 30, 0, "/Images/Weapons/Chashka.png"),
+                new Item("Волчья погибель", 35, 0, "/Images/Weapons/VolchyaPogibel.png"),
+                new Item("Аква Симулякрум", 39, 0, "/Images/Weapons/AquaSimulyacrum.png"),
+                new Item("Нефритовый омут", 44, 3, "/Images/Weapons/Omut.png"),
+                new Item("Рассекающий туман", 50, 10, "/Images/Weapons/RassekaushiTuman.png")
             };
 
             private List<Item> armors = new List<Item>
             {
-                new Item("Кольчуга", 0, 15, "/Images/Armors/kolchuga.png"),
-                new Item("Железная броня", 7, 19, "/Images/Armors/jeleznaya.png"),
-                new Item("Золотая броня", 5, 15, "/Images/Armors/zolotaya.png"),
-                new Item("Алмазная броня", 5, 20, "/Images/Armors/almaznaya.png")
+                new Item("Кольчуга", 0, 30, "/Images/Armors/kolchuga.png"),
+                new Item("Железная броня", 7, 33, "/Images/Armors/jeleznaya.png"),
+                new Item("Золотая броня", 5, 40, "/Images/Armors/zolotaya.png"),
+                new Item("Алмазная броня", 5, 45, "/Images/Armors/almaznaya.png")
             };
 
             public Game(_2MainGamePage page)
             {
                 _page = page;
-                CurrentWeapon = new Item("Дубина переговоров", 7, 0, "/Images/Weapons/dubina.png");
-                CurrentArmor = new Item("Кожанная броня", 0, 1, "/Images/Armors/kojanaya.png");
+                CurrentWeapon = new Item("Дубина переговоров", 20, 0, "/Images/Weapons/dubina.png");
+                CurrentArmor = new Item("Кожанная броня", 0, 20, "/Images/Armors/kojanaya.png");
                 _page.UpdateWeaponImage(CurrentWeapon);
                 _page.UpdateArmorImage(CurrentArmor);
                 _page.UpdateHealth(MaxPlayerHP, PlayerHP);
@@ -184,7 +197,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 await NextTurn();
             }
 
-            private async System.Threading.Tasks.Task NextTurn()
+            private async Task NextTurn()
             {
                 if (PlayerHP <= 0)
                 {
@@ -194,6 +207,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
                 Turn++;
                 _page.UpdateFloor(Turn);
+                _page.UpdateBack();
+
 
                 if (Turn % 10 == 0)
                 {
@@ -228,7 +243,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 Factory selectedFactory = factoryCreate.CreateMob(enemyTypeIndex);
 
                 // Количество врагов от 1 до 3
-                int enemyCount = Raaandom.GetRandomInt(1, 4);
+                int enemyCount = Raaandom.GetRandomInt(1, 3);
 
                 // Создаем врагов одного типа
                 for (int i = 0; i < enemyCount; i++)
@@ -328,8 +343,12 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 {
                     if (PlayerHP <= 0) break;
 
-                    // Меняем картинку на атаку
-                    // _page.SetEnemyImage(enemy.AttackImage);
+                    // Сохраняем старую картинку
+                    string oldImage = enemy.DefaultImage;
+
+                    // Меняем на картинку атаки
+                    enemy.DefaultImage = enemy.AttackImage;
+                    _page.UpdateEnemyList(); // Обновляем отображение
 
                     _page.SetLog($"Ход {enemy.Name}:");
 
@@ -373,13 +392,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                         }
                     }
 
-                    await System.Threading.Tasks.Task.Delay(500);
+                    await Task.Delay(800);
+
+                    // Возвращаем старую картинку
+                    enemy.DefaultImage = oldImage;
+                    _page.UpdateEnemyList();
+
+                    await Task.Delay(200);
                 }
 
                 _isDefending = false;
-
-                // Возвращаем обычную картинку
-                // foreach (var enemy in _currentEnemies) _page.SetEnemyImage(enemy.DefaultImage);
             }
 
             private async void EndCombat()
@@ -388,13 +410,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 _page.EnableCombatMode(false);
                 _page.SetLog("Победа!");
 
-                await System.Threading.Tasks.Task.Delay(1000);
+                await Task.Delay(1000);
 
                 // Продолжаем игру
                 await NextTurn();
             }
 
-            private void OpenChest()
+            private async void OpenChest()
             {
                 _page.SetLog("Вы нашли сундук!");
                 _page.ImgChest.Visibility = Visibility.Visible;
@@ -404,25 +426,40 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 switch (chestContent)
                 {
                     case 0:
+                        await Task.Delay(1000);
+                        _page.ImgLutfromChest.Visibility = Visibility.Visible;
+                        _page.ImgLutfromChest.Source = new BitmapImage(new Uri("/Images/Other/zelie.png", UriKind.Relative));
                         PlayerHP = MaxPlayerHP;
                         _page.UpdateHealth(MaxPlayerHP, PlayerHP);
                         _page.SetLog("Зелье здоровья! HP восстановлено!");
+                        await Task.Delay(1000);
+                        _page.ImgLutfromChest.Visibility = Visibility.Hidden;
                         break;
 
                     case 1:
                         Item newWeapon = weapons[Raaandom.GetRandomInt(0, weapons.Count - 1)];
+                        await Task.Delay(1000);
+                        _page.ImgLutfromChest.Visibility = Visibility.Visible;
+                        _page.ImgLutfromChest.Source = new BitmapImage(new Uri(newWeapon.Image, UriKind.Relative));
                         _page.SetLog($"Найдено оружие: {newWeapon.Name}!");
+                        await Task.Delay(1000);
                         ShowItemChoice(newWeapon, true);
                         return;
 
                     case 2:
                         Item newArmor = armors[Raaandom.GetRandomInt(0, armors.Count - 1)];
+                        await Task.Delay(1000);
+                        _page.ImgLutfromChest.Visibility = Visibility.Visible;
+                        _page.ImgLutfromChest.Source = new BitmapImage(new Uri(newArmor.Image, UriKind.Relative));
                         _page.SetLog($"Найдены доспехи: {newArmor.Name}!");
+                        await Task.Delay(1000);
+
                         ShowItemChoice(newArmor, false);
                         return;
                 }
 
                 _page.ImgChest.Visibility = Visibility.Hidden;
+                _page.ImgLutfromChest.Visibility = Visibility.Hidden;
                 NextTurn();
             }
 
@@ -460,7 +497,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 }
 
                 _page.ImgChest.Visibility = Visibility.Hidden;
-                await System.Threading.Tasks.Task.Delay(500);
+                _page.ImgLutfromChest.Visibility = Visibility.Hidden;
+                await Task.Delay(1000);
                 NextTurn();
             }
 
