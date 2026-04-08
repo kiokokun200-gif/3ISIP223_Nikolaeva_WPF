@@ -27,6 +27,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
     
         public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<Manufacturer> Manufacturer { get; set; }
+        public virtual DbSet<MasterService> MasterService { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItems> OrderItems { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethod { get; set; }
@@ -39,6 +40,5 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserService> UserService { get; set; }
-        public virtual DbSet<MasterService> MasterService { get; set; }
     }
 }

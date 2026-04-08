@@ -18,10 +18,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public User()
         {
             this.Cart = new HashSet<Cart>();
+            this.MasterService = new HashSet<MasterService>();
             this.Order = new HashSet<Order>();
             this.UserService = new HashSet<UserService>();
             this.UserService1 = new HashSet<UserService>();
-            this.MasterService = new HashSet<MasterService>();
         }
     
         public int ID { get; set; }
@@ -35,13 +35,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MasterService> MasterService { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserService> UserService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserService> UserService1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MasterService> MasterService { get; set; }
     }
 }

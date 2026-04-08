@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _3ISIP223_Nikolaeva_WPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace _3ISIP223_Nikolaeva_WPF.Pages
@@ -19,18 +21,107 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class WindowLogIn : Window
     {
-        private List<string> _roles;
-        public WindowLogIn()
+        _1PageMain _pageMain;
+        public WindowLogIn( _1PageMain page)
         {
             InitializeComponent();
-            _roles = Core.Context.Role.Select(r => r.Name).Distinct().ToList();
-            ComboBoxRoles.ItemsSource = _roles;
             Owner = Application.Current.MainWindow;
+            _pageMain = page;
         }
 
-        private void ComboBoxRoles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BtnClientLogLog_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(TxtBoxLogNumber.Text) || string.IsNullOrEmpty(TxtBoxLogPassword.Text))
+            {
+                MessageBox.Show("Заполните все поля!");
+            }
+            else
+            {
+                if (Login(TxtBoxLogNumber.Text, TxtBoxLogPassword.Text))
+                {
+                    MessageBox.Show($"Вход успешный! роль {UserData.CurrentUser.Role.Name}");
+                    _pageMain.UpdateAccount();
+                    this.Close();
+
+                }
+                else
+                {
+                    MessageBox.Show("Пользователь с такими данными не найден");
+                }
+
+            }
+        }
+
+        private bool Login(string number, string password)
+        {
+            var user = Core.Context.User.FirstOrDefault(u => u.PhoneNumber == number && u.Password == password);
+            if (user != null)
+            {
+                UserData.CurrentUser = user;
+                
+                return true;
+            }
+            else { return false; }
+        }
+
+        private void BtnClientRegReg_Click(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(TxtBoxRegFName.Text) || string.IsNullOrEmpty(TxtBoxRegLName.Text) || string.IsNullOrEmpty(TxtBoxRegMName.Text) || string.IsNullOrEmpty(TxtBoxRegNumber.Text) || string.IsNullOrEmpty(TxtBoxRegPassword.Text))
+            {
+                MessageBox.Show("Заполните все поля!");
+            }
+            else
+            {
+                if (Registration(TxtBoxRegFName.Text, TxtBoxRegLName.Text, TxtBoxRegMName.Text, TxtBoxRegNumber.Text, TxtBoxRegPassword.Text))
+                {
+                    MessageBox.Show("Успешный вход!");
+                    this.Close();
+
+
+                }
+                else MessageBox.Show("Ошибка регистрации");
+
+            }
+        }
+
+        private bool Registration(string fname, string lname, string mname, string number, string password)
+        {
+            try
+            {
+                var reguser = new User()
+                {
+                    FirstName = fname,
+                    LastName = lname,
+                    MiddleName = mname,
+                    PhoneNumber = number,
+                    RoleID = 1,
+                    Password = password
+
+                };
+                Core.Context.User.Add(reguser);
+                Core.Context.SaveChanges();
+                UserData.CurrentUser = reguser;
+                return true;
+            }
+
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void TxtBoxLogNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.Text[0]);
 
         }
+
+
+        private void TxtBoxRegNumber_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.Text[0]);
+        }
+
+
     }
 }

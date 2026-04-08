@@ -6,6 +6,7 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="#FFFF7B8E"/>
         <Setter Property="BorderThickness" Value="0"/>
+        
         <!--<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

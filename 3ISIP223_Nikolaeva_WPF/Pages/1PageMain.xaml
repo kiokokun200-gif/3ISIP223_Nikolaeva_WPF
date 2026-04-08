@@ -20,9 +20,28 @@
             <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxServices" Background="Red"/>
             <TextBlock Text="Фильтр по мастеру" FontSize="18" Margin="10"/>
             <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxMasters"/>
+            <Button x:Name="BtnProduct" Content="Товары" Background="White" Foreground="Black" FontSize="18" Margin="10 0 0 0" Click="BtnProduct_Click"/>
         </StackPanel>
 
-        <Button x:Name="BtnLogin" Grid.Row="0" Content="Войти в аккаунт" HorizontalAlignment="Right" FontSize="15" Click="BtnLogin_Click"/>
-       
+        <Button x:Name="BtnLogin" Grid.Row="0" Content="Войти в аккаунт"  HorizontalAlignment="Right" FontSize="15" Click="BtnLogin_Click"/>
+
+        <ListBox Grid.Row="1" x:Name="ListBoxServicesTypes">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock FontSize="25" Text="{Binding ServCategory.Name}"/>
+                        <TextBlock Text="{Binding Description}" FontSize="18"/>
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
     </Grid>
 </Page>
