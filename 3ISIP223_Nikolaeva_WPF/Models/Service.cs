@@ -25,11 +25,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public string Name { get; set; }
         public int CategoryID { get; set; }
         public string Description { get; set; }
-        public int AppointmentID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MasterService> MasterService { get; set; }
-        public virtual Schedule Schedule { get; set; }
         public virtual ServCategory ServCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserService> UserService { get; set; }

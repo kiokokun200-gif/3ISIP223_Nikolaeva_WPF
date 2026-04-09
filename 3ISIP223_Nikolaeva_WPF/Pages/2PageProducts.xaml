@@ -10,16 +10,16 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
             <TextBlock Text="⌕" FontSize="30" Margin="10"/>
             <TextBox x:Name="TxtBoxSearch" Width="150" Height="40" TextChanged="TxtBoxSearch_TextChanged"/>
 
-            <ComboBox x:Name="ComboBoxFiltrProdCat" Style="{StaticResource FiltrCombo}" Margin="10 0 0 0" SelectionChanged="ComboBoxFiltrProdCat_SelectionChanged"/>
-            <ComboBox x:Name="ComboBoxFiltrProdMan" Style="{StaticResource FiltrCombo}" Margin="10 0 0 0" SelectionChanged="ComboBoxFiltrProdMan_SelectionChanged"/>
+            <ComboBox x:Name="ComboBoxFiltrProdCat" Style="{StaticResource FiltrCombo}" Margin="10 0 0 0" SelectedIndex="0" SelectionChanged="ComboBoxFiltrProdCat_SelectionChanged"/>
+            <ComboBox x:Name="ComboBoxFiltrProdMan" Style="{StaticResource FiltrCombo}" Margin="10 0 0 0" SelectedIndex="0" SelectionChanged="ComboBoxFiltrProdMan_SelectionChanged"/>
             <Button x:Name="BtnSortRating" Content="Сортировка по рейтингу" Background="White" Foreground="Black" FontSize="20" Height="40" Margin="10 0 0 0" Click="BtnSortRating_Click"/>
         </StackPanel>
         

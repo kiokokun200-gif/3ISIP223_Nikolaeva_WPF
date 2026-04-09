@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище PR_17Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище PR_17Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="ID" />
@@ -73,6 +73,7 @@
           <Property Name="ManufacturerID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Rating" Type="float" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductInCart">
           <Key>
@@ -98,6 +99,7 @@
           <Property Name="Time" Type="datetime" Nullable="false" />
           <Property Name="MasterID" Type="int" Nullable="false" />
           <Property Name="IsAvailable" Type="bit" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ServCategory">
           <Key>
@@ -114,7 +116,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AppointmentID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -139,6 +140,7 @@
           <Property Name="ServiceID" Type="int" Nullable="false" />
           <Property Name="PaymentMethodID" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="100" />
+          <Property Name="ScheduleID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cart_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -260,18 +262,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Service_Appointment">
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
-          <End Role="Service" Type="Self.Service" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Schedule">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Service">
-              <PropertyRef Name="AppointmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Service_ServCategory">
           <End Role="ServCategory" Type="Self.ServCategory" Multiplicity="1" />
           <End Role="Service" Type="Self.Service" Multiplicity="*" />
@@ -305,6 +295,18 @@
             </Principal>
             <Dependent Role="UserService">
               <PropertyRef Name="PaymentMethodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserService_Schedule">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
+          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="ScheduleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -400,10 +402,6 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductInCart" EntitySet="ProductInCart" />
           </AssociationSet>
-          <AssociationSet Name="FK_Service_Appointment" Association="Self.FK_Service_Appointment">
-            <End Role="Schedule" EntitySet="Schedule" />
-            <End Role="Service" EntitySet="Service" />
-          </AssociationSet>
           <AssociationSet Name="FK_Service_ServCategory" Association="Self.FK_Service_ServCategory">
             <End Role="ServCategory" EntitySet="ServCategory" />
             <End Role="Service" EntitySet="Service" />
@@ -414,6 +412,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_UserService_PaymentMethod" Association="Self.FK_UserService_PaymentMethod">
             <End Role="PaymentMethod" EntitySet="PaymentMethod" />
+            <End Role="UserService" EntitySet="UserService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserService_Schedule" Association="Self.FK_UserService_Schedule">
+            <End Role="Schedule" EntitySet="Schedule" />
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
           <AssociationSet Name="FK_UserService_Service" Association="Self.FK_UserService_Service">
@@ -429,7 +431,8 @@
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PR_17Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -511,11 +514,12 @@
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="ManufacturerID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItems_Product" FromRole="Product" ToRole="OrderItems" />
           <NavigationProperty Name="ProdCategory" Relationship="Self.FK_Product_ProdCategory" FromRole="Product" ToRole="ProdCategory" />
           <NavigationProperty Name="ProductInCart" Relationship="Self.FK_ProductInCart_Product" FromRole="Product" ToRole="ProductInCart" />
-          <Property Name="Rating" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductInCart">
           <Key>
@@ -544,7 +548,8 @@
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MasterID" Type="Int32" Nullable="false" />
           <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="Self.FK_Service_Appointment" FromRole="Schedule" ToRole="Service" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_Schedule" FromRole="Schedule" ToRole="UserService" />
         </EntityType>
         <EntityType Name="ServCategory">
           <Key>
@@ -562,9 +567,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AppointmentID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MasterService" Relationship="Self.FK_MasterService_Service" FromRole="Service" ToRole="MasterService" />
-          <NavigationProperty Name="Schedule" Relationship="Self.FK_Service_Appointment" FromRole="Service" ToRole="Schedule" />
           <NavigationProperty Name="ServCategory" Relationship="Self.FK_Service_ServCategory" FromRole="Service" ToRole="ServCategory" />
           <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_Service" FromRole="Service" ToRole="UserService" />
         </EntityType>
@@ -597,7 +600,9 @@
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
           <Property Name="PaymentMethodID" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ScheduleID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PaymentMethod" Relationship="Self.FK_UserService_PaymentMethod" FromRole="UserService" ToRole="PaymentMethod" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK_UserService_Schedule" FromRole="UserService" ToRole="Schedule" />
           <NavigationProperty Name="Service" Relationship="Self.FK_UserService_Service" FromRole="UserService" ToRole="Service" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserService_User" FromRole="UserService" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_UserService_User1" FromRole="UserService" ToRole="User" />
@@ -746,15 +751,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Service_Appointment">
+        <Association Name="FK_UserService_Schedule">
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
-          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Schedule">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Service">
-              <PropertyRef Name="AppointmentID" />
+            <Dependent Role="UserService">
+              <PropertyRef Name="ScheduleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -806,7 +811,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PR_17Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PR_17Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
           <EntitySet Name="MasterService" EntityType="Self.MasterService" />
@@ -870,9 +875,9 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_Service_Appointment" Association="Self.FK_Service_Appointment">
+          <AssociationSet Name="FK_UserService_Schedule" Association="Self.FK_UserService_Schedule">
             <End Role="Schedule" EntitySet="Schedule" />
-            <End Role="Service" EntitySet="Service" />
+            <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
           <AssociationSet Name="FK_Service_ServCategory" Association="Self.FK_Service_ServCategory">
             <End Role="ServCategory" EntitySet="ServCategory" />
@@ -896,7 +901,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище PR_17ModelContainer" CdmEntityContainer="PR_17Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PR_17ModelContainer" CdmEntityContainer="PR_17Entities1">
           <EntitySetMapping Name="Cart">
             <EntityTypeMapping TypeName="PR_17Model.Cart">
               <MappingFragment StoreEntitySet="Cart">
@@ -963,7 +968,6 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="PR_17Model.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
@@ -971,6 +975,8 @@
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -999,6 +1005,7 @@
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="MasterID" ColumnName="MasterID" />
                 <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1017,7 +1024,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1044,6 +1050,7 @@
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

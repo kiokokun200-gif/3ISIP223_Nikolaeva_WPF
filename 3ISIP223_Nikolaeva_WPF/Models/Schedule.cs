@@ -17,15 +17,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Schedule()
         {
-            this.Service = new HashSet<Service>();
+            this.UserService = new HashSet<UserService>();
         }
     
         public int ID { get; set; }
         public System.DateTime Time { get; set; }
         public int MasterID { get; set; }
         public bool IsAvailable { get; set; }
+        public System.DateTime EndTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Service> Service { get; set; }
+        public virtual ICollection<UserService> UserService { get; set; }
     }
 }

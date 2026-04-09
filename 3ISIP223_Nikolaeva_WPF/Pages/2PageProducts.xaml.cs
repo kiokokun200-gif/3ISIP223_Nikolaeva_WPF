@@ -27,13 +27,20 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public _2PageProducts()
         {
             InitializeComponent();
+            LoadPage();
+
+        }
+
+        private void LoadPage()
+        {
             _products = Core.Context.Product.ToList();
             ListBoxProducts.ItemsSource = _products;
             _categoties = Core.Context.ProdCategory.Select(p => p.Name).ToList();
             ComboBoxFiltrProdCat.ItemsSource = _categoties;
+            _categoties.Insert(0, "Все");
             _manufacturers = Core.Context.Manufacturer.Select(p => p.Name).ToList();
             ComboBoxFiltrProdMan.ItemsSource = _manufacturers;
-
+            _manufacturers.Insert(0, "Все");
         }
 
         private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -44,12 +51,48 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ComboBoxFiltrProdCat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string selectCategory = (string)ComboBoxFiltrProdCat.SelectedItem;
+            switch (selectCategory) {
+                case "Лаки": {
+                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "Лаки");
+                        break;
+                    }
+                case "Уход":
+                    {
+                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "Уход");
+                        break;
+                    }
+                case "Макияж":
+                    {
+                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "Макияж");
+                        break;
+                    }
+                    default: {
+                        ListBoxProducts.ItemsSource = _products;
+                        break;
+                    }
 
+            }
         }
 
         private void ComboBoxFiltrProdMan_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            string selectedManufacturer = (string)ComboBoxFiltrProdMan.SelectedItem;
+            switch (selectedManufacturer) {
+                case "Essie": {
+                        ListBoxProducts.ItemsSource = _products.Where(p => p.Manufacturer.Name == "Essie");
+                        break;
+                    }
+                case "L'Oreal": {
+                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "L'Oreal");
+                        break;
+                    }
+                case "Maybelline":
+                    {
+                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "Maybelline");
+                        break;
+                    }
+            }
         }
 
         private void BtnSortRating_Click(object sender, RoutedEventArgs e)

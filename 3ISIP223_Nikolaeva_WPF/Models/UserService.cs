@@ -21,8 +21,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public int ServiceID { get; set; }
         public int PaymentMethodID { get; set; }
         public string Comment { get; set; }
+        public int ScheduleID { get; set; }
     
         public virtual PaymentMethod PaymentMethod { get; set; }
+        public virtual Schedule Schedule { get; set; }
         public virtual Service Service { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
