@@ -127,6 +127,9 @@
     <Compile Include="Pages\2PageProducts.xaml.cs">
       <DependentUpon>2PageProducts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\3PageCart.xaml.cs">
+      <DependentUpon>3PageCart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserData.cs" />
     <Page Include="DictionaryStyle.xaml">
       <SubType>Designer</SubType>
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\2PageProducts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\3PageCart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\accicon.png" />
+    <Resource Include="Images\cart.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

@@ -11,6 +11,7 @@ namespace _3ISIP223_Nikolaeva_WPF
     {
         public static User CurrentUser { get; set; }
 
+        public static Cart UserCart { get; set; }
         public static bool IsLoggedIn => CurrentUser != null;
 
     }

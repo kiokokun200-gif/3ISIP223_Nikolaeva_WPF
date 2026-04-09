@@ -69,7 +69,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private void BtnProduct_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new _2PageProducts());
-            UpdateAccount();
+            //UpdateAccount();
         }
     }
 }

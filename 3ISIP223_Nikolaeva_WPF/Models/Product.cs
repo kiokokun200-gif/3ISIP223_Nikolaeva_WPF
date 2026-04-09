@@ -28,6 +28,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public int CategoryID { get; set; }
         public int ManufacturerID { get; set; }
         public string Description { get; set; }
+        public double Rating { get; set; }
     
         public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

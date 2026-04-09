@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище PR_17Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище PR_17Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="ID" />
@@ -72,6 +72,7 @@
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="ManufacturerID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductInCart">
           <Key>
@@ -428,8 +429,7 @@
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PR_17Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -515,6 +515,7 @@
           <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItems_Product" FromRole="Product" ToRole="OrderItems" />
           <NavigationProperty Name="ProdCategory" Relationship="Self.FK_Product_ProdCategory" FromRole="Product" ToRole="ProdCategory" />
           <NavigationProperty Name="ProductInCart" Relationship="Self.FK_ProductInCart_Product" FromRole="Product" ToRole="ProductInCart" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductInCart">
           <Key>
@@ -962,6 +963,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="PR_17Model.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
