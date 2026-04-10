@@ -24,6 +24,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private List<Product> _products;
         private List<string> _categoties;
         private List<string> _manufacturers;
+        private bool IsFiltr = false;
         public _2PageProducts()
         {
             InitializeComponent();
@@ -51,53 +52,46 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ComboBoxFiltrProdCat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            IsFiltr = true;
             string selectCategory = (string)ComboBoxFiltrProdCat.SelectedItem;
-            switch (selectCategory) {
-                case "Лаки": {
-                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "Лаки");
-                        break;
-                    }
-                case "Уход":
-                    {
-                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "Уход");
-                        break;
-                    }
-                case "Макияж":
-                    {
-                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "Макияж");
-                        break;
-                    }
-                    default: {
-                        ListBoxProducts.ItemsSource = _products;
-                        break;
-                    }
+            string selectManufacturer = (string)ComboBoxFiltrProdMan.SelectedItem;
+            Filrt(selectCategory, selectManufacturer);
 
-            }
+
         }
 
-        private void ComboBoxFiltrProdMan_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Filrt(string selectCategory, string selectManufacturer)
         {
-            string selectedManufacturer = (string)ComboBoxFiltrProdMan.SelectedItem;
-            switch (selectedManufacturer) {
-                case "Essie": {
-                        ListBoxProducts.ItemsSource = _products.Where(p => p.Manufacturer.Name == "Essie");
-                        break;
-                    }
-                case "L'Oreal": {
-                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "L'Oreal");
-                        break;
-                    }
-                case "Maybelline":
-                    {
-                        ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == "Maybelline");
-                        break;
-                    }
+            if(selectCategory == "Все" &&  selectManufacturer == "Все")
+            {
+                ListBoxProducts.ItemsSource = _products;
             }
+            else if(selectCategory == "Все" && selectManufacturer != "Все")
+            {
+                ListBoxProducts.ItemsSource = _products.Where(p => p.Manufacturer.Name == selectManufacturer);
+            }
+            else if( selectCategory != "Все" &&  selectManufacturer == "Все")
+            {
+                ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == selectCategory);
+            }
+            else
+            {
+                ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == selectCategory && p.Manufacturer.Name == selectManufacturer);
+            }
+
         }
+
+        
 
         private void BtnSortRating_Click(object sender, RoutedEventArgs e)
         {
-            ListBoxProducts.ItemsSource = _products.OrderBy(p => p.Rating).ToList();
+            if(IsFiltr)
+            {
+                Filrt((string)ComboBoxFiltrProdCat.SelectedItem, (string)ComboBoxFiltrProdMan.SelectedItem);
+                 ListBoxProducts.ItemsSource = _products.OrderBy(p => p.Rating).ToList();
+
+            }
+            //ListBoxProducts.ItemsSource = _products.OrderBy(p => p.Rating).ToList();
         }
 
         private void CreateCart()

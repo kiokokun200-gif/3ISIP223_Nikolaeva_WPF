@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
         mc:Ignorable="d"
-        Title="WindowLogIn" SizeToContent="WidthAndHeight"
+        Title="WindowLogIn" Height="200" Width="350" 
+    
         WindowStartupLocation="CenterOwner">
     <Grid Background="White">
         
