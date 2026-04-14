@@ -37,11 +37,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             _products = Core.Context.Product.ToList();
             ListBoxProducts.ItemsSource = _products;
             _categoties = Core.Context.ProdCategory.Select(p => p.Name).ToList();
-            ComboBoxFiltrProdCat.ItemsSource = _categoties;
             _categoties.Insert(0, "Все");
+            ComboBoxFiltrProdCat.ItemsSource = _categoties;
             _manufacturers = Core.Context.Manufacturer.Select(p => p.Name).ToList();
-            ComboBoxFiltrProdMan.ItemsSource = _manufacturers;
             _manufacturers.Insert(0, "Все");
+            ComboBoxFiltrProdMan.ItemsSource = _manufacturers;
         }
 
         private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -52,9 +52,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ComboBoxFiltrProdCat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            IsFiltr = true;
             string selectCategory = (string)ComboBoxFiltrProdCat.SelectedItem;
             string selectManufacturer = (string)ComboBoxFiltrProdMan.SelectedItem;
+            if(selectManufacturer == null || selectCategory == null) return;
             Filrt(selectCategory, selectManufacturer);
 
 
@@ -62,22 +62,34 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void Filrt(string selectCategory, string selectManufacturer)
         {
+            List<Product> prod;
+            if (ListBoxProducts.ItemsSource == null  || (ListBoxProducts.ItemsSource as List<Product>).Count == 0 ) prod = _products;
+            else
+            {
+
+                prod = ListBoxProducts.ItemsSource as List<Product>;
+            }
             if(selectCategory == "Все" &&  selectManufacturer == "Все")
             {
-                ListBoxProducts.ItemsSource = _products;
+                prod = prod;
             }
             else if(selectCategory == "Все" && selectManufacturer != "Все")
             {
-                ListBoxProducts.ItemsSource = _products.Where(p => p.Manufacturer.Name == selectManufacturer);
+                prod = prod.Where(p => p.Manufacturer.Name == selectManufacturer).ToList();
             }
             else if( selectCategory != "Все" &&  selectManufacturer == "Все")
             {
-                ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == selectCategory);
+                prod = prod.Where(p => p.ProdCategory.Name == selectCategory).ToList();
             }
             else
             {
-                ListBoxProducts.ItemsSource = _products.Where(p => p.ProdCategory.Name == selectCategory && p.Manufacturer.Name == selectManufacturer);
+               prod = prod.Where(p => p.ProdCategory.Name == selectCategory && p.Manufacturer.Name == selectManufacturer).ToList();
             }
+            if (IsFiltr)
+                prod = prod.OrderByDescending(p => p.Rating).ToList();
+            ListBoxProducts.ItemsSource = prod;
+
+
 
         }
 
@@ -85,13 +97,15 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnSortRating_Click(object sender, RoutedEventArgs e)
         {
-            if(IsFiltr)
+            IsFiltr = !IsFiltr;
+
+            if (true)
             {
+                 //ListBoxProducts.ItemsSource = _products.OrderByDescending(p => p.Rating).ToList();
                 Filrt((string)ComboBoxFiltrProdCat.SelectedItem, (string)ComboBoxFiltrProdMan.SelectedItem);
-                 ListBoxProducts.ItemsSource = _products.OrderBy(p => p.Rating).ToList();
 
             }
-            //ListBoxProducts.ItemsSource = _products.OrderBy(p => p.Rating).ToList();
+            //ListBoxProducts.ItemsSource = _products.OrderByDescending(p => p.Rating).ToList();
         }
 
         private void CreateCart()

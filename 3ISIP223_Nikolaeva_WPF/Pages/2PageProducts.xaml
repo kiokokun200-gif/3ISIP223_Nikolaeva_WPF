@@ -29,7 +29,10 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center">
-                        <Image Source="{Binding Image}"/>
+                        <Grid>
+                            <Image Source="{Binding Image}"/>
+                            <TextBlock Text="{Binding Rating}" HorizontalAlignment="Right" />
+                        </Grid>
                         <TextBlock Text="{Binding Name}"/>
                         <TextBlock Text="{Binding Cost, StringFormat={}{0} P}"/>
                         <Button x:Name="BtnAddCart" Content="Добавить в корзину" Click="BtnAddCart_Click"/>

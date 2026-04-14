@@ -17,20 +17,20 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock  Text="Фильтр по услуге" Margin="10" FontSize="18"/>
-            <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxServices" Background="Red"/>
+            <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxServices" Background="Red" SelectionChanged="ComboBoxServices_SelectionChanged"/>
             <TextBlock Text="Фильтр по мастеру" FontSize="18" Margin="10"/>
-            <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxMasters"/>
+            <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxMasters" SelectionChanged="ComboBoxServices_SelectionChanged"/>
             <Button x:Name="BtnProduct" Content="Товары" Background="White" Foreground="Black" FontSize="18" Margin="10 0 0 0" Click="BtnProduct_Click"/>
         </StackPanel>
 
         <Button x:Name="BtnLogin" Grid.Row="0" Content="Войти в аккаунт"  HorizontalAlignment="Right" FontSize="15" Click="BtnLogin_Click"/>
 
-        <ListBox Grid.Row="1" x:Name="ListBoxServicesTypes">
+        <ListBox Grid.Row="1" x:Name="ListBoxServicesTypes" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock FontSize="25" Text="{Binding ServCategory.Name}"/>
-                        <TextBlock Text="{Binding Description}" FontSize="18"/>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                        <TextBlock FontSize="25" Text="{Binding Name}"/>
+                        <!--<TextBlock Text="{Binding Description}" FontSize="18"/>-->
                         
                     </StackPanel>
                 </DataTemplate>
@@ -38,7 +38,7 @@
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel/>
+                    <StackPanel />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>

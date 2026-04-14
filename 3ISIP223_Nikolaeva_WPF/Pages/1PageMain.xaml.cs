@@ -23,12 +23,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     {
         private List<string> _services;
         private List<string> _masters;
-        private List<Service> _serviceslist;
+        private List<ServCategory> _serviceslist;
         //private WindowLogIn _wind;
         public _1PageMain()
         {
             InitializeComponent();
 
+            _serviceslist = Core.Context.ServCategory.ToList();
+            ListBoxServicesTypes.ItemsSource = _serviceslist;
             LoadFiltr();
             UpdateAccount();
 
@@ -70,6 +72,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             NavigationService.Navigate(new _2PageProducts());
             //UpdateAccount();
+        }
+
+        private void ComboBoxServices_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
