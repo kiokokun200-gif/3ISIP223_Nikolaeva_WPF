@@ -17,12 +17,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ServCategory()
         {
+            this.MasterService = new HashSet<MasterService>();
             this.Service = new HashSet<Service>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MasterService> MasterService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Service> Service { get; set; }
     }

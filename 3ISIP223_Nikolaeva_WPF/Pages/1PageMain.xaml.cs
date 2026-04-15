@@ -21,9 +21,12 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _1PageMain : Page
     {
-        private List<string> _services;
-        private List<string> _masters;
+        private List<string>  _services;
+        private List<string>  _masters;
+        private List<User> _allmasters;
         private List<ServCategory> _serviceslist;
+        private List<MasterService> _masterService;
+
         //private WindowLogIn _wind;
         public _1PageMain()
         {
@@ -40,9 +43,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             _services = Core.Context.ServCategory.Select(s => s.Name).Distinct().ToList();
             _services.Insert(0, "Все");
             ComboBoxServices.ItemsSource = _services;
-            _masters = Core.Context.User.Where(m => m.Role.Name == "Мастер").Select(u => u.LastName).Distinct().ToList();
+            _allmasters = Core.Context.User.Where(u => u.Role.Name == "Мастер").ToList();
+            _masters = _allmasters.Select(u => u.FirstName).Distinct().ToList();
             _masters.Insert(0, "Все");
             ComboBoxMasters.ItemsSource = _masters;
+            _masterService = Core.Context.MasterService.Where(m => m.User.Role.Name == "Мастер").ToList();
         }
 
         public void UpdateAccount()
@@ -78,6 +83,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             string selectedService = (string)ComboBoxServices.SelectedItem;
             string selectedMaster = (string)ComboBoxMasters.SelectedItem;
+            if (selectedMaster == null || selectedService == null) return;
+            Filtr(selectedService, selectedMaster);
 
         }
 
@@ -85,27 +92,29 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             List<ServCategory> serv = _serviceslist;
 
+            
             if (selectCategory == "Все" && selectMaster == "Все")
             {
                 serv = serv;
             }
             else if (selectCategory == "Все" && selectMaster != "Все")
             {
-
-                serv = serv.Where(p => p. == selectMaster).ToList();
+                List<MasterService> masterserv = _masterService.Where(m => m.User.FirstName == selectMaster).ToList();
+                serv = masterserv.Select(u => u.ServCategory).ToList();
             }
             else if (selectCategory != "Все" && selectMaster == "Все")
             {
-                serv = serv.Where(p => p.ProdCategory.Name == selectCategory).ToList();
+                serv = serv.Where(p => p.Name == selectCategory).ToList();
             }
             else
             {
-                serv = serv.Where(p => p.ProdCategory.Name == selectCategory && p.Manufacturer.Name == selectMaster).ToList();
+                List<MasterService> masterserv = _masterService.Where(m => m.User.FirstName == selectMaster).ToList();
+                serv = masterserv.Where(u => u.ServCategory.Name == selectCategory).Select(a => a.ServCategory).ToList();
+                serv = serv.Where(p => p.Name == selectCategory).ToList();
             }
-            if (IsFiltr)
-                serv = serv.OrderByDescending(p => p.Rating).ToList();
+           
 
-            ListBoxProducts.ItemsSource = serv;
+            ListBoxServicesTypes.ItemsSource = serv;
         }
     }
 }

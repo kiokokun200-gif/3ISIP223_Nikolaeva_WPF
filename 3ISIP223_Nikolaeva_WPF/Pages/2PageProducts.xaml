@@ -16,7 +16,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
             <TextBlock Text="⌕" FontSize="30" Margin="10"/>
-            <TextBox x:Name="TxtBoxSearch" Width="150" Height="40" TextChanged="TxtBoxSearch_TextChanged"/>
+            <TextBox x:Name="TxtBoxSearch" Width="150" Height="40" FontSize="20" TextChanged="TxtBoxSearch_TextChanged"/>
 
             <ComboBox x:Name="ComboBoxFiltrProdCat" Style="{StaticResource FiltrCombo}" Margin="10 0 0 0" SelectedIndex="0" SelectionChanged="ComboBoxFiltrProdCat_SelectionChanged"/>
             <ComboBox x:Name="ComboBoxFiltrProdMan" Style="{StaticResource FiltrCombo}" Margin="10 0 0 0" SelectedIndex="0" SelectionChanged="ComboBoxFiltrProdCat_SelectionChanged"/>
@@ -30,8 +30,8 @@
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center">
                         <Grid>
-                            <Image Source="{Binding Image}"/>
-                            <TextBlock Text="{Binding Rating}" HorizontalAlignment="Right" />
+                            <Image Source="{Binding Image}" Width="100"/>
+                            <TextBlock Text="{Binding Rating}" HorizontalAlignment="Right"  FontSize="18" />
                         </Grid>
                         <TextBlock Text="{Binding Name}"/>
                         <TextBlock Text="{Binding Cost, StringFormat={}{0} P}"/>

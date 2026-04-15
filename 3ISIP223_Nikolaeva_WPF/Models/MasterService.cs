@@ -16,10 +16,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
     {
         public int ID { get; set; }
         public int MasterID { get; set; }
-        public int ServiceID { get; set; }
+        public int ServCategotyID { get; set; }
         public decimal Price { get; set; }
     
-        public virtual Service Service { get; set; }
+        public virtual ServCategory ServCategory { get; set; }
         public virtual User User { get; set; }
     }
 }
