@@ -76,7 +76,36 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ComboBoxServices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string selectedService = (string)ComboBoxServices.SelectedItem;
+            string selectedMaster = (string)ComboBoxMasters.SelectedItem;
 
+        }
+
+        private void Filtr(string selectCategory, string selectMaster)
+        {
+            List<ServCategory> serv = _serviceslist;
+
+            if (selectCategory == "Все" && selectMaster == "Все")
+            {
+                serv = serv;
+            }
+            else if (selectCategory == "Все" && selectMaster != "Все")
+            {
+
+                serv = serv.Where(p => p. == selectMaster).ToList();
+            }
+            else if (selectCategory != "Все" && selectMaster == "Все")
+            {
+                serv = serv.Where(p => p.ProdCategory.Name == selectCategory).ToList();
+            }
+            else
+            {
+                serv = serv.Where(p => p.ProdCategory.Name == selectCategory && p.Manufacturer.Name == selectMaster).ToList();
+            }
+            if (IsFiltr)
+                serv = serv.OrderByDescending(p => p.Rating).ToList();
+
+            ListBoxProducts.ItemsSource = serv;
         }
     }
 }

@@ -62,13 +62,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void Filrt(string selectCategory, string selectManufacturer)
         {
-            List<Product> prod;
-            if (ListBoxProducts.ItemsSource == null  || (ListBoxProducts.ItemsSource as List<Product>).Count == 0 ) prod = _products;
-            else
-            {
+            List<Product> prod = _products;
 
-                prod = ListBoxProducts.ItemsSource as List<Product>;
-            }
             if(selectCategory == "Все" &&  selectManufacturer == "Все")
             {
                 prod = prod;
@@ -87,6 +82,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
             if (IsFiltr)
                 prod = prod.OrderByDescending(p => p.Rating).ToList();
+
             ListBoxProducts.ItemsSource = prod;
 
 
@@ -99,12 +95,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             IsFiltr = !IsFiltr;
 
-            if (true)
-            {
+            
                  //ListBoxProducts.ItemsSource = _products.OrderByDescending(p => p.Rating).ToList();
-                Filrt((string)ComboBoxFiltrProdCat.SelectedItem, (string)ComboBoxFiltrProdMan.SelectedItem);
+            Filrt((string)ComboBoxFiltrProdCat.SelectedItem, (string)ComboBoxFiltrProdMan.SelectedItem);
 
-            }
+            
             //ListBoxProducts.ItemsSource = _products.OrderByDescending(p => p.Rating).ToList();
         }
 

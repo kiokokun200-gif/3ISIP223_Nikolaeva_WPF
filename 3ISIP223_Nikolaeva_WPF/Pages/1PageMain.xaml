@@ -17,7 +17,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock  Text="Фильтр по услуге" Margin="10" FontSize="18"/>
-            <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxServices" Background="Red" SelectionChanged="ComboBoxServices_SelectionChanged"/>
+            <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxServices" SelectionChanged="ComboBoxServices_SelectionChanged"/>
             <TextBlock Text="Фильтр по мастеру" FontSize="18" Margin="10"/>
             <ComboBox Style="{StaticResource FiltrCombo}" x:Name="ComboBoxMasters" SelectionChanged="ComboBoxServices_SelectionChanged"/>
             <Button x:Name="BtnProduct" Content="Товары" Background="White" Foreground="Black" FontSize="18" Margin="10 0 0 0" Click="BtnProduct_Click"/>
@@ -30,7 +30,7 @@
                 <DataTemplate>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
                         <TextBlock FontSize="25" Text="{Binding Name}"/>
-                        <!--<TextBlock Text="{Binding Description}" FontSize="18"/>-->
+                        <TextBlock Text="{Binding Description}" FontSize="18"/>
                         
                     </StackPanel>
                 </DataTemplate>
@@ -38,7 +38,7 @@
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel />
+                    <WrapPanel />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>

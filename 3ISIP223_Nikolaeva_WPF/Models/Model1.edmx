@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище PR_17Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище PR_17Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="ID" />
@@ -26,7 +26,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MasterID" Type="int" Nullable="false" />
-          <Property Name="ServiceID" Type="int" Nullable="false" />
+          <Property Name="ServCategotyID" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
@@ -91,22 +91,13 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Schedule">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Time" Type="datetime" Nullable="false" />
-          <Property Name="MasterID" Type="int" Nullable="false" />
-          <Property Name="IsAvailable" Type="bit" Nullable="false" />
-          <Property Name="EndTime" Type="datetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="ServCategory">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -134,13 +125,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
           <Property Name="MasterID" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="ServiceID" Type="int" Nullable="false" />
           <Property Name="PaymentMethodID" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="100" />
-          <Property Name="ScheduleID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cart_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -154,15 +144,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MasterService_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+        <Association Name="FK_MasterService_ServCategory">
+          <End Role="ServCategory" Type="Self.ServCategory" Multiplicity="1" />
           <End Role="MasterService" Type="Self.MasterService" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Service">
+            <Principal Role="ServCategory">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="MasterService">
-              <PropertyRef Name="ServiceID" />
+              <PropertyRef Name="ServCategotyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -298,18 +288,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserService_Schedule">
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
-          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Schedule">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserService">
-              <PropertyRef Name="ScheduleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserService_Service">
           <End Role="Service" Type="Self.Service" Multiplicity="1" />
           <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
@@ -323,7 +301,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserService_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -357,7 +335,6 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductInCart" EntityType="Self.ProductInCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServCategory" EntityType="Self.ServCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -366,8 +343,8 @@
             <End Role="User" EntitySet="User" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK_MasterService_Service" Association="Self.FK_MasterService_Service">
-            <End Role="Service" EntitySet="Service" />
+          <AssociationSet Name="FK_MasterService_ServCategory" Association="Self.FK_MasterService_ServCategory">
+            <End Role="ServCategory" EntitySet="ServCategory" />
             <End Role="MasterService" EntitySet="MasterService" />
           </AssociationSet>
           <AssociationSet Name="FK_MasterService_User" Association="Self.FK_MasterService_User">
@@ -414,10 +391,6 @@
             <End Role="PaymentMethod" EntitySet="PaymentMethod" />
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserService_Schedule" Association="Self.FK_UserService_Schedule">
-            <End Role="Schedule" EntitySet="Schedule" />
-            <End Role="UserService" EntitySet="UserService" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserService_Service" Association="Self.FK_UserService_Service">
             <End Role="Service" EntitySet="Service" />
             <End Role="UserService" EntitySet="UserService" />
@@ -431,8 +404,7 @@
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PR_17Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -464,6 +436,8 @@
           <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <NavigationProperty Name="Service" Relationship="Self.FK_MasterService_Service" FromRole="MasterService" ToRole="Service" />
           <NavigationProperty Name="User" Relationship="Self.FK_MasterService_User" FromRole="MasterService" ToRole="User" />
+          <Property Name="ServCategotyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServCategory" Relationship="PR_17Model.FK_MasterService_ServCategory" FromRole="MasterService" ToRole="ServCategory" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -558,6 +532,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Service" Relationship="Self.FK_Service_ServCategory" FromRole="ServCategory" ToRole="Service" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MasterService" Relationship="PR_17Model.FK_MasterService_ServCategory" FromRole="ServCategory" ToRole="MasterService" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -594,7 +570,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
           <Property Name="MasterID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
@@ -895,7 +871,23 @@
             <End Role="User" EntitySet="User" />
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
+          <AssociationSet Name="FK_MasterService_ServCategory" Association="PR_17Model.FK_MasterService_ServCategory">
+            <End Role="ServCategory" EntitySet="ServCategory" />
+            <End Role="MasterService" EntitySet="MasterService" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_MasterService_ServCategory">
+          <End Type="PR_17Model.ServCategory" Role="ServCategory" Multiplicity="1" />
+          <End Type="PR_17Model.MasterService" Role="MasterService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MasterService">
+              <PropertyRef Name="ServCategotyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -922,9 +914,9 @@
           <EntitySetMapping Name="MasterService">
             <EntityTypeMapping TypeName="PR_17Model.MasterService">
               <MappingFragment StoreEntitySet="MasterService">
+                <ScalarProperty Name="ServCategotyID" ColumnName="ServCategotyID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MasterID" ColumnName="MasterID" />
-                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -998,20 +990,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Schedule">
-            <EntityTypeMapping TypeName="PR_17Model.Schedule">
-              <MappingFragment StoreEntitySet="Schedule">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
-                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ServCategory">
             <EntityTypeMapping TypeName="PR_17Model.ServCategory">
               <MappingFragment StoreEntitySet="ServCategory">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -1050,7 +1032,6 @@
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

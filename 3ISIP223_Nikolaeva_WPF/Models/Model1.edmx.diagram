@@ -37,6 +37,7 @@
         <AssociationConnector Association="PR_17Model.FK_UserService_Service" ManuallyRouted="false" />
         <AssociationConnector Association="PR_17Model.FK_UserService_User" ManuallyRouted="false" />
         <AssociationConnector Association="PR_17Model.FK_UserService_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="PR_17Model.FK_MasterService_ServCategory" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
