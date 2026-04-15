@@ -32,17 +32,19 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             InitializeComponent();
 
-            _serviceslist = Core.Context.ServCategory.ToList();
-            ListBoxServicesTypes.ItemsSource = _serviceslist;
             LoadFiltr();
             UpdateAccount();
 
         }
         private void LoadFiltr()
         {
-            _services = Core.Context.ServCategory.Select(s => s.Name).Distinct().ToList();
+            _serviceslist = Core.Context.ServCategory.ToList();
+            ListBoxServicesTypes.ItemsSource = _serviceslist;
+
+            _services = _serviceslist.Select(s => s.Name).Distinct().ToList();
             _services.Insert(0, "Все");
             ComboBoxServices.ItemsSource = _services;
+
             _allmasters = Core.Context.User.Where(u => u.Role.Name == "Мастер").ToList();
             _masters = _allmasters.Select(u => u.FirstName).Distinct().ToList();
             _masters.Insert(0, "Все");
@@ -54,8 +56,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             if(UserData.IsLoggedIn)
             {
-                //Image image = new Image();
-                //image.Source = new BitmapImage( new Uri("/Images/accicon.png", UriKind.Relative));
                 BtnLogin.Content = "Аккаунт";
             }
         }
@@ -70,6 +70,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             else if(UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Клиент")
             {
                 //переход на страницу аккаунта 
+                NavigationService.Navigate(new _4PageAccount(UserData.CurrentUser));
             }
         }
 

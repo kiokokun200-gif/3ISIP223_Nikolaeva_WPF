@@ -1,0 +1,85 @@
+﻿<Page x:Class="_3ISIP223_Nikolaeva_WPF.Pages._4PageAccount"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="_4PageAccount">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding LastName}" FontSize="30"/>
+            <TextBlock Text="{Binding FirstName}" FontSize="30"/>
+            <TextBlock Text="{Binding MiddleName}" FontSize="30"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="0" Text="{Binding PhoneNumber}" FontSize="20"/>
+
+        <TextBlock Grid.Row="0" FontSize="20" Text="Ваши записи"/>
+
+        <ListBox Grid.Row="1" x:Name="ListBoxAppointments" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Service.Name}" FontSize="20" Margin="0 0 10 0"/>
+                        <TextBlock Text="{Binding Date}" FontSize="20" Margin="0 0 10 0"/>
+                        <TextBlock Text="{Binding Status, StringFormat=Статус: {0}}" FontSize="20" Margin="0 0 10 0"/>
+                        <TextBlock Text="{Binding Service.Price, StringFormat={}{0} Р}" FontSize="20"/>
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <TextBlock Grid.Row="2" Text="Ваши заказы"/>
+        <ListBox Grid.Row="2" x:Name="ListBoxOrders" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Date, StringFormat=Заказ от{0}}" FontSize="20" Margin="0 0 10 0"/>
+                        <TextBlock Text="{Binding TotalAmount, StringFormat={}{0} Р}" FontSize="20" Margin="0 0 10 0"/>
+                        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" FontSize="14"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        
+        
+
+    </Grid>
+</Page>
