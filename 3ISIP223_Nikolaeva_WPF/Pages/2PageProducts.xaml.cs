@@ -130,6 +130,27 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             Button btn = (Button)sender;
             Product selectedProduct =(Product)btn.DataContext;
 
+            //UserData.UserCart.ProductInCart.Add(ProductInCart)
+            var existprod = Core.Context.ProductInCart.FirstOrDefault(a => a.ProductID == selectedProduct.ID);
+
+            if (existprod == null) {
+                var pridcart = new ProductInCart
+                {
+                    CartID = UserData.UserCart.ID,
+                    ProductID = selectedProduct.ID,
+                    Quantity = 1
+
+                };
+                Core.Context.ProductInCart.Add(pridcart);
+                
+            }
+            else
+            {
+                existprod.Quantity += 1;
+            }
+            Core.Context.SaveChanges();
+
+
 
         }
 
@@ -138,11 +159,19 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             if (!UserData.IsLoggedIn)
             {
                 MessageBox.Show("Нужна авторизация");
+                
                 return;
             }
 
             NavigationService.Navigate(new _3PageCart());
 
+        }
+
+        private void ListBoxProducts_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var selectedprod = ListBoxProducts.SelectedItem as Product;
+            var wind = new WindowProduct(selectedprod);
+            wind.ShowDialog();
         }
     }
 }

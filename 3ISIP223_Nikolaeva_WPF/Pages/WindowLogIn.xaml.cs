@@ -58,6 +58,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             if (user != null)
             {
                 UserData.CurrentUser = user;
+                var cart = Core.Context.Cart.FirstOrDefault(u => u.UserID == user.ID);
+                if (cart != null) {
+                    UserData.UserCart = cart;
+                }
                 
                 return true;
             }

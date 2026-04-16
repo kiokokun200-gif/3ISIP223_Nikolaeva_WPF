@@ -25,12 +25,12 @@
         
         
         
-        <ListBox x:Name="ListBoxProducts" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox x:Name="ListBoxProducts" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDown="ListBoxProducts_MouseDown" MouseDoubleClick="ListBoxProducts_MouseDown">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center">
                         <Grid>
-                            <Image Source="{Binding Image}" Width="100"/>
+                            <Image Source="{Binding Image}" Width="100"  Height="100"/>
                             <TextBlock Text="{Binding Rating}" HorizontalAlignment="Right"  FontSize="18" />
                         </Grid>
                         <TextBlock Text="{Binding Name}"/>

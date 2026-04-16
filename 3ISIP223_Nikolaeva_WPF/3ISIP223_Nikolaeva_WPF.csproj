@@ -130,6 +130,9 @@
     <Compile Include="Pages\4PageAccount.xaml.cs">
       <DependentUpon>4PageAccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WindowProduct.xaml.cs">
+      <DependentUpon>WindowProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserData.cs" />
     <Page Include="DictionaryStyle.xaml">
       <SubType>Designer</SubType>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WindowLogIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,6 +224,9 @@
     <Resource Include="Images\cart.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\essie.png" />
+    <Resource Include="Images\loreal.png" />
+    <Resource Include="Images\maybelline.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

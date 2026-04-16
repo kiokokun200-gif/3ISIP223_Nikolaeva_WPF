@@ -10,21 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using _3ISIP223_Nikolaeva_WPF.Models;
 
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для _4PageAccount.xaml
+    /// Логика взаимодействия для WindowProduct.xaml
     /// </summary>
-    public partial class _4PageAccount : Page
+    public partial class WindowProduct : Window
     {
-        //private List<order>
-        public _4PageAccount(User user)
+        public Product _product { get; set; }
+        public WindowProduct(Product product)
         {
-            
+            _product = product;
+            DataContext = _product;
             InitializeComponent();
         }
     }
