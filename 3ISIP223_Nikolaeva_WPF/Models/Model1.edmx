@@ -12,6 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="TotalQuantity" Type="int" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -417,6 +418,7 @@
           <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Cart_User" FromRole="Cart" ToRole="User" />
           <NavigationProperty Name="ProductInCart" Relationship="Self.FK_ProductInCart_Cart" FromRole="Cart" ToRole="ProductInCart" />
+          <Property Name="TotalQuantity" Type="Int32" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -848,6 +850,7 @@
           <EntitySetMapping Name="Cart">
             <EntityTypeMapping TypeName="PR_17Model.Cart">
               <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />

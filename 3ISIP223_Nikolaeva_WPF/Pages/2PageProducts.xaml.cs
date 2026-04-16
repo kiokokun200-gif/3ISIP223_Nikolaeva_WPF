@@ -96,22 +96,23 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             IsFiltr = !IsFiltr;
 
             
-                 //ListBoxProducts.ItemsSource = _products.OrderByDescending(p => p.Rating).ToList();
             Filrt((string)ComboBoxFiltrProdCat.SelectedItem, (string)ComboBoxFiltrProdMan.SelectedItem);
 
             
-            //ListBoxProducts.ItemsSource = _products.OrderByDescending(p => p.Rating).ToList();
         }
 
         private void CreateCart()
         {
+
             Cart cart = new Cart()
             {
                 UserID = UserData.CurrentUser.ID,
                 TotalAmount = 0,
+                
             };
             Core.Context.Cart.Add(cart);
             Core.Context.SaveChanges();
+            UserData.UserCart = cart;
         }
         private void BtnAddCart_Click(object sender, RoutedEventArgs e)
         {
@@ -162,8 +163,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 
                 return;
             }
-
-            NavigationService.Navigate(new _3PageCart());
+            if (UserData.UserCart == null) {
+                CreateCart();
+            }
+            NavigationService.Navigate(new _3PageCart(UserData.UserCart));
 
         }
 
