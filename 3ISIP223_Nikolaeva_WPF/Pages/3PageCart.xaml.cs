@@ -57,19 +57,58 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     };
                     _products.Add(product);
                 }
-            
+                
                 ListBoxProductsInCart.ItemsSource = _products;
+                UpdateTotalQuantity();
             }
         }
 
+        private void UpdateProductQuantity(ProductInCartViewModel productInCart, int newQuantity)
+        {
+            var prod = Core.Context.ProductInCart.FirstOrDefault(p => p.ProductID == productInCart.ProductID);
+            if (newQuantity >= 1)
+            {
+                if (prod != null)
+                {
+                    prod.Quantity = newQuantity;
+                    Core.Context.SaveChanges();
+                }
+                productInCart.Quantity = newQuantity;
+            }
+            else
+            {
+                
+                if(prod != null)
+                {
+                    Core.Context.ProductInCart.Remove(prod);
+                    Core.Context.SaveChanges();
+                }
+                _products.Remove(productInCart);   
+                
+            }
+            ListBoxProductsInCart.ItemsSource = null;
+            ListBoxProductsInCart.ItemsSource = _products;
+            UpdateTotalQuantity();
+        }
+
+        private void UpdateTotalQuantity()
+        {
+            TxtBlockCartQuantity.Text = _products.Count.ToString();
+        }
         private void BtnMinusProd_Click(object sender, RoutedEventArgs e)
         {
+            var btn = (Button)sender;
+            var selectedproduct = btn.DataContext as ProductInCartViewModel;
 
+            UpdateProductQuantity(selectedproduct, selectedproduct.Quantity - 1);
         }
 
         private void BtnPlusProd_Click(object sender, RoutedEventArgs e)
         {
+            var btn = (Button)sender;
+            var selectedproduct = btn.DataContext as ProductInCartViewModel;
 
+            UpdateProductQuantity(selectedproduct, selectedproduct.Quantity +1);
         }
 
         private void BtnDeleteProd_Click(object sender, RoutedEventArgs e)
