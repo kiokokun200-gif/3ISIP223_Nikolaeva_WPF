@@ -36,6 +36,7 @@
                         <TextBlock Text="{Binding Name}"/>
                         <TextBlock Text="{Binding Cost, StringFormat={}{0} P}"/>
                         <Button x:Name="BtnAddCart" Content="Добавить в корзину" Click="BtnAddCart_Click"/>
+                        
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -45,6 +46,7 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        
 
         <Button x:Name="BtnCart" Grid.Row="1" Height="50" Width="70" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="BtnCart_Click">
             <Image Source="/Images/cart.png"/>

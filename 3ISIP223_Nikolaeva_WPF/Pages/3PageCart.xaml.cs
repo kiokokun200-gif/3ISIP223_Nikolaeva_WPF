@@ -94,12 +94,28 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             
             int totalQuantity = _products.Sum(u => u.Quantity);
+            decimal totalPrice = _products.Sum(u => u.Price * u.Quantity);
+            _cart.TotalQuantity = totalQuantity;
+            _cart.TotalAmount = totalPrice;
+            UserData.UserCart.TotalQuantity = totalQuantity;
+            UserData.UserCart.TotalAmount = totalPrice;
             TxtBlockCartQuantity.Text = totalQuantity.ToString();
-            if(totalQuantity == 0)
+            TxtBlcTotalPrice.Text = $"{totalPrice} Р";
+
+            var cartBD = Core.Context.Cart.FirstOrDefault(c => c.ID == _cart.ID);
+            if (cartBD != null)
+            {
+                cartBD.TotalQuantity = totalQuantity;
+                cartBD.TotalAmount = totalPrice;
+                Core.Context.SaveChanges();
+            }
+
+            if (totalQuantity == 0)
             {
 
                 TxtBlockEmptyCart.Visibility = Visibility.Visible;
                 ListBoxProductsInCart.Visibility = Visibility.Collapsed;
+                StackTotalPrice.Visibility = Visibility.Collapsed;
             }
         }
         private void BtnMinusProd_Click(object sender, RoutedEventArgs e)
@@ -124,6 +140,12 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             var selectedproduct = btn.DataContext as ProductInCartViewModel;
 
             UpdateProductQuantity(selectedproduct, 0);
+        }
+
+        private void BtnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var wind = new WindowOrder();
+            wind.Show();
         }
     }
 }

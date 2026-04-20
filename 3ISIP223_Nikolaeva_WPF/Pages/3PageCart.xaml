@@ -11,6 +11,8 @@
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -51,5 +53,11 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <StackPanel x:Name="StackTotalPrice" Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="Итоговая цена:" FontSize="22" Margin="0 0 10 0"/>
+            <TextBlock x:Name="TxtBlcTotalPrice" FontSize="30" FontWeight="Bold" Margin="0 0 0 20"/>
+        </StackPanel>
+        <Button x:Name="BtnOrder" Grid.Row="3" Width="200" Margin="20 0 0 0" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Оформить заказ" FontSize="22" Click="BtnOrder_Click"/>
     </Grid>
 </Page>

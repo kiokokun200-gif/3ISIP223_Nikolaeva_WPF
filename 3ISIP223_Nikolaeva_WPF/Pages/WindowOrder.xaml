@@ -7,13 +7,15 @@
         mc:Ignorable="d"
         Title="WindowOrder" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-            <TextBlock Text="Подтверждение заказа" FontSize="30" FontWeight="Bold"/>
+        <StackPanel >
+            <TextBlock Text="Подтверждение заказа" FontSize="30" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBlock Text="Выберите способ оплаты:" FontSize="22" />
+            <ComboBox x:Name="ComboBoxPayments" Width="150" FontSize="22" HorizontalAlignment="Left" Height="40" Margin="0 10 0 10"/>
             <TextBlock Text="Выберите дату получения" FontSize="22" Margin="0 10 0 0"/>
             <ListBox x:Name="ListBoxDates">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button x:Name="BtnDate" Content="{Binding Date}" Width="100" Height="30"/>
+                        <Button x:Name="BtnDate" Content="{Binding}" ContentStringFormat="dd.MM.yyyy" FontSize="18"  Width="100" Height="30" Click="BtnDate_Click"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
 
@@ -24,7 +26,10 @@
                 </ListBox.ItemsPanel>
             </ListBox>
 
-            <TextBlock Text="Выберите способ оплаты:"/>
+            <TextBlock Text="Итоговая цена: " FontSize="22"/>
+            <TextBlock x:Name="TxtBlockTotalPrice" FontSize="22"/>
+
+            <!--<Button x:Name="BtnConfirm" Content="Подтвердить заказ" FontSize="22" Width="200" Height="40" HorizontalAlignment="Left" Margin="0 10 0 0" Click="BtnConfirm_Click"/>-->
         </StackPanel>
     </Grid>
 </Window>
