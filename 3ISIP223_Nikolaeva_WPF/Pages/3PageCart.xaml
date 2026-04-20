@@ -16,11 +16,11 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="корзина /" FontSize="40" FontWeight="Bold"/>
-            <TextBlock x:Name="TxtBlockCartQuantity" FontSize="35"/>
-            <TextBlock x:Name="TxtBlockEmptyCart" Text="Корзина пуста" 
-                       FontSize="24" Foreground="Gray" Margin="20,0,0,0"
-                       Visibility="Collapsed"/>
+            <TextBlock x:Name="TxtBlockCartQuantity" FontSize="35" Margin="5"/>
         </StackPanel>
+            <TextBlock Grid.Row="1" x:Name="TxtBlockEmptyCart" Text="В корзине ничего нет..." 
+                       FontSize="24"  Margin="10"
+                       Visibility="Collapsed"/>
 
         <ListBox Grid.Row="1" x:Name="ListBoxProductsInCart" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>

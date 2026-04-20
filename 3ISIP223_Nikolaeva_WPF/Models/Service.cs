@@ -17,6 +17,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
+            this.Schedule = new HashSet<Schedule>();
             this.UserService = new HashSet<UserService>();
         }
     
@@ -25,6 +26,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public int CategoryID { get; set; }
         public string Description { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Schedule> Schedule { get; set; }
         public virtual ServCategory ServCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserService> UserService { get; set; }

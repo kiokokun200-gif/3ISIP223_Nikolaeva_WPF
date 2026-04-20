@@ -117,5 +117,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             ListBoxServicesTypes.ItemsSource = serv;
         }
+
+        private void BtnServiceGo_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            ServCategory category = (ServCategory)btn.DataContext;
+
+            NavigationService.Navigate(new _6PageChoiceService(category));
+        }
     }
 }

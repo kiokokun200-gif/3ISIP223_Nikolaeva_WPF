@@ -19,6 +19,7 @@
             <TextBlock Text="{Binding Name}" FontSize="30"/>
             <TextBlock Text="{Binding Cost, StringFormat={}{0} Р}" FontSize="20"/>
             <TextBlock Text="{Binding ProdCategory.Name, StringFormat=Категория: {0}}" FontSize="20"/>
+            <TextBlock Text="{Binding Manufacturer.Name, StringFormat=Производитель: {9}}" FontSize="20"/>
             <TextBlock Text="{Binding Description}" FontSize="15"/>
             
         </StackPanel>

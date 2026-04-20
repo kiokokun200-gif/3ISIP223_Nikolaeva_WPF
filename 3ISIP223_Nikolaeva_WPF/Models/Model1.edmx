@@ -92,6 +92,17 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterID" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="IsAvailable" Type="bit" Nullable="false" />
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ServCategory">
           <Key>
             <PropertyRef Name="ID" />
@@ -109,6 +120,16 @@
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -120,6 +141,7 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="UserService">
           <Key>
@@ -253,6 +275,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Schedule_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="MasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Service_ServCategory">
           <End Role="ServCategory" Type="Self.ServCategory" Multiplicity="1" />
           <End Role="Service" Type="Self.Service" Multiplicity="*" />
@@ -336,8 +382,10 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductInCart" EntityType="Self.ProductInCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServCategory" EntityType="Self.ServCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserService" EntityType="Self.UserService" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_User" Association="Self.FK_Cart_User">
@@ -380,6 +428,14 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductInCart" EntitySet="ProductInCart" />
           </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Service" Association="Self.FK_Schedule_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_User" Association="Self.FK_Schedule_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
           <AssociationSet Name="FK_Service_ServCategory" Association="Self.FK_Service_ServCategory">
             <End Role="ServCategory" EntitySet="ServCategory" />
             <End Role="Service" EntitySet="Service" />
@@ -416,9 +472,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Cart_User" FromRole="Cart" ToRole="User" />
-          <NavigationProperty Name="ProductInCart" Relationship="Self.FK_ProductInCart_Cart" FromRole="Cart" ToRole="ProductInCart" />
           <Property Name="TotalQuantity" Type="Int32" />
+          <NavigationProperty Name="ProductInCart" Relationship="Self.FK_ProductInCart_Cart" FromRole="Cart" ToRole="ProductInCart" />
+          <NavigationProperty Name="User" Relationship="PR_17Model.FK_Cart_User" FromRole="Cart" ToRole="User" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -437,7 +493,7 @@
           <Property Name="ServCategotyID" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <NavigationProperty Name="ServCategory" Relationship="Self.FK_MasterService_ServCategory" FromRole="MasterService" ToRole="ServCategory" />
-          <NavigationProperty Name="User" Relationship="Self.FK_MasterService_User" FromRole="MasterService" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="PR_17Model.FK_MasterService_User" FromRole="MasterService" ToRole="User" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -447,8 +503,8 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItems" />
+          <NavigationProperty Name="User" Relationship="PR_17Model.FK_Order_User" FromRole="Order" ToRole="User" />
         </EntityType>
         <EntityType Name="OrderItems">
           <Key>
@@ -512,7 +568,20 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="PR_17Model.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterID" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Schedule_Service" FromRole="Schedule" ToRole="Service" />
+          <NavigationProperty Name="User" Relationship="PR_17Model.FK_Schedule_User" FromRole="Schedule" ToRole="User" />
         </EntityType>
         <EntityType Name="ServCategory">
           <Key>
@@ -532,26 +601,19 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK_Schedule_Service" FromRole="Service" ToRole="Schedule" />
           <NavigationProperty Name="ServCategory" Relationship="Self.FK_Service_ServCategory" FromRole="Service" ToRole="ServCategory" />
           <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_Service" FromRole="Service" ToRole="UserService" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_User" FromRole="User" ToRole="Cart" />
-          <NavigationProperty Name="MasterService" Relationship="Self.FK_MasterService_User" FromRole="User" ToRole="MasterService" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_User" FromRole="User" ToRole="UserService" />
-          <NavigationProperty Name="UserService1" Relationship="Self.FK_UserService_User1" FromRole="User" ToRole="UserService" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UserService">
           <Key>
@@ -566,21 +628,9 @@
           <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PaymentMethod" Relationship="Self.FK_UserService_PaymentMethod" FromRole="UserService" ToRole="PaymentMethod" />
           <NavigationProperty Name="Service" Relationship="Self.FK_UserService_Service" FromRole="UserService" ToRole="Service" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserService_User" FromRole="UserService" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_UserService_User1" FromRole="UserService" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="PR_17Model.FK_UserService_User" FromRole="UserService" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="PR_17Model.FK_UserService_User1" FromRole="UserService" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Cart_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductInCart_Cart">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
           <End Role="ProductInCart" Type="Self.ProductInCart" Multiplicity="*" />
@@ -614,30 +664,6 @@
             </Principal>
             <Dependent Role="MasterService">
               <PropertyRef Name="ServCategotyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MasterService_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="MasterService" Type="Self.MasterService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterService">
-              <PropertyRef Name="MasterID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -701,15 +727,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK_Schedule_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Role">
+            <Principal Role="Service">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="RoleID" />
+            <Dependent Role="Schedule">
+              <PropertyRef Name="ServiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -737,31 +763,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserService_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserService">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserService_User1">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserService">
-              <PropertyRef Name="MasterID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="PR_17Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PR_17Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
           <EntitySet Name="MasterService" EntityType="Self.MasterService" />
@@ -772,14 +774,11 @@
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="ProductInCart" EntityType="Self.ProductInCart" />
           <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" />
           <EntitySet Name="ServCategory" EntityType="Self.ServCategory" />
           <EntitySet Name="Service" EntityType="Self.Service" />
-          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="UserService" EntityType="Self.UserService" />
-          <AssociationSet Name="FK_Cart_User" Association="Self.FK_Cart_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductInCart_Cart" Association="Self.FK_ProductInCart_Cart">
             <End Role="Cart" EntitySet="Cart" />
             <End Role="ProductInCart" EntitySet="ProductInCart" />
@@ -791,14 +790,6 @@
           <AssociationSet Name="FK_MasterService_ServCategory" Association="Self.FK_MasterService_ServCategory">
             <End Role="ServCategory" EntitySet="ServCategory" />
             <End Role="MasterService" EntitySet="MasterService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MasterService_User" Association="Self.FK_MasterService_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="MasterService" EntitySet="MasterService" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItems_Order" Association="Self.FK_OrderItems_Order">
             <End Role="Order" EntitySet="Order" />
@@ -820,9 +811,9 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductInCart" EntitySet="ProductInCart" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
+          <AssociationSet Name="FK_Schedule_Service" Association="Self.FK_Schedule_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
           <AssociationSet Name="FK_Service_ServCategory" Association="Self.FK_Service_ServCategory">
             <End Role="ServCategory" EntitySet="ServCategory" />
@@ -832,28 +823,153 @@
             <End Role="Service" EntitySet="Service" />
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserService_User" Association="Self.FK_UserService_User">
+          <EntitySet Name="User" EntityType="PR_17Model.User" />
+          <AssociationSet Name="FK_Cart_User" Association="PR_17Model.FK_Cart_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MasterService_User" Association="PR_17Model.FK_MasterService_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="MasterService" EntitySet="MasterService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="PR_17Model.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="PR_17Model.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_User" Association="PR_17Model.FK_Schedule_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserService_User" Association="PR_17Model.FK_UserService_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserService_User1" Association="Self.FK_UserService_User1">
+          <AssociationSet Name="FK_UserService_User1" Association="PR_17Model.FK_UserService_User1">
             <End Role="User" EntitySet="User" />
             <End Role="UserService" EntitySet="UserService" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cart" Relationship="PR_17Model.FK_Cart_User" FromRole="User" ToRole="Cart" />
+          <NavigationProperty Name="MasterService" Relationship="PR_17Model.FK_MasterService_User" FromRole="User" ToRole="MasterService" />
+          <NavigationProperty Name="Order" Relationship="PR_17Model.FK_Order_User" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Role" Relationship="PR_17Model.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Schedule" Relationship="PR_17Model.FK_Schedule_User" FromRole="User" ToRole="Schedule" />
+          <NavigationProperty Name="UserService" Relationship="PR_17Model.FK_UserService_User" FromRole="User" ToRole="UserService" />
+          <NavigationProperty Name="UserService1" Relationship="PR_17Model.FK_UserService_User1" FromRole="User" ToRole="UserService" />
+        </EntityType>
+        <Association Name="FK_Cart_User">
+          <End Type="PR_17Model.User" Role="User" Multiplicity="1" />
+          <End Type="PR_17Model.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MasterService_User">
+          <End Type="PR_17Model.User" Role="User" Multiplicity="1" />
+          <End Type="PR_17Model.MasterService" Role="MasterService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MasterService">
+              <PropertyRef Name="MasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Type="PR_17Model.User" Role="User" Multiplicity="1" />
+          <End Type="PR_17Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Type="PR_17Model.Role" Role="Role" Multiplicity="1" />
+          <End Type="PR_17Model.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_User">
+          <End Type="PR_17Model.User" Role="User" Multiplicity="1" />
+          <End Type="PR_17Model.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="MasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserService_User">
+          <End Type="PR_17Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="PR_17Model.UserService" Role="UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserService_User1">
+          <End Type="PR_17Model.User" Role="User" Multiplicity="1" />
+          <End Type="PR_17Model.UserService" Role="UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="MasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище PR_17ModelContainer" CdmEntityContainer="PR_17Entities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PR_17ModelContainer" CdmEntityContainer="PR_17Entities2">
           <EntitySetMapping Name="Cart">
             <EntityTypeMapping TypeName="PR_17Model.Cart">
               <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -944,6 +1060,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="PR_17Model.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ServCategory">
             <EntityTypeMapping TypeName="PR_17Model.ServCategory">
               <MappingFragment StoreEntitySet="ServCategory">
@@ -963,16 +1091,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="PR_17Model.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PR_17Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -986,6 +1112,20 @@
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="PR_17Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

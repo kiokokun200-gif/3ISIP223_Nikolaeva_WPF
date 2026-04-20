@@ -34,33 +34,32 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void LoadData()
         {
-            if(_cart == null)
-            {
-                TxtBlockEmptyCart.Visibility = Visibility.Visible;
-                ListBoxProductsInCart.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                var productsInCart = Core.Context.ProductInCart.Where(p => p.CartID == _cart.ID).ToList();
+            //if(_cart == null)
+            //{
+            //    TxtBlockEmptyCart.Visibility = Visibility.Visible;
+            //    ListBoxProductsInCart.Visibility = Visibility.Collapsed;
+            //}
+            
+            var productsInCart = Core.Context.ProductInCart.Where(p => p.CartID == _cart.ID).ToList();
                 
-                for (int i = 0; i < productsInCart.Count; i++)
+            for (int i = 0; i < productsInCart.Count; i++)
+            {
+                var product = new ProductInCartViewModel
                 {
-                    var product = new ProductInCartViewModel
-                    {
-                        ProductID = productsInCart[i].ProductID,
-                        ProductInCartID = productsInCart[i].ID,
-                        Name = productsInCart[i].Product.Name,
-                        Price = productsInCart[i].Product.Cost,
-                        Quantity = productsInCart[i].Quantity,
-                        Image = productsInCart[i].Product.Image
+                    ProductID = productsInCart[i].ProductID,
+                    ProductInCartID = productsInCart[i].ID,
+                    Name = productsInCart[i].Product.Name,
+                    Price = productsInCart[i].Product.Cost,
+                    Quantity = productsInCart[i].Quantity,
+                    Image = productsInCart[i].Product.Image
 
-                    };
-                    _products.Add(product);
-                }
-                
-                ListBoxProductsInCart.ItemsSource = _products;
-                UpdateTotalQuantity();
+                };
+                _products.Add(product);
             }
+                
+            ListBoxProductsInCart.ItemsSource = _products;
+            UpdateTotalQuantity();
+            
         }
 
         private void UpdateProductQuantity(ProductInCartViewModel productInCart, int newQuantity)
@@ -93,7 +92,15 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void UpdateTotalQuantity()
         {
-            TxtBlockCartQuantity.Text = _products.Count.ToString();
+            
+            int totalQuantity = _products.Sum(u => u.Quantity);
+            TxtBlockCartQuantity.Text = totalQuantity.ToString();
+            if(totalQuantity == 0)
+            {
+
+                TxtBlockEmptyCart.Visibility = Visibility.Visible;
+                ListBoxProductsInCart.Visibility = Visibility.Collapsed;
+            }
         }
         private void BtnMinusProd_Click(object sender, RoutedEventArgs e)
         {
@@ -113,7 +120,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnDeleteProd_Click(object sender, RoutedEventArgs e)
         {
+            var btn = (Button)sender;
+            var selectedproduct = btn.DataContext as ProductInCartViewModel;
 
+            UpdateProductQuantity(selectedproduct, 0);
         }
     }
 }

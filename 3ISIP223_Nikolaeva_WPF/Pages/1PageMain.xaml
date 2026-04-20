@@ -31,7 +31,8 @@
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
                         <TextBlock FontSize="25" Text="{Binding Name}"/>
                         <TextBlock Text="{Binding Description}" FontSize="18"/>
-                        
+                        <Button x:Name="BtnServiceGo" Content="Перейти" Width="80" FontSize="18" Click="BtnServiceGo_Click"/>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
