@@ -25,6 +25,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private User _master;
         private Service _service;
         private List<Schedule> _schedules;
+        private List<string> _payments;
+        private List<PaymentMethod> _paymentMethods;
 
         public _5PageAppointments(User master, Service service)
         {
@@ -38,9 +40,12 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void LoadData()
         {
+            _paymentMethods = Core.Context.PaymentMethod.ToList();
+            _payments = _paymentMethods.Select(p => p.Name).ToList();
+            ComboBoxPaymentMethod.ItemsSource = _payments;
             StackService.DataContext = _service;
             StackMaster.DataContext = _master;
-            _schedules = Core.Context.Schedule.Where(s => s.IsAvailable == true && s.MasterID == _master.ID && s.ServiceID == _service.ID && s.StartTime == Calendar.SelectedDate).ToList();
+            _schedules = Core.Context.Schedule.Where(s => s.IsAvailable == true && s.MasterID == _master.ID && s.ServiceID == _service.ID ).ToList();
             ListBoxAppointments.ItemsSource = _schedules;
         }
 
@@ -53,16 +58,46 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 MessageBoxResult result = MessageBox.Show($"Хотите записаться на {schedule.Service.Name} в {schedule.StartTime}?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
+                    string pay = ComboBoxPaymentMethod.SelectedItem.ToString();
+                    PaymentMethod paymentMethod = _paymentMethods.FirstOrDefault(s => s.Name == pay);
+                    try
+                    {
+
+                    UserService userService = new UserService() {
+                        UserID = UserData.CurrentUser.ID,
+                        MasterID = _master.ID,
+                        Date = schedule.StartTime,
+                        ServiceID = _service.ID,
+                        PaymentMethodID = paymentMethod.ID,
+                        Comment = TxtBoxComment.Text,
+                        ID_Schedule = schedule.ID,
+                        
+                    };
+
+                    Core.Context.UserService.Add(userService);
+                    Core.Context.SaveChanges();
                     MessageBox.Show("Запись подтверждена!");
                     NavigationService.Navigate(new _1PageMain());
+
+                    }
+                    catch {
+                        MessageBox.Show("Ошибка записи");
+                    }
                 }
                 else return;
             }
         }
 
-        private void Calendar_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+       
+
+        private void Calendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListBoxAppointments.ItemsSource = _schedules.Where(s => s.StartTime == Calendar.SelectedDate).ToList();
+            ListBoxAppointments.ItemsSource = _schedules.Where(s => s.StartTime.Date == Calendar.SelectedDate).ToList();
+        }
+
+        private void ListBoxAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

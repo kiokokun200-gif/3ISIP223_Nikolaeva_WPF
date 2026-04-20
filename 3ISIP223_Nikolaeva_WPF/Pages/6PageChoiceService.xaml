@@ -31,6 +31,13 @@
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Focusable" Value="False" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+
         </ListBox>
 
         <ListBox x:Name="ListBoxMasters" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}">

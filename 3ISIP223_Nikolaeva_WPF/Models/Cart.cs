@@ -25,8 +25,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public decimal TotalAmount { get; set; }
         public Nullable<int> TotalQuantity { get; set; }
     
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductInCart> ProductInCart { get; set; }
-        public virtual User User { get; set; }
     }
 }

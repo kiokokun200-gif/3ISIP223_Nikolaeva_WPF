@@ -13,10 +13,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PR_17Entities2 : DbContext
+    public partial class PR_17Entities3 : DbContext
     {
-        public PR_17Entities2()
-            : base("name=PR_17Entities2")
+        public PR_17Entities3()
+            : base("name=PR_17Entities3")
         {
         }
     
@@ -38,8 +38,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public virtual DbSet<Schedule> Schedule { get; set; }
         public virtual DbSet<ServCategory> ServCategory { get; set; }
         public virtual DbSet<Service> Service { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<UserService> UserService { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserService> UserService { get; set; }
     }
 }

@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -23,7 +24,6 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel x:Name="StackMaster">
-                    
                     <Image x:Name="ImageMaster" Grid.Column="0" Source="{Binding Image}" Height="150" Width="150"/>
                     <TextBlock Text="{Binding FirstName}" FontSize="20" HorizontalAlignment="Center"/>
                 </StackPanel>
@@ -37,21 +37,22 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
             <TextBlock  Text="Доступные записи: " FontSize="25" Margin="0 0 10 0"/>
-            <DatePicker x:Name="Calendar" DisplayDate="2026-04-25" DisplayDateStart="2026-01-01" DisplayDateEnd="2026-12-31" IsTodayHighlighted ="True" 
-                        
-                       Width="200" DataContextChanged="Calendar_DataContextChanged"/>
+            <DatePicker x:Name="Calendar" DisplayDate="2026-04-25" DisplayDateStart="2026-01-01" DisplayDateEnd="2026-12-31" IsTodayHighlighted ="True"                        
+                       Width="200"  SelectedDateChanged="Calendar_SelectedDateChanged" FontSize="22"/>
         </StackPanel>
-        <ListBox x:Name="ListBoxAppointments" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox x:Name="ListBoxAppointments" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ListBoxAppointments_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Button x:Name="BtnAppointment" Width="100" Height="50" Content="{Binding StartTime}" Click="BtnAppointment_Click">
-                        <!--<Button.Content>
-                            <MultiBinding StringFormat="{}{0} - {1}">
-                                <Binding Path="Schedule.StartTime" StringFormat="HH:mm"/>
-                                <Binding Path="Schedule.EndTime" StringFormat="HH:mm"/>
-                            </MultiBinding>
-                        </Button.Content>-->
-                    </Button>
+                    <StackPanel>
+                        <Button Width="100" Height="50" Content="{Binding StartTime}" Click="BtnAppointment_Click" ContentStringFormat="HH:mm" FontSize="22"/>
+                        <!--<Button.Content  >
+                                <MultiBinding StringFormat="{}{0} - {1}"  >
+                                    <Binding Path="StartTime" />
+                                    <Binding Path="EndTime" />
+                                </MultiBinding>
+                            </Button.Content>-->
+        
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
@@ -62,5 +63,12 @@
             </ListBox.ItemsPanel>
         </ListBox>
 
+
+        <StackPanel Grid.Row="3" Orientation="Vertical"  HorizontalAlignment="Left">
+            <TextBlock Text="Выберите способ оплаты: " FontSize="28"/>
+            <ComboBox x:Name="ComboBoxPaymentMethod" Style="{StaticResource FiltrCombo}" Margin="0 10 0 0"/>
+            <TextBlock Text="Введите комментарий (не обязательно)" FontSize="22" Margin="0 10 0 0"/>
+            <TextBox x:Name="TxtBoxComment" Width="350" Height="100" FontSize="25" Margin="0 10 0 0"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -15,12 +15,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
     public partial class UserService
     {
         public int ID { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public int UserID { get; set; }
         public int MasterID { get; set; }
         public System.DateTime Date { get; set; }
         public int ServiceID { get; set; }
         public int PaymentMethodID { get; set; }
         public string Comment { get; set; }
+        public int ID_Schedule { get; set; }
     
         public virtual PaymentMethod PaymentMethod { get; set; }
         public virtual Service Service { get; set; }
