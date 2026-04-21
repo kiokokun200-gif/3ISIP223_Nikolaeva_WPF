@@ -28,16 +28,39 @@
         <ListBox x:Name="ListBoxProducts" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDown="ListBoxProducts_MouseDown" MouseDoubleClick="ListBoxProducts_MouseDown">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel HorizontalAlignment="Center">
-                        <Grid>
-                            <Image Source="{Binding Image}" Width="150"  Height="150"/>
-                            <TextBlock Text="{Binding Rating}" HorizontalAlignment="Right"  FontSize="18" />
-                        </Grid>
-                        <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="{Binding Cost, StringFormat={}{0} P}"/>
-                        <Button x:Name="BtnAddCart" Content="Добавить в корзину" Click="BtnAddCart_Click"/>
+                    <Border>
+                        <StackPanel HorizontalAlignment="Center">
+                            <Grid>
+                                <Image Source="{Binding Image}" Width="150"  Height="150"/>
+                                <TextBlock Text="{Binding Rating}" HorizontalAlignment="Right"  FontSize="18" />
+                                <Border Visibility="{Binding DiscountVisibility}" Background="#FFEE1C99" Width="39" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <TextBlock Text="{Binding Discount, StringFormat={}{0}%}" HorizontalAlignment="Left" FontSize="18"/>
+                                    
+                                </Border>
+                            </Grid>
+                            <TextBlock Text="{Binding Name}"/>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="{Binding PriceWithDiscount, StringFormat={}{0:F2} P}" Margin="0 0 10 0" />
+                                <TextBlock Visibility="{Binding DiscountVisibility}" Text="{Binding Cost, StringFormat={}{0} P}" TextDecorations="StrikeThrough" Foreground="Gray"/>
+                            </StackPanel>
+                            <Button x:Name="BtnAddCart" Content="Добавить в корзину" Click="BtnAddCart_Click"/>
                         
-                    </StackPanel>
+                        </StackPanel>
+                        
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding HasDiscountMore15}" Value="true">
+                                        <Setter Property="Background" Value="LightGreen"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+
+
+                        </Border.Style>
+                    </Border>
+                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemsPanel>

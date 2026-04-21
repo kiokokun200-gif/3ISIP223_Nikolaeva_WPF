@@ -49,7 +49,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     ProductID = productsInCart[i].ProductID,
                     ProductInCartID = productsInCart[i].ID,
                     Name = productsInCart[i].Product.Name,
-                    Price = productsInCart[i].Product.Cost,
+                    Price = productsInCart[i].Product.Cost - (productsInCart[i].Product.Cost * (decimal)(productsInCart[i].Product.Discount / 100)),
                     Quantity = productsInCart[i].Quantity,
                     Image = productsInCart[i].Product.Image
 
