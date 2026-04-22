@@ -58,11 +58,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             if (result == MessageBoxResult.Yes)
             {
                 List<ProductInCart> prodincart = Core.Context.ProductInCart.Where(p => p.CartID == UserData.UserCart.ID).ToList();
+                try { 
                 Order order = new Order
                 {
-                    Date = date,
+                    Date = DateTime.Now,
                     TotalAmount = UserData.UserCart.TotalAmount,
-                    UserID = UserData.CurrentUser.ID
+                    UserID = UserData.CurrentUser.ID,
+                    DeliverDate = date,
+                    
                 };
                 Core.Context.Order.Add(order);
                 Core.Context.SaveChanges();
@@ -72,13 +75,21 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     {
                         OrderID = order.ID,
                         ProductID = prod.ProductID,
-                        Quantity = prod.Quantity
+                        Quantity = prod.Quantity,
+                        
+                        
                     };
                     Core.Context.OrderItems.Add(orderItems);
                 }
 
                 Core.Context.SaveChanges();
-                
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка сохранения");
+                }
+
+
             }
             else return;
             

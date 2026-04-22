@@ -94,6 +94,7 @@
     <Compile Include="Models\OrderItems.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Orderr.cs" />
     <Compile Include="Models\PaymentMethod.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -141,6 +142,18 @@
     <Compile Include="Pages\6PageChoiceService.xaml.cs">
       <DependentUpon>6PageChoiceService.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\7PageManager.xaml.cs">
+      <DependentUpon>7PageManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WindowAddClientAppointment.xaml.cs">
+      <DependentUpon>WindowAddClientAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WindowAddManufacturer.xaml.cs">
+      <DependentUpon>WindowAddManufacturer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WindowChangeProduct.xaml.cs">
+      <DependentUpon>WindowChangeProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WindowOrder.xaml.cs">
       <DependentUpon>WindowOrder.xaml</DependentUpon>
     </Compile>
@@ -186,6 +199,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\6PageChoiceService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\7PageManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowAddClientAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowAddManufacturer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowChangeProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -75,6 +75,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     };
 
                     Core.Context.UserService.Add(userService);
+
+                    var sch = Core.Context.Schedule.First(s => s.ID ==  schedule.ID);
+                    sch.IsAvailable = false;
                     Core.Context.SaveChanges();
                     MessageBox.Show("Запись подтверждена!");
                     NavigationService.Navigate(new _1PageMain());

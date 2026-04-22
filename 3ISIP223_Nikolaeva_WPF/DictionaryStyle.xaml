@@ -18,6 +18,7 @@
 
     <Style TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Cambria"/>
+        <Setter Property="FontSize" Value="22"/>
     </Style>
 
     <Style TargetType="TextBox">
