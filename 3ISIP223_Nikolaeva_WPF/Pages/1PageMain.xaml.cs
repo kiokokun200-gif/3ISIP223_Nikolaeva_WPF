@@ -72,6 +72,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 //переход на страницу аккаунта 
                 NavigationService.Navigate(new _4PageAccount(UserData.CurrentUser));
             }
+            else if(UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Менеджер")
+            {
+                NavigationService.Navigate(new _7PageManager());
+            }
         }
 
         private void BtnProduct_Click(object sender, RoutedEventArgs e)

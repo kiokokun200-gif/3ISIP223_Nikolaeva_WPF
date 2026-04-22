@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="900"
+      d:DesignHeight="450" d:DesignWidth="1100"
       Title="_1PageMain">
 
     <Grid Background="White">
@@ -31,8 +31,8 @@
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
                         <TextBlock FontSize="25" Text="{Binding Name}"/>
                         <TextBlock Text="{Binding Description}" FontSize="18"/>
-                        <Button x:Name="BtnServiceGo" Content="Перейти" Width="80" FontSize="18" Click="BtnServiceGo_Click"/>
-
+                        <Button x:Name="BtnServiceGo" Content="Перейти" Width="90" FontSize="18" Click="BtnServiceGo_Click"/>
+                        
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

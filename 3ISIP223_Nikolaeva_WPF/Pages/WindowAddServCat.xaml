@@ -1,0 +1,29 @@
+﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowAddServCat"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+        mc:Ignorable="d"
+        Title="WindowAddServCat" Height="250" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+            <TextBlock Text="Введите тип услуги" Margin="10"/>
+            <TextBox x:Name="TxtBoxServCat" Height="40" Width="200" Margin="0 0 10 0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+            <TextBlock Text="Введите описание типа услуги" Margin="10"/>
+            <TextBox x:Name="TxtBoxServCatDesc" Height="70" Width="300" Margin="0 0 10 0"/>
+        </StackPanel>
+
+        <Button Grid.Row="2" Name="BtnConfAddServCat" Content="Добавить" Height="30" Width="300" Click="BtnConfAddServCat_Click"/>
+
+
+    </Grid>
+</Window>

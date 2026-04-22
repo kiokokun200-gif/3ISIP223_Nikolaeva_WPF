@@ -9,6 +9,6 @@ namespace _3ISIP223_Nikolaeva_WPF
 {
     public class Core
     {
-        public static PR_17Entities4 Context = new PR_17Entities4();
+        public static PR_17Entities5 Context = new PR_17Entities5();
     }
 }

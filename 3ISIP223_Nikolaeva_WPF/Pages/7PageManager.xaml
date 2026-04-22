@@ -11,7 +11,7 @@
     <Grid Background="White">
 
         <TabControl>
-            <TabItem Header="Записи" FontSize="22">
+            <TabItem Header="Записи" FontSize="22" x:Name="TabItemAppointment">
                 <Grid>
                     <!--<Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -49,7 +49,7 @@
                                             <Button Content="Записать клиента" Height="30" Width="200" Click="BtnAddClientAppointment_Click"/>
                                         </StackPanel>
                                     </Grid>
-                                    
+
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -84,7 +84,7 @@
             </TabItem>
 
             <TabItem Header="Товары" FontSize="22">
-                <ListBox d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox x:Name="ListBoxProduct" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
@@ -100,7 +100,7 @@
                                     <StackPanel Grid.Column="1">
                                         <TextBlock Text="{Binding Name}"/>
                                         <TextBlock Text="{Binding PriceWithDiscount, StringFormat=Цена со скидкой: {0}}"/>
-                                        <TextBlock Text="{Binding Discount, StringFormat=Скидка: {0}} "/>
+                                        <TextBlock Text="{Binding Discount, StringFormat='Скидка: {0}' }"/>
                                         <TextBlock Text="{Binding Manufacturer.Name, StringFormat=Производитель: {0}}"/>
                                         <TextBlock Text="{Binding ProdCategory.Name, StringFormat=Категория: {0}}"/>
                                         <TextBlock Text="{Binding Description, StringFormat=Описание: {0}}"/>
@@ -109,8 +109,8 @@
                                     </StackPanel>
                                     <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="20">
                                         <Button Content="Изменить товар" Click="BtnChangeProduct_Click"/>
-                                        <Button Content="Заморозить" Margin="0 10 0 0" Click="BtnFrozeProduct_Click"/>
-                                        
+                                        <Button Content="{Binding ButtonContenFrozen}" Margin="0 10 0 0" Click="BtnFrozeProduct_Click"/>
+
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -128,13 +128,61 @@
 
                     <Button x:Name="BtnAddManufacturer" Content="Добавить производителя" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="10" Click="BtnAddManufacturer_Click"/>
 
-                    <ListBox Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListBox x:Name="ListBoxManufacturers"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding Name}" Margin="10"/>
-                                        <Button Content="Изменить" Height="30" Margin="10"/>
+                                        <Button x:Name="BtnChangeMan" Content="Изменить" Height="30" Margin="10" Click="BtnChangeMan_Click"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Типы товаров" FontSize="22">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="BtnAddProdCat" Content="Добавить тип товара" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="10" Click="BtnAddProdCat_Click"/>
+
+                    <ListBox x:Name="ListBoxProdCateg" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" Margin="10"/>
+                                        <Button x:Name="BtnChangeProdCat" Content="Изменить" Height="30" Margin="10" Click="BtnChangeProdCat_Click"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Типы услуг">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="BtnAddServCat" Content="Добавить тип услуги" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="10" Click="BtnAddServCat_Click"/>
+
+                    <ListBox x:Name="ListBoxServCat" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" Margin="10"/>
+                                        <Button x:Name="BtnChangeServCat" Content="Изменить" Height="30" Margin="10" Click="BtnChangeServCat_Click"/>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>

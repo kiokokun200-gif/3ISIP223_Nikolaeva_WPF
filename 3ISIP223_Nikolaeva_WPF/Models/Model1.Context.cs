@@ -13,10 +13,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PR_17Entities4 : DbContext
+    public partial class PR_17Entities5 : DbContext
     {
-        public PR_17Entities4()
-            : base("name=PR_17Entities4")
+        public PR_17Entities5()
+            : base("name=PR_17Entities5")
         {
         }
     

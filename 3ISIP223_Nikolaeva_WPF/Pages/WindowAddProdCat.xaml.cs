@@ -16,29 +16,30 @@ using System.Windows.Shapes;
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для WindowAddManufacturer.xaml
+    /// Логика взаимодействия для WindowAddProdCat.xaml
     /// </summary>
-    public partial class WindowAddManufacturer : Window
+    public partial class WindowAddProdCat : Window
     {
-        public WindowAddManufacturer()
+         
+        public WindowAddProdCat()
         {
             InitializeComponent();
         }
 
-        private void BtnConfAddMan_Click(object sender, RoutedEventArgs e)
+        private void BtnConfAddProdCat_Click(object sender, RoutedEventArgs e)
         {
-            string manname = TxtBoxNameMan.Text;
+            string prodcattname = TxtBoxNameProdCat.Text;
             try
             {
-                Manufacturer manufacturer = new Manufacturer
+                ProdCategory prodCategory = new ProdCategory()
                 {
-                    Name = manname,
-                };
-                Core.Context.Manufacturer.Add(manufacturer);
-                Core.Context.SaveChanges();
-                MessageBox.Show("Производитель добавлен");
+                    Name = prodcattname,
 
-                
+                };
+                Core.Context.ProdCategory.Add(prodCategory);
+                Core.Context.SaveChanges();
+
+
             }
             catch
             {
@@ -46,9 +47,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 return;
             }
 
-
+            MessageBox.Show("Производитель добавлен");
         }
-
-        
     }
 }

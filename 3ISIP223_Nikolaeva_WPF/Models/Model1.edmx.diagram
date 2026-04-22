@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6c155b62920a46e6861c1746d7df80c3" Name="Diagram1">
+      <Diagram DiagramId="e96bf1bc53d047448469cdeb67a0bb5f" Name="Diagram1">
         <EntityTypeShape EntityType="PR_17Model.Cart" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.Manufacturer" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.Manufacturer" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.MasterService" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.Order" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.OrderItems" Width="1.5" PointX="7.5" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.PaymentMethod" Width="1.5" PointX="8" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.ProdCategory" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.Product" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.PaymentMethod" Width="1.5" PointX="8" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.ProdCategory" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.Product" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.ProductInCart" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.Role" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.Schedule" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.ServCategory" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.Service" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.Role" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.Schedule" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.ServCategory" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.Service" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PR_17Model.User" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PR_17Model.UserService" Width="1.5" PointX="10.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR_17Model.UserService" Width="1.5" PointX="10.25" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="PR_17Model.FK_Cart_User" ManuallyRouted="false" />
         <AssociationConnector Association="PR_17Model.FK_ProductInCart_Cart" ManuallyRouted="false" />
         <AssociationConnector Association="PR_17Model.FK_Product_Manufacturer" ManuallyRouted="false" />

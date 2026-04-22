@@ -13,5 +13,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
         public decimal PriceWithDiscount => Cost - (Cost * (decimal)(Discount / 100));
         public bool HasDiscount => Discount > 0;
         public Visibility DiscountVisibility => Discount > 0 ? Visibility.Visible : Visibility.Collapsed;
+        public string ButtonContenFrozen => IsFrozen == true ? "Разморозить" : "Заморозить";
     }
 }
