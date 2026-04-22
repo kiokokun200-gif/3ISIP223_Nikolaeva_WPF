@@ -127,6 +127,7 @@
     <Compile Include="Models\UserService.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserServicee.cs" />
     <Compile Include="Pages\2PageProducts.xaml.cs">
       <DependentUpon>2PageProducts.xaml</DependentUpon>
     </Compile>
@@ -145,17 +146,29 @@
     <Compile Include="Pages\7PageManager.xaml.cs">
       <DependentUpon>7PageManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\8PageMaster.xaml.cs">
+      <DependentUpon>8PageMaster.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\9PageAdmin.xaml.cs">
+      <DependentUpon>9PageAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WindowAddClientAppointment.xaml.cs">
       <DependentUpon>WindowAddClientAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WindowAddManufacturer.xaml.cs">
       <DependentUpon>WindowAddManufacturer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WindowAddMasterService.xaml.cs">
+      <DependentUpon>WindowAddMasterService.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WindowAddProdCat.xaml.cs">
       <DependentUpon>WindowAddProdCat.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WindowAddServCat.xaml.cs">
       <DependentUpon>WindowAddServCat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WindowChangeAppointment.xaml.cs">
+      <DependentUpon>WindowChangeAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WindowChangeManufacturer.xaml.cs">
       <DependentUpon>WindowChangeManufacturer.xaml</DependentUpon>
@@ -168,6 +181,9 @@
     </Compile>
     <Compile Include="Pages\WindowChangeServCat.xaml.cs">
       <DependentUpon>WindowChangeServCat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WindowChangeUserRole.xaml.cs">
+      <DependentUpon>WindowChangeUserRole.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WindowOrder.xaml.cs">
       <DependentUpon>WindowOrder.xaml</DependentUpon>
@@ -221,6 +237,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\8PageMaster.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\9PageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\WindowAddClientAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,11 +253,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\WindowAddMasterService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\WindowAddProdCat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WindowAddServCat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowChangeAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WindowChangeServCat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowChangeUserRole.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

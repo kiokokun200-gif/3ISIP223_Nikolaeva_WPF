@@ -15,7 +15,7 @@
             <ListBox x:Name="ListBoxDates">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button x:Name="BtnDate" Content="{Binding}" ContentStringFormat="dd.MM.yyyy" FontSize="18"  Width="100" Height="30" Click="BtnDate_Click"/>
+                        <Button x:Name="BtnDate" Content="{Binding}" ContentStringFormat="dd.MM.yyyy" FontSize="18"  Width="130" Height="30" Click="BtnDate_Click"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
 

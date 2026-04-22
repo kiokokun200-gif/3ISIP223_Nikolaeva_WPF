@@ -29,8 +29,8 @@
                 <TextBlock Visibility="{Binding DiscountVisibility}" Text="{Binding Cost, StringFormat={}{0} P}" TextDecorations="StrikeThrough" Foreground="Gray"/>
             </StackPanel>
             <TextBlock Text="{Binding ProdCategory.Name, StringFormat=Категория: {0}}" FontSize="20"/>
-            <TextBlock Text="{Binding Manufacturer.Name, StringFormat=Производитель: {9}}" FontSize="20"/>
-            <TextBlock Text="{Binding Description}" FontSize="15"/>
+            <TextBlock Text="{Binding Manufacturer.Name, StringFormat=Производитель: {0}}" FontSize="20"/>
+            <TextBlock Text="{Binding Description, StringFormat=Описание: {0}}" FontSize="20"/>
             
         </StackPanel>
     </Grid>

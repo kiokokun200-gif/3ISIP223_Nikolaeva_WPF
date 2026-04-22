@@ -1,0 +1,32 @@
+﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowAddMasterService"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+        mc:Ignorable="d"
+        Title="WindowAddMasterService" Height="450" Width="800">
+
+    <Grid Background="White" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Выберите тип услуги" FontSize="20" Margin="0,0,0,10"/>
+
+        <ComboBox Grid.Row="1" x:Name="ComboBoxServices" Height="35" FontSize="18" Margin="0,0,0,15"/>
+
+        <TextBlock Grid.Row="2" Text="Ваша цена" FontSize="20" Margin="0,0,0,10"/>
+
+        <TextBox Grid.Row="3" x:Name="TxtBoxPrice" Height="35" FontSize="18" Margin="0,0,0,20"/>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Добавить" Width="100" Height="35" Click="BtnAdd_Click" Margin="0,0,10,0"/>
+            <Button Content="Отмена" Width="100" Height="35" Click="BtnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

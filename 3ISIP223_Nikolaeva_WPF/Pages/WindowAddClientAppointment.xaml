@@ -3,49 +3,77 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
         mc:Ignorable="d"
-        Title="WindowAddClientAppointment" Height="450" Width="800">
-    <Grid>
+        Title="Запись клиента" Height="650" Width="500"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Background="White" Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal">
-            <TextBlock  Text="⌕" FontSize="30" Margin="10"/>
-            <TextBox x:Name="TxtBoxSearchUser" Width="250" Height="40" Margin="0 0 10 0" TextChanged="TxtBoxSearchUser_TextChanged"/>
+        <TextBlock Grid.Row="0" Text="Поиск клиента" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBox x:Name="TxtBoxSearch" Width="250" Height="35" FontSize="16"/>
+            <Button Content="Найти" Width="80" Height="35" Margin="10,0,0,0" Click="BtnSearch_Click"/>
         </StackPanel>
 
-        <ListBox x:Name="ListBoxClients" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox Grid.Row="2" x:Name="ListBoxClients" Height="120" Margin="0,0,0,15">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0">
-                                <TextBlock Text="ФИО: " FontSize="22" Margin="10 0 0 10"/>
-                                <TextBlock Text="Номер: " FontSize="22" Margin="10 0 0 0"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="1">
-                                <StackPanel  Orientation="Horizontal">
-                                    <TextBlock Text="{Binding FirstName}" FontSize="22" Margin="0 0 3 10"/>
-                                    <TextBlock Text="{Binding LastName}" FontSize="22" Margin="0 0 3 10"/>
-                                    <TextBlock Text="{Binding MiddleName}" FontSize="22" Margin="0 0 20 10"/>
-                                </StackPanel>
-                                <TextBlock Text="{Binding PhoneNumber}" FontSize="22"/>
-                            </StackPanel>
-                            <Button Content="Подтвердить" Grid.Column="2" Height="40" Width="130" FontSize="20" Margin="0 0 10 0" Click="BtnConfirm_Click"/>
-                        </Grid>
+                    <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="{Binding LastName, StringFormat=ФИО: {0}}" FontSize="16"/>
+                            <TextBlock Text="{Binding PhoneNumber, StringFormat=Телефон: {0}}" FontSize="14" Foreground="Gray"/>
+                        </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <TextBlock Grid.Row="3" Text="Выберите мастера" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <ComboBox Grid.Row="4" x:Name="ComboBoxMasters" Height="35" FontSize="16" 
+                  DisplayMemberPath="FirstName" Margin="0,0,0,10"
+                  SelectionChanged="ComboBoxMasters_SelectionChanged"/>
+
+        <TextBlock Grid.Row="5" Text="Выберите услугу" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <ComboBox Grid.Row="6" x:Name="ComboBoxServices" Height="35" FontSize="16" 
+                  DisplayMemberPath="Name" Margin="0,0,0,10"
+                  SelectionChanged="ComboBoxServices_SelectionChanged"/>
+
+        <TextBlock Grid.Row="7" Text="Выберите дату и время" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="0,0,0,15">
+            <DatePicker x:Name="DatePickerDate" Height="35" Width="150" SelectedDateChanged="DatePickerDate_SelectedDateChanged"/>
+            <ListBox x:Name="ListBoxSlots" Height="80" Margin="10,0,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding StartTime, StringFormat=HH:mm}" Width="70" Height="30" Margin="3"
+                                Click="BtnSlot_Click" Tag="{Binding}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Button Content="Записать" Width="100" Height="35" Click="BtnSave_Click" Margin="0,0,10,0"/>
+            <Button Content="Отмена" Width="100" Height="35" Click="BtnCancel_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -148,6 +148,7 @@
           <Property Name="PaymentMethodID" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ID_Schedule" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cart_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -637,6 +638,7 @@
           <NavigationProperty Name="Service" Relationship="Self.FK_UserService_Service" FromRole="UserService" ToRole="Service" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserService_User" FromRole="UserService" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_UserService_User1" FromRole="UserService" ToRole="User" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Cart_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -1097,6 +1099,7 @@
           <EntitySetMapping Name="UserService">
             <EntityTypeMapping TypeName="PR_17Model.UserService">
               <MappingFragment StoreEntitySet="UserService">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="MasterID" ColumnName="MasterID" />

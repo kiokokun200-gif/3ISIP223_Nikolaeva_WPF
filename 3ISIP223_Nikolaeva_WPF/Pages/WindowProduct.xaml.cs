@@ -23,9 +23,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public Product _product { get; set; }
         public WindowProduct(Product product)
         {
+            InitializeComponent();
             _product = product;
             DataContext = _product;
-            InitializeComponent();
         }
     }
 }

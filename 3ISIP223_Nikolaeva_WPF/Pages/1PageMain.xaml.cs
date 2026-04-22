@@ -57,7 +57,15 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             if(UserData.IsLoggedIn)
             {
                 BtnLogin.Content = "Аккаунт";
+                BtnLogOut.Visibility = Visibility.Visible;
             }
+            else
+            {
+
+                BtnLogin.Content = "Войти в аккаунт";
+                BtnLogOut.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -67,14 +75,21 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 var _wind = new WindowLogIn(this);
                 _wind.ShowDialog();
             }
-            else if(UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Клиент")
+            else if (UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Клиент")
             {
-                //переход на страницу аккаунта 
                 NavigationService.Navigate(new _4PageAccount(UserData.CurrentUser));
             }
-            else if(UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Менеджер")
+            else if (UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Мастер")  // ← ДОБАВИТЬ
+            {
+                NavigationService.Navigate(new _8PageMaster(UserData.CurrentUser));
+            }
+            else if (UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Менеджер")
             {
                 NavigationService.Navigate(new _7PageManager());
+            }
+            else if (UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Администратор")
+            {
+                NavigationService.Navigate(new _9PageAdmin());
             }
         }
 
@@ -128,6 +143,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             ServCategory category = (ServCategory)btn.DataContext;
 
             NavigationService.Navigate(new _6PageChoiceService(category));
+        }
+        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            UserData.CurrentUser = null;
+            NavigationService.Navigate(new _1PageMain());
         }
     }
 }

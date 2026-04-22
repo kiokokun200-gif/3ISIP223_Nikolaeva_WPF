@@ -44,6 +44,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
+                        <TextBlock Text="{Binding StartTime, StringFormat=yyyy.MM.dd}"/>
                         <Button Width="100" Height="50" Content="{Binding StartTime}" Click="BtnAppointment_Click" ContentStringFormat="HH:mm" FontSize="22"/>
                         <!--<Button.Content  >
                                 <MultiBinding StringFormat="{}{0} - {1}"  >

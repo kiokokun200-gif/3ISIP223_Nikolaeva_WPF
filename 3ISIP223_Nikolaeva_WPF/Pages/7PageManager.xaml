@@ -9,47 +9,38 @@
       Title="_7PageManager">
 
     <Grid Background="White">
-
         <TabControl>
+            <!-- Вкладка ЗАПИСИ -->
             <TabItem Header="Записи" FontSize="22" x:Name="TabItemAppointment">
                 <Grid>
-                    <!--<Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal">
-                        <TextBlock  Text="⌕" FontSize="30" Margin="10"/>
-                        <TextBox x:Name="TxtBoxSearchUser" Width="150" Height="30" Margin="0 0 10 0"/>
-                    </StackPanel>-->
-
-                    <ListBox x:Name="ListBoxAppointments" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListBox x:Name="ListBoxAppointments" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="4">
+                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Row="0" Margin="20">
-                                            <TextBlock Text="{Binding Service.Name}" FontSize="28"/>
-                                            <TextBlock Text="{Binding User.FirstName, StringFormat=Клиент: {0}}" FontSize="20"/>
-                                            <TextBlock Text="{Binding User.FirstName, StringFormat=Мастер: {0}}" FontSize="20"/>
-                                            <TextBlock Text="{Binding Date}" FontSize="20"/>
-                                            <TextBlock Text="{Binding Schedule.StartTime}" FontSize="20"/>
+
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Service.Name}" FontSize="22" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding User.FirstName, StringFormat=Клиент: {0} {1}}" FontSize="18"/>
+                                            <TextBlock Text="{Binding Master.FirstName, StringFormat=Мастер: {0} {1}}" FontSize="18"/>
+                                            <TextBlock Text="{Binding Date, StringFormat=Дата: {0:dd.MM.yyyy HH:mm}}" FontSize="16"/>
+                                            <TextBlock Text="{Binding Comment, StringFormat=Комментарий: {0}}" FontSize="14" Foreground="Gray"/>
+                                            <TextBlock Text="{Binding Status, StringFormat=Статус: {0}}" FontSize="14" Foreground="Blue"/>
                                         </StackPanel>
-                                        <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                            <StackPanel Orientation="Horizontal" >
-                                                <Button Content="Перенести запись" Height="30" Width="200" Margin="0 0 0 20" Click="BtnChangeAppointment_Click"/>
-                                                <DatePicker Name="DatePickAppointment" SelectedDate="{Binding Date}" Height="40" Margin="10 0 10 20" Visibility="Collapsed"/>
-                                                <Button x:Name="BtnConfirmChange" Content="Подтвердить" Margin="10 0 10 20" Height="30" Width="200" Visibility="Collapsed"/>
-                                            </StackPanel>
-                                            <Button Content="Отменить запись" Height="30" Width="200"  Margin="0 0 0 20" Click="BtnCancelAppointment_Click"/>
-                                            <Button Content="Записать клиента" Height="30" Width="200" Click="BtnAddClientAppointment_Click"/>
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10">
+                                            <Button Content="Перенести" Width="200" Height="35" Margin="0,0,0,10" 
+                                                Click="BtnChangeAppointment_Click" Tag="{Binding}"/>
+                                            <Button Content="Отменить" Width="200" Height="35" 
+                                                Click="BtnCancelAppointment_Click" Tag="{Binding}"/>
+                                            <Button Content="Записать клиента" Width="200" Height="35" Margin="0,10,0,0" 
+                                                Click="BtnAddClientAppointment_Click"/>
                                         </StackPanel>
                                     </Grid>
-
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -57,25 +48,30 @@
                 </Grid>
             </TabItem>
 
+            <!-- Вкладка ЗАКАЗЫ -->
             <TabItem Header="Заказы" FontSize="22">
-                <ListBox x:Name="ListBoxOrders" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox x:Name="ListBoxOrders" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
+                            <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0">
-                                        <TextBlock FontSize="22" Text="{Binding ID, StringFormat=Заказ {0}}" Margin="0 0 10 0"/>
-                                        <TextBlock FontSize="22" Text="{Binding Date, StringFormat=От {0}}" Margin="0 0 10 0"/>
-                                        <TextBlock FontSize="22" Text="{Binding User.FirstName, StringFormat=Клиент: {0}}" Margin="0 0 10 0"/>
-                                        <TextBlock FontSize="22" Text="{Binding DeliverDate, StringFormat=Дата получения: {0}}" Margin="0 0 10 0"/>
-                                        <TextBlock Text="{Binding IsClosed, StringFormat=Статус: {0}}"/>
+
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding ID, StringFormat=Заказ №{0}}" FontSize="22" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Date, StringFormat=Дата заказа: {0:dd.MM.yyyy}}" FontSize="18"/>
+                                        <TextBlock Text="{Binding DeliverDate, StringFormat=Дата получения: {0:dd.MM.yyyy}}" FontSize="18"/>
+                                        <TextBlock Text="{Binding User.FirstName, StringFormat=Клиент: {0} {1}}" FontSize="18"/>
+                                        <TextBlock Text="{Binding TotalAmount, StringFormat=Сумма: {0} Р}" FontSize="18" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding IsClosed, StringFormat=Выдан: {0}}" FontSize="14" Foreground="Gray"/>
                                     </StackPanel>
 
-                                    <Button Visibility="{Binding VisIsClosed}" Grid.Column="1" x:Name="BtnCloseOrder" Content="Закрыть заказ" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 10 0" Click="BtnCloseOrder_Click"/>
+                                    <Button Grid.Column="1" Content="Выдать заказ" Width="200" Height="35" 
+                                        Visibility="{Binding VisIsClosed}" Margin="10 0 0 0"
+                                        Click="BtnCloseOrder_Click" Tag="{Binding}"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -83,34 +79,35 @@
                 </ListBox>
             </TabItem>
 
+            <!-- Вкладка ТОВАРЫ -->
             <TabItem Header="Товары" FontSize="22">
-                <ListBox x:Name="ListBoxProduct" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox x:Name="ListBoxProduct" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
+                            <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Image Grid.Column="0" Height="180" Width="180" Margin="0 0 10 0" Source="{Binding Image}"/>
+                                    <Image Grid.Column="0" Height="100" Width="100" Source="{Binding Image}" Margin="0,0,10,0"/>
 
                                     <StackPanel Grid.Column="1">
-                                        <TextBlock Text="{Binding Name}"/>
-                                        <TextBlock Text="{Binding PriceWithDiscount, StringFormat=Цена со скидкой: {0}}"/>
-                                        <TextBlock Text="{Binding Discount, StringFormat='Скидка: {0}' }"/>
-                                        <TextBlock Text="{Binding Manufacturer.Name, StringFormat=Производитель: {0}}"/>
-                                        <TextBlock Text="{Binding ProdCategory.Name, StringFormat=Категория: {0}}"/>
-                                        <TextBlock Text="{Binding Description, StringFormat=Описание: {0}}"/>
-                                        <TextBlock Text="{Binding Rating, StringFormat=Рейтинг: {0}}"/>
-
+                                        <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding PriceWithDiscount, StringFormat=Цена со скидкой: {0} Р}" FontSize="16"/>
+                                        <TextBlock Text="{Binding Discount, StringFormat=Скидка: {0}%}" FontSize="14"/>
+                                        <TextBlock Text="{Binding Manufacturer.Name, StringFormat=Производитель: {0}}" FontSize="14"/>
+                                        <TextBlock Text="{Binding ProdCategory.Name, StringFormat=Категория: {0}}" FontSize="14"/>
+                                        <TextBlock Text="{Binding IsFrozen, StringFormat=Заморожен: {0}}" FontSize="14" Foreground="Red"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="20">
-                                        <Button Content="Изменить товар" Click="BtnChangeProduct_Click"/>
-                                        <Button Content="{Binding ButtonContenFrozen}" Margin="0 10 0 0" Click="BtnFrozeProduct_Click"/>
 
+                                    <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="10">
+                                        <Button Content="Изменить" Width="150" Height="35" Margin="0,0,0,10" 
+                                            Click="BtnChangeProduct_Click" Tag="{Binding}"/>
+                                        <Button Content="{Binding ButtonContenFrozen}" Width="150" Height="35" 
+                                            Click="BtnFrozeProduct_Click" Tag="{Binding}"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -119,23 +116,30 @@
                 </ListBox>
             </TabItem>
 
-            <TabItem Header="Производители">
+            <!-- Вкладка ПРОИЗВОДИТЕЛИ -->
+            <TabItem Header="Производители" FontSize="22">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="BtnAddManufacturer" Content="Добавить производителя" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="10" Click="BtnAddManufacturer_Click"/>
+                    <Button Grid.Row="0" Content="Добавить производителя" Width="300" Height="35" Margin="10" 
+                        HorizontalAlignment="Left" Click="BtnAddManufacturer_Click"/>
 
-                    <ListBox x:Name="ListBoxManufacturers"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListBox Grid.Row="1" x:Name="ListBoxManufacturers" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" Margin="10"/>
-                                        <Button x:Name="BtnChangeMan" Content="Изменить" Height="30" Margin="10" Click="BtnChangeMan_Click"/>
-                                    </StackPanel>
+                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Name}" FontSize="20"/>
+                                        <Button Grid.Column="1" Content="Изменить" Width="150" Height="30" Margin="10 0 0 0"
+                                            Click="BtnChangeMan_Click" Tag="{Binding}"/>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -143,23 +147,30 @@
                 </Grid>
             </TabItem>
 
+            <!-- Вкладка ТИПЫ ТОВАРОВ -->
             <TabItem Header="Типы товаров" FontSize="22">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="BtnAddProdCat" Content="Добавить тип товара" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="10" Click="BtnAddProdCat_Click"/>
+                    <Button Grid.Row="0" Content="Добавить тип товара" Width="300" Height="35" Margin="10" 
+                        HorizontalAlignment="Left" Click="BtnAddProdCat_Click"/>
 
-                    <ListBox x:Name="ListBoxProdCateg" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListBox Grid.Row="1" x:Name="ListBoxProdCateg" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" Margin="10"/>
-                                        <Button x:Name="BtnChangeProdCat" Content="Изменить" Height="30" Margin="10" Click="BtnChangeProdCat_Click"/>
-                                    </StackPanel>
+                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Name}" FontSize="20"/>
+                                        <Button Grid.Column="1" Content="Изменить" Width="150" Height="30" Margin="10 0 0 0"
+                                            Click="BtnChangeProdCat_Click" Tag="{Binding}"/>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -167,23 +178,30 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Типы услуг">
+            <!-- Вкладка ТИПЫ УСЛУГ -->
+            <TabItem Header="Типы услуг" FontSize="22">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="BtnAddServCat" Content="Добавить тип услуги" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="10" Click="BtnAddServCat_Click"/>
+                    <Button Grid.Row="0" Content="Добавить тип услуги" Width="300" Height="35" Margin="10" 
+                        HorizontalAlignment="Left" Click="BtnAddServCat_Click"/>
 
-                    <ListBox x:Name="ListBoxServCat" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListBox Grid.Row="1" x:Name="ListBoxServCat" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" Margin="10"/>
-                                        <Button x:Name="BtnChangeServCat" Content="Изменить" Height="30" Margin="10" Click="BtnChangeServCat_Click"/>
-                                    </StackPanel>
+                                <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Name}" FontSize="20"/>
+                                        <Button Grid.Column="1" Content="Изменить" Margin="10 0 0 0" Width="150" Height="30" 
+                                            Click="BtnChangeServCat_Click" Tag="{Binding}"/>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

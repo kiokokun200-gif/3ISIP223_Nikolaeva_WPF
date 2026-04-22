@@ -32,7 +32,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             //if(_cart == null)
             //{
@@ -144,8 +144,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnOrder_Click(object sender, RoutedEventArgs e)
         {
-            var wind = new WindowOrder();
+            var wind = new WindowOrder(this);
             wind.Show();
+            NavigationService.GoBack();
         }
     }
 }

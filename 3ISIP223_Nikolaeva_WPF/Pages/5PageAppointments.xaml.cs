@@ -63,18 +63,19 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     try
                     {
 
-                    UserService userService = new UserService() {
-                        UserID = UserData.CurrentUser.ID,
-                        MasterID = _master.ID,
-                        Date = schedule.StartTime,
-                        ServiceID = _service.ID,
-                        PaymentMethodID = paymentMethod.ID,
-                        Comment = TxtBoxComment.Text,
-                        ID_Schedule = schedule.ID,
-                        
-                    };
+                        UserService userService = new UserService()
+                        {
+                            UserID = UserData.CurrentUser.ID,
+                            MasterID = _master.ID,
+                            Date = schedule.StartTime,
+                            ServiceID = _service.ID,
+                            PaymentMethodID = paymentMethod.ID,
+                            Comment = TxtBoxComment.Text,
+                            ID_Schedule = schedule.ID,
+                            Status = "Scheduled" 
+                        };
 
-                    Core.Context.UserService.Add(userService);
+                        Core.Context.UserService.Add(userService);
 
                     var sch = Core.Context.Schedule.First(s => s.ID ==  schedule.ID);
                     sch.IsAvailable = false;

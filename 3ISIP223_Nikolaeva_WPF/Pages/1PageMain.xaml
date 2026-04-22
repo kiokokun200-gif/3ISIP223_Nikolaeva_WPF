@@ -23,7 +23,11 @@
             <Button x:Name="BtnProduct" Content="Товары" Background="White" Foreground="Black" FontSize="18" Margin="10 0 0 0" Click="BtnProduct_Click"/>
         </StackPanel>
 
-        <Button x:Name="BtnLogin" Grid.Row="0" Content="Войти в аккаунт"  HorizontalAlignment="Right" FontSize="15" Click="BtnLogin_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right">
+            <Button x:Name="BtnLogin" Content="Войти в аккаунт"  HorizontalAlignment="Right" FontSize="15" Click="BtnLogin_Click" Margin="10 0 10 0"/>
+            <Button x:Name="BtnLogOut" Visibility="Collapsed"  Width="100" Height="40" Content="Выйти" Click="BtnLogOut_Click" Margin="0 0 10 0"/>
+        </StackPanel>
+
 
         <ListBox Grid.Row="1" x:Name="ListBoxServicesTypes" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>

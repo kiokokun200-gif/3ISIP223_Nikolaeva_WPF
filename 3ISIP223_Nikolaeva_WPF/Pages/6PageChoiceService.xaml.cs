@@ -49,6 +49,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnChoiceMaster_Click(object sender, RoutedEventArgs e)
         {
+            if(!UserData.IsLoggedIn)
+            {
+                MessageBox.Show("Войдите в аккаунт");
+                return;
+            }
             if (!isRadioCheck)
             {
                 MessageBox.Show("Выберите услугу!");
