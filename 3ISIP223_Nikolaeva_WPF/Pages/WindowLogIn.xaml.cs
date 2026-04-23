@@ -55,8 +55,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private bool Login(string number, string password)
         {
             var user = Core.Context.User.FirstOrDefault(u => u.PhoneNumber == number && u.Password == password);
+
             if (user != null && !user.IsFrozen)
             {
+                user.Role = Core.Context.Role.FirstOrDefault(r => r.ID == user.RoleID);
                 UserData.CurrentUser = user;
                 var cart = Core.Context.Cart.FirstOrDefault(u => u.UserID == user.ID);
                 if (cart != null) {

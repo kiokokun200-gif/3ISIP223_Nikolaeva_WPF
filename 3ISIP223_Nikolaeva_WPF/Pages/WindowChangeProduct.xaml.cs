@@ -30,7 +30,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void LoadData()
         {
-            // Заполняем поля текущими значениями
             TxtBoxName.Text = _product.Name;
             TxtBoxCost.Text = _product.Cost.ToString();
             TxtBoxDiscount.Text = _product.Discount.ToString();
@@ -38,12 +37,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             TxtBoxDescription.Text = _product.Description;
             TxtBoxImage.Text = _product.Image;
 
-            // Загружаем категории
             var categories = Core.Context.ProdCategory.ToList();
             ComboBoxCategory.ItemsSource = categories;
             ComboBoxCategory.SelectedItem = categories.FirstOrDefault(c => c.ID == _product.CategoryID);
 
-            // Загружаем производителей
             var manufacturers = Core.Context.Manufacturer.ToList();
             ComboBoxManufacturer.ItemsSource = manufacturers;
             ComboBoxManufacturer.SelectedItem = manufacturers.FirstOrDefault(m => m.ID == _product.ManufacturerID);
@@ -53,7 +50,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             try
             {
-                // Проверяем заполнение
                 if (string.IsNullOrEmpty(TxtBoxName.Text))
                 {
                     MessageBox.Show("Введите название");
@@ -92,7 +88,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     return;
                 }
 
-                // Сохраняем изменения
                 _product.Name = TxtBoxName.Text;
                 _product.Cost = cost;
                 _product.Discount = discount;

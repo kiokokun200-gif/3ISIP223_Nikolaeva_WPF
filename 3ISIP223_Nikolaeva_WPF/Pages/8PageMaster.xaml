@@ -16,7 +16,6 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Информация о мастере -->
         <Border Grid.Row="0" Background="#FFF0F0F0" Padding="10">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{Binding Image}" Width="80" Height="80" />
@@ -27,9 +26,7 @@
             </StackPanel>
         </Border>
 
-        <!-- Вкладки -->
         <TabControl Grid.Row="1" Margin="10">
-            <!-- Вкладка "Мои записи" -->
             <TabItem Header="Мои записи" FontSize="20">
                 <ListBox x:Name="ListBoxAppointments" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListBox.ItemTemplate>
@@ -56,7 +53,6 @@
                 </ListBox>
             </TabItem>
 
-            <!-- Вкладка "Мои услуги" -->
             <TabItem Header="Мои услуги" FontSize="20">
                 <Grid>
                     <Grid.RowDefinitions>

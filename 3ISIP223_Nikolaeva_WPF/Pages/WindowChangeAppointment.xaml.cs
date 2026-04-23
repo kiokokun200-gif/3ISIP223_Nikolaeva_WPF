@@ -45,11 +45,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             DateTime selectedDate = DatePickerNewDate.SelectedDate.Value;
 
-            // Получаем начало и конец выбранного дня
             DateTime startOfDay = selectedDate.Date;
             DateTime endOfDay = selectedDate.Date.AddDays(1);
 
-            // Ищем свободные слоты на выбранную дату для того же мастера и услуги
             var slots = Core.Context.Schedule
                 .Where(s => s.MasterID == _appointment.MasterID
                     && s.ServiceID == _appointment.ServiceID
@@ -77,7 +75,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 {
                     try
                     {
-                        // Освобождаем старый слот
                         var oldSchedule = Core.Context.Schedule
                             .FirstOrDefault(s => s.ID == _appointment.ID_Schedule);
                         if (oldSchedule != null)
@@ -85,11 +82,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                             oldSchedule.IsAvailable = true;
                         }
 
-                        // Обновляем запись
                         _appointment.Date = _selectedSchedule.StartTime;
                         _appointment.ID_Schedule = _selectedSchedule.ID;
 
-                        // Занимаем новый слот
                         _selectedSchedule.IsAvailable = false;
 
                         Core.Context.SaveChanges();

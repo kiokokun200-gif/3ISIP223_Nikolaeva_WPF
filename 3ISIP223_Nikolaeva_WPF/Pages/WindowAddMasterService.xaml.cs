@@ -51,7 +51,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 return;
             }
 
-            // Проверяем, есть ли уже такая услуга у мастера
             var exist = Core.Context.MasterService
                 .FirstOrDefault(m => m.MasterID == _master.ID && m.ServCategotyID == _selectedCategory.ID);
 

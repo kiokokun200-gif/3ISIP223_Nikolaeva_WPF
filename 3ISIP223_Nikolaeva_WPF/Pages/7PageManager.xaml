@@ -10,10 +10,15 @@
 
     <Grid Background="White">
         <TabControl>
-            <!-- Вкладка ЗАПИСИ -->
             <TabItem Header="Записи" FontSize="22" x:Name="TabItemAppointment">
                 <Grid>
-                    <ListBox x:Name="ListBoxAppointments" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Content="Записать клиента" Width="200" Grid.Row="0" HorizontalAlignment="Left" Height="35" Margin="0,10,0,0" 
+                        Click="BtnAddClientAppointment_Click"/>
+                    <ListBox Grid.Row="1" x:Name="ListBoxAppointments" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="LightPink" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10">
@@ -37,8 +42,8 @@
                                                 Click="BtnChangeAppointment_Click" Tag="{Binding}"/>
                                             <Button Content="Отменить" Visibility="{Binding VisIsClosed}" Width="200" Height="35" 
                                                 Click="BtnCancelAppointment_Click" Tag="{Binding}"/>
-                                            <Button Content="Записать клиента" Width="200" Height="35" Margin="0,10,0,0" 
-                                                Click="BtnAddClientAppointment_Click"/>
+                                            <!--<Button Content="Записать клиента" Width="200" Height="35" Margin="0,10,0,0" 
+                                                Click="BtnAddClientAppointment_Click"/>-->
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -48,7 +53,6 @@
                 </Grid>
             </TabItem>
 
-            <!-- Вкладка ЗАКАЗЫ -->
             <TabItem Header="Заказы" FontSize="22">
                 <ListBox x:Name="ListBoxOrders" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListBox.ItemTemplate>
@@ -79,7 +83,6 @@
                 </ListBox>
             </TabItem>
 
-            <!-- Вкладка ТОВАРЫ -->
             <TabItem Header="Товары" FontSize="22">
                 <ListBox x:Name="ListBoxProduct" Margin="5" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListBox.ItemTemplate>
@@ -116,7 +119,6 @@
                 </ListBox>
             </TabItem>
 
-            <!-- Вкладка ПРОИЗВОДИТЕЛИ -->
             <TabItem Header="Производители" FontSize="22">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -147,7 +149,6 @@
                 </Grid>
             </TabItem>
 
-            <!-- Вкладка ТИПЫ ТОВАРОВ -->
             <TabItem Header="Типы товаров" FontSize="22">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -178,7 +179,6 @@
                 </Grid>
             </TabItem>
 
-            <!-- Вкладка ТИПЫ УСЛУГ -->
             <TabItem Header="Типы услуг" FontSize="22">
                 <Grid>
                     <Grid.RowDefinitions>

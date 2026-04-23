@@ -13,11 +13,9 @@
         
         <TabControl x:Name="TabControlClient" Visibility="Visible">
             <TabItem Header="ВХОД" FontSize="20">
-                <!--весь стек для клиента-->
                 <StackPanel x:Name="StackClient" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Top">
 
 
-                    <!--стек для входа -->
                     <StackPanel x:Name="StackClientLogin" Visibility="Visible" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Номер" Margin="0 0 10 0" FontSize="18"/>
@@ -33,7 +31,7 @@
                     </StackPanel>
             </TabItem>
             <TabItem Header="РЕГИСТРАЦИЯ" FontSize="20">
-                <!--стек для регистрации-->
+
                 <StackPanel x:Name="StackClientReg" Visibility="Visible" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                         <TextBlock Text="Имя" Margin="0 0 10 0" FontSize="18"/>

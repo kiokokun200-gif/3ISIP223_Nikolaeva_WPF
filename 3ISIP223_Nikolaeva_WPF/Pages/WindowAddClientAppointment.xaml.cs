@@ -125,47 +125,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             Button btn = (Button)sender;
             _selectedSchedule = btn.Tag as Schedule;
 
-            // Визуально выделяем выбранный слот (опционально)
-            foreach (var item in ListBoxSlots.Items)
-            {
-                var container = ListBoxSlots.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
-                if (container != null)
-                {
-                    var button = FindVisualChild<Button>(container);
-                    if (button != null)
-                    {
-                        button.Background = System.Windows.Media.Brushes.LightGray;
-                    }
-                }
-            }
-
-            var selectedContainer = ListBoxSlots.ItemContainerGenerator.ContainerFromItem(_selectedSchedule) as ListBoxItem;
-            if (selectedContainer != null)
-            {
-                var selectedButton = FindVisualChild<Button>(selectedContainer);
-                if (selectedButton != null)
-                {
-                    selectedButton.Background = System.Windows.Media.Brushes.LightGreen;
-                }
-            }
+            
         }
 
-        private T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                    return (T)child;
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-            return null;
-        }
+        
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {

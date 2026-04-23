@@ -32,13 +32,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void LoadData()
         {
-            // Мои записи (где я мастер)
             _myAppointments = Core.Context.UserService
                 .Where(u => u.MasterID == _master.ID)
                 .ToList();
             ListBoxAppointments.ItemsSource = _myAppointments;
 
-            // Мои услуги (что я предоставляю)
             _myServices = Core.Context.MasterService
                 .Where(m => m.MasterID == _master.ID)
                 .ToList();
@@ -57,10 +55,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    // Меняем статус, а не удаляем!
                     appointment.Status = "Completed";
 
-                    // Освобождаем слот в расписании
                     var schedule = Core.Context.Schedule.FirstOrDefault(s => s.ID == appointment.ID_Schedule);
                     if (schedule != null)
                     {
@@ -76,7 +72,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnAddService_Click(object sender, RoutedEventArgs e)
         {
-            // открыть окно выбора услуги для добавления
             var wind = new WindowAddMasterService(_master);
             wind.ShowDialog();
             LoadData();

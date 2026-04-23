@@ -34,7 +34,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void LoadPage()
         {
-            _products = Core.Context.Product.ToList();
+            _products = Core.Context.Product.Where(p => p.IsFrozen == false).ToList();
             ListBoxProducts.ItemsSource = _products;
             _categoties = Core.Context.ProdCategory.Select(p => p.Name).ToList();
             _categoties.Insert(0, "Все");
@@ -117,9 +117,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         }
         private void BtnAddCart_Click(object sender, RoutedEventArgs e)
         {
-            if(!UserData.IsLoggedIn)
+            if(!UserData.IsLoggedIn || UserData.CurrentUser.RoleID != 1)
             {
-                MessageBox.Show("Нужна авторизация");
+                MessageBox.Show("Нужна авторизация под клиентом");
                 return;
             }
 

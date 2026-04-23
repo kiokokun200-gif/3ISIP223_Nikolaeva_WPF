@@ -86,10 +86,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                         Core.Context.OrderItems.Add(orderItems);
                     }
 
-                    // ОЧИЩАЕМ КОРЗИНУ
                     Core.Context.ProductInCart.RemoveRange(prodincart);
 
-                    // ОБНОВЛЯЕМ ДАННЫЕ КОРЗИНЫ
                     UserData.UserCart.TotalAmount = 0;
                     UserData.UserCart.TotalQuantity = 0;
 
@@ -104,13 +102,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
                     MessageBox.Show("Заказ оформлен! Корзина очищена.");
 
-                    // ОБНОВЛЯЕМ СТРАНИЦУ КОРЗИНЫ (если она ещё открыта)
                     if (_cartPage != null)
                     {
                         _cartPage.LoadData();
                     }
 
-                    // ЗАКРЫВАЕМ ОКНО ЗАКАЗА
                     this.Close();
                 }
                 catch (Exception ex)
