@@ -45,16 +45,22 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             DateTime selectedDate = DatePickerNewDate.SelectedDate.Value;
 
+            // Получаем начало и конец выбранного дня
+            DateTime startOfDay = selectedDate.Date;
+            DateTime endOfDay = selectedDate.Date.AddDays(1);
+
             // Ищем свободные слоты на выбранную дату для того же мастера и услуги
             var slots = Core.Context.Schedule
                 .Where(s => s.MasterID == _appointment.MasterID
                     && s.ServiceID == _appointment.ServiceID
-                    && s.StartTime.Date == selectedDate.Date
+                    && s.StartTime >= startOfDay
+                    && s.StartTime < endOfDay
                     && s.IsAvailable == true)
                 .ToList();
 
             ListBoxSlots.ItemsSource = slots;
         }
+
 
         private void BtnSlot_Click(object sender, RoutedEventArgs e)
         {

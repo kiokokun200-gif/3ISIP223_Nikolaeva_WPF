@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using _3ISIP223_Nikolaeva_WPF.Models;
 
 namespace _3ISIP223_Nikolaeva_WPF.Pages
@@ -32,7 +23,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             ListBoxUsers.ItemsSource = _users;
         }
 
-        private void BtnChangeRole_Click(object sender, RoutedEventArgs e)
+        private void BtnAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            var wind = new WindowAddUser();
+            wind.ShowDialog();
+            LoadData();
+        }
+
+        private void BtnEditUser_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             User selectedUser = btn.Tag as User;
@@ -41,7 +39,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 var wind = new WindowChangeUserRole(selectedUser);
                 wind.ShowDialog();
-                LoadData(); // обновляем список
+                LoadData();
             }
         }
 
@@ -52,7 +50,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             if (selectedUser != null)
             {
-                // Не даём удалить самого себя
                 if (selectedUser.ID == UserData.CurrentUser.ID)
                 {
                     MessageBox.Show("Нельзя удалить самого себя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -82,6 +79,19 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void BtnFroze_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            User selectedUser = btn.DataContext as User;
+
+            selectedUser.IsFrozen = !selectedUser.IsFrozen;
+            Core.Context.SaveChanges();
+            LoadData();
+
+            string message = selectedUser.IsFrozen ? "Пользователь заморожен" : "Пользователь разморожен";
+            MessageBox.Show(message);
         }
     }
 }

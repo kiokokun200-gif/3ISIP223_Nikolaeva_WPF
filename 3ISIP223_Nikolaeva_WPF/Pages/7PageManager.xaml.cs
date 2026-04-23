@@ -52,7 +52,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             ListBoxServCat.ItemsSource = _servCategories;
         }
 
-        // ==================== ЗАПИСИ ====================
 
         private void BtnCancelAppointment_Click(object sender, RoutedEventArgs e)
         {
@@ -95,7 +94,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             LoadData();
         }
 
-        // ==================== ЗАКАЗЫ ====================
 
         private void BtnCloseOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -117,7 +115,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
         }
 
-        // ==================== ТОВАРЫ ====================
 
         private void BtnChangeProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -141,7 +138,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             MessageBox.Show(message);
         }
 
-        // ==================== ПРОИЗВОДИТЕЛИ ====================
 
         private void BtnAddManufacturer_Click(object sender, RoutedEventArgs e)
         {
@@ -159,7 +155,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             LoadData();
         }
 
-        // ==================== ТИПЫ ТОВАРОВ ====================
 
         private void BtnAddProdCat_Click(object sender, RoutedEventArgs e)
         {
@@ -176,8 +171,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             wind.ShowDialog();
             LoadData();
         }
-
-        // ==================== ТИПЫ УСЛУГ ====================
 
         private void BtnAddServCat_Click(object sender, RoutedEventArgs e)
         {

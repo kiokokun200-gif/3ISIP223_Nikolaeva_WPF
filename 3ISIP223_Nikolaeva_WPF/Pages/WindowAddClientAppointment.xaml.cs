@@ -1,18 +1,10 @@
-﻿using System;
+﻿using _3ISIP223_Nikolaeva_WPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using _3ISIP223_Nikolaeva_WPF.Models;
-
 
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
@@ -22,17 +14,34 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private User _selectedMaster;
         private Service _selectedService;
         private Schedule _selectedSchedule;
+        private List<Service> _allServices;
 
         public WindowAddClientAppointment()
         {
             InitializeComponent();
             LoadMasters();
+            LoadAllClients();
+            LoadAllServices();
+        }
+
+        private void LoadAllClients()
+        {
+            var clients = Core.Context.User.Where(u => u.Role.Name == "Клиент").ToList();
+            ListBoxClients.ItemsSource = clients;
+        }
+
+        private void LoadAllServices()
+        {
+            _allServices = Core.Context.Service.ToList();
+            ComboBoxServices.ItemsSource = _allServices;
+            ComboBoxServices.DisplayMemberPath = "Name";
         }
 
         private void LoadMasters()
         {
             var masters = Core.Context.User.Where(u => u.Role.Name == "Мастер").ToList();
             ComboBoxMasters.ItemsSource = masters;
+            ComboBoxMasters.DisplayMemberPath = "FirstName";
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
@@ -43,33 +52,45 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 .Where(u => u.Role.Name == "Клиент" &&
                     (u.LastName.ToLower().Contains(search) ||
                      u.FirstName.ToLower().Contains(search) ||
+                     u.MiddleName.ToLower().Contains(search) ||
                      u.PhoneNumber.Contains(search)))
                 .ToList();
 
             ListBoxClients.ItemsSource = clients;
+
+            if (clients.Count == 0)
+            {
+                MessageBox.Show("Клиенты не найдены");
+            }
         }
 
         private void ComboBoxMasters_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _selectedMaster = ComboBoxMasters.SelectedItem as User;
-            if (_selectedMaster != null)
-            {
-                var services = Core.Context.MasterService
-                    .Where(m => m.MasterID == _selectedMaster.ID)
-                    .Select(m => m.ServCategory)
-                    .ToList();
-                ComboBoxServices.ItemsSource = services;
-            }
+
+            // Сбрасываем выбранную услугу
+            ComboBoxServices.SelectedItem = null;
+            _selectedService = null;
+            ListBoxSlots.ItemsSource = null;
         }
 
         private void ComboBoxServices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ServCategory selectedCategory = ComboBoxServices.SelectedItem as ServCategory;
-            if (selectedCategory != null && _selectedMaster != null)
+            _selectedService = ComboBoxServices.SelectedItem as Service;
+
+            if (_selectedService != null && _selectedMaster != null)
             {
-                var service = Core.Context.Service
-                    .FirstOrDefault(s => s.CategoryID == selectedCategory.ID);
-                _selectedService = service;
+                // Проверяем, выполняет ли мастер эту услугу
+                var masterService = Core.Context.MasterService
+                    .FirstOrDefault(m => m.MasterID == _selectedMaster.ID && m.ServCategotyID == _selectedService.CategoryID);
+
+                if (masterService == null)
+                {
+                    MessageBox.Show($"Мастер {_selectedMaster.FirstName} не выполняет услугу {_selectedService.Name}");
+                    ComboBoxServices.SelectedItem = null;
+                    _selectedService = null;
+                    ListBoxSlots.ItemsSource = null;
+                }
             }
         }
 
@@ -79,20 +100,71 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             DateTime selectedDate = DatePickerDate.SelectedDate.Value;
 
+            // Получаем начало и конец выбранного дня
+            DateTime startOfDay = selectedDate.Date;
+            DateTime endOfDay = selectedDate.Date.AddDays(1);
+
             var slots = Core.Context.Schedule
                 .Where(s => s.MasterID == _selectedMaster.ID
                     && s.ServiceID == _selectedService.ID
-                    && s.StartTime.Date == selectedDate.Date
+                    && s.StartTime >= startOfDay
+                    && s.StartTime < endOfDay
                     && s.IsAvailable == true)
                 .ToList();
 
             ListBoxSlots.ItemsSource = slots;
+
+            if (slots.Count == 0)
+            {
+                MessageBox.Show("На выбранную дату нет свободных слотов");
+            }
         }
 
         private void BtnSlot_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             _selectedSchedule = btn.Tag as Schedule;
+
+            // Визуально выделяем выбранный слот (опционально)
+            foreach (var item in ListBoxSlots.Items)
+            {
+                var container = ListBoxSlots.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
+                if (container != null)
+                {
+                    var button = FindVisualChild<Button>(container);
+                    if (button != null)
+                    {
+                        button.Background = System.Windows.Media.Brushes.LightGray;
+                    }
+                }
+            }
+
+            var selectedContainer = ListBoxSlots.ItemContainerGenerator.ContainerFromItem(_selectedSchedule) as ListBoxItem;
+            if (selectedContainer != null)
+            {
+                var selectedButton = FindVisualChild<Button>(selectedContainer);
+                if (selectedButton != null)
+                {
+                    selectedButton.Background = System.Windows.Media.Brushes.LightGreen;
+                }
+            }
+        }
+
+        private T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is T)
+                    return (T)child;
+                else
+                {
+                    T childOfChild = FindVisualChild<T>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -148,9 +220,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 this.DialogResult = true;
                 this.Close();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при записи");
+                MessageBox.Show($"Ошибка при записи: {ex.Message}");
             }
         }
 

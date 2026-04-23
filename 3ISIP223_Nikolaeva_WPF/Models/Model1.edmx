@@ -135,6 +135,7 @@
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Image" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsFrozen" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserService">
           <Key>
@@ -621,6 +622,7 @@
           <NavigationProperty Name="Schedule" Relationship="Self.FK_Schedule_User" FromRole="User" ToRole="Schedule" />
           <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_User" FromRole="User" ToRole="UserService" />
           <NavigationProperty Name="UserService1" Relationship="Self.FK_UserService_User1" FromRole="User" ToRole="UserService" />
+          <Property Name="IsFrozen" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="UserService">
           <Key>
@@ -1085,6 +1087,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="PR_17Model.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsFrozen" ColumnName="IsFrozen" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

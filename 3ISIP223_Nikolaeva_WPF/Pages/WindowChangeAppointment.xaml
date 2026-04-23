@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
         mc:Ignorable="d"
-        Title="WindowChangeAppointment" Height="450" Width="800">
+        Title="WindowChangeAppointment" Height="550" Width="800">
 
     <Grid Background="White" Margin="20">
         <Grid.RowDefinitions>
@@ -38,10 +38,10 @@
 
         <TextBlock Grid.Row="4" Text="Доступное время:" FontSize="16" Margin="0,0,0,5"/>
 
-        <ListBox Grid.Row="5" x:Name="ListBoxSlots" Height="100" Margin="0,0,0,15">
+        <ListBox Grid.Row="5" x:Name="ListBoxSlots" Height="100" Margin="0,0,0,15" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding StartTime, StringFormat=HH:mm}" Width="80" Height="35" Margin="5"
+                    <Button Content="{Binding StartTime}" ContentStringFormat="HH:mm" Width="80" Height="35" Margin="5"
                             Click="BtnSlot_Click" Tag="{Binding}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>

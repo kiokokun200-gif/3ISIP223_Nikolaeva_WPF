@@ -5,38 +5,22 @@ using _3ISIP223_Nikolaeva_WPF.Models;
 
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
-    public partial class WindowChangeUserRole : Window
+    public partial class WindowAddUser : Window
     {
-        private User _user;
-
-        public WindowChangeUserRole(User user)
+        public WindowAddUser()
         {
             InitializeComponent();
-            _user = user;
-            LoadUserData();
             LoadRoles();
-        }
-
-        private void LoadUserData()
-        {
-            TxtBoxFirstName.Text = _user.FirstName;
-            TxtBoxLastName.Text = _user.LastName;
-            TxtBoxMiddleName.Text = _user.MiddleName;
-            TxtBoxPhone.Text = _user.PhoneNumber;
-            TxtBoxPassword.Text = _user.Password;
         }
 
         private void LoadRoles()
         {
             var roles = Core.Context.Role.ToList();
             ComboBoxRoles.ItemsSource = roles;
-            ComboBoxRoles.DisplayMemberPath = "Name";
-
-            var currentRole = roles.FirstOrDefault(r => r.ID == _user.RoleID);
-            ComboBoxRoles.SelectedItem = currentRole;
+            ComboBoxRoles.SelectedIndex = 0;
         }
 
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        private void BtnCreate_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TxtBoxFirstName.Text))
             {
@@ -65,16 +49,20 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
             try
             {
-                _user.FirstName = TxtBoxFirstName.Text;
-                _user.LastName = TxtBoxLastName.Text;
-                _user.MiddleName = TxtBoxMiddleName.Text;
-                _user.PhoneNumber = TxtBoxPhone.Text;
-                _user.Password = TxtBoxPassword.Text;
-                _user.RoleID = selectedRole.ID;
+                User newUser = new User
+                {
+                    FirstName = TxtBoxFirstName.Text,
+                    LastName = TxtBoxLastName.Text,
+                    MiddleName = TxtBoxMiddleName.Text,
+                    PhoneNumber = TxtBoxPhone.Text,
+                    Password = TxtBoxPassword.Text,
+                    RoleID = selectedRole.ID
+                };
 
+                Core.Context.User.Add(newUser);
                 Core.Context.SaveChanges();
 
-                MessageBox.Show("Данные сохранены!");
+                MessageBox.Show("Пользователь создан!");
                 this.DialogResult = true;
                 this.Close();
             }

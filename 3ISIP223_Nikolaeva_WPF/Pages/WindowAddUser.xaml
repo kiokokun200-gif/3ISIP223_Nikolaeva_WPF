@@ -1,10 +1,10 @@
-﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowChangeUserRole"
+﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowAddUser"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Редактирование пользователя" Height="650" Width="450"
+        Title="Создание пользователя" Height="650" Width="450"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
 
@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <!-- Заголовок -->
-        <TextBlock Grid.Row="0" Text="Редактирование пользователя" 
+        <TextBlock Grid.Row="0" Text="Создание нового пользователя" 
                    FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
         <!-- Панель с полями -->
@@ -46,7 +46,7 @@
 
             <!-- Кнопки -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <Button Content="Сохранить" Width="120" Height="35" Click="BtnSave_Click" Margin="0,0,10,0"/>
+                <Button Content="Создать" Width="100" Height="35" Click="BtnCreate_Click" Margin="0,0,10,0"/>
                 <Button Content="Отмена" Width="100" Height="35" Click="BtnCancel_Click"/>
             </StackPanel>
         </StackPanel>

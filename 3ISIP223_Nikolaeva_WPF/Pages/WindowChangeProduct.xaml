@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Редактирование товара" Height="550" Width="800"
+        Title="Редактирование товара" Height="650" Width="800"
         WindowStartupLocation="CenterOwner">
 
     <Grid Background="White" Margin="20">
@@ -47,7 +47,7 @@
                      VerticalScrollBarVisibility="Auto"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                <Button Content="Сохранить" Width="100" Height="35" Click="BtnSave_Click" Margin="0,0,10,0"/>
+                <Button Content="Сохранить" Width="120" Height="35" Click="BtnSave_Click" Margin="0,0,10,0"/>
                 <Button Content="Отмена" Width="100" Height="35" Click="BtnCancel_Click"/>
             </StackPanel>
         </StackPanel>

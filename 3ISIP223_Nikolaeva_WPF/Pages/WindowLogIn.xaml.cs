@@ -31,13 +31,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnClientLogLog_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TxtBoxLogNumber.Text) || string.IsNullOrEmpty(TxtBoxLogPassword.Text))
+            if (string.IsNullOrEmpty(TxtBoxLogNumber.Text) || string.IsNullOrEmpty(TxtBoxLogPassword.Password))
             {
                 MessageBox.Show("Заполните все поля!");
             }
             else
             {
-                if (Login(TxtBoxLogNumber.Text, TxtBoxLogPassword.Text))
+                if (Login(TxtBoxLogNumber.Text, TxtBoxLogPassword.Password))
                 {
                     MessageBox.Show($"Вход успешный! роль {UserData.CurrentUser.Role.Name}");
                     _pageMain.UpdateAccount();
@@ -55,7 +55,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private bool Login(string number, string password)
         {
             var user = Core.Context.User.FirstOrDefault(u => u.PhoneNumber == number && u.Password == password);
-            if (user != null)
+            if (user != null && !user.IsFrozen)
             {
                 UserData.CurrentUser = user;
                 var cart = Core.Context.Cart.FirstOrDefault(u => u.UserID == user.ID);
@@ -70,13 +70,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnClientRegReg_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(TxtBoxRegFName.Text) || string.IsNullOrEmpty(TxtBoxRegLName.Text) || string.IsNullOrEmpty(TxtBoxRegMName.Text) || string.IsNullOrEmpty(TxtBoxRegNumber.Text) || string.IsNullOrEmpty(TxtBoxRegPassword.Text))
+            if(string.IsNullOrEmpty(TxtBoxRegFName.Text) || string.IsNullOrEmpty(TxtBoxRegLName.Text) || string.IsNullOrEmpty(TxtBoxRegMName.Text) || string.IsNullOrEmpty(TxtBoxRegNumber.Text) || string.IsNullOrEmpty(TxtBoxRegPassword.Password))
             {
                 MessageBox.Show("Заполните все поля!");
             }
             else
             {
-                if (Registration(TxtBoxRegFName.Text, TxtBoxRegLName.Text, TxtBoxRegMName.Text, TxtBoxRegNumber.Text, TxtBoxRegPassword.Text))
+                if (Registration(TxtBoxRegFName.Text, TxtBoxRegLName.Text, TxtBoxRegMName.Text, TxtBoxRegNumber.Text, TxtBoxRegPassword.Password))
                 {
                     MessageBox.Show("Успешный вход!");
                     this.Close();
@@ -99,7 +99,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     MiddleName = mname,
                     PhoneNumber = number,
                     RoleID = 1,
-                    Password = password
+                    Password = password,
+                    IsFrozen = false
 
                 };
                 Core.Context.User.Add(reguser);

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Запись клиента" Height="650" Width="500"
+        Title="Запись клиента" Height="700" Width="500"
         WindowStartupLocation="CenterOwner">
 
     <Grid Background="White" Margin="20">
@@ -56,10 +56,10 @@
 
         <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="0,0,0,15">
             <DatePicker x:Name="DatePickerDate" Height="35" Width="150" SelectedDateChanged="DatePickerDate_SelectedDateChanged"/>
-            <ListBox x:Name="ListBoxSlots" Height="80" Margin="10,0,0,0">
+            <ListBox x:Name="ListBoxSlots" Height="80" Margin="10,0,0,0" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding StartTime, StringFormat=HH:mm}" Width="70" Height="30" Margin="3"
+                        <Button Content="{Binding StartTime}" ContentStringFormat="HH:mm" Width="100" Height="30" Margin="3"
                                 Click="BtnSlot_Click" Tag="{Binding}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -71,7 +71,7 @@
             </ListBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+        <StackPanel Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,0">
             <Button Content="Записать" Width="100" Height="35" Click="BtnSave_Click" Margin="0,0,10,0"/>
             <Button Content="Отмена" Width="100" Height="35" Click="BtnCancel_Click"/>
         </StackPanel>

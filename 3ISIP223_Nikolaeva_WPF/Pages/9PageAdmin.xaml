@@ -5,10 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="900"
       Title="_9PageAdmin">
-
-
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -17,8 +15,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Заголовок -->
-        <TextBlock Grid.Row="0" Text="Управление пользователями" FontSize="30" FontWeight="Bold" Margin="10"/>
+        <!-- Заголовок и кнопка добавления -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Управление пользователями" FontSize="30" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button Content="+ Добавить пользователя" Width="300" Height="40" 
+                    Margin="30,0,0,0" Click="BtnAddUser_Click"
+                    Background="#4CAF50" Foreground="White"/>
+        </StackPanel>
 
         <!-- Список пользователей -->
         <ListBox Grid.Row="1" x:Name="ListBoxUsers" Margin="10" d:ItemsSource="{d:SampleData ItemCount=5}">
@@ -44,20 +47,19 @@
                             </StackPanel>
 
                             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="20">
-                                <Button Content="Изменить роль" Width="200" Height="35" 
-                                    Click="BtnChangeRole_Click" Tag="{Binding}"/>
+                                <Button Content="Редактировать" Width="160" Height="35" 
+                                        Click="BtnEditUser_Click" Tag="{Binding}"/>
                                 <Button Content="Удалить" Width="100" Height="35" Margin="10,0,0,0"
-                                    Click="BtnDeleteUser_Click" Tag="{Binding}"
-                                    Background="#FF4444"/>
+                                        Click="BtnDeleteUser_Click" Tag="{Binding}"
+                                        
+                                        Background="#FF4444"/>
+                                <Button x:Name="BtnFroze" Content="{Binding ContIsFrozen}" Width="200" Height="35" Margin="10,0,0,0"
+                                        Click="BtnFroze_Click"/>
                             </StackPanel>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
-        <!-- Кнопка назад -->
-        <Button Grid.Row="2" Content="← Назад" Width="100" Height="35" Margin="10" 
-            HorizontalAlignment="Left" Click="BtnBack_Click"/>
     </Grid>
 </Page>

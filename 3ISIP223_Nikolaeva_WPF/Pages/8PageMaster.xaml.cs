@@ -101,9 +101,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
         }
 
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
+       
     }
 }
