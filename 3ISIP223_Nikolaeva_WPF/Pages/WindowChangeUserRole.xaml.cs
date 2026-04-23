@@ -8,11 +8,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     public partial class WindowChangeUserRole : Window
     {
         private User _user;
+        private User _currentAdmin;
 
         public WindowChangeUserRole(User user)
         {
             InitializeComponent();
             _user = user;
+            _currentAdmin = UserData.CurrentUser;
             LoadUserData();
             LoadRoles();
         }
@@ -29,7 +31,21 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private void LoadRoles()
         {
             var roles = Core.Context.Role.ToList();
-            ComboBoxRoles.ItemsSource = roles;
+
+            // Если редактируемый пользователь - админ, убираем возможность менять роль
+            if (_user.Role.Name == "Администратор")
+            {
+                ComboBoxRoles.ItemsSource = roles.Where(r => r.Name == "Администратор").ToList();
+                ComboBoxRoles.IsEnabled = false;
+                TextBlockWarning.Visibility = Visibility.Visible;
+                TextBlockWarning.Text = "⚠ Нельзя изменить роль администратора";
+            }
+            else
+            {
+                ComboBoxRoles.ItemsSource = roles;
+                ComboBoxRoles.IsEnabled = true;
+            }
+
             ComboBoxRoles.DisplayMemberPath = "Name";
 
             var currentRole = roles.FirstOrDefault(r => r.ID == _user.RoleID);

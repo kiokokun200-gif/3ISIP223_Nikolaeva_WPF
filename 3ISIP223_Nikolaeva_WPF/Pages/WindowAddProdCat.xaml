@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
         mc:Ignorable="d"
-        Title="WindowAddProdCat" Height="110" Width="700">
+        Title="WindowAddProdCat" Height="150" Width="700">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

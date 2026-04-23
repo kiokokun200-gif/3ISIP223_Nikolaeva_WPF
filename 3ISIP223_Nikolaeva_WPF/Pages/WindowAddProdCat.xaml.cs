@@ -29,25 +29,29 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private void BtnConfAddProdCat_Click(object sender, RoutedEventArgs e)
         {
             string prodcattname = TxtBoxNameProdCat.Text;
-            try
+            if (prodcattname.Length <= 0)
             {
-                ProdCategory prodCategory = new ProdCategory()
+                try
                 {
-                    Name = prodcattname,
+                    ProdCategory prodCategory = new ProdCategory()
+                    {
+                        Name = prodcattname,
 
-                };
-                Core.Context.ProdCategory.Add(prodCategory);
-                Core.Context.SaveChanges();
+                    };
+                    Core.Context.ProdCategory.Add(prodCategory);
+                    Core.Context.SaveChanges();
 
+                MessageBox.Show("Производитель добавлен");
+
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка сохранения");
+                    return;
+                }
 
             }
-            catch
-            {
-                MessageBox.Show("Ошибка сохранения");
-                return;
-            }
-
-            MessageBox.Show("Производитель добавлен");
+            else MessageBox.Show("Заполните название");
         }
     }
 }

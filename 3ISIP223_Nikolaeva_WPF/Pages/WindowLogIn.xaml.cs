@@ -79,6 +79,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 if (Registration(TxtBoxRegFName.Text, TxtBoxRegLName.Text, TxtBoxRegMName.Text, TxtBoxRegNumber.Text, TxtBoxRegPassword.Password))
                 {
                     MessageBox.Show("Успешный вход!");
+                    
                     this.Close();
 
 
@@ -105,7 +106,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 };
                 Core.Context.User.Add(reguser);
                 Core.Context.SaveChanges();
-                UserData.CurrentUser = reguser;
+                Login(number, password);
+                //UserData.CurrentUser = ;
                 return true;
             }
 

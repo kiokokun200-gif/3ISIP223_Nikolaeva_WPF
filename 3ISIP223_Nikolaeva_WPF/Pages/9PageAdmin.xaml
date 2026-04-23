@@ -49,11 +49,11 @@
                             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="20">
                                 <Button Content="Редактировать" Width="160" Height="35" 
                                         Click="BtnEditUser_Click" Tag="{Binding}"/>
-                                <Button Content="Удалить" Width="100" Height="35" Margin="10,0,0,0"
+                                <Button Content="Удалить" Visibility="{Binding VisIsAdmin}" Width="100" Height="35" Margin="10,0,0,0"
                                         Click="BtnDeleteUser_Click" Tag="{Binding}"
                                         
                                         Background="#FF4444"/>
-                                <Button x:Name="BtnFroze" Content="{Binding ContIsFrozen}" Width="200" Height="35" Margin="10,0,0,0"
+                                <Button x:Name="BtnFroze" Visibility="{Binding VisIsAdmin}" Content="{Binding ContIsFrozen}" Width="200" Height="35" Margin="10,0,0,0"
                                         Click="BtnFroze_Click"/>
                             </StackPanel>
                         </Grid>

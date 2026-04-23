@@ -108,7 +108,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 UserID = UserData.CurrentUser.ID,
                 TotalAmount = 0,
-                
+                TotalQuantity = 0
+
             };
             Core.Context.Cart.Add(cart);
             Core.Context.SaveChanges();

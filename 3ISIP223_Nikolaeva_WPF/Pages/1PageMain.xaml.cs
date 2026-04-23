@@ -79,7 +79,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 NavigationService.Navigate(new _4PageAccount(UserData.CurrentUser));
             }
-            else if (UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Мастер")  // ← ДОБАВИТЬ
+            else if (UserData.IsLoggedIn && UserData.CurrentUser.Role.Name == "Мастер")  
             {
                 NavigationService.Navigate(new _8PageMaster(UserData.CurrentUser));
             }
