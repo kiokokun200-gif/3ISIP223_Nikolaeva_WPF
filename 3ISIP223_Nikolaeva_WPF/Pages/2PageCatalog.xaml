@@ -11,17 +11,16 @@
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <TextBlock Text="⌕" FontSize="25"/>
             <TextBox x:Name="TxtBoxSearch" Width="200" Margin="0 0 10 0" TextChanged="TxtBoxSearch_TextChanged"/>
             <TextBlock Text="Сортировка" FontSize="20" Margin="0 0 10 0"/>
-            <ComboBox x:Name="ComboBoxSort" Width="200" Margin="0 0 10 0"/>
+            <ComboBox x:Name="ComboBoxSort" Width="200" Margin="0 0 10 0" SelectedIndex="0" SelectionChanged="ComboBoxSort_SelectionChanged" />
             <TextBlock Text="Фильтрация по жанрам" Margin="0 0 10 0" FontSize="20"/>
-            <ComboBox x:Name="ComboBoxFiltrGenre" Width="200"/>
+            <ComboBox x:Name="ComboBoxFiltrGenre" Width="200" SelectedIndex="0"/>
         </StackPanel>
 
         <ListBox Grid.Row="1" x:Name="ListBoxBooks" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ListBoxBooks_MouseDoubleClick">

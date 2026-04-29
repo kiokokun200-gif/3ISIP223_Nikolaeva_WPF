@@ -91,8 +91,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Pages\2PageCatalog.xaml.cs">
       <DependentUpon>2PageCatalog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\3PageBook.xaml.cs">
+      <DependentUpon>3PageBook.xaml</DependentUpon>
     </Compile>
     <Compile Include="Review.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -130,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\2PageCatalog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\3PageBook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

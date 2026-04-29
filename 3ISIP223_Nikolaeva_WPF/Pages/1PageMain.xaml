@@ -23,6 +23,6 @@
             <Button x:Name="BtnProfile" Style="{StaticResource BtnsMenu}" Content="Профиль" Click="BtnProfile_Click"/>
         </StackPanel>
 
-        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Source="/Pages/2PageCatalog.xaml"/>
     </Grid>
 </Page>

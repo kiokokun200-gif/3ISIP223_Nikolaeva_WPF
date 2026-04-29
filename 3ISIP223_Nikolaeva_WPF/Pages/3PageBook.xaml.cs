@@ -12,22 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using _3ISIP223_Nikolaeva_WPF.Pages;
 
-namespace _3ISIP223_Nikolaeva_WPF
+namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для _3PageBook.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class _3PageBook : Page
     {
-        
-        public MainWindow()
+        private Book _book;
+        public _3PageBook(Book book)
         {
             InitializeComponent();
-            
+            _book = book;
         }
-
-       
     }
 }

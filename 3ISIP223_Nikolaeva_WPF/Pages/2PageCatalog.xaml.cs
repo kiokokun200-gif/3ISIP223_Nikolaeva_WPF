@@ -20,24 +20,70 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _2PageCatalog : Page
     {
+        private List<Book> _books;
+        private List<string> _sort;
+        private List<string> _filtr;
+        private List<BookGenre> _bookGenres;
         public _2PageCatalog()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            _books = Core.Context.Book.Where(b => !b.IsFrozen).ToList();
+            ListBoxBooks.ItemsSource = _books;
+           _sort = new List<string>()
+           {
+               "Все",
+               "По названию", 
+               "По оценке"
+           };
+
+            _filtr = Core.Context.Genre.Distinct().Select(f => f.Name).ToList();
+            _filtr.Insert(0, "Все");
+            _bookGenres = Core.Context.BookGenre.Where(b => !b.Book.IsFrozen).ToList();
+
         }
 
         private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            string text = TxtBoxSearch.Text.ToLower();
+            ListBoxBooks.ItemsSource = _books.Where(b => b.Name.ToLower() == text || b.User.NickName.ToLower() == text);
         }
 
         private void ListBoxBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            Book selectedBook = (Book)ListBoxBooks.SelectedItem;
+            if (selectedBook != null)
+            {
+                NavigationService.Navigate(new _3PageBook(selectedBook));
+            }
         }
 
         private void BtnAddToList_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = (Button)sender;
+            Book selectedBook = btn.DataContext as Book;
+            //окно какое нибудь
+        }
 
+        private void ComboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedItem = ComboBoxSort.SelectedItem.ToString();
+            if (selectedItem == "Все")
+            {
+                ListBoxBooks.ItemsSource = _books;
+            }
+            else if(selectedItem == "По названию")
+            {
+                ListBoxBooks.ItemsSource = _books.OrderBy(b => b.Name).ToList();
+            }
+            else
+            {
+                //как то по оценке
+            }
         }
     }
 }
