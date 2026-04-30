@@ -25,6 +25,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             InitializeComponent();
             _book = book;
+            DataContext = _book;
         }
+
+        private void BtnSeeContentBook_Click(object sender, RoutedEventArgs e)
+        {
+            TxtBlcSeeContent.Visibility = Visibility.Visible;
+
+        }
+
     }
 }

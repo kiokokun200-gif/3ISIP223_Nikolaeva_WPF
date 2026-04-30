@@ -8,8 +8,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
 {
     public partial class Book
     {
-        public string Genres { get; set {
-                BookGenre
-            }; }
+        //public string Genres { get; set {
+        //        BookGenre
+        //    }; }
     }
 }

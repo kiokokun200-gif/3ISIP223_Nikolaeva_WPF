@@ -20,6 +20,8 @@
             <TextBlock Text="{Binding Description}" FontSize="22" Margin="0 0 0 10"/>
             <TextBlock Text="{Binding User.NickName, StringFormat=Автор: {0}}" FontSize="22" Margin="0 0 0 10"/>
             <TextBlock Text="{Binding Genres, StringFormat=Жанры: {0}}" FontSize="22" Margin="0 0 0 10"/>
+            <Button x:Name="BtnSeeContentBook" Content="Посмотреть фрагмент ↓" Style="{StaticResource BtnsMenu}" Width="230" Height="35" Click="BtnSeeContentBook_Click"/>
+            <TextBlock x:Name="TxtBlcSeeContent" Text="{Binding Text}" FontSize="20" Foreground="Gray" Visibility="Collapsed" TextWrapping="Wrap"/>
         </StackPanel>
     </Grid>
 </Page>

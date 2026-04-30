@@ -1,0 +1,24 @@
+﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowAddToList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+        mc:Ignorable="d"
+        Title="WindowAddToList" Height="450" Width="400">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Добавление в список" FontSize="30" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBlock Text="{Binding Name, StringFormat=Книга: {0}}"/>
+            <ListBox x:Name="ListBoxStatuses" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Content="{Binding Name}" GroupName="RadioStatus" Checked="RadioButton_Checked"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button x:Name="BtnAddToList" Content="Добавить в список" Style="{StaticResource BtnsMenu}" Width="200" Height="35" Margin="10 10 0 0" Click="BtnAddToList_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

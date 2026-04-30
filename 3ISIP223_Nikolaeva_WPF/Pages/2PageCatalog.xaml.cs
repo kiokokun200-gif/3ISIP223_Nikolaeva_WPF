@@ -55,7 +55,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ListBoxBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Book selectedBook = (Book)ListBoxBooks.SelectedItem;
+            Book selectedBook = ListBoxBooks.SelectedItem as Book;
             if (selectedBook != null)
             {
                 NavigationService.Navigate(new _3PageBook(selectedBook));
@@ -66,7 +66,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             Button btn = (Button)sender;
             Book selectedBook = btn.DataContext as Book;
-            //окно какое нибудь
+            var wind = new WindowAddToList();
+            wind.ShowDialog();
         }
 
         private void ComboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)

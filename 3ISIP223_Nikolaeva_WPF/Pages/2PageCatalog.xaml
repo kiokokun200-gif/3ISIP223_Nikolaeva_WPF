@@ -23,7 +23,7 @@
             <ComboBox x:Name="ComboBoxFiltrGenre" Width="200" SelectedIndex="0"/>
         </StackPanel>
 
-        <ListBox Grid.Row="1" x:Name="ListBoxBooks" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ListBoxBooks_MouseDoubleClick">
+        <ListBox Grid.Row="1" x:Name="ListBoxBooks" d:ItemsSource="{d:SampleData ItemCount=5}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ListBoxBooks_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
