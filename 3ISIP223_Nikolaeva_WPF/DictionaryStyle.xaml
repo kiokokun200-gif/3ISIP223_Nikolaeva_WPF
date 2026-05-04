@@ -7,11 +7,19 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="0 0 10 10 "/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="5"/>
+    </Style>
+    <Style x:Key="BtnsPikmi" TargetType="Button">
+        <Setter Property="Background" Value="#FFFF559B"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="10 "/>
+        <Setter Property="Padding" Value="5"/>
     </Style>
 
     <Style TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Margin" Value="10 0 0 10"/>
+        <!--<Setter Property="Margin" Value="10 0 0 0"/>-->
     </Style>
 </ResourceDictionary>

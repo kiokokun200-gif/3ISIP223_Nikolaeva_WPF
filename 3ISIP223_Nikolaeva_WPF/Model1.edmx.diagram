@@ -4,19 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bd0cdb76a73348b896a5e65d27e58a1d" Name="Diagram1">
-        <EntityTypeShape EntityType="ShutIKrolModel.Book" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.BookGenre" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.BookStatus" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.Complaint" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.ComplaintReason" Width="1.5" PointX="6" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.DefrostingRequest" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.Genre" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.Review" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.Role" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.RoleRequest" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.User" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShutIKrolModel.UserBook" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
+      <Diagram DiagramId="375e872483b54d91bd18a1d61254a80c" Name="Diagram1">
+        <EntityTypeShape EntityType="ShutIKrolModel.Book" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.BookGenre" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.BookStatus" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.Complaint" Width="1.5" PointX="8.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.ComplaintReason" Width="1.5" PointX="6" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.ComplaintTargetType" Width="1.5" PointX="6" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.DefrostingRequest" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.Genre" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.Review" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.Role" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.RoleRequest" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.User" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShutIKrolModel.UserBook" Width="1.5" PointX="10.5" PointY="8.125" IsExpanded="true" />
         <AssociationConnector Association="ShutIKrolModel.FK_Book_User" ManuallyRouted="false" />
         <AssociationConnector Association="ShutIKrolModel.FK_BookGenre_Book" ManuallyRouted="false" />
         <AssociationConnector Association="ShutIKrolModel.FK_Review_Book" ManuallyRouted="false" />
@@ -24,6 +25,7 @@
         <AssociationConnector Association="ShutIKrolModel.FK_BookGenre_Genre" ManuallyRouted="false" />
         <AssociationConnector Association="ShutIKrolModel.FK_UserBook_BookStatus" ManuallyRouted="false" />
         <AssociationConnector Association="ShutIKrolModel.FK_Complaint_ComplaintReason" ManuallyRouted="false" />
+        <AssociationConnector Association="ShutIKrolModel.FK_Complaint_ComplaintTargetType" ManuallyRouted="false" />
         <AssociationConnector Association="ShutIKrolModel.FK_Complaint_User" ManuallyRouted="false" />
         <AssociationConnector Association="ShutIKrolModel.FK_DefrostingRequest_User" ManuallyRouted="false" />
         <AssociationConnector Association="ShutIKrolModel.FK_Review_User" ManuallyRouted="false" />

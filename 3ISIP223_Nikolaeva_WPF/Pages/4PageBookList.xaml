@@ -1,0 +1,57 @@
+﻿<Page x:Class="_3ISIP223_Nikolaeva_WPF.Pages._4PageBookList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="_4PageBookList">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="⌕" FontSize="25"/>
+            <!--<TextBox x:Name="TxtBoxSearch" Width="200" Margin="0 0 10 0" TextChanged="TxtBoxSearch_TextChanged"/>
+            <TextBlock Text="Сортировка" FontSize="20" Margin="0 0 10 0"/>
+            <ComboBox x:Name="ComboBoxSort" Width="200" Margin="0 0 10 0" SelectedIndex="0" SelectionChanged="ComboBoxSort_SelectionChanged" />
+            <TextBlock Text="Фильтрация по жанрам" Margin="0 0 10 0" FontSize="20"/>-->
+            <ComboBox x:Name="ComboBoxFiltrGenre" Width="200" SelectedIndex="0"/>
+        </StackPanel>
+        <ListBox Grid.Row="1" x:Name="ListBoxStatuses" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Border BorderBrush="Gray"  Margin="5 0" BorderThickness="1" CornerRadius="10">
+                            <Button Content="{Binding Name}" BorderThickness="0" Background="Transparent" Padding="5" />
+                        </Border>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <ListBox Grid.Row="2" x:Name="ListBoxBooks" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Book.CoverImage}" Width="100" Height="120"/>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Book.Name}"/>
+                            <TextBlock Text="{Binding Book.User.NickName, StringFormat=Автор: {0}}"/>
+                            <Button x:Name="BtnMoveBook" Content="Переместить" Style="{StaticResource BtnsPikmi}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

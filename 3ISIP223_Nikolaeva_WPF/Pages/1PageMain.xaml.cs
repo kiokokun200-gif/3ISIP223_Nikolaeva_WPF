@@ -27,16 +27,20 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnCatalogBook_Click(object sender, RoutedEventArgs e)
         {
-            if (!(Content is _2PageCatalog))
+            if (!(MainFrame.Content is _2PageCatalog))
             {
-                NavigationService.Navigate(new _2PageCatalog());
+                MainFrame.Navigate(new _2PageCatalog());
             }
             else return;
         }
 
         private void BtnListBook_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!(MainFrame.Content is _4PageBookList))
+            {
+                MainFrame.Navigate(new _4PageBookList());
+            }
+            else return;
         }
 
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)

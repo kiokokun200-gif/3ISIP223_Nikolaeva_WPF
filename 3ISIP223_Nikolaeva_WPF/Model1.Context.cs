@@ -13,10 +13,10 @@ namespace _3ISIP223_Nikolaeva_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ShutIKrolEntities : DbContext
+    public partial class ShutIKrolEntities1 : DbContext
     {
-        public ShutIKrolEntities()
-            : base("name=ShutIKrolEntities")
+        public ShutIKrolEntities1()
+            : base("name=ShutIKrolEntities1")
         {
         }
     
@@ -30,6 +30,7 @@ namespace _3ISIP223_Nikolaeva_WPF
         public virtual DbSet<BookStatus> BookStatus { get; set; }
         public virtual DbSet<Complaint> Complaint { get; set; }
         public virtual DbSet<ComplaintReason> ComplaintReason { get; set; }
+        public virtual DbSet<ComplaintTargetType> ComplaintTargetType { get; set; }
         public virtual DbSet<DefrostingRequest> DefrostingRequest { get; set; }
         public virtual DbSet<Genre> Genre { get; set; }
         public virtual DbSet<Review> Review { get; set; }

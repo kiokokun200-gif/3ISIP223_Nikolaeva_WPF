@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
             <TextBlock Text="⌕" FontSize="25"/>
             <TextBox x:Name="TxtBoxSearch" Width="200" Margin="0 0 10 0" TextChanged="TxtBoxSearch_TextChanged"/>
             <TextBlock Text="Сортировка" FontSize="20" Margin="0 0 10 0"/>
@@ -26,11 +26,11 @@
         <ListBox Grid.Row="1" x:Name="ListBoxBooks" d:ItemsSource="{d:SampleData ItemCount=5}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ListBoxBooks_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Margin="10 0 0 0">
                         <Image Source="{Binding CoverImage}" Width="100" Height="150"/>
                         <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"/>
                         <TextBlock Text="{Binding User.NickName, StringFormat=Автор: {0}}" FontSize="15"/>
-                        <Button x:Name="BtnAddToList" Content="Добавить в список" Background="#FFFF559B" BorderThickness="0" FontSize="15" Click="BtnAddToList_Click"/>
+                        <Button x:Name="BtnAddToList" Content="Добавить в список"  Width="200" Height="40" Style="{StaticResource BtnsPikmi}" FontSize="15" Click="BtnAddToList_Click"/>
 
                     </StackPanel>
                 </DataTemplate>

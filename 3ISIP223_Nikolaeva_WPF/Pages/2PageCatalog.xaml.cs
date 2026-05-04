@@ -66,8 +66,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             Button btn = (Button)sender;
             Book selectedBook = btn.DataContext as Book;
-            var wind = new WindowAddToList();
+            var wind = new WindowAddToList(selectedBook);
             wind.ShowDialog();
+            NavigationService.Navigate(new _2PageCatalog());
+
         }
 
         private void ComboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)

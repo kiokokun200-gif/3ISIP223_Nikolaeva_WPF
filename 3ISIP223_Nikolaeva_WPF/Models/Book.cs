@@ -8,8 +8,15 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
 {
     public partial class Book
     {
-        //public string Genres { get; set {
-        //        BookGenre
-        //    }; }
+        //public List<string> GenreNames
+        //{
+        //    get
+        //    {
+        //        if (BookGenre == null || !BookGenre.Any())
+        //            return new List<string>();
+
+        //        return BookGenre.Select(bg => bg.Genre?.Name).Where(name => name != null).ToList();
+        //    }
+        //}
     }
 }

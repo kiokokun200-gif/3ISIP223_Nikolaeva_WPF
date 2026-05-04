@@ -45,6 +45,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             if(!UserData.IsLoggedIn)
             {
                 MessageBox.Show("Войдите в аккаунт");
+                return;
             }
             if(!IsRaidoCheked)
             {
@@ -53,12 +54,26 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
             else
             {
-                UserBook userBook = new UserBook()
+                try
                 {
-                    BookID = _book.ID,
-                    UserID = UserData.CurrentUser.ID,
-                    BookStatusID = _bookStatus.ID,
-                };
+                    UserBook userBook = new UserBook()
+                    {
+                        BookID = _book.ID,
+                        UserID = UserData.CurrentUser.ID,
+                        BookStatusID = _bookStatus.ID,
+                    };
+                    Core.Context.UserBook.Add(userBook);
+                    Core.Context.SaveChanges();
+                    MessageBox.Show("Книга успешно сохранена в список!");
+                    
+                    this.DialogResult = true;
+                    this.Close();
+                }
+
+                catch
+                {
+                    MessageBox.Show("Ошибка сохранения");
+                }
             }
         }
     }

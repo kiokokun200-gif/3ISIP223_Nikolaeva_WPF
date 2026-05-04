@@ -12,31 +12,18 @@ namespace _3ISIP223_Nikolaeva_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class Book
+    public partial class ComplaintTargetType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Book()
+        public ComplaintTargetType()
         {
-            this.BookGenre = new HashSet<BookGenre>();
-            this.Review = new HashSet<Review>();
-            this.UserBook = new HashSet<UserBook>();
+            this.Complaint = new HashSet<Complaint>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string CoverImage { get; set; }
-        public string Text { get; set; }
-        public int AuthorID { get; set; }
-        public bool IsFrozen { get; set; }
-        public decimal AvgRating { get; set; }
     
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BookGenre> BookGenre { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Review> Review { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserBook> UserBook { get; set; }
+        public virtual ICollection<Complaint> Complaint { get; set; }
     }
 }
