@@ -120,6 +120,9 @@
     <Compile Include="Pages\WindowComplaint.xaml.cs">
       <DependentUpon>WindowComplaint.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WindowMoveBook.xaml.cs">
+      <DependentUpon>WindowMoveBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Review.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WindowComplaint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowMoveBook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

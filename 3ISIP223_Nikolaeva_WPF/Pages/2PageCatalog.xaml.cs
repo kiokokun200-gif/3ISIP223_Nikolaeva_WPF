@@ -44,6 +44,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             _filtr = Core.Context.Genre.Distinct().Select(f => f.Name).ToList();
             _filtr.Insert(0, "Все");
             _bookGenres = Core.Context.BookGenre.Where(b => !b.Book.IsFrozen).ToList();
+            
 
         }
 
@@ -85,7 +86,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
             else
             {
-                //как то по оценке
+                ListBoxBooks.ItemsSource = _books.OrderByDescending(b => b.AvgRating).ToList();
             }
         }
     }

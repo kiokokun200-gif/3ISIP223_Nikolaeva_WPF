@@ -1,0 +1,24 @@
+﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowMoveBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+        mc:Ignorable="d"
+        Title="WindowMoveBook" Height="450" Width="400">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="{Binding Name, StringFormat=Переместить книгу {0}}" FontSize="25" FontWeight="Bold"/>
+
+            <ListBox x:Name="ListBoxBookStatuses" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton GroupName="Radio" Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button Content="Переместить" Style="{StaticResource BtnsMenu}" Margin="10 10 0 0" x:Name="BtnMove" Click="BtnMove_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
