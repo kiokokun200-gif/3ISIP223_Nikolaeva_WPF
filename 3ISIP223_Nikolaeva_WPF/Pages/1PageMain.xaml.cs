@@ -55,7 +55,18 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnProfile_Click(object sender, RoutedEventArgs e)
         {
+            if ( UserData.CurrentUser.RoleID == 1)
+            {
+                MainFrame.Navigate(new _5PageUser(UserData.CurrentUser));
 
+            }
+            else if(UserData.CurrentUser.RoleID == 2)
+            {
+                NavigationService.Navigate(new _6PageAuthor());
+            }
+
+
+            else return;
         }
     }
 }

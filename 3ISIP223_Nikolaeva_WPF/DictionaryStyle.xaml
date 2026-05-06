@@ -22,4 +22,12 @@
         <Setter Property="FontSize" Value="20"/>
         <!--<Setter Property="Margin" Value="10 0 0 0"/>-->
     </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        
+    </Style>
 </ResourceDictionary>

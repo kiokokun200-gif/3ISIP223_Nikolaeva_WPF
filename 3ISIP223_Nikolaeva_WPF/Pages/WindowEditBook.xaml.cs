@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace _3ISIP223_Nikolaeva_WPF.Pages
+{
+    /// <summary>
+    /// Логика взаимодействия для WindowEditBook.xaml
+    /// </summary>
+    public partial class WindowEditBook : Window
+    {
+        private Book _book;
+        public WindowEditBook(Book book)
+        {
+            InitializeComponent();
+            _book = book;
+            DataContext = _book;
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(TxtBoxImagePath.Text))
+                {
+                    MessageBox.Show("Введите путь картинки");
+                    return;
+                }
+                else if (string.IsNullOrWhiteSpace(TxtBoxName.Text))
+                {
+                    MessageBox.Show("Введите название");
+                    return;
+
+                }
+
+                else if (string.IsNullOrWhiteSpace(TxtBoxDescription.Text))
+                {
+                    MessageBox.Show("Введите описание");
+                    return;
+                }
+
+                else if (string.IsNullOrWhiteSpace(TxtBoxText.Text))
+                {
+                    MessageBox.Show("Введите текст книги");
+                    return;
+                }
+                _book.CoverImage = TxtBoxImagePath.Text;
+                _book.Name = TxtBoxName.Text;
+                _book.Description = TxtBoxDescription.Text;
+                _book.Text = TxtBoxText.Text;
+                Core.Context.SaveChanges();
+                MessageBox.Show("Изменения сохранены");
+                this.Close();
+
+            }
+            catch 
+            {
+                MessageBox.Show("Ошибка сохранения");
+            }
+        }
+    }
+}

@@ -114,11 +114,26 @@
     <Compile Include="Pages\4PageBookList.xaml.cs">
       <DependentUpon>4PageBookList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\5PageUser.xaml.cs">
+      <DependentUpon>5PageUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\6PageAuthor.xaml.cs">
+      <DependentUpon>6PageAuthor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\7PageAddBook.xaml.cs">
+      <DependentUpon>7PageAddBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\8PageAdmin.xaml.cs">
+      <DependentUpon>8PageAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WindowAddToList.xaml.cs">
       <DependentUpon>WindowAddToList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WindowComplaint.xaml.cs">
       <DependentUpon>WindowComplaint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WindowEditBook.xaml.cs">
+      <DependentUpon>WindowEditBook.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WindowMoveBook.xaml.cs">
       <DependentUpon>WindowMoveBook.xaml</DependentUpon>
@@ -171,11 +186,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\5PageUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\6PageAuthor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\7PageAddBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\8PageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\WindowAddToList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WindowComplaint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowEditBook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
