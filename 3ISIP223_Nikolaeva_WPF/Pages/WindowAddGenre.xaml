@@ -1,0 +1,28 @@
+﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowAddGenre"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+        mc:Ignorable="d"
+        Title="WindowAddGenre" Height="450" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="AUTO"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Добавление жанров" FontSize="30" FontWeight="Bold"/>
+
+        <ListBox x:Name="ListBoxGenres" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Grid.Row="2" Content="Сохранить" x:Name="BtnSave" Style="{StaticResource BtnsPikmi}" Width="150" HorizontalAlignment="Left"/>
+    </Grid>
+</Window>

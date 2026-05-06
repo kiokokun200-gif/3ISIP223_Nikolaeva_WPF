@@ -22,7 +22,33 @@
         </StackPanel>
         <TabControl Grid.Row="1" TabStripPlacement="Left">
             <TabItem Header="Список жалоб">
-                
+                <ListBox>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Жалоба № {0} от {1}">
+                                                    <Binding Path="ID"/>
+                                                    <Binding Path="User.NickName"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding ComplaintTargetType.Name}"/>
+                                        <TextBlock Text="{Binding ComplaintReason.Name}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </TabItem>
 
             <TabItem Header="Список заявок на разморозку">
@@ -36,6 +62,13 @@
             <TabItem Header="Список заморозок">
                 <TabControl>
                     <TabItem Header="Книги">
+                        
+                    </TabItem>
+                    <TabItem Header="Пользователи">
+                        
+                    </TabItem>
+
+                    <TabItem Header="Отзывы">
                         
                     </TabItem>
                 </TabControl>

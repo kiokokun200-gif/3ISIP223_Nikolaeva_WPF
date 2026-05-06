@@ -126,6 +126,9 @@
     <Compile Include="Pages\8PageAdmin.xaml.cs">
       <DependentUpon>8PageAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WindowAddGenre.xaml.cs">
+      <DependentUpon>WindowAddGenre.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WindowAddToList.xaml.cs">
       <DependentUpon>WindowAddToList.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\8PageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowAddGenre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,11 +20,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     public partial class WindowEditBook : Window
     {
         private Book _book;
+        private List<BookGenre> _bookGenres;
         public WindowEditBook(Book book)
         {
             InitializeComponent();
             _book = book;
             DataContext = _book;
+            _bookGenres = Core.Context.BookGenre.Where(b => b.BookID == _book.ID).ToList();
+            ListBoxGenres.ItemsSource = _bookGenres;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -67,6 +70,15 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 MessageBox.Show("Ошибка сохранения");
             }
+        }
+
+        private void BtnDeleteGenre_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            BookGenre bookGenre = btn.DataContext as BookGenre;
+            _bookGenres.Remove(bookGenre);
+            ListBoxGenres.ItemsSource = _bookGenres;
+            Core.Context.SaveChanges();
         }
     }
 }
