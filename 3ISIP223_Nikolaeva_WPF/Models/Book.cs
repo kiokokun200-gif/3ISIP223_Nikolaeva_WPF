@@ -8,6 +8,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Models
 {
     public partial class Book
     {
+
         //public List<string> GenreNames
         //{
         //    get

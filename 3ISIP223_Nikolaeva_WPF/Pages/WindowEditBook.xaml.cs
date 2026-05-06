@@ -27,6 +27,12 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             _book = book;
             DataContext = _book;
             _bookGenres = Core.Context.BookGenre.Where(b => b.BookID == _book.ID).ToList();
+            var genres = db.BookGenre
+            .Where(bg => bg.BookID == _currentBook.ID)
+            .Select(bg => bg.Genre.Name)
+            .ToList();
+            GenresTextBlock.Text = _bookGenres.Any() ? string.Join(", ", _bookGenres)
+            : "Жанры не выбраны";
             ListBoxGenres.ItemsSource = _bookGenres;
         }
 
