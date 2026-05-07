@@ -23,6 +23,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     {
         private List<Complaint> _complaints;
         private List<DefrostingRequest> _defrostingRequests;
+        private List<RoleRequest> _roleRequests;
+        private List<Book> _frozeBooks;
+        private List<User> _frozeUsers;
+        private List<Review> _frozenReviews;
         public _8PageAdmin()
         {
             InitializeComponent();
@@ -35,6 +39,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             LoadDateComp();
             LoadDefReq();
+            LoadRoleReq();
+            _frozeBooks = Core.Context.Book.Where(b => b.IsFrozen).ToList();
+            ListBoxFrozeBooks.ItemsSource = _frozeBooks;
+            _frozenReviews = Core.Context.Review.Where(r => r.IsFrozen).ToList();
+            ListBoxFrozeReviews.ItemsSource = _frozenReviews;
+            _frozeUsers = Core.Context.User.Where(u => u.IsFrozen).ToList();
+            ListBoxFrozeUsers.ItemsSource = _frozeUsers;
         }
         private void LoadDateComp()
         {
@@ -45,6 +56,12 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             _defrostingRequests =Core.Context.DefrostingRequest.ToList();
             ListBoxDefrozeRequests.ItemsSource = _defrostingRequests;
+        }
+
+        private void LoadRoleReq()
+        {
+            _roleRequests = Core.Context.RoleRequest.ToList();
+            ListBoxRoleRequests.ItemsSource = _roleRequests;
         }
 
         private void BtnAcceptComplaint_Click(object sender, RoutedEventArgs e)
@@ -76,6 +93,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                         break;
                     }
             }
+            LoadDateComp();
         }
 
         private void BtnRejectComplaint_Click(object sender, RoutedEventArgs e)
@@ -90,12 +108,59 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnAcceptDefRequest_Click(object sender, RoutedEventArgs e)
         {
+            Button button = (Button)sender;
+            DefrostingRequest defrostingRequest = (DefrostingRequest)button.DataContext;
+            defrostingRequest.IsConfirmed = true;
+            Core.Context.SaveChanges();
+            switch (defrostingRequest.ComplaintTargetType.Name)
+            {
+                case "Книга":
+                    {
+                        var book = Core.Context.Book.FirstOrDefault(b => b.ID == defrostingRequest.TargetID);
+                        book.IsFrozen = false;
+                        Core.Context.SaveChanges();
+                        break;
+                    }
 
+                case "Автор":
+                    {
+                        var avt = Core.Context.User.FirstOrDefault(a => a.ID == defrostingRequest.TargetID);
+                        avt.IsFrozen = false;
+                        Core.Context.SaveChanges();
+                        break;
+                    }
+
+            }
+            LoadDefReq();
         }
 
         private void BtnRejectDefRequest_Click(object sender, RoutedEventArgs e)
         {
+            Button button = (Button)sender;
+            DefrostingRequest defrostingRequest = (DefrostingRequest)button.DataContext;
+            defrostingRequest.IsConfirmed = true;
+            Core.Context.SaveChanges();
+            LoadDefReq();
+        }
 
+        private void BtnAcceptAuthorRequest_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            RoleRequest roleRequest = (RoleRequest)button.DataContext;
+            roleRequest.IsConfirmed = true;
+            User author = Core.Context.User.FirstOrDefault(a => a.ID == roleRequest.UserID);
+            author.RoleID = 2;
+            Core.Context.SaveChanges();
+            LoadRoleReq();
+        }
+
+        private void BtnRejectAuthorRequest_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            RoleRequest roleRequest = (RoleRequest)button.DataContext;
+            roleRequest.IsConfirmed = false;
+            Core.Context.SaveChanges();
+            LoadRoleReq();
         }
     }
 }

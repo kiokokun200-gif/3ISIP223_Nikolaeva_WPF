@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _3ISIP223_Nikolaeva_WPF
 {
@@ -24,7 +25,12 @@ namespace _3ISIP223_Nikolaeva_WPF
                             return $"Заявка на разморозку {ComplaintTargetType.Name} {user.NickName} {Date:dd MMMM yyyy}";
 
                         }
+                    default: return null;
                 }
-            } }
+            } 
+        }
+        public Visibility VisIsConfirmed => IsConfirmed == null ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility VisIsClosed => IsConfirmed != null ? Visibility.Visible : Visibility.Collapsed;
     }
 }
