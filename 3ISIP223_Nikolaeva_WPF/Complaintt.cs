@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _3ISIP223_Nikolaeva_WPF
 {
@@ -40,7 +41,9 @@ namespace _3ISIP223_Nikolaeva_WPF
 
         public string FullDescription { get
             {
-                return $"Жалоба №{ID} от {User.NickName} на {ComplaintTargetType.Name} {TargetName} от {Date} по причине {ComplaintReason.Name}";
+                return $"Жалоба №{ID} от {User.NickName} на {ComplaintTargetType.Name} {TargetName} \nот {Date:dd MMMM yyyy} по причине {ComplaintReason.Name}";
             } }
+
+        public Visibility VisIsConfirmed => IsConfirmed == null ? Visibility.Visible : Visibility.Collapsed;
     }
 }

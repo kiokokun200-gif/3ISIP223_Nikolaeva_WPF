@@ -47,7 +47,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
             else
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show($"Хотите пожаловаться на на {_complaintTargetType.Name} {_targetName} по причине {_selectedComplaintReason}?", "Подтверждение жалобы", MessageBoxButton.YesNo);
+                MessageBoxResult messageBoxResult = MessageBox.Show($"Хотите пожаловаться на на {_complaintTargetType.Name} {_targetName} по причине {_selectedComplaintReason.Name}?", "Подтверждение жалобы", MessageBoxButton.YesNo);
                 if(messageBoxResult == MessageBoxResult.Yes)
                 {
                     try

@@ -18,12 +18,38 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// <summary>
     /// Логика взаимодействия для _8PageAdmin.xaml
     /// </summary>
+    
     public partial class _8PageAdmin : Page
     {
+        private List<Complaint> _complaints;
         public _8PageAdmin()
         {
             InitializeComponent();
             DataContext = UserData.CurrentUser;
+            LoadDate();
+        }
+
+        private void LoadDate()
+        {
+            _complaints = Core.Context.Complaint.ToList();
+            ListBoxComplaints.ItemsSource = _complaints;
+        }
+
+        private void BtnAcceptComplaint_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Complaint complaint = (Complaint)button.DataContext;
+            complaint.IsConfirmed = true;
+            Core.Context.SaveChanges();
+        }
+
+        private void BtnRejectComplaint_Click(object sender, RoutedEventArgs e)
+        {
+
+            Button button = (Button)sender;
+            Complaint complaint = (Complaint)button.DataContext;
+            complaint.IsConfirmed = false;
+            Core.Context.SaveChanges();
         }
     }
 }

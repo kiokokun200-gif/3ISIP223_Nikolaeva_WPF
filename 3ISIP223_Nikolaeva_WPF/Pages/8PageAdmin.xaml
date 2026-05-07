@@ -22,7 +22,7 @@
         </StackPanel>
         <TabControl Grid.Row="1" TabStripPlacement="Left">
             <TabItem Header="Список жалоб">
-                <ListBox>
+                <ListBox x:Name="ListBoxComplaints" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4">
@@ -32,10 +32,10 @@
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0"  Text="{Binding FullDescription}"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Content="Принять" />
-                                        <Button Content="Отклонить"/>
+                                    <TextBlock Grid.Column="0"  Text="{Binding FullDescription}" Margin="0 0 15 0"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding VisIsConfirmed}">
+                                        <Button  Content="Принять"  Margin="0 0 10 10" Style="{StaticResource BtnsMenu}" Click="BtnAcceptComplaint_Click"/>
+                                        <Button  Content="Отклонить" Background="#FFFF7171" Margin="0 0 10 10" Padding="5" BorderThickness="0" Click="BtnRejectComplaint_Click"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>
