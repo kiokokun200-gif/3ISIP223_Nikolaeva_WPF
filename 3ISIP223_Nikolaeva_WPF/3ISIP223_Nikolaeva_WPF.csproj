@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Bookk.cs" />
+    <Compile Include="Models\DefrostingRequestt.cs" />
     <Compile Include="Pages\2PageCatalog.xaml.cs">
       <DependentUpon>2PageCatalog.xaml</DependentUpon>
     </Compile>

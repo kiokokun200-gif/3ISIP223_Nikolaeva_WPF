@@ -18,6 +18,7 @@ namespace _3ISIP223_Nikolaeva_WPF
         public ComplaintTargetType()
         {
             this.Complaint = new HashSet<Complaint>();
+            this.DefrostingRequest = new HashSet<DefrostingRequest>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,7 @@ namespace _3ISIP223_Nikolaeva_WPF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaint> Complaint { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DefrostingRequest> DefrostingRequest { get; set; }
     }
 }

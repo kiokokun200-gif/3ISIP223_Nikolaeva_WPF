@@ -20,6 +20,7 @@ namespace _3ISIP223_Nikolaeva_WPF
         public int UserID { get; set; }
         public int BookID { get; set; }
         public System.DateTime Date { get; set; }
+        public bool IsFrozen { get; set; }
     
         public virtual Book Book { get; set; }
         public virtual User User { get; set; }

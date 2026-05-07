@@ -13,10 +13,10 @@ namespace _3ISIP223_Nikolaeva_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ShutIKrolEntities1 : DbContext
+    public partial class ShutIKrolEntities2 : DbContext
     {
-        public ShutIKrolEntities1()
-            : base("name=ShutIKrolEntities1")
+        public ShutIKrolEntities2()
+            : base("name=ShutIKrolEntities2")
         {
         }
     

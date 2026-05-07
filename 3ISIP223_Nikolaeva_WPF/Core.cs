@@ -8,6 +8,6 @@ namespace _3ISIP223_Nikolaeva_WPF
 {
     public static class Core
     {
-        public static ShutIKrolEntities1 Context = new ShutIKrolEntities1();
+        public static ShutIKrolEntities2 Context = new ShutIKrolEntities2();
     }
 }

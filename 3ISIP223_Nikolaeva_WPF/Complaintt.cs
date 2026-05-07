@@ -45,5 +45,7 @@ namespace _3ISIP223_Nikolaeva_WPF
             } }
 
         public Visibility VisIsConfirmed => IsConfirmed == null ? Visibility.Visible : Visibility.Collapsed;
+
+        public Visibility VisIsClosed => IsConfirmed != null ? Visibility.Visible : Visibility.Collapsed;   
     }
 }

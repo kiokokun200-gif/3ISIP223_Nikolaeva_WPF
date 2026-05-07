@@ -37,6 +37,7 @@
                                         <Button  Content="Принять"  Margin="0 0 10 10" Style="{StaticResource BtnsMenu}" Click="BtnAcceptComplaint_Click"/>
                                         <Button  Content="Отклонить" Background="#FFFF7171" Margin="0 0 10 10" Padding="5" BorderThickness="0" Click="BtnRejectComplaint_Click"/>
                                     </StackPanel>
+                                    <TextBlock Text="[Закрыта]" Grid.Column="1" Visibility="{Binding VisIsClosed}" Margin="0 0 10 10"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -45,7 +46,29 @@
             </TabItem>
 
             <TabItem Header="Список заявок на разморозку">
-                
+                <ListBox x:Name="ListBoxDefrozeRequests">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox Grid.Column="0"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding VisIsConfirmed}">
+                                        <Button x:Name="BtnAcceptDefRequest" Content="Принять"  Margin="0 0 10 10" Style="{StaticResource BtnsMenu}" Click="BtnAcceptDefRequest_Click"/>
+                                        <Button x:Name="BtnRejectDefRequest" Content="Отклонить" Background="#FFFF7171" Margin="0 0 10 10" Padding="5" BorderThickness="0" Click="BtnRejectDefRequest_Click"/>
+                                    </StackPanel>
+                                    <TextBlock Text="[Закрыта]" Grid.Column="1" Visibility="{Binding VisIsClosed}" Margin="0 0 10 10"/>
+
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </TabItem>
 
             <TabItem Header="Список заявок на роль автора">

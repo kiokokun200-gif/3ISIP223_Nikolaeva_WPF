@@ -45,7 +45,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)
         {
-            if(UserData.CurrentUser.ID == 3)
+            if(UserData.CurrentUser.RoleID == 3)
             {
                 MainFrame.Navigate(new _8PageAdmin());
             }

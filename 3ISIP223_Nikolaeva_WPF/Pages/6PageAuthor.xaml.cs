@@ -55,7 +55,15 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 try
                 {
-                    //спросить про разморозку
+                    DefrostingRequest request = new DefrostingRequest() { 
+                        UserID = UserData.CurrentUser.ID,
+                        Date = DateTime.Now,
+                        TargetTypeID = 1,
+                        TargetID = book.ID,
+                    };
+                    Core.Context.DefrostingRequest.Add(request);
+                    Core.Context.SaveChanges();
+
                 }
                 catch
                 {

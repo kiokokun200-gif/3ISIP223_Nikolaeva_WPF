@@ -18,7 +18,10 @@ namespace _3ISIP223_Nikolaeva_WPF
         public int UserID { get; set; }
         public Nullable<bool> IsConfirmed { get; set; }
         public System.DateTime Date { get; set; }
+        public int TargetTypeID { get; set; }
+        public int TargetID { get; set; }
     
+        public virtual ComplaintTargetType ComplaintTargetType { get; set; }
         public virtual User User { get; set; }
     }
 }

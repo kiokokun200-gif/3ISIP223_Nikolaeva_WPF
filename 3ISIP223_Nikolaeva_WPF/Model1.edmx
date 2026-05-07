@@ -67,6 +67,8 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="IsConfirmed" Type="bit" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TargetTypeID" Type="int" Nullable="false" />
+          <Property Name="TargetID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -86,6 +88,7 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="BookID" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="IsFrozen" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -193,6 +196,18 @@
             </Principal>
             <Dependent Role="Complaint">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DefrostingRequest_ComplaintTargetType">
+          <End Role="ComplaintTargetType" Type="Self.ComplaintTargetType" Multiplicity="1" />
+          <End Role="DefrostingRequest" Type="Self.DefrostingRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplaintTargetType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DefrostingRequest">
+              <PropertyRef Name="TargetTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -330,6 +345,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Complaint" EntitySet="Complaint" />
           </AssociationSet>
+          <AssociationSet Name="FK_DefrostingRequest_ComplaintTargetType" Association="Self.FK_DefrostingRequest_ComplaintTargetType">
+            <End Role="ComplaintTargetType" EntitySet="ComplaintTargetType" />
+            <End Role="DefrostingRequest" EntitySet="DefrostingRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_DefrostingRequest_User" Association="Self.FK_DefrostingRequest_User">
             <End Role="User" EntitySet="User" />
             <End Role="DefrostingRequest" EntitySet="DefrostingRequest" />
@@ -433,6 +452,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Complaint" Relationship="Self.FK_Complaint_ComplaintTargetType" FromRole="ComplaintTargetType" ToRole="Complaint" />
+          <NavigationProperty Name="DefrostingRequest" Relationship="Self.FK_DefrostingRequest_ComplaintTargetType" FromRole="ComplaintTargetType" ToRole="DefrostingRequest" />
         </EntityType>
         <EntityType Name="DefrostingRequest">
           <Key>
@@ -442,6 +462,9 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="IsConfirmed" Type="Boolean" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TargetTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TargetID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ComplaintTargetType" Relationship="Self.FK_DefrostingRequest_ComplaintTargetType" FromRole="DefrostingRequest" ToRole="ComplaintTargetType" />
           <NavigationProperty Name="User" Relationship="Self.FK_DefrostingRequest_User" FromRole="DefrostingRequest" ToRole="User" />
         </EntityType>
         <EntityType Name="Genre">
@@ -463,6 +486,7 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="BookID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsFrozen" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Book" Relationship="Self.FK_Review_Book" FromRole="Review" ToRole="Book" />
           <NavigationProperty Name="User" Relationship="Self.FK_Review_User" FromRole="Review" ToRole="User" />
         </EntityType>
@@ -623,6 +647,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DefrostingRequest_ComplaintTargetType">
+          <End Role="ComplaintTargetType" Type="Self.ComplaintTargetType" Multiplicity="1" />
+          <End Role="DefrostingRequest" Type="Self.DefrostingRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplaintTargetType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DefrostingRequest">
+              <PropertyRef Name="TargetTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DefrostingRequest_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="DefrostingRequest" Type="Self.DefrostingRequest" Multiplicity="*" />
@@ -683,7 +719,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ShutIKrolEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ShutIKrolEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Book" EntityType="Self.Book" />
           <EntitySet Name="BookGenre" EntityType="Self.BookGenre" />
           <EntitySet Name="BookStatus" EntityType="Self.BookStatus" />
@@ -733,6 +769,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Complaint" EntitySet="Complaint" />
           </AssociationSet>
+          <AssociationSet Name="FK_DefrostingRequest_ComplaintTargetType" Association="Self.FK_DefrostingRequest_ComplaintTargetType">
+            <End Role="ComplaintTargetType" EntitySet="ComplaintTargetType" />
+            <End Role="DefrostingRequest" EntitySet="DefrostingRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_DefrostingRequest_User" Association="Self.FK_DefrostingRequest_User">
             <End Role="User" EntitySet="User" />
             <End Role="DefrostingRequest" EntitySet="DefrostingRequest" />
@@ -759,7 +799,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ShutIKrolModelContainer" CdmEntityContainer="ShutIKrolEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ShutIKrolModelContainer" CdmEntityContainer="ShutIKrolEntities2">
           <EntitySetMapping Name="Book">
             <EntityTypeMapping TypeName="ShutIKrolModel.Book">
               <MappingFragment StoreEntitySet="Book">
@@ -827,6 +867,8 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TargetTypeID" ColumnName="TargetTypeID" />
+                <ScalarProperty Name="TargetID" ColumnName="TargetID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -848,6 +890,7 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsFrozen" ColumnName="IsFrozen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
