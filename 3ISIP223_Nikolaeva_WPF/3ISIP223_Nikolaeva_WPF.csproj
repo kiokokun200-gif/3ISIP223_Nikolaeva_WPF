@@ -79,6 +79,7 @@
     <Compile Include="ComplaintReason.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Complaintt.cs" />
     <Compile Include="ComplaintTargetType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -105,6 +106,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Bookk.cs" />
     <Compile Include="Pages\2PageCatalog.xaml.cs">
       <DependentUpon>2PageCatalog.xaml</DependentUpon>
     </Compile>

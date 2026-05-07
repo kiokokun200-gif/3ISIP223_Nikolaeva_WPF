@@ -32,17 +32,10 @@
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <StackPanel>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="Жалоба № {0} от {1}">
-                                                    <Binding Path="ID"/>
-                                                    <Binding Path="User.NickName"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                        <TextBlock Text="{Binding ComplaintTargetType.Name}"/>
-                                        <TextBlock Text="{Binding ComplaintReason.Name}"/>
+                                    <TextBlock Grid.Column="0"  Text="{Binding FullDescription}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Принять" />
+                                        <Button Content="Отклонить"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>

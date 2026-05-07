@@ -8,7 +8,7 @@ namespace _3ISIP223_Nikolaeva_WPF
 {
     public static class UserData
     {
-        public static User CurrentUser { get; set; } = Core.Context.User.First(u => u.ID == 2);
+        public static User CurrentUser { get; set; } = Core.Context.User.First(u => u.ID == 1);
         public static bool IsLoggedIn => CurrentUser != null;
     }
 }

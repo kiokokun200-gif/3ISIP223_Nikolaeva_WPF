@@ -23,6 +23,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public _8PageAdmin()
         {
             InitializeComponent();
+            DataContext = UserData.CurrentUser;
         }
     }
 }
