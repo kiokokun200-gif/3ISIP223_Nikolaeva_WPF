@@ -110,6 +110,7 @@
     <Compile Include="Models\DefrostingRequestt.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\RoleRequestt.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Pages\2PageCatalog.xaml.cs">
       <DependentUpon>2PageCatalog.xaml</DependentUpon>
     </Compile>
@@ -136,6 +137,12 @@
     </Compile>
     <Compile Include="Pages\WindowAddToList.xaml.cs">
       <DependentUpon>WindowAddToList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WindowChangePassword.xaml.cs">
+      <DependentUpon>WindowChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WindowChangeRole.xaml.cs">
+      <DependentUpon>WindowChangeRole.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WindowComplaint.xaml.cs">
       <DependentUpon>WindowComplaint.xaml</DependentUpon>
@@ -215,6 +222,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WindowAddToList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WindowChangeRole.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

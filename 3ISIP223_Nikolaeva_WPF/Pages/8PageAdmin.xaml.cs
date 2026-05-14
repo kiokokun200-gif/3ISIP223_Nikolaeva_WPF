@@ -27,6 +27,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private List<Book> _frozeBooks;
         private List<User> _frozeUsers;
         private List<Review> _frozenReviews;
+        private List<User> _users;
         public _8PageAdmin()
         {
             InitializeComponent();
@@ -46,6 +47,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             ListBoxFrozeReviews.ItemsSource = _frozenReviews;
             _frozeUsers = Core.Context.User.Where(u => u.IsFrozen).ToList();
             ListBoxFrozeUsers.ItemsSource = _frozeUsers;
+            LoadUsers();
+        }
+        private void LoadUsers()
+        {
+            _users = Core.Context.User.Where(u => !u.IsFrozen).ToList();
+            ListBoxUsers.ItemsSource = _users;
+
         }
         private void LoadDateComp()
         {
@@ -161,6 +169,24 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             roleRequest.IsConfirmed = false;
             Core.Context.SaveChanges();
             LoadRoleReq();
+        }
+
+        private void BtnChangeRole_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            User user = (User)btn.DataContext;
+            var wind = new WindowChangeRole(user);
+            wind.ShowDialog();
+            LoadUsers();
+        }
+
+        private void BtnChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            User user = (User)btn.DataContext;
+            var wind = new WindowChangePassword(user);
+            wind.ShowDialog();
+            LoadUsers();
         }
     }
 }

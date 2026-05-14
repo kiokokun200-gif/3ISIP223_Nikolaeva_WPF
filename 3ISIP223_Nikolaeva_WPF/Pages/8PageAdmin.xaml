@@ -150,7 +150,32 @@
             </TabItem>
 
             <TabItem Header="Список пользователей">
-                
+                <ListBox x:Name="ListBoxUsers" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="{Binding Login}"/>
+                                        <TextBlock Text="{Binding Password}"/>
+                                        <TextBlock Text="{Binding Role.Name, StringFormat=Роль: {0} }"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Column="1" Visibility="{Binding VisIsAdmin}" HorizontalAlignment="Right">
+                                        <Button x:Name="BtnChangeRole" Content="Изменить роль" Style="{StaticResource BtnsMenu}" Height="40" Click="BtnChangeRole_Click"/>
+                                        <Button x:Name="BtnChangePassword" Content="Сменить пароль" Style="{StaticResource BtnsMenu}" Height="40" Click="BtnChangePassword_Click"/>
+                                        
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </TabItem>
         </TabControl>
     </Grid>

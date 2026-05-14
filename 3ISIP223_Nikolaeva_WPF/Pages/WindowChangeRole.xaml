@@ -1,0 +1,16 @@
+﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowChangeRole"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+        mc:Ignorable="d"
+        Title="WindowChangeRole" Height="250" Width="230">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Margin="5">
+            <TextBlock Text="{Binding NickName, StringFormat= Измение роли для {0}}"/>
+            <ComboBox x:Name="ComboRoles" Width="200"/>
+            <Button x:Name="BtnSave" Content="Сохранить" Style="{StaticResource BtnsPikmi}" Click="BtnSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
