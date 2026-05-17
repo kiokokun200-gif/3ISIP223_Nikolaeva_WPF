@@ -18,5 +18,6 @@ namespace _3ISIP223_Nikolaeva_WPF
                 return BookGenre.Select(bg => bg.Genre?.Name).Where(name => name != null).ToList();
             }
         }
+        public string GenresString => string.Join(", ", GenreNames);
     }
 }

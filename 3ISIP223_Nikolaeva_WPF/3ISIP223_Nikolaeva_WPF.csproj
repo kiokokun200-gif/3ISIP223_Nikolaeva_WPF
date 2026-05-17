@@ -135,6 +135,9 @@
     <Compile Include="Pages\WindowAddGenre.xaml.cs">
       <DependentUpon>WindowAddGenre.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WindowAddReview.xaml.cs">
+      <DependentUpon>WindowAddReview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WindowAddToList.xaml.cs">
       <DependentUpon>WindowAddToList.xaml</DependentUpon>
     </Compile>
@@ -221,6 +224,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\WindowAddReview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\WindowAddToList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -283,13 +290,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Image\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Icons\Admin.png" />
+    <Resource Include="Images\Icons\BookCatalog.png" />
+    <Resource Include="Images\Icons\BookList.png" />
+    <Resource Include="Images\Icons\Profile.png" />
+    <Resource Include="Images\Icons\ProfileFroze.png" />
+    <Resource Include="Images\Icons\Author.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

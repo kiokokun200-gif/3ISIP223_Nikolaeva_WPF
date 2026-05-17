@@ -27,7 +27,7 @@
          </StackPanel>
 
         <Button x:Name="BtnAuthorRequest" Height="40" HorizontalAlignment="Right" Content="Подать на автора" Style="{StaticResource BtnsMenu}" Grid.Column="1" Grid.Row="0" Click="BtnAuthorRequest_Click"/>
-        <ListBox Grid.Row="1" x:Name="ListBoxReviews" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox Grid.Row="1" x:Name="ListBoxReviews" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5">

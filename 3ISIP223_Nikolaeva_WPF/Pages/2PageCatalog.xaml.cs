@@ -75,19 +75,23 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ComboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedItem = ComboBoxSort.SelectedItem.ToString();
-            if (selectedItem == "Все")
+            string selectedSort = ComboBoxSort.SelectedItem.ToString();
+            string selectedGenre = ComboBoxFiltrGenre.SelectedItem.ToString();
+            if (selectedSort == "Все" && selectedGenre == "Все")
             {
                 ListBoxBooks.ItemsSource = _books;
             }
-            else if(selectedItem == "По названию")
+            else if(selectedSort == "По названию" && selectedGenre != "Все")
             {
-                ListBoxBooks.ItemsSource = _books.OrderBy(b => b.Name).ToList();
+                ListBoxBooks.ItemsSource = _books.Where(bu => bu.GenresString.Contains(selectedGenre)).OrderBy(b => b.Name).ToList();
             }
-            else
+            else if (selectedSort == "По оценке" && selectedGenre != "Все")
             {
-                ListBoxBooks.ItemsSource = _books.OrderByDescending(b => b.AvgRating).ToList();
+                ListBoxBooks.ItemsSource = _books.Where(bu => bu.GenresString.Contains(selectedGenre)).OrderByDescending(b => b.AvgRating).ToList();
             }
         }
+
+        
+        
     }
 }

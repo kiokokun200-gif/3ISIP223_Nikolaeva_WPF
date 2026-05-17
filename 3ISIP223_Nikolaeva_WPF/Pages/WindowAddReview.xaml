@@ -1,0 +1,23 @@
+﻿<Window x:Class="_3ISIP223_Nikolaeva_WPF.Pages.WindowAddReview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+        mc:Ignorable="d"
+        Title="WindowAddReview" Height="450" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="{Binding Name, StringFormat=Отзыв на книгу {0}}" FontSize="25" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Оценка: "/>
+                <ComboBox x:Name="ComboBoxRating" Width="50" SelectedIndex="0"/>
+                
+            </StackPanel>
+            <TextBlock Text="Текст отзыва: "/>
+            <TextBox x:Name="TxtBoxTextReview" Width="370" Height="100" HorizontalContentAlignment="Stretch"/>
+            <Button x:Name="BtnAddReview" Style="{StaticResource BtnsPikmi}" Content="Оставить отзыв" Click="BtnAddReview_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

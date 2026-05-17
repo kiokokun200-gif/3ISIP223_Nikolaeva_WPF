@@ -20,7 +20,7 @@
             <TextBlock Text="Сортировка" FontSize="20" Margin="0 0 10 0"/>
             <ComboBox x:Name="ComboBoxSort" Width="200" Margin="0 0 10 0" SelectedIndex="0" SelectionChanged="ComboBoxSort_SelectionChanged" />
             <TextBlock Text="Фильтрация по жанрам" Margin="0 0 10 0" FontSize="20"/>
-            <ComboBox x:Name="ComboBoxFiltrGenre" Width="200" SelectedIndex="0"/>
+            <ComboBox x:Name="ComboBoxFiltrGenre" Width="200" SelectedIndex="0" SelectionChanged="ComboBoxSort_SelectionChanged"/>
         </StackPanel>
 
         <ListBox Grid.Row="1" x:Name="ListBoxBooks" d:ItemsSource="{d:SampleData ItemCount=5}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ListBoxBooks_MouseDoubleClick">

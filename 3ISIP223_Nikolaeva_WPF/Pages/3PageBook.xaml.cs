@@ -107,5 +107,25 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
             else return;
         }
+
+        private void BtnAddReview_Click(object sender, RoutedEventArgs e)
+        {
+            var wind = new WindowAddReview(_book);
+            wind.ShowDialog();
+        }
+
+        private void BtnFrozeReview_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Review review = button.DataContext as Review;
+
+            MessageBoxResult result = MessageBox.Show($"Заморозить отзыв {review.Text} от {review.User.NickName}?", "Вопрос", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                review.IsFrozen = true;
+                Core.Context.SaveChanges();
+            }
+            else return;
+        }
     }
 }

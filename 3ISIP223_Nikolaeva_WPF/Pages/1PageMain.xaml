@@ -16,11 +16,24 @@
 
         <StackPanel Grid.Column="0" Background="#FFFFC1C1" HorizontalAlignment="Left">
             <TextBlock Text="Меню" FontSize="20" Margin="0 0 0 10"/>
-            <Button x:Name="BtnCatalogBook" Style="{StaticResource BtnsMenu}" Content="Каталог книг" Click="BtnCatalogBook_Click"/>
-            <Button x:Name="BtnListBook" Style="{StaticResource BtnsMenu}" Content="Списки книг" Click="BtnListBook_Click"/>
-            <Button x:Name="BtnAdmin" Style="{StaticResource BtnsMenu}" Content="Администрирование " Click="BtnAdmin_Click"/>
-            <Button x:Name="BtnAuthor" Style="{StaticResource BtnsMenu}" Content="Заморозка" Click="BtnAuthor_Click"/>
-            <Button x:Name="BtnProfile" Style="{StaticResource BtnsMenu}" Content="Профиль" Click="BtnProfile_Click"/>
+            <Button x:Name="BtnCatalogBook" Style="{StaticResource BtnsMenu}" ToolTip="Каталог книг" Click="BtnCatalogBook_Click">
+                <Image Source="/Images/Icons/BookCatalog.png" Width="40"/>
+            </Button>
+            <Button x:Name="BtnListBook" Style="{StaticResource BtnsMenu}" ToolTip="Списки книг" Click="BtnListBook_Click">
+                <Image Source="/Images/Icons/BookList.png" Width="40"/>
+            </Button>
+            <Button x:Name="BtnAdmin" Style="{StaticResource BtnsMenu}" ToolTip="Администрирование " Visibility="{Binding VisIsAdmin}" Click="BtnAdmin_Click">
+                <Image Source="/Images/Icons/Admin.png" Width="40"/>
+            </Button>
+            <Button x:Name="BtnAuthor" Style="{StaticResource BtnsMenu}" ToolTip="Автор " Visibility="{Binding VisIsAuthor}" Click="BtnAuthor_Click">
+                <Image Source="/Images/Icons/Author.png" Width="40"/>
+            </Button>
+            <Button x:Name="BtnFroze" Style="{StaticResource BtnsMenu}" ToolTip="Предупреждение о заморозке аккаунта" Visibility="{Binding VisIsFrozen}" >
+                <Image Source="/Images/Icons/ProfileFroze.png" Width="35"/>
+            </Button>
+            <Button x:Name="BtnProfile" Style="{StaticResource BtnsMenu}" ToolTip="Профиль" Click="BtnProfile_Click">
+                <Image Source="/Images/Icons/Profile.png" Width="40"/>
+            </Button>
         </StackPanel>
 
         <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Source="/Pages/2PageCatalog.xaml"/>
