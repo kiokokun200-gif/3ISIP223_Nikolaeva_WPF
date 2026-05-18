@@ -20,19 +20,30 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     public partial class WindowMoveBook : Window
     {
         private List<BookStatus> _booksStatuses;
+        private UserBook _userBook;
         private Book _book;
         public WindowMoveBook(Book book)
         {
             InitializeComponent();
+            _book = book;
+            LoadDate();
+        }
+
+        private void LoadDate()
+        {
             _booksStatuses = Core.Context.BookStatus.ToList();
             ComboBoxStatuses.ItemsSource = _booksStatuses.Select(b => b.Name);
-            _book = book;
+            _userBook = Core.Context.UserBook.FirstOrDefault(u => u.UserID == UserData.CurrentUser.ID && u.BookID == _book.ID);
+            ComboBoxStatuses.SelectedItem = _userBook.BookStatus.Name;
 
         }
 
         private void BtnMove_Click(object sender, RoutedEventArgs e)
         {
-
+            _userBook.BookStatus = ComboBoxStatuses.SelectedItem as BookStatus;
+            Core.Context.SaveChanges();
+            MessageBox.Show($"Книга {_book.Name} перемещена в {_userBook.BookStatus}");
+            this.Close();
         }
     }
 }
