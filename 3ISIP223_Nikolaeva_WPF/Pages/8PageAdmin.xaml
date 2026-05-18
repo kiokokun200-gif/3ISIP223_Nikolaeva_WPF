@@ -116,7 +116,7 @@
                         </ListBox>
                     </TabItem>
                     <TabItem Header="Пользователи">
-                        <ListBox x:Name="ListBoxFrozeUsers">
+                        <ListBox x:Name="ListBoxFrozeUsers" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
@@ -134,7 +134,7 @@
                     </TabItem>
 
                     <TabItem Header="Отзывы">
-                        <ListBox x:Name="ListBoxFrozeReviews">
+                        <ListBox x:Name="ListBoxFrozeReviews" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">

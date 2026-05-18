@@ -9,14 +9,14 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="{Binding Name, StringFormat=Переместить книгу {0}}" FontSize="25" FontWeight="Bold"/>
-
-            <ListBox x:Name="ListBoxBookStatuses" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ComboBox x:Name="ComboBoxStatuses" Width="350"/>
+            <!--<ListBox x:Name="ListBoxBookStatuses" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <RadioButton GroupName="Radio" Content="{Binding Name}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
+            </ListBox>-->
 
             <Button Content="Переместить" Style="{StaticResource BtnsMenu}" Margin="10 10 0 0" x:Name="BtnMove" Click="BtnMove_Click"/>
         </StackPanel>

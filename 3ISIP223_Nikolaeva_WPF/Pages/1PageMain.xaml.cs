@@ -23,6 +23,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public _1PageMain()
         {
             InitializeComponent();
+            DataContext = UserData.CurrentUser;
+
         }
 
         private void BtnCatalogBook_Click(object sender, RoutedEventArgs e)

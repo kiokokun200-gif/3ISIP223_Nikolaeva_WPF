@@ -301,6 +301,16 @@
     <Resource Include="Images\Icons\Profile.png" />
     <Resource Include="Images\Icons\ProfileFroze.png" />
     <Resource Include="Images\Icons\Author.png" />
+    <Resource Include="Images\Covers\kak_rabotaet_mozg.jpg" />
+    <Resource Include="Images\Covers\lunnyy_princ.jpg" />
+    <Resource Include="Images\Covers\magiya_drakony.jpg" />
+    <Resource Include="Images\Covers\noch_v_muzee.jpg" />
+    <Resource Include="Images\Covers\osenniy_roman.jpg" />
+    <Resource Include="Images\Covers\stihi_glavnom.jpg" />
+    <Resource Include="Images\Covers\tayna_zamka.jpg" />
+    <Resource Include="Images\Covers\teni_proshlogo.jpg" />
+    <Resource Include="Images\Covers\zvezdnye_voiny_3000.jpg" />
+    <Resource Include="Images\Covers\programmirovanie.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

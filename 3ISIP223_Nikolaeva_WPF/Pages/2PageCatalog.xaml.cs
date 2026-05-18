@@ -23,7 +23,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private List<Book> _books;
         private List<string> _sort;
         private List<string> _filtr;
-        private List<BookGenre> _bookGenres;
         public _2PageCatalog()
         {
             InitializeComponent();
@@ -40,18 +39,25 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                "По названию", 
                "По оценке"
            };
-
+            ComboBoxSort.ItemsSource = _sort;
+            ComboBoxSort.SelectedIndex = 0;
             _filtr = Core.Context.Genre.Distinct().Select(f => f.Name).ToList();
             _filtr.Insert(0, "Все");
-            _bookGenres = Core.Context.BookGenre.Where(b => !b.Book.IsFrozen).ToList();
+            ComboBoxFiltrGenre.ItemsSource = _filtr;
+            ComboBoxFiltrGenre.SelectedIndex = 0;
             
 
         }
 
         private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string text = TxtBoxSearch.Text.ToLower();
-            ListBoxBooks.ItemsSource = _books.Where(b => b.Name.ToLower() == text || b.User.NickName.ToLower() == text);
+            //string text = TxtBoxSearch.Text.ToLower();
+            //ListBoxBooks.ItemsSource = _books.Where(b => b.Name.ToLower() == text || b.User.NickName.ToLower() == text);
+            if (TxtBoxSearch.Text.Length > 0)
+            {
+                FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre.SelectedItem.ToString(), TxtBoxSearch.Text);
+            }
+            else FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre.SelectedItem.ToString(), "");
         }
 
         private void ListBoxBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -62,35 +68,71 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 NavigationService.Navigate(new _3PageBook(selectedBook));
             }
         }
-
         private void BtnAddToList_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
-            Book selectedBook = btn.DataContext as Book;
-            var wind = new WindowAddToList(selectedBook);
-            wind.ShowDialog();
-            NavigationService.Navigate(new _2PageCatalog());
+            if (UserData.CurrentUser.Role.Name == "Администратор" || !UserData.IsLoggedIn)
+            {
+                MessageBox.Show("Войдите в аккаунт под пользователем или автором");
+                return;
+            }
+            else if (UserData.IsLoggedIn)
+            {
+                Button btn = (Button)sender;
+                Book selectedBook = btn.DataContext as Book;
+                var wind = new WindowAddToList(selectedBook);
+                wind.ShowDialog();
+                NavigationService.Navigate(new _2PageCatalog());
+            }
 
         }
 
         private void ComboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedSort = ComboBoxSort.SelectedItem.ToString();
-            string selectedGenre = ComboBoxFiltrGenre.SelectedItem.ToString();
-            if (selectedSort == "Все" && selectedGenre == "Все")
+            //string selectedSort = ComboBoxSort.SelectedItem.ToString();
+            //string selectedGenre = ComboBoxFiltrGenre.SelectedItem.ToString();
+            if (TxtBoxSearch.Text.Length > 0)
             {
-                ListBoxBooks.ItemsSource = _books;
+                FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre?.SelectedItem.ToString(), TxtBoxSearch.Text);
             }
-            else if(selectedSort == "По названию" && selectedGenre != "Все")
-            {
-                ListBoxBooks.ItemsSource = _books.Where(bu => bu.GenresString.Contains(selectedGenre)).OrderBy(b => b.Name).ToList();
-            }
-            else if (selectedSort == "По оценке" && selectedGenre != "Все")
-            {
-                ListBoxBooks.ItemsSource = _books.Where(bu => bu.GenresString.Contains(selectedGenre)).OrderByDescending(b => b.AvgRating).ToList();
-            }
+            else FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre.SelectedItem?.ToString(), "");
+            //if (selectedSort == "Все" && selectedGenre == "Все")
+            //{
+            //    ListBoxBooks.ItemsSource = _books;
+            //}
+            //else if(selectedSort == "По названию" && selectedGenre != "Все")
+            //{
+            //    ListBoxBooks.ItemsSource = _books.Where(bu => bu.GenresString.Contains(selectedGenre)).OrderBy(b => b.Name).ToList();
+            //}
+            //else if (selectedSort == "По оценке" && selectedGenre != "Все")
+            //{
+            //    ListBoxBooks.ItemsSource = _books.Where(bu => bu.GenresString.Contains(selectedGenre)).OrderByDescending(b => b.AvgRating).ToList();
+            //}
         }
 
+        private void FiltrationSearch(string selectedSort, string selectedGenre, string search) 
+        {
+            List<Book> filt = null;
+
+            filt = _books.Where(b => b.Name.ToLower().Contains(search.ToLower()) || b.User.NickName.ToLower().Contains(search.ToLower())).ToList();
+
+            if (selectedSort.ToString() != "Все")
+            {
+                if (selectedSort.ToString() == "По названию")
+                {
+                    filt = filt.OrderBy(b => b.Name).ToList();
+                }
+                else if (selectedSort == "По оценке")
+                {
+                    filt = filt.OrderByDescending(b => b.AvgRating).ToList();
+                }
+            }
+
+            if (selectedGenre != null && selectedGenre.ToString() != "Все")
+            {
+                filt = filt.Where(b => b.GenresString != null && b.GenresString.Contains(selectedGenre)).ToList();
+            }
+            ListBoxBooks.ItemsSource = filt;
+        }
         
         
     }

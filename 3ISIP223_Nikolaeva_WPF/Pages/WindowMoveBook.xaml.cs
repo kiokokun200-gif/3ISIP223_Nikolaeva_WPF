@@ -25,7 +25,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             InitializeComponent();
             _booksStatuses = Core.Context.BookStatus.ToList();
-            ListBoxBookStatuses.ItemsSource = _booksStatuses;
+            ComboBoxStatuses.ItemsSource = _booksStatuses.Select(b => b.Name);
             _book = book;
 
         }

@@ -23,6 +23,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         private Book _book;
         private List<ComplaintTargetType> _complaintTargetType;
         private List<Review> _reviews;
+        private bool IsShowText = false;
         public _3PageBook(Book book)
         {
             InitializeComponent();
@@ -40,15 +41,39 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnSeeContentBook_Click(object sender, RoutedEventArgs e)
         {
-            TxtBlcSeeContent.Visibility = Visibility.Visible;
+            IsShowText = !IsShowText;
+            if (IsShowText)
+            {
+                TxtBlcSeeContent.Visibility = Visibility.Visible;
+                BtnSeeContentBook.Content = "Скрыть фрагмент ↑";
+            }
+            else
+            {
+                TxtBlcSeeContent.Visibility = Visibility.Collapsed;
+                BtnSeeContentBook.Content = "Посмотреть фрагмент ↓";
+            
 
+        }
         }
 
         private void BtnAddToList_Click(object sender, RoutedEventArgs e)
         {
-            var wind = new WindowAddToList(_book);
-            wind.ShowDialog();
-            NavigationService.Navigate(new _2PageCatalog());
+            if (UserData.CurrentUser.Role.Name == "Администратор" || !UserData.IsLoggedIn)
+            {
+                MessageBox.Show("Войдите в аккаунт под пользователем или автором");
+                return;
+            }
+            else if (UserData.IsLoggedIn)
+            {
+                Button btn = (Button)sender;
+                Book selectedBook = btn.DataContext as Book;
+                var wind = new WindowAddToList(selectedBook);
+                wind.ShowDialog();
+                NavigationService.Navigate(new _2PageCatalog());
+            }
+            //var wind = new WindowAddToList(_book);
+            //wind.ShowDialog();
+            //NavigationService.Navigate(new _2PageCatalog());
 
         }
 

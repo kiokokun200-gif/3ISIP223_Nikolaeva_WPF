@@ -17,7 +17,7 @@
         <Grid Grid.Column="0">
             <Image Grid.Column="0" Source="{Binding CoverImage}" Width="300" Height="400" VerticalAlignment="Top"/>
             <Border Background="#FFFF9AC8" Width="40" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <TextBlock Text="{Binding AvgRating, StringFormat={}★{0}}"/>
+                <TextBlock Text="{Binding AvgRating, StringFormat={}★{0:F0}}"/>
             </Border>
         </Grid>
         <StackPanel Grid.Column="1" HorizontalAlignment="Left">
