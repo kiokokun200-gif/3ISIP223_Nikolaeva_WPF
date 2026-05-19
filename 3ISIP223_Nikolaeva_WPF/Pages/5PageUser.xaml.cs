@@ -36,7 +36,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 Complaint complaint = Core.Context.Complaint.OrderByDescending(r => r.Date).FirstOrDefault(c => c.IsConfirmed == true && c.UserID == _user.ID);
                 if (complaint != null)
                 {
-                    MessageBoxResult result = MessageBox.Show($"Вы заморожены по причине {complaint.ComplaintReason.Name}. Подать заявку на разморозку?", "Вопрос", MessageBoxButton.YesNo);
+                    MessageBoxResult result = MessageBox.Show($"Вы заморожены по причине {complaint.ComplaintReason.Name}. Подать заявку на разморозку?", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if (result == MessageBoxResult.Yes)
                     {
                         try
@@ -45,6 +45,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                             {
                                 UserID = _user.ID,
                                 Date = DateTime.Now,
+                                TargetTypeID = 2,
+                                TargetID = _user.ID,
                             };
 
                             Core.Context.DefrostingRequest.Add(request);
@@ -59,7 +61,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     }
                 }
                 
-                NavigationService.Navigate( new _1PageMain() );
+                //NavigationService.Navigate( new _2PageCatalog() );
                 return;
                 
             }

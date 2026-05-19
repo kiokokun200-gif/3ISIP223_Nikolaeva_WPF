@@ -1,4 +1,4 @@
-﻿using _3ISIP223_Nikolaeva_WPF.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,51 +21,92 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _4PageBookList : Page
     {
-        private List<BookStatus> _bookStatuses;
+        //private List<BookStatus> _bookStatuses;
         private List<UserBook> _userBooks;
+        private List<Book> _books;
+        
         public _4PageBookList()
         {
             InitializeComponent();
-            _bookStatuses = Core.Context.BookStatus.ToList();
-            _bookStatuses.Insert(0, new BookStatus
-            {
-                Name = "Все"
-            });
-            ListBoxStatuses.ItemsSource = _bookStatuses;
-            _userBooks = Core.Context.UserBook.Where(b => b.UserID == UserData.CurrentUser.ID).ToList();
-            ListBoxBooks.ItemsSource = _userBooks;
+            LoadDate();   
         }
 
+        private void LoadDate()
+        {
+            var statuses = BookFiltration.BookStatusesOptions.ToList();
+            statuses.Insert(0, "Все");
+            ComboStatuses.ItemsSource = statuses;
+            ComboStatuses.SelectedIndex = 0;
+            _userBooks = Core.Context.UserBook.Where(b => b.UserID == UserData.CurrentUser.ID).ToList();
+
+            _books = _userBooks.Select(u => u.Book).ToList();
+            Category("Все");
+            ComboBoxSort.ItemsSource = BookFiltration.SortOptions;
+            ComboBoxSort.SelectedIndex = 0;
+            var genres = BookFiltration.GenreOptions.ToList();
+            genres.Insert(0, "Все");
+            ComboBoxFiltrGenre.ItemsSource = genres;
+            ComboBoxFiltrGenre.SelectedIndex = 0;
+        }
+        private void FiltrationSearch(string selectedSort, string selectedGenre, string search)
+        {
+            ListBoxBooks.ItemsSource = BookFiltration.FiltrationSearch(_books, selectedSort, selectedGenre, search);
+        }
         private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string text = TxtBoxSearch.Text.ToLower();
-            ListBoxBooks.ItemsSource = _userBooks.Where(b => b.Book.Name.ToLower() == text || b.Book.User.NickName.ToLower() == text);
+            if (TxtBoxSearch.Text.Length > 0)
+            {
+                FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre?.SelectedItem.ToString(), TxtBoxSearch.Text);
+            }
+            else FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre.SelectedItem?.ToString(), "");
         }
 
         private void ComboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedItem = ComboBoxSort.SelectedItem.ToString();
-            if (selectedItem == "Все")
+            if (TxtBoxSearch.Text.Length > 0)
             {
-                ListBoxBooks.ItemsSource = _userBooks;
+                FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre?.SelectedItem.ToString(), TxtBoxSearch.Text);
             }
-            else if (selectedItem == "По названию")
-            {
-                ListBoxBooks.ItemsSource = _userBooks.OrderBy(b => b.Book.Name).ToList();
-            }
-            else
-            {
-                ListBoxBooks.ItemsSource = _userBooks.OrderByDescending(b => b.Book.AvgRating).ToList();
-            }
+            else FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre.SelectedItem?.ToString(), "");
         }
 
         private void BtnMoveBook_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Book book = button.DataContext as Book;
+            Book book = (button.DataContext as UserBook).Book;
             var wind = new WindowMoveBook(book);
             wind.ShowDialog();
 
+        }
+
+        
+
+        //private void BtnCatagory_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Button button = (sender as Button);
+        //    BookStatus status = button.DataContext as BookStatus;
+        //    string bookStatus = status.Name;
+
+        //    Category(bookStatus);
+
+        //}
+
+        private void Category(string bookStatus)
+        {
+            if (bookStatus != "Все")
+            {
+                ListBoxBooks.ItemsSource = _userBooks.Where(b => b.BookStatus.Name == bookStatus).ToList();
+            }
+            else
+            {
+                ListBoxBooks.ItemsSource = _userBooks;
+            }
+        }
+
+        private void ComboStatuses_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string status = ComboStatuses.SelectedItem.ToString();
+            Category(status);
         }
     }
 }

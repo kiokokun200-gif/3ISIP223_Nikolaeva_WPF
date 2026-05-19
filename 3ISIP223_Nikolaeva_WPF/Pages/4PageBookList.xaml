@@ -14,7 +14,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
             <TextBlock Text="⌕" FontSize="25"/>
             <TextBox x:Name="TxtBoxSearch" Width="200" Margin="0 0 10 0" TextChanged="TxtBoxSearch_TextChanged"/>
             <TextBlock Text="Сортировка" FontSize="20" Margin="0 0 10 0"/>
@@ -22,22 +22,26 @@
             <TextBlock Text="Фильтрация по жанрам" Margin="0 0 10 0" FontSize="20"/>
             <ComboBox x:Name="ComboBoxFiltrGenre" Width="200" SelectedIndex="0"/>
         </StackPanel>
-        <ListBox Grid.Row="1" x:Name="ListBoxStatuses" d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border>
-                        <Border BorderBrush="Gray"  Margin="5 0" BorderThickness="1" CornerRadius="10">
-                            <Button Content="{Binding Name}" BorderThickness="0" Background="Transparent" Padding="5" />
-                        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Text="Статус книги : "/>
+            <ComboBox x:Name="ComboStatuses" Width="200" SelectionChanged="ComboStatuses_SelectionChanged"/>
+        </StackPanel>
+    <!--<ListBox Grid.Row="1" x:Name="ListBoxStatuses" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Border>
+                    <Border BorderBrush="Gray"  Margin="5 0" BorderThickness="1" CornerRadius="10">
+                        <Button x:Name="BtnCatagory" Content="{Binding Name}" BorderThickness="0" Background="Transparent" Padding="5" Click="BtnCatagory_Click"/>
                     </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+                </Border>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+    </ListBox>-->
 
         <ListBox Grid.Row="2" x:Name="ListBoxBooks" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>

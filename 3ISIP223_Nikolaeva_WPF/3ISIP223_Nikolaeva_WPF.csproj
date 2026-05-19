@@ -67,6 +67,7 @@
     <Compile Include="Book.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="BookFiltration.cs" />
     <Compile Include="BookGenre.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -105,7 +106,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Bookk.cs" />
     <Compile Include="Models\DefrostingRequestt.cs" />
     <Compile Include="Models\Review.cs" />

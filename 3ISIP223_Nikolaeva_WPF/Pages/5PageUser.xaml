@@ -21,12 +21,12 @@
 
         <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Margin="10">
             <TextBlock Text="{Binding NickName}" FontSize="30" FontWeight="Bold"/>
-            <TextBlock Text="{Binding Email}" />
-            <TextBlock Text="{Binding Login}"/>
-            <TextBlock Text="{Binding Role.Name}"/>
+            <TextBlock Text="{Binding Email, StringFormat=Email: {0}}" />
+            <TextBlock Text="{Binding Login, StringFormat=Логин: {0}}"/>
+            <TextBlock Text="{Binding Role.Name, StringFormat=Роль: {0}}"/>
          </StackPanel>
 
-        <Button x:Name="BtnAuthorRequest" Height="40" HorizontalAlignment="Right" Content="Подать на автора" Style="{StaticResource BtnsMenu}" Grid.Column="1" Grid.Row="0" Click="BtnAuthorRequest_Click"/>
+        <Button x:Name="BtnAuthorRequest" Height="40" HorizontalAlignment="Right" Visibility="{Binding IsAuthorRequest}" Content="Подать на автора" Style="{StaticResource BtnsMenu}" Grid.Column="1" Grid.Row="0" Click="BtnAuthorRequest_Click"/>
         <ListBox Grid.Row="1" x:Name="ListBoxReviews" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>

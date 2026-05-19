@@ -33,19 +33,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             _books = Core.Context.Book.Where(b => !b.IsFrozen).ToList();
             ListBoxBooks.ItemsSource = _books;
-           _sort = new List<string>()
-           {
-               "Все",
-               "По названию", 
-               "По оценке"
-           };
-            ComboBoxSort.ItemsSource = _sort;
+            ComboBoxSort.ItemsSource = BookFiltration.SortOptions;
             ComboBoxSort.SelectedIndex = 0;
-            _filtr = Core.Context.Genre.Distinct().Select(f => f.Name).ToList();
-            _filtr.Insert(0, "Все");
-            ComboBoxFiltrGenre.ItemsSource = _filtr;
+            var genres = BookFiltration.GenreOptions.ToList();
+            genres.Insert(0, "Все");
+            ComboBoxFiltrGenre.ItemsSource = genres;
             ComboBoxFiltrGenre.SelectedIndex = 0;
-            
+
 
         }
 
@@ -75,13 +69,22 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 MessageBox.Show("Войдите в аккаунт под пользователем или автором");
                 return;
             }
+
             else if (UserData.IsLoggedIn)
             {
                 Button btn = (Button)sender;
                 Book selectedBook = btn.DataContext as Book;
-                var wind = new WindowAddToList(selectedBook);
-                wind.ShowDialog();
-                NavigationService.Navigate(new _2PageCatalog());
+                var userbook = Core.Context.UserBook.FirstOrDefault(b => b.BookID == selectedBook.ID);
+                if (userbook == null)
+                {
+                    var wind = new WindowAddToList(selectedBook);
+                    wind.ShowDialog();
+                    //NavigationService.Navigate(new _2PageCatalog());
+                }
+                else
+                {
+                    MessageBox.Show($"Книга {selectedBook.Name} уже в списке в статусе {userbook.BookStatus.Name}");
+                }
             }
 
         }
@@ -111,27 +114,28 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void FiltrationSearch(string selectedSort, string selectedGenre, string search) 
         {
-            List<Book> filt = null;
+            //List<Book> filt = null;
 
-            filt = _books.Where(b => b.Name.ToLower().Contains(search.ToLower()) || b.User.NickName.ToLower().Contains(search.ToLower())).ToList();
+            //filt = _books.Where(b => b.Name.ToLower().Contains(search.ToLower()) || b.User.NickName.ToLower().Contains(search.ToLower())).ToList();
 
-            if (selectedSort.ToString() != "Все")
-            {
-                if (selectedSort.ToString() == "По названию")
-                {
-                    filt = filt.OrderBy(b => b.Name).ToList();
-                }
-                else if (selectedSort == "По оценке")
-                {
-                    filt = filt.OrderByDescending(b => b.AvgRating).ToList();
-                }
-            }
+            //if (selectedSort.ToString() != "Все")
+            //{
+            //    if (selectedSort.ToString() == "По названию")
+            //    {
+            //        filt = filt.OrderBy(b => b.Name).ToList();
+            //    }
+            //    else if (selectedSort == "По оценке")
+            //    {
+            //        filt = filt.OrderByDescending(b => b.AvgRating).ToList();
+            //    }
+            //}
 
-            if (selectedGenre != null && selectedGenre.ToString() != "Все")
-            {
-                filt = filt.Where(b => b.GenresString != null && b.GenresString.Contains(selectedGenre)).ToList();
-            }
-            ListBoxBooks.ItemsSource = filt;
+            //if (selectedGenre != null && selectedGenre.ToString() != "Все")
+            //{
+            //    filt = filt.Where(b => b.GenresString != null && b.GenresString.Contains(selectedGenre)).ToList();
+            //}
+            //ListBoxBooks.ItemsSource = filt;
+            ListBoxBooks.ItemsSource = BookFiltration.FiltrationSearch(_books, selectedSort, selectedGenre, search);
         }
         
         

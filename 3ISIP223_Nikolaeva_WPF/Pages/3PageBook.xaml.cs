@@ -31,12 +31,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             _book = book;
             DataContext = _book;
             _complaintTargetType = Core.Context.ComplaintTargetType.ToList();
-            _reviews = Core.Context.Review.Where(b => b.BookID == _book.ID).ToList();
-            ListBoxReview.ItemsSource = _reviews;
+            LoadReviews();
             if(UserData.CurrentUser.RoleID == 3)
             {
                 BtnFrozeBook.Visibility = Visibility.Visible;
             }
+        }
+        private void LoadReviews()
+        {
+            _reviews = Core.Context.Review.Where(b => b.BookID == _book.ID && !b.IsFrozen).OrderByDescending(bo => bo.Date).ToList();
+            ListBoxReview.ItemsSource = _reviews;
         }
 
         private void BtnSeeContentBook_Click(object sender, RoutedEventArgs e)
@@ -63,27 +67,45 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 MessageBox.Show("Войдите в аккаунт под пользователем или автором");
                 return;
             }
+            else if(UserData.CurrentUser.IsFrozen)
+            {
+                MessageBox.Show("Вы заморожены !");
+                return;
+            }
             else if (UserData.IsLoggedIn)
             {
                 Button btn = (Button)sender;
                 Book selectedBook = btn.DataContext as Book;
-                var wind = new WindowAddToList(selectedBook);
-                wind.ShowDialog();
-                NavigationService.Navigate(new _2PageCatalog());
+                
+                var userbook = Core.Context.UserBook.FirstOrDefault(b => b.BookID == selectedBook.ID);
+                if (userbook == null)
+                {
+                    var wind = new WindowAddToList(selectedBook);
+                    wind.ShowDialog();
+                    
+                }
+                else
+                {
+                    MessageBox.Show($"Книга {selectedBook.Name} уже в списке в статусе {userbook.BookStatus.Name}");
+                }
+                
             }
-            //var wind = new WindowAddToList(_book);
-            //wind.ShowDialog();
-            //NavigationService.Navigate(new _2PageCatalog());
+           
 
         }
 
         private void BtnComplaintBook_Click(object sender, RoutedEventArgs e)
         {
-            //if(!UserData.IsLoggedIn || UserData.CurrentUser.RoleID != 1)
-            //{
-            //    MessageBox.Show("Войдите в аккаунт под пользователем!");
-            //    return;
-            //}
+            if (!UserData.IsLoggedIn || UserData.CurrentUser.RoleID != 1)
+            {
+                MessageBox.Show("Войдите в аккаунт под пользователем!");
+                return;
+            }
+            else if (UserData.CurrentUser.IsFrozen)
+            {
+                MessageBox.Show("Вы заморожены !");
+                return;
+            }
             var targetType = _complaintTargetType.FirstOrDefault(t => t.Name == "Книга");
             var wind = new WindowComplaint(targetType, _book.ID, _book.Name);
             wind.ShowDialog();
@@ -91,18 +113,20 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnComplaintAuthor_Click(object sender, RoutedEventArgs e)
         {
-            //if (!UserData.IsLoggedIn || UserData.CurrentUser.RoleID != 1)
-            //{
-            //    MessageBox.Show("Войдите в аккаунт под пользователем!");
-            //    return;
-            //}
+            if (!UserData.IsLoggedIn || UserData.CurrentUser.RoleID != 1)
+            {
+                MessageBox.Show("Войдите в аккаунт под пользователем!");
+                return;
+            }
+            else if (UserData.CurrentUser.IsFrozen)
+            {
+                MessageBox.Show("Вы заморожены !");
+                return;
+            }
             var targetType = _complaintTargetType.FirstOrDefault(t => t.Name == "Автор");
             var wind = new WindowComplaint(targetType, _book.AuthorID, _book.User.NickName);
             wind.ShowDialog();
-           if ( wind.DialogResult == true ) {
-                NavigationService.Navigate(new _2PageCatalog());
-
-            }
+           
         }
 
         private void BtnComplaintReview_Click(object sender, RoutedEventArgs e)
@@ -113,11 +137,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             var targetType = _complaintTargetType.FirstOrDefault(t => t.Name == "Отзыв");
             var wind = new WindowComplaint(targetType, _book.AuthorID, review.User.NickName);
             wind.ShowDialog();
-            if (wind.DialogResult == true)
-            {
-                NavigationService.Navigate(new _2PageCatalog());
-
-            }
+           
         }
 
         private void BtnFrozeBook_Click(object sender, RoutedEventArgs e)
@@ -128,15 +148,26 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 _book.IsFrozen = true;
                 Core.Context.SaveChanges();
                 MessageBox.Show("Книга заморожена");
-
+                NavigationService.Navigate(new _2PageCatalog());
             }
             else return;
         }
 
         private void BtnAddReview_Click(object sender, RoutedEventArgs e)
         {
+            if (!UserData.IsLoggedIn || UserData.CurrentUser.RoleID != 1)
+            {
+                MessageBox.Show("Войдите в аккаунт под пользователем!");
+                return;
+            }
+            else if (UserData.CurrentUser.IsFrozen)
+            {
+                MessageBox.Show("Вы заморожены !");
+                return;
+            }
             var wind = new WindowAddReview(_book);
             wind.ShowDialog();
+            LoadReviews();
         }
 
         private void BtnFrozeReview_Click(object sender, RoutedEventArgs e)
@@ -149,6 +180,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 review.IsFrozen = true;
                 Core.Context.SaveChanges();
+                LoadReviews();
             }
             else return;
         }

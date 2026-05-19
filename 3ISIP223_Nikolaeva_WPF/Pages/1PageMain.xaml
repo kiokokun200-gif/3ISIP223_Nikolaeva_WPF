@@ -31,7 +31,7 @@
             <Button x:Name="BtnFroze" Style="{StaticResource BtnsMenu}" ToolTip="Предупреждение о заморозке аккаунта" Visibility="{Binding VisIsFrozen}" >
                 <Image Source="/Images/Icons/ProfileFroze.png" Width="35"/>
             </Button>
-            <Button x:Name="BtnProfile" Style="{StaticResource BtnsMenu}" ToolTip="Профиль" Click="BtnProfile_Click">
+            <Button x:Name="BtnProfile" Style="{StaticResource BtnsMenu}" Visibility="{Binding VisIsUserAuthor}" ToolTip="Профиль" Click="BtnProfile_Click">
                 <Image Source="/Images/Icons/Profile.png" Width="40"/>
             </Button>
         </StackPanel>

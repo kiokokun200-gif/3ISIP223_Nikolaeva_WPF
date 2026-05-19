@@ -30,7 +30,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
                     <Button x:Name="BtnComplaintBook" Visibility="{Binding VisIsUserAuthor}" Content="🚩 Пожаловаться на книгу" HorizontalAlignment="Right" Background="White" BorderThickness="0" Margin="10 0 10 0" Click="BtnComplaintBook_Click"/>
                     <Button x:Name="BtnComplaintAuthor" Visibility="{Binding VisIsUserAuthor}" Content="🚩 Пожаловаться на автора" HorizontalAlignment="Right" Background="White" BorderThickness="0" Click="BtnComplaintAuthor_Click"/>
-                    <Button x:Name="BtnFrozeBook" Content="Заморозить" Style="{StaticResource BtnsMenu}" Visibility="{Binding VisIsAdmin}"  Margin="10 10 0 0" Click="BtnFrozeBook_Click"/>
+                    <Button x:Name="BtnFrozeBook" Content="Заморозить" Style="{StaticResource BtnsMenu}" Visibility="Collapsed"  Margin="10 10 0 0" Click="BtnFrozeBook_Click"/>
                 </StackPanel>
             </Grid>
             <TextBlock Text="{Binding Description}" FontSize="22" Margin="0 0 0 10"/>

@@ -26,6 +26,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             InitializeComponent();
             _book = book;
+            DataContext = book;
             LoadDate();
         }
 
