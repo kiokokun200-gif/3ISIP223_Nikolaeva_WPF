@@ -24,6 +24,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             InitializeComponent();
             DataContext = UserData.CurrentUser;
+            MenuPanel.Visibility = UserData.IsLoggedIn ? Visibility.Visible : Visibility.Collapsed;
+            BtnBack.Visibility = UserData.IsLoggedIn ? Visibility.Visible : Visibility.Collapsed;
 
         }
 
@@ -47,30 +49,39 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)
         {
-            if(UserData.CurrentUser.RoleID == 3)
-            {
-                MainFrame.Navigate(new _8PageAdmin());
-            }
+            
+            MainFrame.Navigate(new _8PageAdmin());
+            
         }
 
         private void BtnAuthor_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Navigate(new _6PageAuthor());
         }
 
         private void BtnProfile_Click(object sender, RoutedEventArgs e)
         {
-            if ( UserData.CurrentUser.RoleID == 1)
+            
+            MainFrame.Navigate(new _5PageUser(UserData.CurrentUser));
+
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if(NavigationService.CanGoBack)
             {
-                MainFrame.Navigate(new _5PageUser(UserData.CurrentUser));
+                NavigationService.GoBack();
+            }
+        }
+        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Выйти из аккаунта? ", "Вопрос", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                UserData.CurrentUser = null;
+                NavigationService.Navigate(new PageLogin());
 
             }
-            else if(UserData.CurrentUser.RoleID == 2)
-            {
-                MainFrame.Navigate(new _6PageAuthor());
-            }
-
-
             else return;
         }
     }

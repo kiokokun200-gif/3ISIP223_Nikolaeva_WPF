@@ -20,7 +20,7 @@
             <TextBlock Text="Сортировка" FontSize="20" Margin="0 0 10 0"/>
             <ComboBox x:Name="ComboBoxSort" Width="200" Margin="0 0 10 0" SelectedIndex="0" SelectionChanged="ComboBoxSort_SelectionChanged" />
             <TextBlock Text="Фильтрация по жанрам" Margin="0 0 10 0" FontSize="20"/>
-            <ComboBox x:Name="ComboBoxFiltrGenre" Width="200" SelectedIndex="0"/>
+            <ComboBox x:Name="ComboBoxFiltrGenre" Width="200" SelectedIndex="0" SelectionChanged="ComboBoxSort_SelectionChanged"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <TextBlock Text="Статус книги : "/>
@@ -47,11 +47,19 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Book.CoverImage}"  Width="150" Height="180"/>
+                        <Grid>
+
+                            <Image Source="{Binding Book.CoverImage}" Width="150" Height="180"/>
+                            <Border Background="#FFFF9AC8" Width="40" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <TextBlock Text="{Binding Book.AvgRating, StringFormat={}★{0:F0}}"/>
+                            </Border>
+                        </Grid>
                         <StackPanel>
                             <TextBlock Text="{Binding Book.Name}"/>
                             <TextBlock Text="{Binding Book.User.NickName, StringFormat=Автор: {0}}"/>
-                            <Button x:Name="BtnMoveBook" Content="Переместить" Style="{StaticResource BtnsPikmi}" Click="BtnMoveBook_Click"/>
+                            <TextBlock Text="{Binding Book.GenresString, StringFormat=Жанры: {0}}"/>
+                            <TextBlock Text="{Binding BookStatus.Name, StringFormat=Статус: {0}}"/>
+                            <Button x:Name="BtnMoveBook" Tag="{Binding}" Content="Переместить" Style="{StaticResource BtnsPikmi}" Click="BtnMoveBook_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

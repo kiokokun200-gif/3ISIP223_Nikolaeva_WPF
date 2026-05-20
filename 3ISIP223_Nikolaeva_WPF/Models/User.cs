@@ -18,6 +18,8 @@ namespace _3ISIP223_Nikolaeva_WPF
 
         public Visibility IsDefrozingRequest => DefrostingRequest.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
 
+        public Visibility IsLoggedIn => UserData.IsLoggedIn ? Visibility.Visible : Visibility.Collapsed;
+
         
     }
 }

@@ -36,6 +36,7 @@
                         </Grid>
                         <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"/>
                         <TextBlock Text="{Binding User.NickName, StringFormat=Автор: {0}}" FontSize="15"/>
+                        <TextBlock Text="{Binding GenresString, StringFormat=Жанры: {0}}"/>
                         <Button x:Name="BtnAddToList" Content="Добавить в список"  Width="200" Height="40" Style="{StaticResource BtnsPikmi}" FontSize="15" Click="BtnAddToList_Click"/>
 
                     </StackPanel>

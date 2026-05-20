@@ -38,34 +38,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 {
                     TxtBlockFrozenUser.DataContext = complaint;
                 }
-                //if (complaint != null)
-                //{
-                //    MessageBoxResult result = MessageBox.Show($"Вы заморожены по причине {complaint.ComplaintReason.Name}. Подать заявку на разморозку?", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                //    if (result == MessageBoxResult.Yes)
-                //    {
-                //        try
-                //        {
-                //            DefrostingRequest request = new DefrostingRequest()
-                //            {
-                //                UserID = _user.ID,
-                //                Date = DateTime.Now,
-                //                TargetTypeID = 2,
-                //                TargetID = _user.ID,
-                //            };
-
-                //            Core.Context.DefrostingRequest.Add(request);
-                //            Core.Context.SaveChanges();
-                //            MessageBox.Show("Заявка принята!");
-                //        }
-
-                //        catch
-                //        {
-                //            MessageBox.Show("Ошибка сохранения");
-                //        }
-                //    }
-                //}
-
-                //NavigationService.Navigate( new _2PageCatalog() );
+                
 
 
             }
@@ -123,6 +96,18 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     MessageBox.Show("Ошибка сохранения");
                 }
             }
+        }
+
+        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Выйти из аккаунта? ", "Вопрос", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                UserData.CurrentUser = null;
+                NavigationService.Navigate(new PageLogin());
+
+            }
+            else return;
         }
     }
 }

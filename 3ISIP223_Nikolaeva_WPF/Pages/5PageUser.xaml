@@ -26,8 +26,13 @@
             <TextBlock Text="{Binding Login, StringFormat=Логин: {0}}"/>
             <TextBlock Text="{Binding Role.Name, StringFormat=Роль: {0}}"/>
          </StackPanel>
-
-        <Button x:Name="BtnAuthorRequest" Height="40" HorizontalAlignment="Right" Visibility="{Binding IsAuthorRequest}" Content="Подать на автора" Style="{StaticResource BtnsMenu}" Grid.Column="1" Grid.Row="0" Click="BtnAuthorRequest_Click"/>
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <!--<Button x:Name="BtnLogOut" Width="50" Height="50" Background="White" Click="BtnLogOut_Click" BorderThickness="0">
+                <Image Source="/Images/Icons/LogOut.png"  />
+                
+            </Button>-->
+            <Button x:Name="BtnAuthorRequest" Height="40" Visibility="{Binding IsAuthorRequest}" Content="Подать на автора" Style="{StaticResource BtnsMenu}" Click="BtnAuthorRequest_Click"/>
+        </StackPanel>
         <Border Margin="10" Padding="5" Visibility="{Binding VisIsFrozen}" BorderBrush="Red" BorderThickness="1" CornerRadius="5" Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel>
                 <TextBlock x:Name="TxtBlockFrozenUser" Text="{Binding ComplaintReason.Name, StringFormat={}⚠ Вы заморожены по причине {0}}"/>

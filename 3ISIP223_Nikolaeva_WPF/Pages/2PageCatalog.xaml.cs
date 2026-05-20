@@ -21,8 +21,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     public partial class _2PageCatalog : Page
     {
         private List<Book> _books;
-        private List<string> _sort;
-        private List<string> _filtr;
         public _2PageCatalog()
         {
             InitializeComponent();
@@ -74,7 +72,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 Button btn = (Button)sender;
                 Book selectedBook = btn.DataContext as Book;
-                var userbook = Core.Context.UserBook.FirstOrDefault(b => b.BookID == selectedBook.ID);
+                var userbook = Core.Context.UserBook.FirstOrDefault(b => b.BookID == selectedBook.ID && b.UserID == UserData.CurrentUser.ID);
                 if (userbook == null)
                 {
                     var wind = new WindowAddToList(selectedBook);

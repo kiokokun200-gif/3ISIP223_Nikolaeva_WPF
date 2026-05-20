@@ -41,9 +41,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnMove_Click(object sender, RoutedEventArgs e)
         {
-            _userBook.BookStatus = ComboBoxStatuses.SelectedItem as BookStatus;
+            string selectedStatusName = ComboBoxStatuses.SelectedItem as string;
+            var selectedStatus = _booksStatuses.FirstOrDefault(s => s.Name == selectedStatusName);
+            _userBook.BookStatusID = selectedStatus.ID;
             Core.Context.SaveChanges();
-            MessageBox.Show($"Книга {_book.Name} перемещена в {_userBook.BookStatus}");
+            MessageBox.Show($"Книга {_book.Name} перемещена в {_userBook.BookStatus.Name}");
             this.Close();
         }
     }

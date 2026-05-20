@@ -14,7 +14,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Background="#FFFFC1C1" HorizontalAlignment="Left">
+        <StackPanel Grid.Column="0" x:Name="MenuPanel" Background="#FFFFC1C1" HorizontalAlignment="Left" >
             <!--<TextBlock Text="Меню" FontSize="20" Margin="0 0 0 10"/>-->
             <Button x:Name="BtnCatalogBook" Style="{StaticResource BtnsMenu}" ToolTip="Каталог книг" Click="BtnCatalogBook_Click">
                 <Image Source="/Images/Icons/BookCatalog.png" Width="40"/>
@@ -35,7 +35,12 @@
                 <Image Source="/Images/Icons/Profile.png" Width="40"/>
             </Button>
         </StackPanel>
+        <Button Grid.Column="0" VerticalAlignment="Bottom" x:Name="BtnLogOut" Width="50" Height="50" Style="{StaticResource BtnsMenu}" Click="BtnLogOut_Click" >
+            <Image Source="/Images/Icons/LogOut.png"  />
 
-        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Source="/Pages/2PageCatalog.xaml"/>
+        </Button>
+
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Source="/Pages/2PageCatalog.xaml"></Frame>
+        <Button x:Name="BtnBack" Grid.Column="1"  Style="{StaticResource BtnsMenu}" Content="Назад" Height="40" VerticalAlignment="Bottom" Margin="10" Click="BtnBack_Click"/>
     </Grid>
 </Page>

@@ -166,7 +166,7 @@
                                         <TextBlock Text="{Binding Role.Name, StringFormat=Роль: {0} }"/>
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal" Grid.Column="1" Visibility="{Binding VisIsAdmin}" HorizontalAlignment="Right">
+                                    <StackPanel Orientation="Horizontal" Grid.Column="1" Visibility="{Binding VisIsUserAuthor}" HorizontalAlignment="Right">
                                         <Button x:Name="BtnChangeRole" Content="Изменить роль" Style="{StaticResource BtnsMenu}" Height="40" Click="BtnChangeRole_Click"/>
                                         <Button x:Name="BtnChangePassword" Content="Сменить пароль" Style="{StaticResource BtnsMenu}" Height="40" Click="BtnChangePassword_Click"/>
                                         

@@ -132,6 +132,9 @@
     <Compile Include="Pages\8PageAdmin.xaml.cs">
       <DependentUpon>8PageAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PageLogin.xaml.cs">
+      <DependentUpon>PageLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WindowAddGenre.xaml.cs">
       <DependentUpon>WindowAddGenre.xaml</DependentUpon>
     </Compile>
@@ -217,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\8PageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,6 +318,7 @@
     <Resource Include="Images\Covers\teni_proshlogo.jpg" />
     <Resource Include="Images\Covers\zvezdnye_voiny_3000.jpg" />
     <Resource Include="Images\Covers\programmirovanie.jpg" />
+    <Resource Include="Images\Icons\LogOut.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

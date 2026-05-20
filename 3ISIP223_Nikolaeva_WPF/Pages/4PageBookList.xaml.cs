@@ -33,14 +33,13 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void LoadDate()
         {
+            _userBooks = Core.Context.UserBook.Where(b => b.UserID == UserData.CurrentUser.ID).ToList();
+            _books = _userBooks.Select(u => u.Book).ToList();
+
             var statuses = BookFiltration.BookStatusesOptions.ToList();
             statuses.Insert(0, "Все");
             ComboStatuses.ItemsSource = statuses;
-            _userBooks = Core.Context.UserBook.Where(b => b.UserID == UserData.CurrentUser.ID).ToList();
-            _books = _userBooks.Select(u => u.Book).ToList();
             ComboStatuses.SelectedIndex = 0;
-
-            //Category("Все");
             ComboBoxSort.ItemsSource = BookFiltration.SortOptions;
             ComboBoxSort.SelectedIndex = 0;
             var genres = BookFiltration.GenreOptions.Select(g => g.Name).ToList();
@@ -50,12 +49,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         }
         private void FiltrationSearch(string selectedSort, string selectedGenre, string search)
         {
-            ListBoxBooks.ItemsSource = BookFiltration.FiltrationSearch(_books, selectedSort, selectedGenre, search);
+            var books = Category(ComboStatuses.SelectedItem.ToString()).Select(b => b.Book).ToList();
+            var filteredBooks = BookFiltration.FiltrationSearch(books, selectedSort, selectedGenre, search);
+            var result = _userBooks.Where(ub => filteredBooks.Select(b => b.ID).Contains(ub.BookID)).ToList();
+            ListBoxBooks.ItemsSource = result;
         }
         private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (TxtBoxSearch.Text.Length > 0)
             {
+
                 FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre?.SelectedItem.ToString(), TxtBoxSearch.Text);
             }
             else FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre.SelectedItem?.ToString(), "");
@@ -78,40 +81,39 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 return;
             }
             Button button = sender as Button;
-            Book book = (button.DataContext as UserBook).Book;
+            UserBook userBook = button.Tag as UserBook;
+            Book book = userBook?.Book;
+
+            if (book == null) return;
+           
             var wind = new WindowMoveBook(book);
             wind.ShowDialog();
-
+            LoadDate();
+            FiltrationSearch(ComboBoxSort.SelectedItem?.ToString(), ComboBoxFiltrGenre.SelectedItem?.ToString(), TxtBoxSearch.Text);
         }
 
         
 
-        //private void BtnCatagory_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Button button = (sender as Button);
-        //    BookStatus status = button.DataContext as BookStatus;
-        //    string bookStatus = status.Name;
 
-        //    Category(bookStatus);
 
-        //}
-
-        private void Category(string bookStatus)
+        private List<UserBook> Category(string bookStatus)
         {
             if (bookStatus != "Все")
             {
-                ListBoxBooks.ItemsSource = _userBooks.Where(b => b.BookStatus.Name == bookStatus).ToList();
+                return _userBooks.Where(b => b.BookStatus.Name == bookStatus).ToList();
+                //ListBoxBooks.ItemsSource = _userBooks.Where(b => b.BookStatus.Name == bookStatus).ToList();
             }
             else
             {
-                ListBoxBooks.ItemsSource = _userBooks;
+                return _userBooks;
+                //ListBoxBooks.ItemsSource = _userBooks;
             }
         }
 
         private void ComboStatuses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string status = ComboStatuses.SelectedItem.ToString();
-            Category(status);
+            FiltrationSearch(ComboBoxSort.SelectedItem?.ToString(), ComboBoxFiltrGenre.SelectedItem?.ToString(), TxtBoxSearch.Text);
         }
     }
 }
