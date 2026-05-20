@@ -35,7 +35,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             ListBoxBooks.ItemsSource = _books;
             ComboBoxSort.ItemsSource = BookFiltration.SortOptions;
             ComboBoxSort.SelectedIndex = 0;
-            var genres = BookFiltration.GenreOptions.ToList();
+            var genres = BookFiltration.GenreOptions.Select(g => g.Name).ToList();
             genres.Insert(0, "Все");
             ComboBoxFiltrGenre.ItemsSource = genres;
             ComboBoxFiltrGenre.SelectedIndex = 0;

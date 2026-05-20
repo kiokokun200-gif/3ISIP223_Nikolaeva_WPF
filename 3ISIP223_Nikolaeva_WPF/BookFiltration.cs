@@ -15,7 +15,7 @@ namespace _3ISIP223_Nikolaeva_WPF
             "По оценке"
         };
 
-        public static List<string> GenreOptions = Core.Context.Genre.Select(g => g.Name).Distinct().ToList();
+        public static List<Genre> GenreOptions = Core.Context.Genre.Distinct().ToList();
         public static List<string> BookStatusesOptions = Core.Context.BookStatus.Select(s => s.Name).ToList();
         public static List<Book> FiltrationSearch(List<Book> books, string selectedSort, string selectedGenre, string search)
         {

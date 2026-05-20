@@ -22,7 +22,7 @@
         </StackPanel>
         <TabControl Grid.Row="1" TabStripPlacement="Left">
             <TabItem Header="Список жалоб">
-                <ListBox x:Name="ListBoxComplaints" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox x:Name="ListBoxComplaints" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4">
@@ -46,7 +46,7 @@
             </TabItem>
 
             <TabItem Header="Список заявок на разморозку">
-                <ListBox x:Name="ListBoxDefrozeRequests" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox x:Name="ListBoxDefrozeRequests" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
@@ -72,7 +72,7 @@
             </TabItem>
 
             <TabItem Header="Список заявок на роль автора">
-                <ListBox x:Name="ListBoxRoleRequests" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox x:Name="ListBoxRoleRequests" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">

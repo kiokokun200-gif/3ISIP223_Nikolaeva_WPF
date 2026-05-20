@@ -26,11 +26,16 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             InitializeComponent();
             DataContext = UserData.CurrentUser;
-            _books = Core.Context.Book.Where(b => b.AuthorID == UserData.CurrentUser.ID && !b.IsFrozen).ToList();
-            ListBoxBooks.ItemsSource = _books;  
+            LoadBooks();
             _frozenBooks = Core.Context.Book.Where(b => b.AuthorID == UserData.CurrentUser.ID && b.IsFrozen).ToList();
             ListBoxFrozenBooks.ItemsSource = _frozenBooks;
 
+        }
+
+        private void LoadBooks()
+        {
+            _books = Core.Context.Book.Where(b => b.AuthorID == UserData.CurrentUser.ID && !b.IsFrozen).ToList();
+            ListBoxBooks.ItemsSource = _books;
         }
 
         private void BtnEditBook_Click(object sender, RoutedEventArgs e)
@@ -54,6 +59,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 return;
             }
             NavigationService.Navigate(new _7PageAddBook());
+            
         }
 
 
@@ -90,6 +96,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 }
             }
             else return;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadBooks();
         }
     }
 }

@@ -21,16 +21,20 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _7PageAddBook : Page
     {
+        private List<Genre> _bookGenres;
+        private List<Genre> _selectedGenres = new List<Genre>();
         public _7PageAddBook()
         {
             InitializeComponent();
+            _bookGenres = BookFiltration.GenreOptions.ToList();
+            ListBoxGenres.ItemsSource = _bookGenres;
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(TxtBoxImagePath.Text) && TxtBoxImagePath.Text.Length < 100)
+                if (string.IsNullOrWhiteSpace(TxtBoxImagePath.Text) )
                 {
                     MessageBox.Show("Введите путь к обложке");
                     return;
@@ -53,7 +57,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     MessageBox.Show("Введите текст книги");
                     return;
                 }
-                Book book = new Book() {
+                else if(_selectedGenres.Count == 0)
+                {
+                    MessageBox.Show("Выберите жанры");
+                    return;
+                }
+
+                Book book = new Book()
+                {
                     Name = TxtBoxName.Text,
                     Description = TxtBoxDescription.Text,
                     CoverImage = TxtBoxImagePath.Text,
@@ -65,6 +76,27 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 };
                 Core.Context.Book.Add(book);
                 Core.Context.SaveChanges();
+                try
+                {
+                    foreach (var genre in _selectedGenres)
+                    {
+                        BookGenre bookGenre = new BookGenre
+                        {
+                            GenreID = genre.ID,
+                            BookID = book.ID,
+
+                        };
+                        Core.Context.BookGenre.Add(bookGenre);
+
+                    }
+                    Core.Context.SaveChanges();
+                    
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка сохранения");
+                }
+
                 MessageBox.Show("Книга добавлена");
                 NavigationService.GoBack();
 
@@ -73,6 +105,18 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             {
                 MessageBox.Show("Ошибка сохранения");
             }
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox check = (CheckBox)sender;
+            Genre selectedGenre = check.DataContext as Genre;
+
+            if (check.IsChecked == true)
+            {
+                _selectedGenres.Add(selectedGenre);
+            }
+            else _selectedGenres.Remove(selectedGenre);
         }
     }
 }

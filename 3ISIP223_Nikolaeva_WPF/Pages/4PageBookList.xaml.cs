@@ -36,14 +36,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             var statuses = BookFiltration.BookStatusesOptions.ToList();
             statuses.Insert(0, "Все");
             ComboStatuses.ItemsSource = statuses;
-            ComboStatuses.SelectedIndex = 0;
             _userBooks = Core.Context.UserBook.Where(b => b.UserID == UserData.CurrentUser.ID).ToList();
-
             _books = _userBooks.Select(u => u.Book).ToList();
-            Category("Все");
+            ComboStatuses.SelectedIndex = 0;
+
+            //Category("Все");
             ComboBoxSort.ItemsSource = BookFiltration.SortOptions;
             ComboBoxSort.SelectedIndex = 0;
-            var genres = BookFiltration.GenreOptions.ToList();
+            var genres = BookFiltration.GenreOptions.Select(g => g.Name).ToList();
             genres.Insert(0, "Все");
             ComboBoxFiltrGenre.ItemsSource = genres;
             ComboBoxFiltrGenre.SelectedIndex = 0;

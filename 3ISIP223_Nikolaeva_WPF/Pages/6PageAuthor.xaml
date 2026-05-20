@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="_6PageAuthor">
+      Title="_6PageAuthor" Loaded="Page_Loaded">
 
     <Grid Background="White">
         <Grid.RowDefinitions>

@@ -83,9 +83,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             Button btn = (Button)sender;
             BookGenre bookGenre = btn.DataContext as BookGenre;
-            _bookGenres.Remove(bookGenre);
-            ListBoxGenres.ItemsSource = _bookGenres;
+            Core.Context.BookGenre.Remove(bookGenre);
             Core.Context.SaveChanges();
+            _bookGenres = _book.BookGenre.ToList();
+            ListBoxGenres.ItemsSource = _bookGenres;
         }
 
         private void BtnAddGenre_Click(object sender, RoutedEventArgs e)
