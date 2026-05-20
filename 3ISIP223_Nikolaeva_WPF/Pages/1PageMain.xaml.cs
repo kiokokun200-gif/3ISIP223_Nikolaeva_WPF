@@ -67,7 +67,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
             else if(UserData.CurrentUser.RoleID == 2)
             {
-                NavigationService.Navigate(new _6PageAuthor());
+                MainFrame.Navigate(new _6PageAuthor());
             }
 
 

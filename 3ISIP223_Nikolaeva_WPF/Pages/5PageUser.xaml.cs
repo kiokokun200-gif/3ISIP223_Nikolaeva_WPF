@@ -33,41 +33,45 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             if(_user.IsFrozen)
             {
-                Complaint complaint = Core.Context.Complaint.OrderByDescending(r => r.Date).FirstOrDefault(c => c.IsConfirmed == true && c.UserID == _user.ID);
+                Complaint complaint = Core.Context.Complaint.OrderByDescending(r => r.Date).FirstOrDefault(c => c.IsConfirmed == true && c.TargetID == _user.ID);
                 if (complaint != null)
                 {
-                    MessageBoxResult result = MessageBox.Show($"Вы заморожены по причине {complaint.ComplaintReason.Name}. Подать заявку на разморозку?", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        try
-                        {
-                            DefrostingRequest request = new DefrostingRequest()
-                            {
-                                UserID = _user.ID,
-                                Date = DateTime.Now,
-                                TargetTypeID = 2,
-                                TargetID = _user.ID,
-                            };
-
-                            Core.Context.DefrostingRequest.Add(request);
-                            Core.Context.SaveChanges();
-                            MessageBox.Show("Заявка принята!");
-                        }
-
-                        catch
-                        {
-                            MessageBox.Show("Ошибка сохранения");
-                        }
-                    }
+                    TxtBlockFrozenUser.DataContext = complaint;
                 }
-                
+                //if (complaint != null)
+                //{
+                //    MessageBoxResult result = MessageBox.Show($"Вы заморожены по причине {complaint.ComplaintReason.Name}. Подать заявку на разморозку?", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                //    if (result == MessageBoxResult.Yes)
+                //    {
+                //        try
+                //        {
+                //            DefrostingRequest request = new DefrostingRequest()
+                //            {
+                //                UserID = _user.ID,
+                //                Date = DateTime.Now,
+                //                TargetTypeID = 2,
+                //                TargetID = _user.ID,
+                //            };
+
+                //            Core.Context.DefrostingRequest.Add(request);
+                //            Core.Context.SaveChanges();
+                //            MessageBox.Show("Заявка принята!");
+                //        }
+
+                //        catch
+                //        {
+                //            MessageBox.Show("Ошибка сохранения");
+                //        }
+                //    }
+                //}
+
                 //NavigationService.Navigate( new _2PageCatalog() );
-                return;
-                
+
+
             }
             
             DataContext = _user;
-            _reviews = Core.Context.Review.Where(r => r.UserID == _user.ID).ToList();
+            _reviews = Core.Context.Review.Where(r => r.UserID == _user.ID && !r.IsFrozen).ToList();
             ListBoxReviews.ItemsSource = _reviews;
 
         }
@@ -84,6 +88,34 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     Core.Context.RoleRequest.Add(roleRequest);
                     Core.Context.SaveChanges();
                     MessageBox.Show("Заявка принята!");
+                }
+
+                catch
+                {
+                    MessageBox.Show("Ошибка сохранения");
+                }
+            }
+        }
+
+        private void BtnDefrozeRequest_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Подать заявку на разморозку?", "Вопрос", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    DefrostingRequest request = new DefrostingRequest()
+                    {
+                        UserID = _user.ID,
+                        Date = DateTime.Now,
+                        TargetTypeID = 2,
+                        TargetID = _user.ID,
+                    };
+
+                    Core.Context.DefrostingRequest.Add(request);
+                    Core.Context.SaveChanges();
+                    MessageBox.Show("Заявка принята!");
+                    DataContext = _user;
                 }
 
                 catch

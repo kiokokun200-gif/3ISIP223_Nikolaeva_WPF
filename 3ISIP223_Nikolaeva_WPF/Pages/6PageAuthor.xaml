@@ -25,7 +25,7 @@
 
         <TabControl Grid.Row="2">
             <TabItem Header="Мои книги">
-                <ListBox x:Name="ListBoxBooks"  d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox x:Name="ListBoxBooks"  d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -34,7 +34,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding CoverImage}" Width="100" Height="120"/>
+                                    <Image Source="{Binding CoverImage}" Width="150" Height="180"/>
                                     <StackPanel Margin="0 0 0 10" VerticalAlignment="Center">
                                         <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
 
@@ -50,7 +50,7 @@
             </TabItem>
 
             <TabItem Header="Мои замороженные книги">
-                <ListBox x:Name="ListBoxFrozenBooks"  d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox x:Name="ListBoxFrozenBooks"  d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -59,15 +59,16 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding CoverImage}" Width="100" Height="120"/>
-                                    <StackPanel Margin="0 0 0 10" VerticalAlignment="Center">
+                                    <Image Source="{Binding CoverImage}" Width="150" Height="180"/>
+                                    <StackPanel Margin="10 0 0 10" VerticalAlignment="Center">
                                         <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
 
                                     </StackPanel>
                                 </StackPanel>
-
-                                <Button x:Name="BtnDefrozeBook" Content="Оспорить заморозку" Grid.Column="1" Style="{StaticResource BtnsMenu}" Height="40" HorizontalAlignment="Right" Margin="10 0 10 0" Click="BtnDefrozeBook_Click"/>
-
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <TextBlock Text="Жалоба на разморозку подана"  Visibility="{Binding IsNoDefrozingRequest}"/>
+                                    <Button x:Name="BtnDefrozeBook" Visibility="{Binding IsDefrozingRequest}" Content="Оспорить заморозку" Grid.Column="1" Style="{StaticResource BtnsMenu}" Height="40" HorizontalAlignment="Right" Margin="10 0 10 0" Click="BtnDefrozeBook_Click"/>
+                                </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

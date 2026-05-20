@@ -13,16 +13,16 @@
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Добавление жанров" FontSize="30" FontWeight="Bold"/>
+        <TextBlock Grid.Row="0" Text="{Binding Name, StringFormat=Добавление жанров для книги {0}}" FontSize="30" FontWeight="Bold"/>
 
         <ListBox x:Name="ListBoxGenres" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Content="{Binding Name}" />
+                    <CheckBox Content="{Binding Name}" Click="CheckBox_Click" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Grid.Row="2" Content="Сохранить" x:Name="BtnSave" Style="{StaticResource BtnsPikmi}" Width="150" HorizontalAlignment="Left"/>
+        <Button Grid.Row="2" Content="Сохранить" x:Name="BtnSave" Style="{StaticResource BtnsPikmi}" Width="150" HorizontalAlignment="Left" Click="BtnSave_Click"/>
     </Grid>
 </Window>

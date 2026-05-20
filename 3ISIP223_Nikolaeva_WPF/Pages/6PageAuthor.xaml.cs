@@ -25,6 +25,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         public _6PageAuthor()
         {
             InitializeComponent();
+            DataContext = UserData.CurrentUser;
             _books = Core.Context.Book.Where(b => b.AuthorID == UserData.CurrentUser.ID && !b.IsFrozen).ToList();
             ListBoxBooks.ItemsSource = _books;  
             _frozenBooks = Core.Context.Book.Where(b => b.AuthorID == UserData.CurrentUser.ID && b.IsFrozen).ToList();
@@ -34,6 +35,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnEditBook_Click(object sender, RoutedEventArgs e)
         {
+            if (UserData.CurrentUser.IsFrozen)
+            {
+                MessageBox.Show("Вы заморожены !");
+                return;
+            }
             Button btn = (Button)sender;
             Book book = btn.DataContext as Book;
             var wind = new WindowEditBook(book);
@@ -42,12 +48,22 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnAddNewBook_Click(object sender, RoutedEventArgs e)
         {
+            if (UserData.CurrentUser.IsFrozen)
+            {
+                MessageBox.Show("Вы заморожены !");
+                return;
+            }
             NavigationService.Navigate(new _7PageAddBook());
         }
 
 
         private void BtnDefrozeBook_Click(object sender, RoutedEventArgs e)
         {
+            if (UserData.CurrentUser.IsFrozen)
+            {
+                MessageBox.Show("Вы заморожены !");
+                return;
+            }
             Button btn = (Button)sender;
             Book book = btn.DataContext as Book;
             MessageBoxResult result = MessageBox.Show("Оспорить заморозку книги?", "Вопрос", MessageBoxButton.YesNo);
@@ -63,6 +79,9 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     };
                     Core.Context.DefrostingRequest.Add(request);
                     Core.Context.SaveChanges();
+                    _frozenBooks = Core.Context.Book.Where(b => b.AuthorID == UserData.CurrentUser.ID && b.IsFrozen).ToList();
+                    ListBoxFrozenBooks.ItemsSource = _frozenBooks;
+
 
                 }
                 catch

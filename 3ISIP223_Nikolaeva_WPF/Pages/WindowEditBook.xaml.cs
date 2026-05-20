@@ -26,7 +26,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             InitializeComponent();
             _book = book;
             DataContext = _book;
-            _bookGenres = Core.Context.BookGenre.Where(b => b.BookID == _book.ID).ToList();
+            _bookGenres = _book.BookGenre.ToList();
+            //_bookGenres = Core.Context.BookGenre.Where(b => b.BookID == _book.ID).ToList();
             //var genres = db.BookGenre
             //.Where(bg => bg.BookID == _currentBook.ID)
             //.Select(bg => bg.Genre.Name)
@@ -85,6 +86,14 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             _bookGenres.Remove(bookGenre);
             ListBoxGenres.ItemsSource = _bookGenres;
             Core.Context.SaveChanges();
+        }
+
+        private void BtnAddGenre_Click(object sender, RoutedEventArgs e)
+        {
+            var wind = new WindowAddGenre(_book);
+            wind.ShowDialog();
+            _bookGenres = _book.BookGenre.ToList();
+            ListBoxGenres.ItemsSource = _bookGenres;
         }
     }
 }

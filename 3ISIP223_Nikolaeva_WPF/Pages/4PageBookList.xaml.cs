@@ -72,6 +72,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void BtnMoveBook_Click(object sender, RoutedEventArgs e)
         {
+            if (UserData.CurrentUser.IsFrozen)
+            {
+                MessageBox.Show("Вы заморожены !");
+                return;
+            }
             Button button = sender as Button;
             Book book = (button.DataContext as UserBook).Book;
             var wind = new WindowMoveBook(book);

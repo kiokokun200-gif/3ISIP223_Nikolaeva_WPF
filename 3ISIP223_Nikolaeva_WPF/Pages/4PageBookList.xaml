@@ -47,7 +47,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Book.CoverImage}" Width="100" Height="120"/>
+                        <Image Source="{Binding Book.CoverImage}"  Width="150" Height="180"/>
                         <StackPanel>
                             <TextBlock Text="{Binding Book.Name}"/>
                             <TextBlock Text="{Binding Book.User.NickName, StringFormat=Автор: {0}}"/>

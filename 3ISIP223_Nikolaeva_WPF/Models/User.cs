@@ -16,6 +16,8 @@ namespace _3ISIP223_Nikolaeva_WPF
         public Visibility VisIsFrozen => IsFrozen ? Visibility.Visible : Visibility.Collapsed;
         public Visibility IsAuthorRequest => RoleRequest.Count > 0 || Role.Name == "Автор" || IsFrozen ? Visibility.Collapsed : Visibility.Visible;
 
+        public Visibility IsDefrozingRequest => DefrostingRequest.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+
         
     }
 }
