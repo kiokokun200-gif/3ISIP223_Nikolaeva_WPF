@@ -24,8 +24,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             InitializeComponent();
             DataContext = UserData.CurrentUser;
-            MenuPanel.Visibility = UserData.IsLoggedIn ? Visibility.Visible : Visibility.Collapsed;
-            BtnBack.Visibility = UserData.IsLoggedIn ? Visibility.Visible : Visibility.Collapsed;
 
         }
 
