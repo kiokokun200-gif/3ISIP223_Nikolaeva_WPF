@@ -71,7 +71,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Ошибка сохранения: {ex.Message}");
-                        //return;
+          
                     }
                 }
             }

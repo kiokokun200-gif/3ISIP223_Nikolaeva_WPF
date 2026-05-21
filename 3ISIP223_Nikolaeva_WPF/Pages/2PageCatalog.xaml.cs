@@ -43,8 +43,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void TxtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //string text = TxtBoxSearch.Text.ToLower();
-            //ListBoxBooks.ItemsSource = _books.Where(b => b.Name.ToLower() == text || b.User.NickName.ToLower() == text);
             if (TxtBoxSearch.Text.Length > 0)
             {
                 FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre.SelectedItem.ToString(), TxtBoxSearch.Text);
@@ -77,7 +75,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 {
                     var wind = new WindowAddToList(selectedBook);
                     wind.ShowDialog();
-                    //NavigationService.Navigate(new _2PageCatalog());
                 }
                 else
                 {
@@ -89,50 +86,18 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ComboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //string selectedSort = ComboBoxSort.SelectedItem.ToString();
-            //string selectedGenre = ComboBoxFiltrGenre.SelectedItem.ToString();
+           
             if (TxtBoxSearch.Text.Length > 0)
             {
                 FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre?.SelectedItem.ToString(), TxtBoxSearch.Text);
             }
             else FiltrationSearch(ComboBoxSort.SelectedItem.ToString(), ComboBoxFiltrGenre.SelectedItem?.ToString(), "");
-            //if (selectedSort == "Все" && selectedGenre == "Все")
-            //{
-            //    ListBoxBooks.ItemsSource = _books;
-            //}
-            //else if(selectedSort == "По названию" && selectedGenre != "Все")
-            //{
-            //    ListBoxBooks.ItemsSource = _books.Where(bu => bu.GenresString.Contains(selectedGenre)).OrderBy(b => b.Name).ToList();
-            //}
-            //else if (selectedSort == "По оценке" && selectedGenre != "Все")
-            //{
-            //    ListBoxBooks.ItemsSource = _books.Where(bu => bu.GenresString.Contains(selectedGenre)).OrderByDescending(b => b.AvgRating).ToList();
-            //}
+
         }
 
         private void FiltrationSearch(string selectedSort, string selectedGenre, string search) 
         {
-            //List<Book> filt = null;
 
-            //filt = _books.Where(b => b.Name.ToLower().Contains(search.ToLower()) || b.User.NickName.ToLower().Contains(search.ToLower())).ToList();
-
-            //if (selectedSort.ToString() != "Все")
-            //{
-            //    if (selectedSort.ToString() == "По названию")
-            //    {
-            //        filt = filt.OrderBy(b => b.Name).ToList();
-            //    }
-            //    else if (selectedSort == "По оценке")
-            //    {
-            //        filt = filt.OrderByDescending(b => b.AvgRating).ToList();
-            //    }
-            //}
-
-            //if (selectedGenre != null && selectedGenre.ToString() != "Все")
-            //{
-            //    filt = filt.Where(b => b.GenresString != null && b.GenresString.Contains(selectedGenre)).ToList();
-            //}
-            //ListBoxBooks.ItemsSource = filt;
             ListBoxBooks.ItemsSource = BookFiltration.FiltrationSearch(_books, selectedSort, selectedGenre, search);
         }
         

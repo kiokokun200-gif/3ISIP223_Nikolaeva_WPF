@@ -98,16 +98,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             }
         }
 
-        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Выйти из аккаунта? ", "Вопрос", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                UserData.CurrentUser = null;
-                NavigationService.Navigate(new PageLogin());
-
-            }
-            else return;
-        }
+       
     }
 }

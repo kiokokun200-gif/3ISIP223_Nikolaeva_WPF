@@ -26,32 +26,16 @@
             <TextBlock Text="Статус книги : "/>
             <ComboBox x:Name="ComboStatuses" Width="200" SelectionChanged="ComboStatuses_SelectionChanged"/>
         </StackPanel>
-    <!--<ListBox Grid.Row="1" x:Name="ListBoxStatuses" d:ItemsSource="{d:SampleData ItemCount=5}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <Border>
-                    <Border BorderBrush="Gray"  Margin="5 0" BorderThickness="1" CornerRadius="10">
-                        <Button x:Name="BtnCatagory" Content="{Binding Name}" BorderThickness="0" Background="Transparent" Padding="5" Click="BtnCatagory_Click"/>
-                    </Border>
-                </Border>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-        <ListBox.ItemsPanel>
-            <ItemsPanelTemplate>
-                <WrapPanel/>
-            </ItemsPanelTemplate>
-        </ListBox.ItemsPanel>
-    </ListBox>-->
+    
 
         <ListBox Grid.Row="2" x:Name="ListBoxBooks" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Grid>
-
                             <Image Source="{Binding Book.CoverImage}" Width="150" Height="180"/>
                             <Border Background="#FFFF9AC8" Width="40" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
-                                <TextBlock Text="{Binding Book.AvgRating, StringFormat={}★{0:F0}}"/>
+                                <TextBlock Text="{Binding Book.AvgRating, StringFormat={}★{0:F1}}"/>
                             </Border>
                         </Grid>
                         <StackPanel>
@@ -59,7 +43,7 @@
                             <TextBlock Text="{Binding Book.User.NickName, StringFormat=Автор: {0}}"/>
                             <TextBlock Text="{Binding Book.GenresString, StringFormat=Жанры: {0}}"/>
                             <TextBlock Text="{Binding BookStatus.Name, StringFormat=Статус: {0}}"/>
-                            <Button x:Name="BtnMoveBook" Tag="{Binding}" Content="Переместить" Style="{StaticResource BtnsPikmi}" Click="BtnMoveBook_Click"/>
+                            <Button x:Name="BtnMoveBook" Content="Переместить" Style="{StaticResource BtnsPikmi}" Click="BtnMoveBook_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

@@ -21,7 +21,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     /// </summary>
     public partial class _4PageBookList : Page
     {
-        //private List<BookStatus> _bookStatuses;
         private List<UserBook> _userBooks;
         private List<Book> _books;
         
@@ -81,7 +80,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 return;
             }
             Button button = sender as Button;
-            UserBook userBook = button.Tag as UserBook;
+            UserBook userBook = button.DataContext as UserBook;
             Book book = userBook?.Book;
 
             if (book == null) return;
@@ -101,12 +100,10 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             if (bookStatus != "Все")
             {
                 return _userBooks.Where(b => b.BookStatus.Name == bookStatus).ToList();
-                //ListBoxBooks.ItemsSource = _userBooks.Where(b => b.BookStatus.Name == bookStatus).ToList();
             }
             else
             {
                 return _userBooks;
-                //ListBoxBooks.ItemsSource = _userBooks;
             }
         }
 

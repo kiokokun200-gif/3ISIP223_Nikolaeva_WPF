@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="_3PageBook">
+      Title="_3PageBook" Loaded="Page_Loaded">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -16,8 +16,8 @@
 
         <Grid Grid.Column="0" Margin="10">
             <Image Grid.Column="0" Source="{Binding CoverImage}" Width="300" Height="400" VerticalAlignment="Top"/>
-            <Border Background="#FFFF9AC8" Width="40" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <TextBlock Text="{Binding AvgRating, StringFormat={}★{0:F0}}"/>
+            <Border Background="#FFFF9AC8" Width="50" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <TextBlock Text="{Binding AvgRating, StringFormat={}★{0:F1}, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
         </Grid>
         <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="10">

@@ -30,8 +30,8 @@
                         <Grid>
                             
                             <Image Source="{Binding CoverImage}" Width="200" Height="350"/>
-                            <Border Background="#FFFF9AC8" Width="40" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
-                                <TextBlock Text="{Binding AvgRating, StringFormat={}★{0:F0}}"/>
+                            <Border Background="#FFFF9AC8" Width="50" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <TextBlock Text="{Binding AvgRating, StringFormat={}★{0:F1}}"/>
                             </Border>
                         </Grid>
                         <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"/>

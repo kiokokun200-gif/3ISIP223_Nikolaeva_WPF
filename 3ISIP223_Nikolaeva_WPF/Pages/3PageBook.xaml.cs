@@ -41,6 +41,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             _reviews = Core.Context.Review.Where(b => b.BookID == _book.ID && !b.IsFrozen).OrderByDescending(bo => bo.Date).ToList();
             ListBoxReview.ItemsSource = _reviews;
+            _book = Core.Context.Book.FirstOrDefault(b => b.ID ==  _book.ID);
+            DataContext = _book;
         }
 
         private void BtnSeeContentBook_Click(object sender, RoutedEventArgs e)
@@ -183,6 +185,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 LoadReviews();
             }
             else return;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
