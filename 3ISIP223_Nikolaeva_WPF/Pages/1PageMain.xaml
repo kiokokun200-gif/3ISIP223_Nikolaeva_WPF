@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="MenuPanel" Background="#FFFFC1C1" HorizontalAlignment="Left" >
-            <!--<TextBlock Text="Меню" FontSize="20" Margin="0 0 0 10"/>-->
+
             <Button x:Name="BtnCatalogBook" Style="{StaticResource BtnsMenu}" ToolTip="Каталог книг" Click="BtnCatalogBook_Click">
                 <Image Source="/Images/Icons/BookCatalog.png" Width="40"/>
             </Button>

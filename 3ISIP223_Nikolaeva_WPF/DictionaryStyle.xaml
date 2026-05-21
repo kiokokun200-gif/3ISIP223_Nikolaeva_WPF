@@ -20,7 +20,6 @@
     <Style TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="FontSize" Value="20"/>
-        <!--<Setter Property="Margin" Value="10 0 0 0"/>-->
     </Style>
 
     <Style TargetType="TextBox">
@@ -30,4 +29,6 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
         
     </Style>
+
+    
 </ResourceDictionary>

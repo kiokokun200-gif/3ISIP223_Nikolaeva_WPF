@@ -11,7 +11,7 @@
     <Grid Background="White">
         <TabControl x:Name="TabControlClient" Visibility="Visible">
             <TabItem Header="ВХОД" FontSize="20">
-                <StackPanel x:Name="StackClient" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <StackPanel x:Name="StackClient" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
 
 
                     <StackPanel x:Name="StackClientLogin" Visibility="Visible" HorizontalAlignment="Center">
@@ -20,7 +20,7 @@
                             <TextBox x:Name="TxtBoxLogLogin" Width="150" FontSize="18" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                            <TextBlock Text="Пароль" Margin="0 0 10 0" FontSize="18"/>
+                            <TextBlock Text="Пароль" Height="40" Margin="0 0 10 0" FontSize="18"/>
                             <PasswordBox x:Name="TxtBoxLogPassword" Width="150" FontSize="18"/>
                         </StackPanel>
 
@@ -30,7 +30,7 @@
             </TabItem>
             <TabItem Header="РЕГИСТРАЦИЯ" FontSize="20">
 
-                <StackPanel x:Name="StackClientReg" Visibility="Visible" HorizontalAlignment="Center">
+                <StackPanel x:Name="StackClientReg" Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                         <TextBlock Text="Ник" Margin="0 0 10 0" FontSize="18"/>
                         <TextBox x:Name="TxtBoxNickName" Width="150" FontSize="18"/>
@@ -51,7 +51,7 @@
 
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                         <TextBlock Text="Пароль" Margin="0 0 10 0" FontSize="18"/>
-                        <PasswordBox x:Name="TxtBoxRegPassword" Width="150" FontSize="18"/>
+                        <PasswordBox Height="40" x:Name="TxtBoxRegPassword" Width="150" FontSize="18"/>
                     </StackPanel>
 
                     <Button x:Name="BtnClientRegReg" Content="Зарегистрироваться" Style="{StaticResource BtnsPikmi}" Width="200" FontSize="20" Margin="0 10 0 0" HorizontalAlignment="Center" Click="BtnClientRegReg_Click"/>
