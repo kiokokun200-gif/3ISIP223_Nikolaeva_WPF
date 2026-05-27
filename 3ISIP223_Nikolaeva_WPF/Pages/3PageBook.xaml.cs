@@ -41,7 +41,8 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
         {
             _reviews = Core.Context.Review.Where(b => b.BookID == _book.ID && !b.IsFrozen).OrderByDescending(bo => bo.Date).ToList();
             ListBoxReview.ItemsSource = _reviews;
-            _book = Core.Context.Book.FirstOrDefault(b => b.ID ==  _book.ID);
+            //_book = Core.Context.Book.FirstOrDefault(b => b.ID ==  _book.ID);
+            Core.Context.Entry(_book).Reload();
             DataContext = _book;
         }
 
@@ -123,6 +124,11 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             else if (UserData.CurrentUser.IsFrozen)
             {
                 MessageBox.Show("Вы заморожены !");
+                return;
+            }
+            else if(_book.User.IsFrozen)
+            {
+                MessageBox.Show("Автор уже заморожен!");
                 return;
             }
             var targetType = _complaintTargetType.FirstOrDefault(t => t.Name == "Автор");

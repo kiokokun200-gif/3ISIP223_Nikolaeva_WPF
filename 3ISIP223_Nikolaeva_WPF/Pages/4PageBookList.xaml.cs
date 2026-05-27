@@ -32,7 +32,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void LoadDate()
         {
-            _userBooks = Core.Context.UserBook.Where(b => b.UserID == UserData.CurrentUser.ID).ToList();
+            _userBooks = Core.Context.UserBook.Where(b => b.UserID == UserData.CurrentUser.ID && !b.Book.IsFrozen).ToList();
             _books = _userBooks.Select(u => u.Book).ToList();
 
             var statuses = BookFiltration.BookStatusesOptions.ToList();
@@ -109,7 +109,6 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
 
         private void ComboStatuses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string status = ComboStatuses.SelectedItem.ToString();
             FiltrationSearch(ComboBoxSort.SelectedItem?.ToString(), ComboBoxFiltrGenre.SelectedItem?.ToString(), TxtBoxSearch.Text);
         }
     }

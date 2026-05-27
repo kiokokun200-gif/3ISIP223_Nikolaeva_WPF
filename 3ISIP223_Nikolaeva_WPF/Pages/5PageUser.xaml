@@ -51,6 +51,7 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Row="0" Grid.Column="0">
+                                <TextBlock Text="{Binding Book.Name, StringFormat=Отзыв на книгу: {0}}"/>
                                 <TextBlock Text="{Binding Date, StringFormat=dd MMMM yyyy}" FontSize="14"/>
 
                             </StackPanel>
