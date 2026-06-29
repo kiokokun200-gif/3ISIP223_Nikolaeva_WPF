@@ -16,13 +16,22 @@ using System.Windows.Shapes;
 namespace _3ISIP223_Nikolaeva_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для TotalCostPage3.xaml
+    /// Логика взаимодействия для PageHotel.xaml
     /// </summary>
-    public partial class TotalCostPage3 : Page
+    public partial class PageHotel : Page
     {
-        public TotalCostPage3()
+        private Hotel _hotel;
+        public PageHotel(Hotel hotel)
         {
             InitializeComponent();
+            _hotel = hotel;
+            DataContext = _hotel;
+        }
+
+        private void BtnAddReview_Click(object sender, RoutedEventArgs e)
+        {
+            var wind = new WindowReview(_hotel);
+            wind.ShowDialog();
         }
     }
 }

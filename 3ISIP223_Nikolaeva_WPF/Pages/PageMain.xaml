@@ -1,0 +1,41 @@
+﻿    <Page x:Class="_3ISIP223_Nikolaeva_WPF.Pages.PageMain"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+          xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+          mc:Ignorable="d" 
+          d:DesignHeight="450" d:DesignWidth="800"
+          Title="PageMain">
+
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Поиск "/>
+                <TextBox x:Name="TxtBoxSearch" Width="300" TextChanged="TxtBoxSearch_TextChanged"/>
+            
+            </StackPanel>
+
+            <ListBox MouseDoubleClick="ListBoxHotels_MouseDoubleClick" x:Name="ListBoxHotels" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Description }"/>
+                            <TextBlock Text="{Binding Address}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </Grid>
+    </Page>
