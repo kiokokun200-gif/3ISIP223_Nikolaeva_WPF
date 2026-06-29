@@ -1,0 +1,64 @@
+﻿<Page x:Class="_3ISIP223_Nikolaeva_WPF.Pages.PageMain"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_3ISIP223_Nikolaeva_WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageMain">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+
+        <Button x:Name="BtnAddPodnos" Content="Собрать поднос" Width="200" Grid.Row="0" Click="BtnAddPodnos_Click"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Блюда">
+                <Grid>
+                    
+                    
+                    <ListBox x:Name="ListBoxDishes" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Description}"/>
+                                    <TextBlock Text="{Binding Price, StringFormat={}{0}Р}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </Grid>
+                
+            </TabItem>
+
+            <TabItem Header="Комбо">
+                <ListBox x:Name="ListBoxCombos" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding FullDescription}"/>
+                                <TextBlock Text="{Binding Description}"/>
+                                <TextBlock Text="{Binding Price}"/>
+                                
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Page>

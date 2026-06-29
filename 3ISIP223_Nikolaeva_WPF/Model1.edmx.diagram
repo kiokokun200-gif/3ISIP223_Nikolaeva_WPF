@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d1d64c892019498ab6aed152ff9b6e1b" Name="Diagram1">
+        <EntityTypeShape EntityType="CafeteriaDBModel.ComboDishes" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeteriaDBModel.Combos" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeteriaDBModel.Dishes" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeteriaDBModel.DishTypes" Width="1.5" PointX="1.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeteriaDBModel.OrderItems" Width="1.5" PointX="6" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeteriaDBModel.Orders" Width="1.5" PointX="3.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CafeteriaDBModel.Tables" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
+        <AssociationConnector Association="CafeteriaDBModel.FK__ComboDish__Combo__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeteriaDBModel.FK__ComboDish__DishI__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeteriaDBModel.FK__OrderItem__Combo__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeteriaDBModel.FK__Dishes__DishType__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeteriaDBModel.FK__OrderItem__DishI__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeteriaDBModel.FK__OrderItem__Order__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="CafeteriaDBModel.FK__Orders__TableId__36B12243" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
