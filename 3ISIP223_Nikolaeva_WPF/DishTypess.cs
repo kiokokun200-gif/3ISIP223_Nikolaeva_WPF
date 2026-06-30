@@ -8,12 +8,15 @@ namespace _3ISIP223_Nikolaeva_WPF
 {
     public partial class DishTypes
     {
-        public List<string> DishesListNames
+        public List<Dishes> DishesListNames
         {
             get
             {
-                var l = Dishes.Select(d => d.Name).ToList();
-                l.Insert(0, "Не выбрано");
+                List<Dishes> l = Dishes.ToList();
+                l.Insert(0, new Dishes() {
+                    Id = 0,
+                    Name = "Не выбрано"
+                });
                 return l;
             }
         }

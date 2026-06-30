@@ -21,6 +21,7 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
     public partial class PageAddPodnos : Page
     {
         private List<DishTypes> _DishTypes;
+        private List<Dishes> _SelevtedDishes = new List<Dishes>();
         public PageAddPodnos()
         {
             InitializeComponent();
@@ -34,16 +35,20 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
             var newCombo = new Combos()
             {
                 Name = "",
+                Price = _SelevtedDishes.Sum(d => d.Price),
+                IsAvailable = true
                 
             };
-            foreach(DishTypes type in _DishTypes)
+            Core.Context.Combos.Add(newCombo);
+            Core.Context.SaveChanges();
+            foreach(Dishes dish in _SelevtedDishes)
             {
-                if (type.selectedDish.Name != "Не выбрано")
+                if (dish.Name != "Не выбрано")
                 {
                     ComboDishes comboDishes = new ComboDishes()
                     {
                         ComboId = newCombo.Id,
-                        DishId = type.selectedDish.Id,
+                        DishId = dish.Id,
                     };
                     Core.Context.ComboDishes.Add(comboDishes);
 
@@ -51,8 +56,29 @@ namespace _3ISIP223_Nikolaeva_WPF.Pages
                 else continue;
                 
             }
-            newCombo.Price = _DishTypes.Where(d => d.selectedDish.Name != "Не выбрано").Sum(di => di.selectedDish.Price);
+            
             Core.Context.SaveChanges();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            Dishes dish = comboBox.SelectedItem as Dishes;
+            //Dishes dish = Core.Context.Dishes.FirstOrDefault(c => c.Name == comboBox.SelectedItem.ToString());
+            if (dish != null)
+            {
+                var existedDishType = _SelevtedDishes.FirstOrDefault(c => c.DishTypeId == dish.DishTypeId);
+                if (existedDishType == null)
+                {
+                    _SelevtedDishes.Add(dish);
+                } 
+                else
+                {
+                    _SelevtedDishes.Remove(existedDishType);
+                    _SelevtedDishes.Add(dish);
+                }
+            }
+
         }
     }
 }
